@@ -7,7 +7,7 @@
                             is-disabled="settings.first.status.disabled"
                             >
         <uib-accordion-heading>
-          Set My Location <i class="pull-right glyphicon" 
+          Set my Location <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
         </uib-accordion-heading>
 
@@ -21,13 +21,13 @@
                             is-disabled="settings.second.status.disabled"
                             >
         <uib-accordion-heading>
-          Select an Activity <i class="pull-right glyphicon" 
+          Filter by Activity <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
         </uib-accordion-heading>
 
         <ul id = "amenities-list">
-          <li ng-repeat="amenity in amenities">
-            <a>{{ amenity.name }}</a>
+          <li ng-repeat="amenity in amenities.uniques">
+            <a><img ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} </a>
           </li>          
         </ul>
         
