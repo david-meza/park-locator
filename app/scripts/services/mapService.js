@@ -55,8 +55,9 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
 
   // Get our map instance when it loads
   map.events = {
-    tilesloaded: function () {
+    tilesloaded: function (instance) {
       map.mapInstance = map.control.getGMap();
+      console.log(map.mapInstance);
     }
   };
 
@@ -85,8 +86,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     }
   };
 
-  getCoords();
-
 	var _isInRaleigh = function (lat, lon) {
     // Test Raleigh address: 35.7776464, -78.63844279999999
     return lat < 36.013561 && lat > 35.537814 && lon < -78.436890 && lon > -78.884583;
@@ -100,7 +99,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
       map.myLocationMarker.coords.latitude = lat;
       map.myLocationMarker.coords.longitude = lon;
       map.zoom = 15;
-      map.refresh = true;
+      console.log('updating user coords!');
     } else {
       // Otherwise, keep using default coordinates
       var message = '<strong> Oops!</strong>  It seems this location is not in Raleigh.';
@@ -108,20 +107,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     }
   };
 
-
-  // Search box inside accordion
-  var autocomplete;
-  gMapsAPI.then(function(maps) {
-    autocomplete = new maps.places.Autocomplete( (document.getElementById('autocomplete')), { types: ['geocode'] } );
-    autocomplete.addListener('place_changed', updateUserMarker);
-  });
-
-  var updateUserMarker = function() {
-    console.log(autocomplete.getPlace());
-    var loc = autocomplete.getPlace().geometry.location;
-    console.log(loc.lat() + ' | ' + loc.lng());
-    updateUserCoords(loc.lat(), loc.lng());
-  };
 
   return {
     map: map,
