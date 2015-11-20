@@ -65,7 +65,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
     events: {
     places_changed: function (searchBox) {
       var loc = searchBox.getPlaces()[0].geometry.location;
-      _updateCoords(loc.lat(), loc.lng());
+      updateUserCoords(loc.lat(), loc.lng());
 	    }
 	  }
   };
@@ -75,7 +75,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
   // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition( function (position) {
-        _updateCoords(position.coords.latitude, position.coords.longitude);
+        updateUserCoords(position.coords.latitude, position.coords.longitude);
       });
     } else {
       var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
@@ -91,7 +91,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
     return lat < 36.013561 && lat > 35.537814 && lon < -78.436890 && lon > -78.884583;
   };
 
-  var _updateCoords = function (lat, lon) {
+  var updateUserCoords = function (lat, lon) {
     if (_isInRaleigh(lat, lon)) {
       // Update the location obj with the accurate user coords
       map.location.coords.latitude = lat;
@@ -108,7 +108,8 @@ angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
 
   return {
     map: map,
-    getCoords: getCoords
+    getCoords: getCoords,
+    updateUserCoords: updateUserCoords
   };
 
 }]);
