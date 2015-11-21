@@ -63,7 +63,7 @@ angular.module('parkLocator').factory('parkService', ['$http',
         onMarkerClicked: _onMarkerClicked,
         options: {
           title: p['NAME'],
-          labelAnchor: '22 0'
+          labelAnchor: '20 0'
         },
       };
 
