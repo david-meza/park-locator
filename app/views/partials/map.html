@@ -22,7 +22,7 @@
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
-    <!-- <ui-gmap-markers  models="map.parkMarkers.content"
+    <ui-gmap-markers  models="map.parkMarkers.content"
                       coords="'self'"
                       icon="'icon'"
                       click="onMarkerClicked()"
@@ -38,13 +38,13 @@
             <div>
               <h5 ng-non-bindable> {{ name }}</h5>
 
-              <p ng-non-bindable class="text-muted"> {{ schedule }}</p>
+              <!-- <p ng-non-bindable class="text-muted"> {{ schedule }}</p>
 
-              <p ng-non-bindable>{{ description | limitTo : 60 }}...</p>
+              <p ng-non-bindable>{{ description | limitTo : 60 }}...</p> -->
             </div>
         </ui-gmap-windows>
 
-    </ui-gmap-markers> -->
+    </ui-gmap-markers>
 
   </ui-gmap-google-map>
     

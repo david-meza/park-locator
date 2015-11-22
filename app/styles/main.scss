@@ -42,24 +42,6 @@ html, body, #map-canvas {
   height: 100%
 }
 
-body {
-  padding: 0;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-
-}
-
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -73,14 +55,4 @@ body {
   //   max-width: 730px;
   // }
 
-  /* Remove the padding we set earlier */
-  .header,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
 }
