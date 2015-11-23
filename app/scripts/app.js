@@ -30,7 +30,7 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps']
               controller: 'MainCtrl'
             },
 
-            'map@': {
+            'map@home': {
               templateUrl: 'views/partials/map.html',
               controller: 'mapCtrl'
             }
