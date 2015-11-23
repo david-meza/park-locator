@@ -4,7 +4,8 @@
   "dependencies": {
     "angular": "^1.4.0",
     "bootstrap-sass-official": "^3.2.0",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-bootstrap": "~0.14.3"
   },
   "appPath": "app",
   "moduleName": "parkLocator",

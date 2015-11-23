@@ -5,36 +5,20 @@
     <title>Park Locator</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
+
   <body ng-app="parkLocator">
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" ui-sref = "home">Park Locator</a>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    
+    <nav ui-view = "navbar"></nav>
 
     <div class="container">
-    <div ui-view></div>
+      <div ui-view></div>
     </div>
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>Copyright © 2015 | raleighnc.gov | All Rights Reserved</p>
       </div>
     </div>
 
@@ -50,14 +34,22 @@
        ga('send', 'pageview');
     </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
+    <!-- Angular -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
+    <!-- Angular Dependencies -->
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <!-- Main -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+
+    <!-- Controllers -->
+    <script src="scripts/controllers/mainCtrl.js"></script>
     <script src="scripts/controllers/mapCtrl.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/accordionConfig.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 'use strict';
 
-var app = angular
-  .module('parkLocator', ['ui.router'])
+angular.module('parkLocator', ['ui.router', 'ui.bootstrap'])
+
   .config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
 
@@ -11,9 +11,15 @@ var app = angular
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          controllerAs: 'main'
+          views: {
+            'navbar': {
+              templateUrl: 'views/nav.html'
+            },
+            '': {
+              templateUrl: 'views/main.html',
+              controller: 'MainCtrl'
+            }
+          }
         });
 
   }]);
