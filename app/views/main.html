@@ -7,7 +7,8 @@
                             is-disabled="settings.first.status.disabled"
                             >
         <uib-accordion-heading>
-          Set Location <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
+          Set Location <i class="pull-right glyphicon" 
+                          ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
         </uib-accordion-heading>
         Content here!
       </uib-accordion-group>
@@ -16,7 +17,8 @@
                             is-disabled="settings.second.status.disabled"
                             >
         <uib-accordion-heading>
-          Select an Activity <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
+          Select an Activity <i class="pull-right glyphicon" 
+                          ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
         </uib-accordion-heading>
         Content here!
       </uib-accordion-group>
@@ -25,7 +27,8 @@
                             is-disabled="settings.third.status.disabled"
                             >
         <uib-accordion-heading>
-          Select a Park <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
+          Select a Park <i class="pull-right glyphicon" 
+                          ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
         </uib-accordion-heading>
         Content here!
       </uib-accordion-group>
@@ -35,11 +38,29 @@
   </div>   
 
 
-  <div class="col-md-8">
-
-
-    
+  <div ui-view = "map" class="col-md-8">
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-default">
+        <h2 class="text-center">Activities</h2>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-default">
+        <h2 class="text-center">Classes</h2>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 
