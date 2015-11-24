@@ -17,6 +17,12 @@ h1 {
   }
 }
 
+input#search-box {
+  margin-top: 5px;
+  width: 50%;
+  opacity: 0.9;
+}
+
 html, body, #map-canvas {
   height: 100%;
   width: 100%;

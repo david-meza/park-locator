@@ -10,7 +10,9 @@
           Set Location <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
         </uib-accordion-heading>
-        Content here!
+
+        <button class="btn btn-success" ng-click="getCoords()">Use my location!</button>
+
       </uib-accordion-group>
 
       <uib-accordion-group  is-open = "settings.second.status.open"

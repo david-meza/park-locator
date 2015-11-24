@@ -1,8 +1,6 @@
 <div id="map_canvas">
 
-  <div id = "flash" flash-message="8000" ></div>
-
-  <p>{{ map.location.coords }}</p>
+  <div id = "flash" flash-message="5000" ></div>
 
   <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
@@ -14,8 +12,8 @@
                       control = 'map.control' >
 
 
-    <ui-gmap-search-box template="searchbox.template"
-                        events="searchbox.events">
+    <ui-gmap-search-box template="map.searchbox.template"
+                        events="map.searchbox.events">
     </ui-gmap-search-box>
 
 
@@ -24,7 +22,7 @@
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
-    <ui-gmap-markers  models="map.parkMarkers.content"
+    <!-- <ui-gmap-markers  models="map.parkMarkers.content"
                       coords="'self'"
                       icon="'icon'"
                       click="onMarkerClicked()"
@@ -46,7 +44,7 @@
             </div>
         </ui-gmap-windows>
 
-    </ui-gmap-markers>
+    </ui-gmap-markers> -->
 
   </ui-gmap-google-map>
     
