@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps'])
+angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps', 'flash'])
 
   .config(['uiGmapGoogleMapApiProvider', 
     function(uiGmapGoogleMapApiProvider) {

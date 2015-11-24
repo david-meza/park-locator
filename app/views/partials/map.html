@@ -1,7 +1,52 @@
 <div id="map_canvas">
-  <ui-gmap-google-map center='map.center'
+
+  <div id = "flash" flash-message="8000" ></div>
+
+  <p>{{ map.location.coords }}</p>
+
+  <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
-                      options='map.options'>
+                      options = 'map.options'
+                      dragging='map.dragging'
+                      refresh='map.refresh'
+                      pan='map.pan'
+                      events = 'map.events'
+                      control = 'map.control' >
+
+
+    <ui-gmap-search-box template="searchbox.template"
+                        events="searchbox.events">
+    </ui-gmap-search-box>
+
+
+    <ui-gmap-marker idKey='map.myLocationMarker.id'
+                    coords='map.myLocationMarker.coords'
+                    options = "map.myLocationMarker.options">
+    </ui-gmap-marker>
+
+    <ui-gmap-markers  models="map.parkMarkers.content"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="onMarkerClicked()"
+                      doCluster="map.clusterMarkers"
+                      clusterOptions="map.clusterOptions"
+                      modelsbyref="true"
+                      options="'options'"
+                      events="map.parkMarkerEvents">
+
+
+        <ui-gmap-windows  show="'showWindow'"
+                          closeClick="'closeClick'" ng-cloak>
+            <div>
+              <h5 ng-non-bindable> {{ name }}</h5>
+
+              <p ng-non-bindable class="text-muted"> {{ schedule }}</p>
+
+              <p ng-non-bindable>{{ description | limitTo : 60 }}...</p>
+            </div>
+        </ui-gmap-windows>
+
+    </ui-gmap-markers>
 
   </ui-gmap-google-map>
     
