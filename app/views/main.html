@@ -34,7 +34,13 @@
           Select a Park <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
         </uib-accordion-heading>
-        Content here!
+        
+        <ul id = "park-list">
+          <li ng-repeat="park in parks.content">
+            <a ng-click="centerToPark(park)">{{ park.name }}</a>
+          </li>          
+        </ul>
+
       </uib-accordion-group>
 
     </uib-accordion>

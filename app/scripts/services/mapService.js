@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
+angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
+  function (Flash, gMapsAPI) {
 
   // Temporary coordinates while Geoloc gets us the user's coords
   var location = {
@@ -104,6 +105,21 @@ angular.module('parkLocator').factory('mapService', ['Flash', function (Flash) {
       var message = '<strong> Oops!</strong>  It seems this location is not in Raleigh.';
       Flash.create('warning', message);
     }
+  };
+
+
+  // Search box inside accordion
+  var autocomplete;
+  gMapsAPI.then(function(maps) {
+    autocomplete = new maps.places.Autocomplete( (document.getElementById('autocomplete')), { types: ['geocode'] } );
+    autocomplete.addListener('place_changed', updateUserMarker);
+  });
+
+  var updateUserMarker = function() {
+    console.log(autocomplete.getPlace());
+    var loc = autocomplete.getPlace().geometry.location;
+    console.log(loc.lat() + ' | ' + loc.lng());
+    updateUserCoords(loc.lat(), loc.lng());
   };
 
   return {

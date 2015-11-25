@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('parkService', ['$http', function($http){
+angular.module('parkLocator').factory('parkService', ['$http', 
+	function ($http) {
 	
 	var currentMarker = { obj: {} };
 	var markers = { content: [] };
@@ -86,6 +87,7 @@ angular.module('parkLocator').factory('parkService', ['$http', function($http){
 		method: 'GET',
 		url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson'
 	}).then(_generateMarkers, _logAjaxError);
+
 
 	return {
 		markers: markers
