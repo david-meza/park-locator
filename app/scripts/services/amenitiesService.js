@@ -11,7 +11,17 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 	};
 
 	var _generateList = function (response) {
-		console.log(response.data);
+		var uniqueAmenities = response.data.drawingInfo.renderer.uniqueValueInfos;
+		uniqueAmenities.forEach( function(amenity) {
+			var filtered = {
+				id: amenity.value,
+				name: amenity.label,
+				url: amenity.symbol.url,
+				imageData: amenity.symbol.imageData
+			};
+
+			list.push(filtered);
+		});
 	};
 
 	(function getAmenitiesData () {

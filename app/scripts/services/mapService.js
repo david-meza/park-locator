@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
-  function (Flash, gMapsAPI) {
+angular.module('parkLocator').factory('mapService', ['Flash',
+  function (Flash) {
 
   // Temporary coordinates while Geoloc gets us the user's coords
   var location = {
@@ -55,9 +55,8 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
 
   // Get our map instance when it loads
   map.events = {
-    tilesloaded: function (instance) {
+    tilesloaded: function () {
       map.mapInstance = map.control.getGMap();
-      console.log(map.mapInstance);
     }
   };
 
@@ -70,20 +69,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
       updateUserCoords(loc.lat(), loc.lng());
 	    }
 	  }
-  };
-
-  var getCoords = function() {
-
-  // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition( function (position) {
-        updateUserCoords(position.coords.latitude, position.coords.longitude);
-      });
-    } else {
-      var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
-      Flash.create('warning', message);
-      console.log('Geolocation not supported');
-    }
   };
 
 	var _isInRaleigh = function (lat, lon) {
@@ -110,7 +95,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
 
   return {
     map: map,
-    getCoords: getCoords,
     updateUserCoords: updateUserCoords
   };
 

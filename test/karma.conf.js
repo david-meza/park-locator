@@ -31,6 +31,7 @@ module.exports = function(config) {
       'bower_components/lodash/lodash.js',
       'bower_components/angular-google-maps/dist/angular-google-maps.js',
       'bower_components/angular-flash-alert/dist/angular-flash.js',
+      'bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js',
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",

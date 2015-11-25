@@ -7,13 +7,13 @@
                             is-disabled="settings.first.status.disabled"
                             >
         <uib-accordion-heading>
-          Set Location <i class="pull-right glyphicon" 
+          Set My Location <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
         </uib-accordion-heading>
 
         <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
 
-        <button class="btn btn-success" ng-click="getCoords()">Use my location!</button>
+        <button class="btn btn-success btn-block" ng-click="geoLocate()">Use my current location!</button>
 
       </uib-accordion-group>
 
@@ -24,7 +24,13 @@
           Select an Activity <i class="pull-right glyphicon" 
                           ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
         </uib-accordion-heading>
-        Content here!
+
+        <ul id = "amenities-list">
+          <li ng-repeat="amenity in amenities">
+            <a>{{ amenity.name }}</a>
+          </li>          
+        </ul>
+        
       </uib-accordion-group>
 
       <uib-accordion-group  is-open = "settings.third.status.open"
@@ -37,7 +43,7 @@
         
         <ul id = "park-list">
           <li ng-repeat="park in parks.content">
-            <a ng-click="centerToPark(park)">{{ park.name }}</a>
+            <a ng-click="centerToPark(park)" scroll-to="map-canvas">{{ park.name }}</a>
           </li>          
         </ul>
 

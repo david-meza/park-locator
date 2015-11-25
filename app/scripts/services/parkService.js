@@ -7,7 +7,7 @@ angular.module('parkLocator').factory('parkService', ['$http',
 	var markers = { content: [] };
 
 	var _generateMarkers = function (response) {
-		console.log(response.data);
+
 		response.data.features.forEach(function(park){
 			var p = park.attributes;
       var marker = {
@@ -63,12 +63,14 @@ angular.module('parkLocator').factory('parkService', ['$http',
         onMarkerClicked: _onMarkerClicked,
         options: {
           title: p['NAME'],
-          labelAnchor: '20 0'
+          labelAnchor: '0 0'
         },
       };
 
       markers.content.push(marker);
     });
+
+		console.log(markers);
 	};
 
 	var _onMarkerClicked = function () {
