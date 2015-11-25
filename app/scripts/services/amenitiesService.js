@@ -39,16 +39,35 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 		}
 	};
 
+	var _generateParkData = function (response) {
+		
+	};
+
 	(function getAmenitiesData () {
+
+		// First set of amenities (buildings)
 		$http({
 			method: 'GET',
 			url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2?f=pjson'
 		}).then(_generateList, _logAjaxError);
 
+		// Second set of amenities (outdoors)
 		$http({
 			method: 'GET',
 			url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3?f=pjson'
 		}).then(_generateList, _logAjaxError);
+
+		// // Building amenities join table with parks
+		// $http({
+		// 	method: 'GET',
+		// 	url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson'
+		// }).then(_generateParkData, _logAjaxError);
+
+		// // Outdoor amenities join table with parks
+		// $http({
+		// 	method: 'GET',
+		// 	url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson'
+		// }).then(_generateParkData, _logAjaxError);
 		
 	})();
 
