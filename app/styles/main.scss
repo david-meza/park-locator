@@ -47,7 +47,7 @@ ul {
       border: none;
     }
 
-    a {
+    & > a, p {
       color: #333;
       display: block;
       width: 100%;
@@ -87,6 +87,18 @@ html, body, #map-canvas {
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.glyphicon-ok {
+  color: #669834;
+}
+
+.glyphicon-remove {
+  color: #E63125;
 }
 
 .angular-google-map-container {

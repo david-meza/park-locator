@@ -3,8 +3,10 @@
 angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService',
 	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService) {
     
+    // Basic accordion config
     $scope.settings = accordionService.settings;
 
+    // Set Location Section
     $scope.geoLocate = function() {
 
     	Flash.create('info', 'We are attempting to obtain your location. Please wait a few seconds.');
@@ -23,10 +25,27 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 
 	  $scope.geoLocate();
 
+	  // Define some async objects from our services
     $scope.parks = parkService.markers;
-
     $scope.amenities = amenitiesService.list;
 
+
+    // Filter by activity section
+    $scope.selectedActivities = [];
+
+    $scope.addToSelected = function (amenity) {
+    	$scope.selectedActivities.push(amenity);
+    	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
+    	console.log($scope.amenities.uniques);
+    };
+
+    $scope.removeSelected = function (amenity) {
+    	$scope.amenities.uniques.push( amenity );
+    	$scope.selectedActivities.splice($scope.selectedActivities.indexOf(amenity), 1);
+    	console.log($scope.selectedActivities);
+    };
+
+    // Select a park section
     $scope.centerToPark = function (park) {
     	park.onMarkerClicked();
     	mapService.map.location.coords.latitude = park.latitude;
@@ -51,7 +70,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
       // Bias autocomplete results to locations in Raleigh
       autocomplete.setBounds(circle.getBounds());
 	  });
-
+	  // Function used by address typeahead on a place selected
 	  var updateUserMarker = function() {
 	    var loc = autocomplete.getPlace().geometry.location;
 	    $scope.$apply(mapService.updateUserCoords(loc.lat(), loc.lng()));
