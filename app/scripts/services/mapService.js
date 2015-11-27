@@ -27,14 +27,65 @@ angular.module('parkLocator').factory('mapService', ['Flash',
         mapTypeIds: ['light_dream', 'roadmap']
       }
     },
-    clusterMarkers: true,
-    clusterOptions: {
-      title: 'Zoom in to find more parks!',
-      gridSize: 60,
-      ignoreHidden: true,
-      minimumClusterSize: 2
+    markersConfig: {
+      type: 'cluster',
+      typeOptions: {
+        title: 'Zoom in to find more parks!',
+        gridSize: 60,
+        minimumClusterSize: 3
+      },
+      typeEvents: {}
     }
   };
+
+  map.markersConfig.typeOptions.styles = [
+    {
+      textColor: '#FFF',
+      textSize: 20,
+      fontFamily: 'Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+    {
+      textColor: '#FFF',
+      textSize: 16,
+      fontFamily: 'Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+    {
+      textColor: '#FFF',
+      textSize: 12,
+      fontFamily: 'Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+    {
+      textColor: '#FFF',
+      textSize: 12,
+      fontFamily: 'Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+    {
+      textColor: '#FFF',
+      textSize: 12,
+      fontFamily: 'Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+
+  ];
 
   // Optional map themes
   // Light browns and greens (nature)

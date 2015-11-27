@@ -50,7 +50,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     	park.onMarkerClicked();
     	mapService.map.location.coords.latitude = park.latitude;
     	mapService.map.location.coords.longitude = park.longitude;
-    	mapService.map.zoom = 18;
+    	mapService.map.zoom = 15;
     };
 
     // Search box inside accordion
