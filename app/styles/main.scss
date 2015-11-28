@@ -1,6 +1,9 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "./flatly.min.css";
+
+
 // @import "../bower_components/angular-flash-alert/dist/angular-flash.css";
 
 html {
@@ -48,7 +51,7 @@ ul {
     }
 
     & > a, & > p {
-      color: #333;
+      color: #246;
       display: block;
       width: 100%;
 
@@ -59,13 +62,22 @@ ul {
       transition:         font-size 0.3s ease, background-color 0.3s ease;
 
       &:hover {
+        color: #18bc9c;
         text-decoration: none;
-        color: #222;
         font-size: 1.2em;
         background-color: #f6f6f6;
       }
     }
   }
+}
+
+.park-center {
+  a {
+    display: block;
+    margin-bottom: 10px; 
+  }
+
+  padding-bottom: 1em;
 }
 
 input#search-box {
@@ -102,7 +114,7 @@ html, body, #map-canvas {
 }
 
 .panel-body {
-  max-height: 30em;
+  max-height: 26em;
   overflow: scroll;
 }
 

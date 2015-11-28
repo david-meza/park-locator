@@ -79,14 +79,17 @@
           </div>
 
           <div class = "col-md-12" ng-show="noResults">
-            <i class="glyphicon glyphicon-remove"></i> No Results Found
+            <br>
+            <i class="glyphicon glyphicon-remove"></i> No Parks With This Name
           </div>
         </div>
 
         
         <ul id = "park-list">
           <li ng-repeat="park in parks.content | filter: { name: parkSelected.name }">
-            <a ng-click="centerToPark(park)" scroll-to="map-canvas">{{ park.name }}</a>
+            <a ng-click="centerToPark(park)" scroll-to="map-canvas">
+              <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
+            </a>
           </li>          
         </ul>
 
@@ -101,25 +104,87 @@
 
 </div>
 
-<div class="row">
-  <div class="col-md-12">
+<div id="panels-section" ng-show="parks.currentPark">
+  
+  <div class="row">
 
-    <div class="panel panel-default">
-      <h2 class="text-center">Activities</h2>
+    <div class="col-md-12">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">General Information</h2>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            
+            <div class="col-md-4 text-center">
+
+              <img class = "img-responsive img-thumbnail" ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
+
+            </div>
+
+            <div class="col-md-8 text-center park-center">
+
+              <h3>{{ parks.currentPark.name }}</h3>
+              <p> {{ parks.currentPark.address }}</p>
+              <p> <i class = "glyphicon glyphicon-phone"></i> {{ parks.currentPark.phone }}</p>
+              <a ng-href="{{ parks.currentPark.url }}" target="_blank">Website</a>
+              <a ng-click="setDirections()"> <i class = "glyphicon glyphicon-flag"></i> Google Directions</a>
+
+            </div>
+
+          <!--   <div class="col-md-4">
+
+              <h2 class="text-center">Mini map</h2>
+
+            </div> -->
+
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
 
-    <div class="panel panel-default">
-      <h2 class="text-center">Classes</h2>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Activities</h2>
+        </div>
+        <div class="panel-body">
+
+          <p>{{ parks.currentPark }}</p>
+
+        </div>
+      </div>
+
     </div>
-
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Classes</h2>
+        </div>
+        <div class="panel-body">
+
+          <p>Coming Soon!</p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
+
 
 
 

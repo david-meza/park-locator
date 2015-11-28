@@ -4,7 +4,7 @@ angular.module('parkLocator').factory('parkService', ['$http',
 	function ($http) {
 	
 	var currentMarker = { obj: {} };
-	var markers = { content: [] };
+	var markers = { content: [], currentPark: undefined };
 
 	var _generateMarkers = function (response) {
 
@@ -77,7 +77,7 @@ angular.module('parkLocator').factory('parkService', ['$http',
 		// If currentMarker is not null, meaning another marker window is shown,
     // then set showWindow of that marker window to false.
     currentMarker.obj.showWindow = false;
-    currentMarker.obj = this;
+    currentMarker.obj = markers.currentPark = this;
     this.showWindow = true;
 	};
 
