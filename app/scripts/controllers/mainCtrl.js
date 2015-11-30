@@ -95,6 +95,9 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 		  }
 		  var map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);
 	  	directionsDisplay.setMap( map );
+      $scope.mapsApi.maps.event.addListenerOnce(map, 'idle', function() {
+         $scope.mapsApi.maps.event.trigger(map, 'resize');
+      });
 	  };
 
 	  var calcRoute = function(park) {

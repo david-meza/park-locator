@@ -1,9 +1,10 @@
-# 
+# Park Locator
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.14.0.
+Park locator will find the parks in Raleigh nearest to you and display them in a map.
 
 ## Build & development
+
+To install dependencies run `npm install` and `bower install`
 
 Run `grunt` for building and `grunt serve` for preview.
 
