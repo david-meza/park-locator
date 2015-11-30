@@ -124,7 +124,7 @@
 
             </div>
 
-            <div class="col-md-8 text-center park-center">
+            <div class="col-md-4 text-center park-center">
 
               <h3>{{ parks.currentPark.name }}</h3>
               <p> {{ parks.currentPark.address }}</p>
@@ -134,11 +134,13 @@
 
             </div>
 
-          <!--   <div class="col-md-4">
+            <div class="col-md-4">
 
-              <h2 class="text-center">Mini map</h2>
+              <!-- <mini-map></mini-map> -->
 
-            </div> -->
+              <div id="mini-map"></div>
+
+            </div>
 
           </div>
 
@@ -159,6 +161,14 @@
         <div class="panel-body">
 
           <p>{{ parks.currentPark }}</p>
+
+          <ul id = "amenities-list">
+            <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
+              <p>
+                <img ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
+              </p>
+            </li>          
+          </ul>
 
         </div>
       </div>

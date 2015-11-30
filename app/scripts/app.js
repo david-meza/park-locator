@@ -6,7 +6,7 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
     function(uiGmapGoogleMapApiProvider) {
       uiGmapGoogleMapApiProvider.configure({
           v: '3.20',
-          libraries: 'places,geometry,visualization'
+          libraries: 'places, geometry'
       });
   }])
 

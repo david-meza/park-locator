@@ -39,9 +39,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 		}
 	};
 
-	var _generateParkData = function (response) {
-		
-	};
 
 	(function getAmenitiesData () {
 

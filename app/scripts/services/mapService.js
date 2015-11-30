@@ -143,10 +143,9 @@ angular.module('parkLocator').factory('mapService', ['Flash',
     }
   };
 
-
   return {
     map: map,
-    updateUserCoords: updateUserCoords
+    updateUserCoords: updateUserCoords,
   };
 
 }]);
