@@ -9,7 +9,7 @@ angular.module('parkLocator').filter('parkAmenities', function() {
   	var filtered = [];
 
   	for (var i = 0; i < amenities.length; i++) {
-  		var normalized = amenities[i].name.replace(' ', '').toLowerCase();
+  		var normalized = amenities[i].name.replace(/\s+/g, '').toLowerCase();
   		if (park[normalized]) {
   			filtered.push(amenities[i]);
   		}

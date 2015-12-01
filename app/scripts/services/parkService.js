@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('parkService', ['$http', 
-	function ($http) {
+angular.module('parkLocator').factory('parkService', ['$http', '$state',
+	function ($http, $state) {
 	
 	var currentMarker = { obj: {} };
 	var markers = { content: [], currentPark: undefined };
@@ -68,10 +68,11 @@ angular.module('parkLocator').factory('parkService', ['$http',
         },
       };
 
+      // Storing parks both individually as key on markers object and as an array of parks
+      markers[p['NAME'].replace(/\s+/g, '').toLowerCase()] = marker;
       markers.content.push(marker);
     });
 
-		console.log(markers);
 	};
 
 	var _onMarkerClicked = function () {
@@ -80,6 +81,7 @@ angular.module('parkLocator').factory('parkService', ['$http',
     currentMarker.obj.showWindow = false;
     currentMarker.obj = markers.currentPark = this;
     this.showWindow = true;
+    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
 	};
 
 	var _logAjaxError = function (error) {

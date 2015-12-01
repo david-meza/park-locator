@@ -50,13 +50,11 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     	park.onMarkerClicked();
     	mapService.map.location.coords.latitude = park.latitude;
     	mapService.map.location.coords.longitude = park.longitude;
-    	mapService.map.zoom = 16;
+    	mapService.map.zoom = 15;
     };
 
     // Search box inside set my location panel
-	  var autocomplete,
-	  		directionsService,
-	  		directionsDisplay;
+	  var autocomplete;
 
 	  gMapsAPI.then(function(maps) {
 	  	$scope.mapsApi = maps;
@@ -75,9 +73,6 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
       // Bias autocomplete results to locations in Raleigh
       autocomplete.setBounds(circle.getBounds());
 
-      // Directions Service
-      initializeDirections();
-
 	  });
 
 	  // Function used by address typeahead on a place selected
@@ -86,39 +81,5 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 	    $scope.$apply(mapService.updateUserCoords(loc.lat(), loc.lng()));
 	  };
 
-	  var initializeDirections = function () {
-	    directionsService = new $scope.mapsApi.DirectionsService();
-	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer();
-	    var mapOptions = {
-		    zoom: 16,
-		    center: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude)
-		  }
-		  var map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);
-	  	directionsDisplay.setMap( map );
-      $scope.mapsApi.maps.event.addListenerOnce(map, 'idle', function() {
-         $scope.mapsApi.maps.event.trigger(map, 'resize');
-      });
-	  };
-
-	  var calcRoute = function(park) {
-	  	console.log("attempting to calc route");
-		  var request = {
-		      origin: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude),
-		      destination: new $scope.mapsApi.LatLng(park.latitude, park.longitude),
-		      travelMode: $scope.mapsApi.TravelMode.DRIVING
-		  };
-	  	console.log(request);
-		  directionsService.route(request, displayDirections);
-		};
-
-		var displayDirections = function(response, status) {
-			console.log("displaying directions now!");
-	    if (status === $scope.mapsApi.DirectionsStatus.OK) {
-	    	console.log("here");
-	      directionsDisplay.setDirections(response);
-	    }
-	  };
-
-	  $scope.$watch('parks.currentPark', calcRoute);
 
   }]);

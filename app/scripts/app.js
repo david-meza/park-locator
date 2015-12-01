@@ -22,7 +22,7 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
           views: {
 
             'navbar': {
-              templateUrl: 'views/nav.html'
+              templateUrl: 'views/partials/navbar.html'
             },
 
             '': {
@@ -33,6 +33,17 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
             'map@home': {
               templateUrl: 'views/partials/map.html',
               controller: 'mapCtrl'
+            }
+          }
+        })
+
+        .state('home.park', {
+          url: ':name',
+          views: {
+
+            '': {
+              templateUrl: 'views/park-information.html',
+              controller: 'parkCtrl'
             }
           }
         });

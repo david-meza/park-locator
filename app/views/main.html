@@ -87,7 +87,8 @@
         
         <ul id = "park-list">
           <li ng-repeat="park in parks.content | filter: { name: parkSelected.name }">
-            <a ng-click="centerToPark(park)" scroll-to="map-canvas">
+            <a  ng-click="centerToPark(park)" 
+                scroll-to="map-canvas">
               <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
             </a>
           </li>          
@@ -104,96 +105,8 @@
 
 </div>
 
-<div id="panels-section" ng-if="parks.currentPark">
-  
-  <div class="row">
 
-    <div class="col-md-12">
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h2 class="panel-title">General Information</h2>
-        </div>
-        <div class="panel-body">
-
-          <div class="row">
-            
-            <div class="col-md-4 text-center">
-
-              <img class = "img-responsive img-thumbnail" ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
-
-            </div>
-
-            <div class="col-md-4 text-center park-center">
-
-              <h3>{{ parks.currentPark.name }}</h3>
-              <p> {{ parks.currentPark.address }}</p>
-              <p> <i class = "glyphicon glyphicon-phone"></i> {{ parks.currentPark.phone }}</p>
-              <a ng-href="{{ parks.currentPark.url }}" target="_blank">Website</a>
-              <a ng-click="setDirections()"> <i class = "glyphicon glyphicon-flag"></i> Google Directions</a>
-
-            </div>
-
-            <div class="col-md-4">
-
-              <!-- <mini-map></mini-map> -->
-
-              <div id="mini-map"></div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h2 class="panel-title">Activities</h2>
-        </div>
-        <div class="panel-body">
-
-          <p>{{ parks.currentPark }}</p>
-
-          <ul id = "amenities-list">
-            <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
-              <p>
-                <img ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
-              </p>
-            </li>          
-          </ul>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h2 class="panel-title">Classes</h2>
-        </div>
-        <div class="panel-body">
-
-          <p>Coming Soon!</p>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
+<ui-view></ui-view>
 
 
 
