@@ -14,7 +14,10 @@
             
             <div class="col-md-4 text-center">
 
-              <img class = "img-responsive img-thumbnail" ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
+              <div class="img-container">
+                <img class = "img-responsive img-thumbnail img-vertical-center" ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
+              </div>
+
 
             </div>
 
@@ -24,7 +27,7 @@
               <p> {{ parks.currentPark.address }}</p>
               <p> <i class = "glyphicon glyphicon-phone"></i> {{ parks.currentPark.phone }}</p>
               <a ng-href="{{ parks.currentPark.url }}" target="_blank">Website</a>
-              <a ng-href = "https://maps.google.com/maps?saddr='{{myLoc.latitude}},{{myLoc.longitude}}'&daddr='{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}'"> <i class = "glyphicon glyphicon-flag"></i> Google Directions</a>
+              <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> <i class = "glyphicon glyphicon-flag"></i> Google Directions</a>
 
             </div>
 

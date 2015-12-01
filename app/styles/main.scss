@@ -34,6 +34,22 @@ p {
   word-wrap: break-word;
 }
 
+.img-container {
+  position: relative;
+  height: 15em;
+
+  .img-vertical-center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  
+}
+
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -117,7 +133,7 @@ html, body, #map-canvas {
   color: #E63125;
 }
 
-.panel-body {
+.panel-group .panel-body {
   max-height: 26em;
   overflow: scroll;
 }
