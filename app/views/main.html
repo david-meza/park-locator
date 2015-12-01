@@ -76,6 +76,7 @@
             <input  type="text"
                     id = "searchParkName" 
                     ng-model="parkSelected"
+                    placeholder = "Pullen Park"
                     typeahead-no-results = "noResults"
                     typeahead-on-select = "centerToPark($item, $model, $label)"
                     uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8" 
@@ -90,7 +91,7 @@
 
         
         <ul id = "park-list">
-          <li ng-repeat="park in parks.content | filter: { name: parkSelected.name }">
+          <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: '-name' ">
             <a  ng-click="centerToPark(park)" 
                 scroll-to="map-canvas">
               <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}

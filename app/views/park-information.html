@@ -26,10 +26,25 @@
             <div class="col-md-4 text-center park-center">
 
               <h3>{{ parks.currentPark.name }}</h3>
-              <p> {{ parks.currentPark.address }}</p>
+              <p> <i class = "fa fa-map-marker"></i> {{ parks.currentPark.address }}</p>
+
               <p> <i class = "glyphicon glyphicon-phone"></i> {{ parks.currentPark.phone }}</p>
-              <a ng-href="{{ parks.currentPark.url }}" target="_blank">Website</a>
-              <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> <i class = "glyphicon glyphicon-flag"></i> Google Directions</a>
+              
+              <p ng-if = "routeData.duration"> 
+                If you leave now, you could be here in <span ng-class="durationColoring"> <i class = "fa fa-car"></i> {{ routeData.duration }}</span> 
+              </p>
+              
+              <p ng-if = "routeData.distance"> 
+                You are <span ng-class="distanceColoring"> <i class = "fa fa-location-arrow"></i> {{ routeData.distance }}</span> away
+              </p>
+              
+              <a ng-href="{{ parks.currentPark.url }}" target="_blank"> 
+                <i class = "glyphicon glyphicon-info-sign"></i> Website
+              </a>
+
+              <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> 
+                <i class = "glyphicon glyphicon-flag"></i> Google Directions
+              </a>
 
             </div>
 

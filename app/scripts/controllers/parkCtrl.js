@@ -14,7 +14,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
     $scope.amenities = amenitiesService.list;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
 
-	  gMapsAPI.then(function(maps) {
+	  gMapsAPI.then( function (maps) {
 	  	$scope.mapsApi = maps;
       // Directions Service
       initializeDirections();
@@ -36,19 +36,18 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
       // });
 	  };
 
-	  var calcRoute = function(park) {
+	  var calcRoute = function (park) {
 	  	if ( !verifyPark() ) { return; }
 
 		  var request = {
 		      origin: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude),
 		      destination: new $scope.mapsApi.LatLng(park.latitude, park.longitude),
-		      travelMode: $scope.mapsApi.TravelMode.DRIVING
+		      travelMode: $scope.mapsApi.TravelMode.DRIVING,
 		  };
-	  	console.log(request);
 		  directionsService.route(request, displayDirections);
 		};
 
-		var verifyPark = function() {
+		var verifyPark = function () {
 			if ($scope.parks[parkName]) {
 				$scope.parks.currentPark = $scope.parks[parkName];
 				return true;
@@ -56,15 +55,36 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 			$state.go('home');
 		};
 
-		var displayDirections = function(response, status) {
-			console.log("displaying directions now!");
+		var displayDirections = function (response, status) {
 	    if (status === $scope.mapsApi.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
+	      extractDirectionsInfo(response);
+	    } else {
+	    	console.log("Error happened... Maybe over query limit?");
 	    }
 	  };
 
 	  $scope.$watchGroup(['parks.currentPark', 'myLoc.latitude', 'myLoc.longitude'], function () {
 	  	calcRoute($scope.parks.currentPark);
 	  });
+
+	  var extractDirectionsInfo = function (response) {
+	  	var r = response.routes[0].legs[0];
+	  	var dt = r.distance.text;
+	  	var dur = r.duration.text;
+	  	// Other valuable information may include waypoints, steps, coordinates, etc.
+	  	$scope.routeData = {
+	  		distance: dt,
+	  		duration: dur
+	  	};
+
+	  	// Color code the dist / dur text
+	  	var a = parseInt(dt);
+	  	var b = parseInt(dur);
+	  	$scope.distanceColoring = { 'text-green': a <= 2, 'text-warning': a > 2 && a <= 10, 'text-danger': a > 10 };
+	  	$scope.durationColoring = { 'text-green': b <= 5, 'text-warning': b > 5 && b <= 20, 'text-danger': b > 20 };
+
+	  };
+
 
   }]);

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('parkLocator').directive('ngError', ['$parse', function($parse){
 
   return {
