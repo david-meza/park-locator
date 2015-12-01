@@ -104,7 +104,7 @@
 
 </div>
 
-<div id="panels-section" ng-show="parks.currentPark">
+<div id="panels-section" ng-if="parks.currentPark">
   
   <div class="row">
 
@@ -163,7 +163,7 @@
           <p>{{ parks.currentPark }}</p>
 
           <ul id = "amenities-list">
-            <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
+            <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
               <p>
                 <img ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
               </p>

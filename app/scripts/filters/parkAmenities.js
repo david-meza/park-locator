@@ -1,9 +1,20 @@
-angular.module('parkLocator').filter('parkAmenities', ['parkService' function(parkService) {
+'use strict';
+
+angular.module('parkLocator').filter('parkAmenities', function() {
   
-	
+  return function(amenities, park) {
 
-  return function(amenities) {
+  	if (!park) {return amenities;}
 
-    return input ? '\u2713' : '\u2718';
+  	var filtered = [];
+
+  	for (var i = 0; i < amenities.length; i++) {
+  		var normalized = amenities[i].name.replace(' ', '').toLowerCase();
+  		if (park[normalized]) {
+  			filtered.push(amenities[i]);
+  		}
+  	}
+
+    return filtered;
   };
-}]);
+});
