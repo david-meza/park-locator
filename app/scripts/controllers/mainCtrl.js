@@ -8,7 +8,8 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 	  // Define some async objects from our services
     $scope.parks = parkService.markers;
     $scope.amenities = amenitiesService.list;
-    $scope.myLoc = mapService.map.location.coords;
+    $scope.map = mapService.map;
+    $scope.myLoc = mapService.map.myLocationMarker.coords;
     // Filter by activity section
     $scope.selectedActivities = [];
 
@@ -52,9 +53,9 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     // Select a park section
     $scope.centerToPark = function (park) {
     	park.onMarkerClicked();
-    	$scope.myLoc.latitude = park.latitude;
-    	$scope.myLoc.longitude = park.longitude;
-    	mapService.map.zoom = 15;
+    	$scope.map.location.coords.latitude = park.latitude;
+    	$scope.map.location.coords.longitude = park.longitude;
+    	$scope.map.zoom = 15;
     };
 
     $scope.nearestPark = function (park) {
