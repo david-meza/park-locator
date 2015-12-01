@@ -8,6 +8,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 	  // Define some async objects from our services
     $scope.parks = parkService.markers;
     $scope.amenities = amenitiesService.list;
+    $scope.myLoc = mapService.map.location.coords;
     // Filter by activity section
     $scope.selectedActivities = [];
 
@@ -51,9 +52,16 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     // Select a park section
     $scope.centerToPark = function (park) {
     	park.onMarkerClicked();
-    	mapService.map.location.coords.latitude = park.latitude;
-    	mapService.map.location.coords.longitude = park.longitude;
+    	$scope.myLoc.latitude = park.latitude;
+    	$scope.myLoc.longitude = park.longitude;
     	mapService.map.zoom = 15;
+    };
+
+    $scope.nearestPark = function (park) {
+      // We calculate the distance between two points use Pythagorea theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
+      var a = Math.abs(park.latitude - $scope.myLoc.latitude);
+      var b = Math.abs(park.longitude - $scope.myLoc.longitude);
+      return Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
     };
 
     // Search box inside set my location panel

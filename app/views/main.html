@@ -91,7 +91,7 @@
 
         
         <ul id = "park-list">
-          <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: '-name' ">
+          <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark ">
             <a  ng-click="centerToPark(park)" 
                 scroll-to="map-canvas">
               <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
