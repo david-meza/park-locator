@@ -5,33 +5,36 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
+	  // Define some async objects from our services
+    $scope.parks = parkService.markers;
+    $scope.amenities = amenitiesService.list;
+    // Filter by activity section
+    $scope.selectedActivities = [];
+
+    $scope.goToPanel = function (from, to) {
+      $scope.settings[from].status.open = false;
+      $scope.settings[to].status.open = true;
+    };
 
     // Set Location Section
     $scope.geoLocate = function() {
 
-    	Flash.create('info', 'We are attempting to obtain your location. Please wait a few seconds.');
+      Flash.create('info', 'We are attempting to obtain your location. Please wait a few seconds.');
 
-	  	// Try HTML5 geolocation.
-	    if (navigator.geolocation) {
-	      navigator.geolocation.getCurrentPosition( function (position) {
-	        $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
-	      });
-	    } else {
-	      var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
-	      Flash.create('warning', message);
-	      console.log('Geolocation not supported');
-	    }
-	  };
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( function (position) {
+          $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
+        });
+        $scope.goToPanel('first', 'second');
+      } else {
+        var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
+        Flash.create('warning', message);
+        console.log('Geolocation not supported');
+      }
+    };
 
-	  $scope.geoLocate();
-
-	  // Define some async objects from our services
-    $scope.parks = parkService.markers;
-    $scope.amenities = amenitiesService.list;
-
-
-    // Filter by activity section
-    $scope.selectedActivities = [];
+    $scope.geoLocate();
 
     $scope.addToSelected = function (amenity) {
     	$scope.selectedActivities.push(amenity);
@@ -79,6 +82,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 	  var updateUserMarker = function() {
 	    var loc = autocomplete.getPlace().geometry.location;
 	    $scope.$apply(mapService.updateUserCoords(loc.lat(), loc.lng()));
+      $scope.goToPanel('first', 'second');
 	  };
 
 

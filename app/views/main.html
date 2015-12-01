@@ -25,6 +25,10 @@
                           ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
         </uib-accordion-heading>
 
+        <div ng-show="selectedActivities.length === 0">
+          <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
+        </div>
+
         <div ng-show="selectedActivities.length > 0">
           <h5>Selected</h5>
 

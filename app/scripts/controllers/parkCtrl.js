@@ -26,6 +26,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer();
 	    var mapOptions = {
 		    zoom: 16,
+		    scrollwheel: false,
 		    center: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude)
 		  };
 		  var map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);

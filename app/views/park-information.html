@@ -15,7 +15,9 @@
             <div class="col-md-4 text-center">
 
               <div class="img-container">
-                <img class = "img-responsive img-thumbnail img-vertical-center" ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
+                <img  class = "img-responsive img-thumbnail img-vertical-center" 
+                      fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
+                      ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg">
               </div>
 
 
