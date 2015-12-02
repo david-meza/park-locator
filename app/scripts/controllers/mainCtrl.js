@@ -11,7 +11,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     $scope.map = mapService.map;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     // Filter by activity section
-    $scope.selectedActivities = [];
+    $scope.selectedActivities = amenitiesService.selectedActivities;
 
     $scope.goToPanel = function (from, to) {
       $scope.settings[from].status.open = false;
@@ -39,15 +39,13 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     $scope.geoLocate();
 
     $scope.addToSelected = function (amenity) {
-    	$scope.selectedActivities.push(amenity);
+    	$scope.selectedActivities.current.push(amenity);
     	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
-    	console.log($scope.amenities.uniques);
     };
 
     $scope.removeSelected = function (amenity) {
     	$scope.amenities.uniques.push( amenity );
-    	$scope.selectedActivities.splice($scope.selectedActivities.indexOf(amenity), 1);
-    	console.log($scope.selectedActivities);
+    	$scope.selectedActivities.current.splice($scope.selectedActivities.current.indexOf(amenity), 1);
     };
 
     // Select a park section

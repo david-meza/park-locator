@@ -53,11 +53,6 @@ p {
   
 }
 
-.activity-img {
-  height: 25px;
-  width: 25px;
-}
-
 
 ul#park-list, ul#amenities-list, ul#selected-amenities-list {
   list-style-type: none;
@@ -68,6 +63,11 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
     font: 200 1em/2.3 Helvetica, Verdana, sans-serif;
     min-height: 2.88em;
     border-bottom: 1px solid #ccc;
+
+    .activity-img {
+      height: 25px;
+      width: 25px;
+    }
 
     &:last-child {
       border: none;
@@ -103,6 +103,11 @@ ul#park-amenities {
   list-style-type: none;
 
   li {
+
+    .activity-img {
+      height: 35px;
+      width: 35px;
+    }
 
     img {
       float: left;

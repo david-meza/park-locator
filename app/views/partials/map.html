@@ -22,7 +22,7 @@
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
-    <ui-gmap-markers  models="map.parkMarkers.content"
+    <ui-gmap-markers  models="map.parkMarkers.content | selectedActivities: selectedActivities.current"
                       coords="'self'"
                       icon="'icon'"
                       click="onMarkerClicked()"

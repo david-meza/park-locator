@@ -7,13 +7,14 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   $scope.map = mapService.map;
   $scope.map.parkMarkers = parkService.markers;
   $scope.activities = amenitiesService.list.activitiesPos;
+  $scope.selectedActivities = amenitiesService.selectedActivities;
 
   var noIndigestion = [];
 
   $scope.showMarkers = function () {
     if ($scope.map.zoom >= 17) { return $scope.activities.markers; }
     return noIndigestion;
-  }
+  };
 
   var mapInstance,
       mapsApi;

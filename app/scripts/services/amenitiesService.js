@@ -6,6 +6,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 
 	var list = { content: [], uniques: [], activitiesPos: { markers: [] } };
 	var currentMarker = { obj: {} };
+	var selectedActivities = { current: [] };
 
 	list.activitiesPos.markersConfig = {
     type: 'cluster',
@@ -144,6 +145,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 
 
 	return {
-		list: list
+		list: list,
+		selectedActivities: selectedActivities
 	};
 }]);
