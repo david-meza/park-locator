@@ -28,7 +28,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
         navigator.geolocation.getCurrentPosition( function (position) {
           $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
         });
-        $scope.goToPanel('first', 'second');
+        $scope.goToPanel('first', 'third');
       } else {
         var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
         Flash.create('warning', message);
@@ -91,7 +91,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
 	  var updateUserMarker = function() {
 	    var loc = autocomplete.getPlace().geometry.location;
 	    $scope.$apply(mapService.updateUserCoords(loc.lat(), loc.lng()));
-      $scope.goToPanel('first', 'second');
+      $scope.goToPanel('first', 'third');
 	  };
 
 

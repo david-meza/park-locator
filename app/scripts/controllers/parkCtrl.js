@@ -3,8 +3,6 @@
 angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService',
 	function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI, amenitiesService) {
 
-		console.log('park controller instantiated');
-
 		var parkName = $stateParams.name,
 				directionsService,
 	  		directionsDisplay,

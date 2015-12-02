@@ -50,8 +50,6 @@
 
             <div class="col-md-4">
 
-              <!-- <mini-map></mini-map> -->
-
               <div id="mini-map"></div>
 
             </div>
@@ -76,11 +74,11 @@
 
           <p>{{ parks.currentPark }}</p>
 
-          <ul id = "amenities-list">
+          <ul id = "park-amenities">
             <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
-              <p>
-                <img ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
-              </p>
+              <a ng-click="showAmenityInMap()">
+                <img ng-src="data:image/png;base64,{{amenity.imageData}}" />
+              </a>
             </li>          
           </ul>
 
