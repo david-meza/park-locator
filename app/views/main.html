@@ -11,9 +11,16 @@
                           ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
         </uib-accordion-heading>
 
-        <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
+        <div class="input-group mb-20">
+          <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+          <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
+        </div>
 
-        <button class="btn btn-success btn-block" ng-click="geoLocate()">Use my current location!</button>
+
+        <button class="btn btn-success btn-block" 
+                ng-click="geoLocate()">
+          <i class = "fa fa-fw fa-location-arrow"></i> Use my current location!
+        </button>
 
       </uib-accordion-group>
 
@@ -68,19 +75,21 @@
         </uib-accordion-heading>
 
         <div class="row mb-20">
-          <div class="col-md-4">
-            <label for = "searchParkName">Search</label>
-          </div>
+          <div class="col-md-12">
 
-          <div class="col-md-8">
-            <input  type="text"
-                    id = "searchParkName" 
-                    ng-model="parkSelected"
-                    placeholder = "Pullen Park"
-                    typeahead-no-results = "noResults"
-                    typeahead-on-select = "centerToPark($item, $model, $label)"
-                    uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8" 
-                    class="form-control">            
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              
+              <input  type="text"
+                      id = "searchParkName" 
+                      ng-model="parkSelected"
+                      placeholder = "Park Name"
+                      typeahead-no-results = "noResults"
+                      typeahead-on-select = "centerToPark($item, $model, $label)"
+                      uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8" 
+                      class="form-control">            
+            </div>
+
           </div>
 
           <div class = "col-md-12" ng-show="noResults">

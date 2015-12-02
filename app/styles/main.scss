@@ -74,6 +74,10 @@ ul {
       border: none;
     }
 
+    & > p {
+      margin: 0;
+    }
+
     & > a, & > p {
       color: #246;
       display: block;
@@ -111,7 +115,7 @@ input#search-box {
 }
 
 #autocomplete {
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 }
 
 html, body, #map-canvas {

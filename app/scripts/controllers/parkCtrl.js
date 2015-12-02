@@ -7,40 +7,71 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 
 		var parkName = $stateParams.name,
 				directionsService,
-	  		directionsDisplay;
+	  		directionsDisplay,
+	  		icons,
+	  		map;
 
 	  // Define some async objects from our services
     $scope.parks = parkService.markers;
     $scope.amenities = amenitiesService.list;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
+    $scope.map = mapService.map;
 
 	  gMapsAPI.then( function (maps) {
 	  	$scope.mapsApi = maps;
       // Directions Service
-      initializeDirections();
+      initializeDirectionsMap();
 
 	  });
 
-	  var initializeDirections = function () {
+	  var initializeDirectionsMap = function () {
+	  	if ( !$scope.parks[parkName] ) { return; }
+	  	
 	    directionsService = new $scope.mapsApi.DirectionsService();
-	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer();
+	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer({ suppressMarkers: true });
+	    generateMarkerIcons();
+	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: "Light Dream"});
 	    var mapOptions = {
 		    zoom: 16,
 		    scrollwheel: false,
-		    center: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude)
+		    center: new $scope.mapsApi.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
+		    mapTypeControlOptions: {
+		      mapTypeIds: [$scope.mapsApi.MapTypeId.ROADMAP, 'light_dream']
+		    }
 		  };
-		  var map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);
+		  map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);
 	  	directionsDisplay.setMap( map );
+		  map.mapTypes.set('light_dream', styledMap);
+		  map.setMapTypeId('light_dream');
       // $scope.mapsApi.event.addListenerOnce(map, 'idle', function() {
       //    $scope.mapsApi.event.trigger(map, 'resize');
       // });
+	  };
+
+	  var generateMarkerIcons = function () {
+	  	icons = {
+			  start: new $scope.mapsApi.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
+			    // (width,height)
+			    new $scope.mapsApi.Size( 45, 45 ),
+			    // The origin point (x,y)
+			    new $scope.mapsApi.Point( 0, 0 ),
+			    // The anchor point (x,y)
+			    new $scope.mapsApi.Point( 24, 39 ) ),
+			  end: new $scope.mapsApi.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
+			   // (width,height)
+			   new $scope.mapsApi.Size( 45, 50 ),
+			   // The origin point (x,y)
+			   new $scope.mapsApi.Point( 0, 0 ),
+			   // The anchor point (x,y)
+			   new $scope.mapsApi.Point( 25, 46 ) )
+			};
 	  };
 
 	  var calcRoute = function (park) {
 	  	if ( !verifyPark() ) { return; }
 
 		  var request = {
-		      origin: new $scope.mapsApi.LatLng(mapService.map.myLocationMarker.coords.latitude, mapService.map.myLocationMarker.coords.longitude),
+		      origin: new $scope.mapsApi.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
 		      destination: new $scope.mapsApi.LatLng(park.latitude, park.longitude),
 		      travelMode: $scope.mapsApi.TravelMode.DRIVING,
 		  };
@@ -58,6 +89,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 		var displayDirections = function (response, status) {
 	    if (status === $scope.mapsApi.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
+	      placeCustomMarkers(response);
 	      extractDirectionsInfo(response);
 	    } else {
 	    	console.log("Error happened... Maybe over query limit?");
@@ -67,6 +99,21 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  $scope.$watchGroup(['parks.currentPark', 'myLoc.latitude', 'myLoc.longitude'], function () {
 	  	calcRoute($scope.parks.currentPark);
 	  });
+
+	  var placeCustomMarkers = function (response) {
+	  	var leg = response.routes[0].legs[0];
+	  	makeMarker( leg.start_location, icons.start, 'You' );
+  		makeMarker( leg.end_location, icons.end, 'Park' );
+	  };
+
+	  var makeMarker = function ( position, icon, title ) {
+	  	new $scope.mapsApi.Marker({
+	  		position: position,
+	  		map: map,
+	  		icon: icon,
+	  		title: title
+	  	});
+	  };
 
 	  var extractDirectionsInfo = function (response) {
 	  	var r = response.routes[0].legs[0];

@@ -37,6 +37,10 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			// Mapping the amenity by id so we can get the name later when we have foreign keys
 			list[c.id] = { name: c.name };
 		}
+		console.log('all amenities');
+		console.log(list.content);
+		console.log('unique amenities');
+		console.log(list.uniques);
 	};
 
 
