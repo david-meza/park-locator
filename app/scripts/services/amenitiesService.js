@@ -4,7 +4,18 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 	
 	// http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2?f=pjson
 
-	var list = { content: [], uniques: [] };
+	var list = { content: [], uniques: [], activitiesPos: { markers: [] } };
+	var currentMarker = { obj: {} };
+
+	list.activitiesPos.markersConfig = {
+    type: 'cluster',
+    typeOptions: {
+      title: 'Zoom in to find more activities!',
+      gridSize: 60,
+      minimumClusterSize: 3
+    },
+    typeEvents: {}
+  };
 
 	var _logAjaxError = function (error) {
 		console.log(error);
@@ -37,13 +48,13 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			var c = list.content[i];
 
 			// Name overrides
-			if (c.name === 'Tennis') { c.name = 'Tennis Courts' };
-			if (c.name === 'Tennis Center') { c.imageData = 'iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAAHfZzBgAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsFJREFUeNpi+P//PwMQ/EfGIDFGKAcDMMEYnp7eIKUMUBMQEugAt1FArYzogiAxgADCqoMJp2tgLgDRHz9+grHBov+BAmA28WYCBBBO9+INDpIVg9wHCkNkH2AEBi5cUFj8PzQsAs4nyc0AAQRCDfhMh+IFRJvKRPXggivs7Z8ED57klDR4koOJsWDTPWf2TEhUMjLit3rdhk1g+uq16yiRgDNYJk+dQXqgk+Trg0SoewgQQMRGISn4AMmJiOoZhCxDYSkEG4ZlMGB+wZB79PgJ4QwHNPw/DAANQy4j4UBFRRVDDKaOhVwv3rlzG0yfPHUGQ44kQ0F5AFQq8vHxYpQzqqpq5BV7Axr7zECsCMQGVDTzIUAAgQgBJiamj1TKTQpUD0+mQR85I91AXKUQcrYDlTrocsCaHH8phK1kQRdHB7BSiWgD3d094WKgVhNIbMGipXCxXXv2kWZgR2cPXAy53kTHREfK7du34Gx1dUjRBQq7EydPgzHQtZSFIdAQFD6omUWSl0EY1C7DBoBtDPLbazCv2tk7MFw4f45h7pxZ5DdaR/My/QxUpKJ5jgABBq6kgPgClZt+VMHQylOBEcT49+8fH8MgBjRp7QyJ1tOoIwcrwNmsB/VwigpySTbQy8uHYfv2rRjioN6QrZ0dg7SUFIr4jZu3wJXLhP5evOb+J9RTIgUg96pqahtI1p+ckobNPcSVWbgcjewoZIzeQEBuG4EcAmovwUac0AHIc8hmsdAiDYGGSMzNTLAOdAQH+oPZoLZDi4oqg72DI4a6T58+kd/VJBYgdzuRwbNnzzH6wLB+MN1zN2wMCR3kZKWjNNhBjU5sDf616zcSP55HSZoEtdtxpTl8AJSWyW6Kkwp27tzOwM/PB476KdNmAtPZZ5xqHz95ClYDGrmwMDcdrbtHHTnqSGo5UhDYOv80iN3oCAAPitoy7GshPgAAAABJRU5ErkJggg==' };
-			if (c.name === 'Aquatic Center') { c.name = 'Pool' };
-			if (c.name === 'Bocceball') { c.name = 'Bocce' };
-			if (c.name === 'Off Leash Dog Area') { c.name = 'Dog Park' };
-			if (c.name === 'Community Center' || c.name === 'Neighborhood Center') { c.name = 'Recreation Center' };
-			if (c.name === 'Informal Playfield' || c.name === 'Multipurpose') { c.name = 'Multipurpose Field' };
+			if (c.name === 'Tennis') { c.name = 'Tennis Courts'; }
+			if (c.name === 'Tennis Center') { c.imageData = 'iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAAHfZzBgAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsFJREFUeNpi+P//PwMQ/EfGIDFGKAcDMMEYnp7eIKUMUBMQEugAt1FArYzogiAxgADCqoMJp2tgLgDRHz9+grHBov+BAmA28WYCBBBO9+INDpIVg9wHCkNkH2AEBi5cUFj8PzQsAs4nyc0AAQRCDfhMh+IFRJvKRPXggivs7Z8ED57klDR4koOJsWDTPWf2TEhUMjLit3rdhk1g+uq16yiRgDNYJk+dQXqgk+Trg0SoewgQQMRGISn4AMmJiOoZhCxDYSkEG4ZlMGB+wZB79PgJ4QwHNPw/DAANQy4j4UBFRRVDDKaOhVwv3rlzG0yfPHUGQ44kQ0F5AFQq8vHxYpQzqqpq5BV7Axr7zECsCMQGVDTzIUAAgQgBJiamj1TKTQpUD0+mQR85I91AXKUQcrYDlTrocsCaHH8phK1kQRdHB7BSiWgD3d094WKgVhNIbMGipXCxXXv2kWZgR2cPXAy53kTHREfK7du34Gx1dUjRBQq7EydPgzHQtZSFIdAQFD6omUWSl0EY1C7DBoBtDPLbazCv2tk7MFw4f45h7pxZ5DdaR/My/QxUpKJ5jgABBq6kgPgClZt+VMHQylOBEcT49+8fH8MgBjRp7QyJ1tOoIwcrwNmsB/VwigpySTbQy8uHYfv2rRjioN6QrZ0dg7SUFIr4jZu3wJXLhP5evOb+J9RTIgUg96pqahtI1p+ckobNPcSVWbgcjewoZIzeQEBuG4EcAmovwUac0AHIc8hmsdAiDYGGSMzNTLAOdAQH+oPZoLZDi4oqg72DI4a6T58+kd/VJBYgdzuRwbNnzzH6wLB+MN1zN2wMCR3kZKWjNNhBjU5sDf616zcSP55HSZoEtdtxpTl8AJSWyW6Kkwp27tzOwM/PB476KdNmAtPZZ5xqHz95ClYDGrmwMDcdrbtHHTnqSGo5UhDYOv80iN3oCAAPitoy7GshPgAAAABJRU5ErkJggg=='; }
+			if (c.name === 'Aquatic Center') { c.name = 'Pool'; }
+			if (c.name === 'Bocceball') { c.name = 'Bocce'; }
+			if (c.name === 'Off Leash Dog Area') { c.name = 'Dog Park'; }
+			if (c.name === 'Community Center' || c.name === 'Neighborhood Center') { c.name = 'Recreation Center'; }
+			if (c.name === 'Informal Playfield' || c.name === 'Multipurpose') { c.name = 'Multipurpose Field'; }
 
 			if (list[c.name]) {continue;}
 			list.uniques.push(c);
@@ -52,10 +63,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			// Mapping the amenity by id so we can get the name later when we have foreign keys
 			list[c.id] = c;
 		}
-		// console.log('all amenities');
-		// console.log(list.content);
-		// console.log('unique amenities');
-		// console.log(list.uniques);
 	};
 
 	var _addMissingAmenities = function () {
@@ -74,12 +81,36 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 		];
 		for (var i = 0; i < missing.length; i++) {
 			list.uniques.push(missing[i]);
-		};
+		}
+	};
+
+	var _onMarkerClicked = function () {
+		// If currentMarker is not null, meaning another marker window is shown,
+    // then set showWindow of that marker window to false.
+    currentMarker.obj.showWindow = false;
+    currentMarker.obj = this;
+    this.showWindow = true;
 	};
 
 	var _generateParkData = function (response) {
-		console.log('park data:');
-		console.log(response.data.features);
+
+		var actsPos = response.data.features;
+		actsPos.forEach( function(activity) {
+			var processed = {
+				id: activity.attributes.OBJECTID,
+				name: activity.attributes.LOCATION,
+				park: activity.attributes.PARK_NAME,
+				subcategory: list[activity.attributes.SUBCATEGORY],
+				latitude: activity.geometry.y,
+				longitude: activity.geometry.x,
+				icon: list[activity.attributes.SUBCATEGORY] ? ('data:image/png;base64,' + list[activity.attributes.SUBCATEGORY].imageData) : 'http://maps.raleighnc.gov/parklocator/images/adult.png',
+				showWindow: false,
+        onMarkerClicked: _onMarkerClicked
+			};
+
+			list.activitiesPos.markers.push(processed);
+		});
+
 	};
 
 

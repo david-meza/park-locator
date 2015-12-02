@@ -50,6 +50,32 @@
 
     </ui-gmap-markers>
 
+
+
+    <ui-gmap-markers  models="showMarkers()"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="onMarkerClicked()"
+                      type = "activities.markersConfig.type"
+                      typeOptions = "activities.markersConfig.typeOptions"
+                      typeEvents = "activities.markersConfig.typeEvents"
+                      modelsbyref="true">
+
+
+        <ui-gmap-windows  isIconVisibleOnClick = "true"
+                          show="'showWindow'"
+                          closeClick="'closeClick'" ng-cloak>
+            
+            <div>
+              <h5 ng-non-bindable> {{ name ? name : park }} </h5>
+              <p ng-non-bindable> {{ subcategory.name }} </p>
+            </div>
+
+        </ui-gmap-windows>
+
+    </ui-gmap-markers>
+
+
   </ui-gmap-google-map>
     
 </div>
