@@ -2,7 +2,7 @@
 
 angular.module('parkLocator').filter('selectedActivities', function() {
   
-  var filtered;
+  var filtered = [];
   
   return function(parkMarkers, activities) {
     console.log(parkMarkers);
@@ -10,7 +10,7 @@ angular.module('parkLocator').filter('selectedActivities', function() {
 
     if (activities.length <= 0) {return parkMarkers;}
 
-    filtered = [];
+    filtered.splice(0, filtered.length);
 
   	parkMarkers.forEach( function (marker) {
 
