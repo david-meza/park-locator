@@ -52,7 +52,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			if (c.name === 'Tennis') { c.name = 'Tennis Courts'; }
 			if (c.name === 'Theatre') { c.name = 'Theater'; }
 			if (c.name === 'Tennis Center') { c.imageData = 'iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH3wwDCwIEwfcPzwAAAw1JREFUSMe9Vk1PE1EUPe/NkEJbQaggGzdGxSjgAkz4GeoCd34s1Shqor9Bg/9AAwK60IjGHRAxMSaiLUWjBdToRj6muKst2mln3nFRZux0KpSQ9iaTzNz37j3v3nvufQMAjQAGhRAmAFbrEUI80HW9DQDubCjtKgI6vp8KIYRJsg4FEaieKABCbCDXSlhrQMhaggGAXqoQQkCIzUtJEiR9duX2+fxjhymVUkIIAdu2fWuapkEp5QH2AbZEImhq3AWl6Ds1SUgpkc1mkUwmPfqGYBDhUBgAQQLpTBpmNuv6KAZ1GpMAePfeEEnStm2WimVZJMloNMZQKEwAbGvbyysDA4zNxrm0vMIfS8v8sbTMNzNveeHiJYZCIY9/H+Ct24NMpVJcXTVomjmSpFKKtm0zmVxjKpXixMQE6+rq2BKJ8NWr12UP6HyPjz9jMOgB9Y0gAuCuxibGZuOug/X1dXZ2dhMApZQEwJGRMZKkaZokyeTaT87PL1IpRaUUcxv6y5cHiu22DwiAhw51MJ3OuBkgyRMnT7G+IchHj5+QJHO5QoYmp164dr62KGZT6aQr5tCRo0cRDoeglIKUEh8/JfByehrZP79x/dpVDA8NwbItaFJDOpN27f4LuFWvNO9u9rAvlfqFfD4PXddhGKtYWVku30aV9lupfP/+DZZlQ8qCi4MHD6C1rRWWZeHM2fNYXPyC2fgcEvMLGB176Aumohp2df2rYSBQz0RivlCrfJ4kOTE5xRs3bvLzl6+eNhq+P1oZS6Oxf4CZTMYljaZpBMAzZ8/Rsmy3DRzyKKVcMCO5xo6Ow1uztLFpN+NzHzwRdncfcw2dff39p/kpseBha+GdjMbi7Onp9bTSf2eplBLt7e0IBALusDYMA7lcroi1AiRRX9+Avr4+9PYeR0skAsMw8P79HKLRd8iZprvP4f2OhremaWUHt3MgKaVnfVPA0qtKKVXRPpeN5a6xnUa4Xan5jS9rHKFyIlQ7clMhGAChCSH2AehxFFUCIwrZnIGu63sAPN9QKlTvrzsGYP9fe4PZVKNaaIwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMTItMDNUMTE6MDI6MDQtMDU6MDBYT/64AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTEyLTAzVDExOjAyOjA0LTA1OjAwKRJGBAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAASUVORK5CYII='; }
-			if (c.name === 'Aquatic Center') { c.name = 'Pool'; }
+			if (c.name === 'Aquatic Center') { c.id = 1302; c.name = 'Pool'; }
 			if (c.name === 'Bocceball') { c.name = 'Bocce'; }
 			if (c.name === 'Off Leash Dog Area') { c.name = 'Dog Park'; }
 			// These two seem to be different 
@@ -85,6 +85,14 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 		for (var i = 0; i < missing.length; i++) {
 			list.uniques.push(missing[i]);
 		}
+
+		list[2113] = { id: 2113, name: 'Youth Baseball', imageData: 'iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAhlJREFUSInF1jGI2lAYwPG/cEOWAwsWzdAhh8NJoKDQIUM7OBR6B11uzObS4XKLJHDQDDfYcoNuOSe5LauUDg4FXQoVCpctU8tl6CDaGwId1MkONqn2er2nRPtNL1++fL8HSd57O2w5dv476DjObDAYJNJclmUMw0jdCSoZZdY4awg1q52/xj59c2+dklFmwU0QozHoOI4w5n3xeFEuC9UC1Ov1mWmaqSVwEATCmOd5DL+FwuDiK1rpo+l+7uK6Lo2zBtffrwEolUqEK+DCoPve5a1t0/3QB37Eedu2MV+ZyYH7T/aRJIlqtcrw6/BXdje+X6vVhDEhsNPpAHBwcMCQOXh8eky73QZA13Uuzi+SAbWnGqVSCc/z6HQ6GIaB4zi36hID+x/7AKiqiu/7MTaZTJAkSRgRBqMYj8aoqkqr1ULXdVzXRdO0zYERqr/U10LWApOKtUAll9sumFOU5QnkswTxP5owqDyeY2EYkk6nAXAuLzl8drgZMPo1LMuiUqmgaRqFQkH4+ZXBqHn3XZerT1d4vgdANp9dWPoSArP57NJ1OPq9SzSbTY6eHyULNpvNW7ler0e5XKZYLAr1WAmMmkYLOoB5coLn+wCkH6Xv3RtjUJZlYdiyrHgcjsbxeDqd/rV+sXcMGqaZUjLK7F/Q3sM95pvvrlA+iug8swQCBDdBql6vJ3dMfCBj2ubdx8Q/Z7OJ2Pri/RNlqLk+UmpInQAAAABJRU5ErkJggg==' };
+		
+		_addParkAttributesName();
+	};
+
+	var _addParkAttributesName = function () {
+		var rridx;
 		for (var mm = 0; mm < list.uniques.length; mm++) {
 
 			var c = list.uniques[mm];
@@ -103,8 +111,12 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			if (c.name === 'Environmental Education Center') { c.parkAttr = "ENVCTR"; }
 			if (c.name === 'Greenway Trail') { c.parkAttr = "GREENWAYACCESS"; }
 			if (c.name === 'Teen Center') { c.parkAttr = "TEEN"; }
+			if (c.name === 'Restroom') { rridx = mm; }
 			
 		}
+
+		list.uniques.splice(rridx, 1);
+
 	};
 
 	var _onMarkerClicked = function () {
@@ -113,6 +125,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
     currentMarker.obj.showWindow = false;
     currentMarker.obj = this;
     this.showWindow = true;
+    console.log(this);
 	};
 
 	var _generateParkData = function (response) {
@@ -123,7 +136,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 				id: activity.attributes.OBJECTID,
 				name: activity.attributes.LOCATION,
 				park: activity.attributes.PARK_NAME,
-				subcategory: list[activity.attributes.SUBCATEGORY],
+				subcategory: list[activity.attributes.SUBCATEGORY] || activity.attributes.SUBCATEGORY,
 				latitude: activity.geometry.y,
 				longitude: activity.geometry.x,
 				icon: list[activity.attributes.SUBCATEGORY] ? ('data:image/png;base64,' + list[activity.attributes.SUBCATEGORY].imageData) : 'http://maps.raleighnc.gov/parklocator/images/adult.png',

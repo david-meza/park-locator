@@ -22,6 +22,14 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 
 	  });
 
+	  $scope.showAmenityInMap = function (activity) {
+	  	console.log(activity);
+	  	// activity.onMarkerClicked();
+    	// $scope.map.location.coords.latitude = activity.latitude;
+    	// $scope.map.location.coords.longitude = activity.longitude;
+    	$scope.map.zoom = 18;
+	  };
+
 	  var initializeDirectionsMap = function () {
 	  	if ( !$scope.parks[parkName] ) { return; }
 	  	
@@ -109,7 +117,8 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  		position: position,
 	  		map: map,
 	  		icon: icon,
-	  		title: title
+	  		title: title,
+	  		animation: $scope.mapsApi.Animation.DROP
 	  	});
 	  };
 

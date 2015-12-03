@@ -67,7 +67,7 @@
                           closeClick="'closeClick'" ng-cloak>
             
             <div>
-              <h5 ng-non-bindable> {{ name ? name : park }} </h5>
+              <h6 ng-non-bindable> {{ name || park }} </h6>
               <p ng-non-bindable> {{ subcategory.name }} </p>
             </div>
 
