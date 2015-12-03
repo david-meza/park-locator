@@ -8,6 +8,8 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 
 	var _generateMarkers = function (response) {
 
+    markers.content = [];
+
 		response.data.features.forEach(function(park){
 			var p = park.attributes;
       var marker = {
@@ -88,14 +90,31 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 		console.log(error);
 	};
 
-	$http({
-		method: 'GET',
-		url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson'
-	}).then(_generateMarkers, _logAjaxError);
+  var updateParkMarkers = function (selectedActivities) {
+    var query = '';
+    selectedActivities.forEach( function (activity, idx) {
+      query += activity.parkAttr + '%3D' + '%27Yes%27';
+      if (idx <= selectedActivities.length - 2) { query += '+AND+'; }
+      
+    });
+    getParksInfo(query);
+  };
+
+  var getParksInfo = function (where) {
+    var url = 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=' + (where ? where : '1%3D1') + '&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson';
+  	$http({
+  		method: 'GET',
+  		url: url
+  	}).then(_generateMarkers, _logAjaxError);
+  };
+
+  // This gets automatically called because of the $watchCollection in MapCtrl
+  // getParksInfo();
 
 
 	return {
-		markers: markers
+		markers: markers,
+    updateParkMarkers: updateParkMarkers
 	};
 
 }]);

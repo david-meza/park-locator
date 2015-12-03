@@ -9,6 +9,8 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   $scope.activities = amenitiesService.list.activitiesPos;
   $scope.selectedActivities = amenitiesService.selectedActivities;
 
+  $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
+
   var noIndigestion = [];
 
   $scope.showMarkers = function () {
