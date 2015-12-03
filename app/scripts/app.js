@@ -10,6 +10,12 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
       });
   }])
 
+  .config(function ($httpProvider) {
+
+    $httpProvider.interceptors.push('httpInterceptor');
+
+  })
+
   .config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
 
@@ -26,26 +32,21 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
             },
 
             '': {
-              templateUrl: 'views/main.html',
-              controller: 'MainCtrl'
-            },
-
-            'map@home': {
-              templateUrl: 'views/partials/map.html',
-              controller: 'mapCtrl'
+              templateUrl: 'views/main.html'
             }
+
           }
         })
 
         .state('home.park', {
           url: ':name',
-          views: {
+          // views: {
 
-            '': {
+            // '': {
               templateUrl: 'views/park-information.html',
               controller: 'parkCtrl'
-            }
-          }
+            // }
+          // }
         });
 
   }]);

@@ -1,121 +1,16 @@
 <div class="row mb-20">
+  
   <div class="col-md-4">
 
-    <uib-accordion close-others="settings.closeOthers">
-
-      <uib-accordion-group  is-open = "settings.first.status.open"
-                            is-disabled="settings.first.status.disabled"
-                            >
-        <uib-accordion-heading>
-          Set my Location <i class="pull-right glyphicon" 
-                          ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
-        </uib-accordion-heading>
-
-        <div class="input-group mb-20">
-          <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-          <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
-        </div>
-
-
-        <button class="btn btn-success btn-block" 
-                ng-click="geoLocate()">
-          <i class = "fa fa-fw fa-location-arrow"></i> Use my current location!
-        </button>
-
-      </uib-accordion-group>
-
-      <uib-accordion-group  is-open = "settings.second.status.open"
-                            is-disabled="settings.second.status.disabled"
-                            >
-        <uib-accordion-heading>
-          Filter by Activity <i class="pull-right glyphicon" 
-                                ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
-        </uib-accordion-heading>
-
-        <div ng-show="selectedActivities.current.length === 0">
-          <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
-        </div>
-
-        <div ng-show="selectedActivities.current.length > 0">
-          <h5>Selected</h5>
-
-          <ul id = "selected-amenities-list">
-            <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
-              <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-                <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
-                <a ng-click="removeSelected(amenity)">
-                  <i  class="pull-right glyphicon glyphicon-ok" 
-                      ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>  
-                </a>
-              </p>
-            </li>          
-          </ul>
-        </div>
-
-        <div>
-          <h5>Not Selected</h5>
-
-          <ul id = "amenities-list">
-            <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
-              <a ng-click="addToSelected(amenity)">
-                <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
-              </a>
-            </li>          
-          </ul>          
-        </div>
-        
-      </uib-accordion-group>
-
-      <uib-accordion-group  is-open = "settings.third.status.open"
-                            is-disabled="settings.third.status.disabled"
-                            >
-        <uib-accordion-heading>
-          Select a Park <i class="pull-right glyphicon" 
-                          ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
-        </uib-accordion-heading>
-
-        <div class="row mb-20">
-          <div class="col-md-12">
-
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              
-              <input  type="text"
-                      id = "searchParkName" 
-                      ng-model="parkSelected"
-                      placeholder = "Park Name"
-                      typeahead-no-results = "noResults"
-                      typeahead-on-select = "centerToPark($item, $model, $label)"
-                      uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8" 
-                      class="form-control">            
-            </div>
-
-          </div>
-
-          <div class = "col-md-12" ng-show="noResults">
-            <br>
-            <i class="glyphicon glyphicon-remove"></i> No Parks With This Name
-          </div>
-        </div>
-
-        
-        <ul id = "park-list">
-          <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark ">
-            <a  ng-click="centerToPark(park)" 
-                scroll-to="map-canvas">
-              <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
-            </a>
-          </li>          
-        </ul>
-
-      </uib-accordion-group>
-
-    </uib-accordion>
+    <accordion-menu></accordion-menu>
     
   </div>   
 
-
-  <div ui-view="map" class="col-md-8"></div>
+  <div class="col-md-8">
+    
+    <main-map></main-map>
+  
+  </div>
 
 </div>
 

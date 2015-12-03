@@ -41,6 +41,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 	var _addSecondSet = function (response) {
 		_generateList(response);
 		_addMissingAmenities();
+		_addParkAttributesName();
 	};
 
 	var _processUniques = function () {
@@ -87,8 +88,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 		}
 
 		list[2113] = { id: 2113, name: 'Youth Baseball', imageData: 'iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAhlJREFUSInF1jGI2lAYwPG/cEOWAwsWzdAhh8NJoKDQIUM7OBR6B11uzObS4XKLJHDQDDfYcoNuOSe5LauUDg4FXQoVCpctU8tl6CDaGwId1MkONqn2er2nRPtNL1++fL8HSd57O2w5dv476DjObDAYJNJclmUMw0jdCSoZZdY4awg1q52/xj59c2+dklFmwU0QozHoOI4w5n3xeFEuC9UC1Ov1mWmaqSVwEATCmOd5DL+FwuDiK1rpo+l+7uK6Lo2zBtffrwEolUqEK+DCoPve5a1t0/3QB37Eedu2MV+ZyYH7T/aRJIlqtcrw6/BXdje+X6vVhDEhsNPpAHBwcMCQOXh8eky73QZA13Uuzi+SAbWnGqVSCc/z6HQ6GIaB4zi36hID+x/7AKiqiu/7MTaZTJAkSRgRBqMYj8aoqkqr1ULXdVzXRdO0zYERqr/U10LWApOKtUAll9sumFOU5QnkswTxP5owqDyeY2EYkk6nAXAuLzl8drgZMPo1LMuiUqmgaRqFQkH4+ZXBqHn3XZerT1d4vgdANp9dWPoSArP57NJ1OPq9SzSbTY6eHyULNpvNW7ler0e5XKZYLAr1WAmMmkYLOoB5coLn+wCkH6Xv3RtjUJZlYdiyrHgcjsbxeDqd/rV+sXcMGqaZUjLK7F/Q3sM95pvvrlA+iug8swQCBDdBql6vJ3dMfCBj2ubdx8Q/Z7OJ2Pri/RNlqLk+UmpInQAAAABJRU5ErkJggg==' };
-		
-		_addParkAttributesName();
+	
 	};
 
 	var _addParkAttributesName = function () {
@@ -99,18 +99,18 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 			
 			c.parkAttr = c.name.replace( /\s+/g, '').toUpperCase();
 			
-			if (c.name === 'Art Center') { c.parkAttr = "ARTSCENTER"; }
-			if (c.name === 'Boat Ramp') { c.parkAttr = "BOATRENTALS"; }
-			if (c.name === 'Kiddie Boats') { c.parkAttr = "BOATRIDE"; }
-			if (c.name === 'Baseball' || c.name === 'Softball' ) { c.parkAttr = "BALLFIELDS"; }
-			if (c.name === 'Canoe Launch') { c.parkAttr = "CANOE"; }
-			if (c.name === 'Fishing Area') { c.parkAttr = "FISHING"; }
-			if (c.name === 'Horseshoe Pit') { c.parkAttr = "HORSESHOE"; }
-			if (c.name === 'In Line Hockey') { c.parkAttr = "INLINESKATING"; }
-			if (c.name === 'Active Adult Center') { c.parkAttr = "ACTIVE_ADULT"; }
-			if (c.name === 'Environmental Education Center') { c.parkAttr = "ENVCTR"; }
-			if (c.name === 'Greenway Trail') { c.parkAttr = "GREENWAYACCESS"; }
-			if (c.name === 'Teen Center') { c.parkAttr = "TEEN"; }
+			if (c.name === 'Art Center') { c.parkAttr = 'ARTSCENTER'; }
+			if (c.name === 'Boat Ramp') { c.parkAttr = 'BOATRENTALS'; }
+			if (c.name === 'Kiddie Boats') { c.parkAttr = 'BOATRIDE'; }
+			if (c.name === 'Baseball' || c.name === 'Softball' ) { c.parkAttr = 'BALLFIELDS'; }
+			if (c.name === 'Canoe Launch') { c.parkAttr = 'CANOE'; }
+			if (c.name === 'Fishing Area') { c.parkAttr = 'FISHING'; }
+			if (c.name === 'Horseshoe Pit') { c.parkAttr = 'HORSESHOE'; }
+			if (c.name === 'In Line Hockey') { c.parkAttr = 'INLINESKATING'; }
+			if (c.name === 'Active Adult Center') { c.parkAttr = 'ACTIVE_ADULT'; }
+			if (c.name === 'Environmental Education Center') { c.parkAttr = 'ENVCTR'; }
+			if (c.name === 'Greenway Trail') { c.parkAttr = 'GREENWAYACCESS'; }
+			if (c.name === 'Teen Center') { c.parkAttr = 'TEEN'; }
 			if (c.name === 'Restroom') { rridx = mm; }
 			
 		}

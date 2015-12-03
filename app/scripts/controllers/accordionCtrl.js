@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService) {
+angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$rootScope',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $rootScope) {
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
@@ -21,7 +21,7 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     // Set Location Section
     $scope.geoLocate = function() {
 
-      Flash.create('info', 'We are attempting to obtain your location. Please wait a few seconds.');
+      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> We are attempting to obtain your location. Please wait a few seconds.');
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
@@ -37,6 +37,14 @@ angular.module('parkLocator').controller('MainCtrl', [ '$scope', 'mapService', '
     };
 
     $scope.geoLocate();
+
+    $rootScope.$on('loading:progress', function(){
+      Flash.create('info', '<i class="fa fa-lg fa-spinner fa-pulse"></i> Processing park results. Please wait a few seconds.');
+    });
+
+    $rootScope.$on('loading:finish', function(){
+      Flash.dismiss();
+    });
 
     $scope.addToSelected = function (amenity) {
     	$scope.selectedActivities.current.push(amenity);
