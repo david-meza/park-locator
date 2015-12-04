@@ -39,7 +39,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.geoLocate();
 
     $rootScope.$on('loading:progress', function(){
-      Flash.create('info', '<i class="fa fa-lg fa-spinner fa-pulse"></i> Processing park results. Please wait a few seconds.');
+      Flash.create('info', '<i class="fa fa-lg fa-spinner fa-pulse"></i> Processing park results.');
     });
 
     $rootScope.$on('loading:finish', function(){
@@ -61,7 +61,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     	park.onMarkerClicked();
     	$scope.map.location.coords.latitude = park.latitude;
     	$scope.map.location.coords.longitude = park.longitude;
-    	$scope.map.zoom = 15;
+    	$scope.map.zoom = 16;
     };
 
     $scope.nearestPark = function (park) {

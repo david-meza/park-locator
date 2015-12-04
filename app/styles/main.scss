@@ -4,14 +4,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "./flatly.min.css";
 
 
-// @import "../bower_components/angular-flash-alert/dist/angular-flash.css";
-
 html {
   font-family: Helvetica, Verdana, sans-serif;
 }
 
 .nav, .pagination, .carousel, .panel-title a, a { 
   cursor: pointer; 
+}
+
+#flash {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  position: fixed;
 }
 
 h1 {
@@ -108,25 +113,25 @@ ul#park-amenities {
 
   li {
 
-    .activity-img {
-      height: 100px;
-      width: 100px;
-    }
+    // .activity-img {
+    //   height: 105px;
+    //   width: 105px;
+    // }
 
     img {
-      float: left;
-      margin: 10px;
-      border: 5px solid #fff;
+      // float: left;
+      // margin: 10px;
+      // border: 3px solid #fff;
 
-      -webkit-transition: box-shadow 0.5s ease;
-      -moz-transition: box-shadow 0.5s ease;
-      -o-transition: box-shadow 0.5s ease;
-      -ms-transition: box-shadow 0.5s ease;
-      transition: box-shadow 0.5s ease;
+      // -webkit-transition: box-shadow 0.5s ease;
+      // -moz-transition: box-shadow 0.5s ease;
+      // -o-transition: box-shadow 0.5s ease;
+      // -ms-transition: box-shadow 0.5s ease;
+      // transition: box-shadow 0.5s ease;
 
       &:hover {
-        -webkit-box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
-        box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
+        // -webkit-box-shadow: 0px 0px 7px rgba(0,0,0,0.9);
+        // box-shadow: 0px 0px 7px rgba(0,0,0,0.9);
       }
     }
 
@@ -158,6 +163,93 @@ html, body, #map-canvas {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+
+.view {
+
+  width: 110px;
+  height: 110px;
+  margin: 15px;
+  float: left;
+  border: 5px solid #fff;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 7px rgba(0,50,100,0.8);
+  -moz-box-shadow: 0px 0px 7px rgba(0,50,100,0.8);
+  box-shadow: 0px 0px 7px rgba(0,50,100,0.8);
+  cursor: default;
+
+  .mask {
+    width: 105px;
+    height: 105px;
+    position: absolute;
+    overflow: hidden;
+    top: -5px;
+    left: -5px;
+    opacity: 0;
+    background-color: rgba(219,127,8, 0.7);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+
+  img {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+
+  h6 {
+    color: #fff;
+    position: relative;
+    font-size: 1em;
+    padding: 10px;
+    background: rgba(11,69,159, 0.8);
+    margin: 30px 0 0 0;
+    -webkit-transform: translateY(-100px);
+    -moz-transform: translateY(-100px);
+    -o-transform: translateY(-100px);
+    -ms-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+
+    img {
+      -webkit-transform: scale(1.1,1.1);
+      -moz-transform: scale(1.1,1.1);
+      -o-transform: scale(1.1,1.1);
+      -ms-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+
+    .mask {
+      opacity: 1;
+    }
+
+    h6 {
+      opacity: 1;
+      -webkit-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      -o-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+  }
 }
 
 .mb-20 {
@@ -200,10 +292,15 @@ html, body, #map-canvas {
   border-top: 1px solid #e5e5e5;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  // .container {
-  //   max-width: 730px;
-  // }
+@media screen and (max-width: 768px) {
+  h1 {
+    .navbar-brand {
+      font-size: 0.55em;
+    }
+  }
+
+  .angular-google-map-container {
+    height: 25em;
+  }
 
 }

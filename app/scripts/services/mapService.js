@@ -134,7 +134,7 @@ angular.module('parkLocator').factory('mapService', ['Flash',
       map.location.coords.longitude = lon;
       map.myLocationMarker.coords.latitude = lat;
       map.myLocationMarker.coords.longitude = lon;
-      map.zoom = 15;
+      map.zoom = 14;
     } else {
       // Otherwise, keep using default coordinates
       var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> Oops.</strong>  It seems this location is not in Raleigh.';

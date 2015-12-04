@@ -1,7 +1,5 @@
 <div id="map-canvas">
 
-  <div id = "flash" flash-message="4000" ></div>
-
   <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
                       options = 'map.options'
@@ -30,6 +28,7 @@
                       typeOptions = "map.markersConfig.typeOptions"
                       typeEvents = "map.markersConfig.typeEvents"
                       modelsbyref="true"
+                      fit = "true"
                       options="'options'"
                       events="map.parkMarkerEvents">
 
@@ -59,21 +58,20 @@
                       type = "activities.markersConfig.type"
                       typeOptions = "activities.markersConfig.typeOptions"
                       typeEvents = "activities.markersConfig.typeEvents"
-                      modelsbyref="true">
-
-
-        <ui-gmap-windows  isIconVisibleOnClick = "true"
-                          show="'showWindow'"
-                          closeClick="'closeClick'" ng-cloak>
-            
-            <div>
-              <h6 ng-non-bindable> {{ name || park }} </h6>
-              <p ng-non-bindable> {{ subcategory.name }} </p>
-            </div>
-
-        </ui-gmap-windows>
-
+                      modelsbyref = "true">
     </ui-gmap-markers>
+
+
+
+    <!-- <ui-gmap-window show="activities.window.show" 
+                    coords="activities.window.model" 
+                    options="activities.window.options" 
+                    closeclick="activities.window.closeClick">
+      <div ng-non-bindable>
+        <h6> {{ subcategory.name }} </h6>
+        <p class="text-muted"> {{ name || park || subcategory.name }} </p>
+      </div>
+    </ui-gmap-window> -->
 
 
   </ui-gmap-google-map>

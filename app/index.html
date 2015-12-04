@@ -18,6 +18,8 @@
     
     <nav ui-view = "navbar"></nav>
 
+    <div id = "flash" flash-message="3000" ></div>
+
     <div class="container">
       <ui-view></ui-view>
     </div>
@@ -61,6 +63,7 @@
     <script src="scripts/services/mapService.js"></script>
     <script src="scripts/services/parkService.js"></script>
     <script src="scripts/services/amenitiesService.js"></script>
+    <script src="scripts/services/classesService.js"></script>
     
     <script src="scripts/services/httpInterceptor.js"></script>
     
@@ -73,10 +76,12 @@
     <script src="scripts/controllers/accordionCtrl.js"></script>
     <script src="scripts/controllers/mapCtrl.js"></script>
     <script src="scripts/controllers/parkCtrl.js"></script>
+    <script src="scripts/controllers/classesCtrl.js"></script>
 
     <!-- Directives -->
     <script src="scripts/directives/mainMap.js"></script>
     <script src="scripts/directives/accordionMenu.js"></script>
+    <script src="scripts/directives/classesInfo.js"></script>
 
 </body>
 </html>

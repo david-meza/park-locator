@@ -82,7 +82,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     // then set showWindow of that marker window to false.
     currentMarker.obj.showWindow = false;
     currentMarker.obj = markers.currentPark = this;
-    this.showWindow = true;
+    this.showWindow = !this.showWindow;
     $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
 	};
 

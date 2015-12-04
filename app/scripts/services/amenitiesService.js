@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('amenitiesService', ['$http', function($http){
+angular.module('parkLocator').factory('amenitiesService', ['$http', '$timeout', 
+	function($http, $timeout){
 	
 	// http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2?f=pjson
 
@@ -13,9 +14,18 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
     typeOptions: {
       title: 'Zoom in to find more activities!',
       gridSize: 60,
-      minimumClusterSize: 6
+      minimumClusterSize: 8
     },
     typeEvents: {}
+  };
+
+  list.activitiesPos.window = {
+    model: {},
+    show: false,
+    closeClick: function() {
+      this.show = false;
+    },
+    options: {} // define when map is ready
   };
 
 	var _logAjaxError = function (error) {
@@ -163,12 +173,14 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 	};
 
 	var _onMarkerClicked = function () {
-		// If currentMarker is not null, meaning another marker window is shown,
-    // then set showWindow of that marker window to false.
-    currentMarker.obj.showWindow = false;
-    currentMarker.obj = this;
-    this.showWindow = true;
-    console.log(this);
+		// var self = this;
+    list.activitiesPos.window.model = this;
+    list.activitiesPos.window.show = true;
+    // self.showPopup = !self.showPopup;
+    // $timeout(function(){
+    // 	list.activitiesPos.window.show = false;
+    // }, 2000);
+    // console.log(self);
 	};
 
 	var _generateParkData = function (response) {
@@ -183,7 +195,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', function($ht
 				latitude: activity.geometry.y,
 				longitude: activity.geometry.x,
 				icon: list[activity.attributes.SUBCATEGORY] ? ('data:image/png;base64,' + (list[activity.attributes.SUBCATEGORY].imageDataSm ? list[activity.attributes.SUBCATEGORY].imageDataSm : list[activity.attributes.SUBCATEGORY].imageData)) : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
-				showWindow: false,
+				showPopup: false,
         onMarkerClicked: _onMarkerClicked
 			};
 

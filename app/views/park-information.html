@@ -74,9 +74,18 @@
 
           <ul id = "park-amenities">
             <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
+              
               <a ng-click="showAmenityInMap(amenity)">
-                <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataLg}}" />
+                
+                <div class="view">
+                  <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataLg}}" />
+                  <div class="mask">  
+                    <h6>{{ amenity.name }}</h6>  
+                  </div>  
+                </div>
+              
               </a>
+
             </li>          
           </ul>
 
@@ -95,7 +104,7 @@
         </div>
         <div class="panel-body">
 
-          <p>Coming Soon!</p>
+          <classes-info currentPark = "parks.currentPark"></classes-info>
 
         </div>
       </div>

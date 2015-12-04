@@ -9,13 +9,14 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   $scope.activities = amenitiesService.list.activitiesPos;
   $scope.selectedActivities = amenitiesService.selectedActivities;
 
+  $scope.$watch('activities.window.model', function () { console.log($scope.activities.window); });
+
   $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
 
-  var noIndigestion = [];
+  $scope.noIndigestion = [];
 
   $scope.showMarkers = function () {
-    if ($scope.map.zoom >= 17) { return $scope.activities.markers; }
-    return noIndigestion;
+    return ($scope.map.zoom >= 16) ? $scope.activities.markers : $scope.noIndigestion;
   };
 
   var mapInstance,
