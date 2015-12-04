@@ -39,7 +39,7 @@
       <ul id = "selected-amenities-list">
         <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
           <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
+            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
             <a ng-click="removeSelected(amenity)">
               <i  class="pull-right glyphicon glyphicon-ok" 
                   ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>  
@@ -55,7 +55,7 @@
       <ul id = "amenities-list">
         <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
           <a ng-click="addToSelected(amenity)">
-            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageData}}" /> {{ amenity.name }} 
+            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
           </a>
         </li>          
       </ul>          

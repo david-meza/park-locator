@@ -75,7 +75,7 @@
           <ul id = "park-amenities">
             <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
               <a ng-click="showAmenityInMap(amenity)">
-                <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageData}}" />
+                <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataLg}}" />
               </a>
             </li>          
           </ul>
