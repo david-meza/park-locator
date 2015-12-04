@@ -36,7 +36,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	    directionsService = new $scope.mapsApi.DirectionsService();
 	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer({ suppressMarkers: true });
 	    generateMarkerIcons();
-	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: "Light Dream"});
+	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: 'Light Dream'});
 	    var mapOptions = {
 		    zoom: 16,
 		    scrollwheel: false,
@@ -45,7 +45,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 		      mapTypeIds: [$scope.mapsApi.MapTypeId.ROADMAP, 'light_dream']
 		    }
 		  };
-		  map = new $scope.mapsApi.Map(document.getElementById("mini-map"), mapOptions);
+		  map = new $scope.mapsApi.Map(document.getElementById('mini-map'), mapOptions);
 	  	directionsDisplay.setMap( map );
 		  map.mapTypes.set('light_dream', styledMap);
 		  map.setMapTypeId('light_dream');
@@ -98,7 +98,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	      placeCustomMarkers(response);
 	      extractDirectionsInfo(response);
 	    } else {
-	    	console.log("Error happened... Maybe over query limit?");
+	    	console.log('Error happened... Maybe over query limit?');
 	    }
 	  };
 

@@ -31,7 +31,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   });
 
   var applyMapStyles = function () {
-  	var styledMap = new mapsApi.StyledMapType( $scope.map.options.styles, {name: "Nature"});
+  	var styledMap = new mapsApi.StyledMapType( $scope.map.options.styles, {name: 'Nature'});
 		mapInstance.mapTypes.set('nature', styledMap);
 	  mapInstance.setMapTypeId('nature');
   };
