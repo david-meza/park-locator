@@ -7,7 +7,7 @@ angular.module('parkLocator').controller('sectionCtrl', ['$scope', 'classesServi
 
     $scope.classes = classesService.classes;
 
-    $scope.sortQuery = 'course';
+    $scope.sortQuery = 'COURSE';
     $scope.reverse = false;
 
     $scope.sortBy = function (query) {
