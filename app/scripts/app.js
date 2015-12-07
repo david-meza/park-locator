@@ -44,13 +44,15 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
 
         .state('home.park', {
           url: ':name',
-          // views: {
+          templateUrl: 'views/park-information.html',
+          controller: 'parkCtrl'
 
-            // '': {
-              templateUrl: 'views/park-information.html',
-              controller: 'parkCtrl'
-            // }
-          // }
+        })
+
+        .state('home.park.section', {
+          url: '/:sectionName',
+          templateUrl: 'views/course-section.html',
+          controller: 'sectionCtrl'
         });
 
   }]);

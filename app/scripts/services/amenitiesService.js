@@ -166,6 +166,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', '$timeout',
 			
 		}
 
+		list[1301] = list['Pool'];
 		list[1311] = list['Neighborhood Center'];
 		list[2302] = list['Outdoor Basketball'];
 		list.uniques.splice(rridx, 1);

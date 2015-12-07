@@ -15,14 +15,26 @@ angular.module('parkLocator').factory('classesService', ['$http',
   };
 
   var _processClasses = function (response) {
-    console.log(response.data);
+    console.log(response.data, typeof response.data);
+    // Empty all arrays when we change the current park
+    // We can't just do classes = { content: [], sections: [] }; because it replaces and disconnects the object from the $digest loop that was triggered in the ctrl with $scope
+    // So instead, we just clear the contents of the object and we still have a reference to the same object
+    for (var key in classes) {
+      if (key === 'content' || key === 'sections') {
+        classes[key].splice(0, classes[key].length);
+      } else{
+        delete classes[key]
+      };
+    }
+    // Typical response for no results is "null"
+    if (response.data === null) { return; }
     response.data.forEach( function (course) {
       classes.content.push(course);
       if (classes[course.SECTION]) {
         classes[course.SECTION].push(course);
       } else {
         classes[course.SECTION] = [course];
-        classes.sections.push[course.SECTION];
+        classes.sections.push({ name: course.SECTION, active: false, disabled: false});
       }
 
     });

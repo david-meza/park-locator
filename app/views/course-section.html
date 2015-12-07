@@ -1,0 +1,43 @@
+{{ sortQuery }}
+
+{{ reverse }}
+
+<input 	type="text" 
+				ng-model="courseSelected" 
+				class="form-control"
+				placeholder = "Filter by any category">
+
+<table class = "table table-hover">
+	<thead>
+		<th>
+			<a ng-click="sortBy('COURSE')" >
+				<i class="fa fa-group"></i> Course <i class="fa fa-pad-right" ng-show = "sortQuery === 'COURSE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i> 
+			</a>
+		</th>
+		<th>
+			<a ng-click="sortBy('ACTIVITY')" >
+				<i class="fa fa-group"></i> Activity <i class="fa fa-pad-right" ng-show = "sortQuery === 'ACTIVITY' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
+			</a>
+		</th>
+		<th>
+			<a ng-click="sortBy('START_DATE')" >
+				<i class="fa fa-calendar"></i> Start Date <i class="fa fa-pad-right" ng-show = "sortQuery === 'START_DATE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
+			</a>
+		</th>
+		<th>
+			<i class="fa fa-external-link"></i> Info
+		</th>
+	</thead>
+
+	<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse">
+		<td> {{ course.COURSE }} </td>
+		<td> {{ course.ACTIVITY }} </td>
+		<td> {{ course.START_DATE | date : 'MMM d, y h:mm a' }} </td>
+		<td> 
+			<a 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
+					target="_blank"> 
+				More
+			</a> 
+		</td>
+	</tr>
+</table>

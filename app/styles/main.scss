@@ -44,8 +44,21 @@ p {
   word-wrap: break-word;
 }
 
+th {
+  white-space: nowrap;
+}
+
+.fa-pad-right {
+  padding-left: 5px;
+}
+
 .text-green {
   color: #3C763D;
+}
+
+.course-details {
+  max-height: 40em;
+  overflow: scroll;
 }
 
 .img-container {

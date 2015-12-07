@@ -1,17 +1,23 @@
 <div class="row">
 	<div class="col-xs-4">
 		
-		<uib-tabset vertical="true" type="pills">
+		<uib-tabset vertical="true" 
+								type="pills">
 
-		  <uib-tab ng-repeat="section in classes.sections" heading="{{section}}" active="section.active" disable="section.disabled">
-      	{{section}}
+		  <uib-tab 	ng-repeat="section in classes.sections" 
+		  					heading="{{section.name}}" 
+		  					active="section.active" 
+		  					disable="section.disabled"
+		  					select = "goToSection(section.name)">
     	</uib-tab>
 
 
 		</uib-tabset>
 		
 	</div>
-	<div class="col-xs-8">
+	<div class="col-xs-8 course-details">
 		
+		<ui-view></ui-view>
+
 	</div>
 </div>
