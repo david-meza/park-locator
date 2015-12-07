@@ -1,290 +1,329 @@
 'use strict';
 
-angular.module('parkLocator').factory('classesService', function(){
+angular.module('parkLocator').factory('classesService', ['$http', 
+  function($http){
 
-  
+    var classes = { content: [], sections: [] };
+
+
+  var getParkClasses = function (ids) {
+    $http({
+      method: 'GET',
+      url: 'https://maps.raleighnc.gov/class/class.php?&ids=' + ids
+    }).then(_processClasses, _logAjaxError);
+    
+  };
+
+  var _processClasses = function (response) {
+    console.log(response.data);
+    response.data.forEach( function (course) {
+      classes.content.push(course);
+      if (classes[course.SECTION]) {
+        classes[course.SECTION].push(course);
+      } else {
+        classes[course.SECTION] = [course];
+        classes.sections.push[course.SECTION];
+      }
+
+    });
+    console.log(classes);
+  };
+
+  var getParkIds = function (name) {
+    for (var i = 0; i < parkIds.length; i++) {
+      if (parkIds[i].name === name) {
+        return parkIds[i].ids;
+      }
+    }
+  };
 	
 	var parkIds = [
     {
-      "ids": "30,74",
-      "park": "Anderson Point Park"
+      'ids': '30,74',
+      'name': 'Anderson Point Park'
     },
     {
-      "ids": "82,83",
-      "park": "Annie Louise Wilkerson, MD Nature Preserve Park"
+      'ids': '82,83',
+      'name': 'Annie Louise Wilkerson, MD Nature Preserve Park'
     },
     {
-      "ids": "23",
-      "park": "Apollo Heights Park"
+      'ids': '23',
+      'name': 'Apollo Heights Park'
     },
     {
-      "ids": "57",
-      "park": "Baileywick Road Park"
+      'ids': '57',
+      'name': 'Baileywick Road Park'
     },
     {
-      "ids": "68",
-      "park": "Barwell Road"
+      'ids': '68',
+      'name': 'Barwell Road'
     },
     {
-      "ids": "7,50",
-      "park": "Biltmore Hills"
+      'ids': '7,50',
+      'name': 'Biltmore Hills'
     },
     {
-      "ids": "33",
-      "park": "Brentwood Park"
+      'ids': '33',
+      'name': 'Brentwood Park'
     },
     {
-      "ids": "69",
-      "park": "Brier Creek Park"
+      'ids': '69',
+      'name': 'Brier Creek Park'
     },
     {
-      "ids": "60",
-      "park": "Brookhaven"
+      'ids': '60',
+      'name': 'Brookhaven'
     },
     {
-      "ids": "58,89",
-      "park": "Buffaloe Road Athletic Park"
+      'ids': '58,89',
+      'name': 'Buffaloe Road Athletic Park'
     },
     {
-      "ids": "11",
-      "park": "Campbell Lodge"
+      'ids': '11',
+      'name': 'Campbell Lodge'
     },
     {
-      "ids": "8",
-      "park": "Carolina Pines Park"
+      'ids': '8',
+      'name': 'Carolina Pines Park'
     },
     {
-      "ids": "34",
-      "park": "Cedar Hills Park"
+      'ids': '34',
+      'name': 'Cedar Hills Park'
     },
     {
-      "ids": "9,54",
-      "park": "John Chavis Memorial Park"
+      'ids': '9,54',
+      'name': 'John Chavis Memorial Park'
     },
     {
-      "ids": "11",
-      "park": "Durant Nature Preserve"
+      'ids': '11',
+      'name': 'Durant Nature Preserve'
     },
     {
-      "ids": "35",
-      "park": "Eastgate Park"
+      'ids': '35',
+      'name': 'Eastgate Park'
     },
     {
-      "ids": "75",
-      "park": "Fallon Park"
+      'ids': '75',
+      'name': 'Fallon Park'
     },
     {
-      "ids": "36",
-      "park": "Fred Fletcher Park"
+      'ids': '36',
+      'name': 'Fred Fletcher Park'
     },
     {
-      "ids": "62",
-      "park": "Gardner"
+      'ids': '62',
+      'name': 'Gardner'
     },
     {
-      "ids": "39",
-      "park": "Glen Eden Pilot Park"
+      'ids': '39',
+      'name': 'Glen Eden Pilot Park'
     },
     {
-      "ids": "10",
-      "park": "Green Road Park"
+      'ids': '10',
+      'name': 'Green Road Park'
     },
     {
-      "ids": "77",
-      "park": "Greystone Recreation Center"
+      'ids': '77',
+      'name': 'Greystone Recreation Center'
     },
     {
-      "ids": "12",
-      "park": "Halifax Park"
+      'ids': '12',
+      'name': 'Halifax Park'
     },
     {
-      "ids": "90",
-      "park": "Hill Street Park"
+      'ids': '90',
+      'name': 'Hill Street Park'
     },
     {
-      "ids": "72",
-      "park": "Honeycutt Park"
+      'ids': '72',
+      'name': 'Honeycutt Park'
     },
     {
-      "ids": "81",
-      "park": "Isabella Cannon Park"
+      'ids': '81',
+      'name': 'Isabella Cannon Park'
     },
     {
-      "ids": "2,13",
-      "park": "Jaycee Park"
+      'ids': '2,13',
+      'name': 'Jaycee Park'
     },
     {
-      "ids": "42",
-      "park": "John P Top Greene Park"
+      'ids': '42',
+      'name': 'John P Top Greene Park'
     },
     {
-      "ids": "37",
-      "park": "Kentwood Park"
+      'ids': '37',
+      'name': 'Kentwood Park'
     },
     {
-      "ids": "38",
-      "park": "Kiwanis Park"
+      'ids': '38',
+      'name': 'Kiwanis Park'
     },
     {
-      "ids": "14",
-      "park": "Lake Johnson Park"
+      'ids': '14',
+      'name': 'Lake Johnson Park'
     },
     {
-      "ids": "14",
-      "park": "Lake Johnson Nature Preserve"
+      'ids': '14',
+      'name': 'Lake Johnson Nature Preserve'
     },
     {
-      "ids": "53",
-      "park": "Lake Johnson Pool"
+      'ids': '53',
+      'name': 'Lake Johnson Pool'
     },
     {
-      "ids": "16",
-      "park": "Lake Lynn"
+      'ids': '16',
+      'name': 'Lake Lynn'
     },
     {
-      "ids": "15",
-      "park": "Lake Wheeler Park"
+      'ids': '15',
+      'name': 'Lake Wheeler Park'
     },
     {
-      "ids": "3",
-      "park": "Laurel Hills Park"
+      'ids': '3',
+      'name': 'Laurel Hills Park'
     },
     {
-      "ids": "17",
-      "park": "Lions Park"
+      'ids': '17',
+      'name': 'Lions Park'
     },
     {
-      "ids": "52",
-      "park": "Longview Park"
+      'ids': '52',
+      'name': 'Longview Park'
     },
     {
-      "ids": "46",
-      "park": "Marsh Creek Park"
+      'ids': '46',
+      'name': 'Marsh Creek Park'
     },
     {
-      "ids": "19",
-      "park": "Method Park"
+      'ids': '19',
+      'name': 'Method Park'
     },
     {
-      "ids": "6,18,43,88",
-      "park": "Millbrook Exchange Park"
+      'ids': '6,18,43,88',
+      'name': 'Millbrook Exchange Park'
     },
     {
-      "ids": "56",
-      "park": "Moore Square"
+      'ids': '56',
+      'name': 'Moore Square'
     },
     {
-      "ids": "64",
-      "park": "Mordecai Square"
+      'ids': '64',
+      'name': 'Mordecai Square'
     },
     {
-      "ids": "84",
-      "park": "Nash Square"
+      'ids': '84',
+      'name': 'Nash Square'
     },
     {
-      "ids": "48",
-      "park": "North Hills Park"
+      'ids': '48',
+      'name': 'North Hills Park'
     },
     {
-      "ids": "45",
-      "park": "Oakwood Park"
+      'ids': '45',
+      'name': 'Oakwood Park'
     },
     {
-      "ids": "1,20",
-      "park": "Optimist Park"
+      'ids': '1,20',
+      'name': 'Optimist Park'
     },
     {
-      "ids": "59",
-      "park": "Peach Road Park"
+      'ids': '59',
+      'name': 'Peach Road Park'
     },
     {
-      "ids": "40",
-      "park": "Powell Drive Park"
+      'ids': '40',
+      'name': 'Powell Drive Park'
     },
     {
-      "ids": "4,21,22,49",
-      "park": "Pullen Park"
+      'ids': '4,21,22,49',
+      'name': 'Pullen Park'
     },
     {
-      "ids": "5",
-      "park": "Pullen Arts Center"
+      'ids': '5',
+      'name': 'Pullen Arts Center'
     },
     {
-      "ids": "4,21,22,49",
-      "park": "Pullen Amusement"
+      'ids': '4,21,22,49',
+      'name': 'Pullen Amusement'
     },
     {
-      "ids": "91",
-      "park": "Raleigh City Museum"
+      'ids': '91',
+      'name': 'Raleigh City Museum'
     },
     {
-      "ids": "51",
-      "park": "Ridge Road"
+      'ids': '51',
+      'name': 'Ridge Road'
     },
     {
-      "ids": "24",
-      "park": "Roberts Park"
+      'ids': '24',
+      'name': 'Roberts Park'
     },
     {
-      "ids": "86",
-      "park": "Rose Garden & Little Theatre"
+      'ids': '86',
+      'name': 'Rose Garden & Little Theatre'
     },
     {
-      "ids": "41",
-      "park": "Sanderford Road Park"
+      'ids': '41',
+      'name': 'Sanderford Road Park'
     },
     {
-      "ids": "25",
-      "park": "Sertoma Arts Center"
+      'ids': '25',
+      'name': 'Sertoma Arts Center'
     },
     {
-      "ids": "55",
-      "park": "Shelley Lake Park"
+      'ids': '55',
+      'name': 'Shelley Lake Park'
     },
     {
-      "ids": "31",
-      "park": "Southgate Park"
+      'ids': '31',
+      'name': 'Southgate Park'
     },
     {
-      "ids": "47",
-      "park": "Spring Forest Road Park"
+      'ids': '47',
+      'name': 'Spring Forest Road Park'
     },
     {
-      "ids": "26,80",
-      "park": "Tarboro Road Park"
+      'ids': '26,80',
+      'name': 'Tarboro Road Park'
     },
     {
-      "ids": "76",
-      "park": "Tucker House"
+      'ids': '76',
+      'name': 'Tucker House'
     },
     {
-      "ids": "29",
-      "park": "Walnut Creek Softball Complex"
+      'ids': '29',
+      'name': 'Walnut Creek Softball Complex'
     },
     {
-      "ids": "78",
-      "park": "Walnut Creek Wetland Center"
+      'ids': '78',
+      'name': 'Walnut Creek Wetland Center'
     },
     {
-      "ids": "87",
-      "park": "Whitaker Mill"
+      'ids': '87',
+      'name': 'Whitaker Mill'
     },
     {
-      "ids": "44",
-      "park": "Williams Park"
+      'ids': '44',
+      'name': 'Williams Park'
     },
     {
-      "ids": "61",
-      "park": "Windemere Beaver Dam Park"
+      'ids': '61',
+      'name': 'Windemere Beaver Dam Park'
     },
     {
-      "ids": "28",
-      "park": "Worthdale Park"
+      'ids': '28',
+      'name': 'Worthdale Park'
     }
   ];
+
+  var _logAjaxError = function (error) {
+    console.log(error);
+  };
   
 
 	return {
-		parkIds: parkIds
+    getParkClasses: getParkClasses,
+    getParkIds: getParkIds,
+    classes: classes
 	};
-});
+}]);

@@ -1,5 +1,17 @@
-<h1>{{ currentPark }}</h1>
+<div class="row">
+	<div class="col-xs-4">
+		
+		<uib-tabset vertical="true" type="pills">
 
-<ul>
-	<li ng-repeat="park in parksList"> {{ park.park }}</li>
-</ul>
+		  <uib-tab ng-repeat="section in classes.sections" heading="{{section}}" active="section.active" disable="section.disabled">
+      	{{section}}
+    	</uib-tab>
+
+
+		</uib-tabset>
+		
+	</div>
+	<div class="col-xs-8">
+		
+	</div>
+</div>
