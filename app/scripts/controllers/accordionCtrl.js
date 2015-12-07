@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$rootScope',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $rootScope) {
+angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$rootScope', '$timeout',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $rootScope, $timeout) {
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
@@ -12,6 +12,16 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     // Filter by activity section
     $scope.selectedActivities = amenitiesService.selectedActivities;
+
+    var parkResults = $scope.parks.content.length;
+
+    var informUser = function() {
+      if ($scope.parks.content.length > 0) {
+        Flash.create('success', '<i class="fa fa-lg fa-check"></i> There are ' + $scope.parks.content.length + ' parks that meet your criteria.');
+      } else {
+        Flash.create('danger', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> No parks matched your search.');
+      }
+    };
 
     $scope.goToPanel = function (from, to) {
       $scope.settings[from].status.open = false;
@@ -30,7 +40,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
         });
         $scope.goToPanel('first', 'third');
       } else {
-        var message = '<strong> Oops!</strong>  Your browser does not support Geolocation.';
+        var message = '<i class="fa fa-lg fa-meh-o"></i> <strong> Oops!</strong>  Your browser does not support Geolocation.';
         Flash.create('warning', message);
         console.log('Geolocation not supported');
       }
@@ -43,7 +53,13 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     });
 
     $rootScope.$on('loading:finish', function(){
-      Flash.dismiss();
+      $timeout(function(){
+        Flash.dismiss();
+        if ($scope.parks.content.length !== parkResults) {
+          informUser();
+          parkResults = $scope.parks.content.length;
+        }
+      }, 0);
     });
 
     $scope.addToSelected = function (amenity) {

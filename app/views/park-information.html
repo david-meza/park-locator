@@ -73,7 +73,7 @@
         <div class="panel-body">
 
           <ul id = "park-amenities">
-            <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark">
+            <li ng-repeat="amenity in amenities.uniques | parkAmenities: parks.currentPark | orderBy: 'name'">
               
               <a ng-click="showAmenityInMap(amenity)">
                 

@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('parkLocator').factory('amenitiesService', ['$http', '$timeout', 
-	function($http, $timeout){
+angular.module('parkLocator').factory('amenitiesService', ['$http', 
+	function($http){
 	
 	// http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2?f=pjson
 
 	var list = { content: [], uniques: [], activitiesPos: { markers: [] } };
-	var currentMarker = { obj: {} };
+	// var currentMarker = { obj: {} };
 	var selectedActivities = { current: [] };
 
 	list.activitiesPos.markersConfig = {
@@ -166,7 +166,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', '$timeout',
 			
 		}
 
-		list[1301] = list['Pool'];
+		list[1301] = list.Pool;
 		list[1311] = list['Neighborhood Center'];
 		list[2302] = list['Outdoor Basketball'];
 		list.uniques.splice(rridx, 1);

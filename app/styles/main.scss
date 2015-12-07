@@ -20,6 +20,17 @@ html {
   position: fixed;
 }
 
+.faded-edge-bottom {
+  position: absolute;
+  height: 6em;
+  width: 100%;
+  margin-left: -15px;
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+  bottom: 3.1em;
+}
+
 h1 {
   margin: 0;
 
@@ -54,6 +65,10 @@ th {
 
 .text-green {
   color: #3C763D;
+}
+
+.text-total-results {
+  margin: -15px 0 0;
 }
 
 .course-details {
@@ -161,6 +176,10 @@ ul#park-amenities {
   padding-bottom: 1em;
 }
 
+.text-classes {
+  font-size: 1.4em;
+}
+
 input#search-box {
   margin-top: 5px;
   width: 50%;
@@ -184,7 +203,7 @@ html, body, #map-canvas {
 
   width: 110px;
   height: 110px;
-  margin: 15px;
+  margin: 13px;
   float: left;
   border: 5px solid #fff;
   overflow: hidden;

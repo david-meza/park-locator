@@ -31,7 +31,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  };
 
 	  var initializeDirectionsMap = function () {
-	  	if ( !$scope.parks[parkName] ) { return; }
+	  	if ( !document.getElementById('mini-map') ) { return; }
 	  	
 	    directionsService = new $scope.mapsApi.DirectionsService();
 	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer({ suppressMarkers: true });
@@ -112,14 +112,18 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
   		makeMarker( leg.end_location, icons.end, 'Park' );
 	  };
 
+	  var startEndMarkers = [];
+
 	  var makeMarker = function ( position, icon, title ) {
-	  	new $scope.mapsApi.Marker({
+	  	if (startEndMarkers[startEndMarkers.length - 2]) { startEndMarkers[startEndMarkers.length - 2].setMap(null); }
+	  	var marker = new $scope.mapsApi.Marker({
 	  		position: position,
 	  		map: map,
 	  		icon: icon,
 	  		title: title,
 	  		animation: $scope.mapsApi.Animation.DROP
 	  	});
+	  	startEndMarkers.push(marker);
 	  };
 
 	  var extractDirectionsInfo = function (response) {
