@@ -60,7 +60,7 @@ th {
 
 .course-details {
   max-height: 40em;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .img-container {
@@ -264,7 +264,7 @@ html, body, #map-canvas {
 
 .panel-group .panel-body {
   max-height: 26em;
-  overflow: scroll;
+  overflow: auto;
 
   .faded-edge-bottom {
     position: absolute;
@@ -329,7 +329,7 @@ html, body, #map-canvas {
   }
 
   .angular-google-map-container {
-    height: 25em;
+    height: 20em;
   }
 
 }
@@ -344,5 +344,47 @@ html, body, #map-canvas {
   .park-details-list {
 
   }
+
+  table {
+    margin-top: 1em;
+  }
+
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr { 
+    display: block; 
+  }
+  
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr { 
+    border: 1px solid #ccc; 
+  }
+  
+  td { 
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    padding-left: 35% !important;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+  }
+  
+  td:before { 
+    // Get the label information from the HTML template
+    content: attr(data-label); // Table header
+    position: absolute;
+    top: 10px;
+    left: 6px;
+    width: 30%; 
+    padding-right: 5px; 
+    white-space: nowrap;
+  }
+
 
 }

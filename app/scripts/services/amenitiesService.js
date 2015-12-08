@@ -169,6 +169,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 		list[1301] = list.Pool;
 		list[1311] = list['Neighborhood Center'];
 		list[2302] = list['Outdoor Basketball'];
+		list[2307] = list['Sand Volleyball'];
 		list.uniques.splice(rridx, 1);
 
 	};
@@ -213,7 +214,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 			method: 'GET',
 			url: 'http://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2?f=pjson'
 		}).then(_reqSecondSet, _logAjaxError);
-		
+
 	})();
 
 

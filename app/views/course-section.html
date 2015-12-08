@@ -3,7 +3,7 @@
 				class="form-control"
 				placeholder = "e.g. Yoga or 5:30PM">
 
-<table class = "table table-hover">
+<table class = "table table-striped course-details">
 	<thead>
 		<th>
 			<a ng-click="sortBy('COURSE')" >
@@ -26,10 +26,10 @@
 	</thead>
 
 	<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse">
-		<td> {{ course.COURSE }} </td>
-		<td> {{ course.ACTIVITY }} </td>
-		<td> {{ course.START_DATE | date : 'MMM d, y h:mm a' }} </td>
-		<td> 
+		<td data-label = "Course"> {{ course.COURSE }} </td>
+		<td data-label = "Activity"> {{ course.ACTIVITY }} </td>
+		<td data-label = "Start Date"> {{ course.START_DATE | date : 'MMM d, y h:mm a' }} </td>
+		<td data-label = "Info"> 
 			<a 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
 					target="_blank"> 
 				More

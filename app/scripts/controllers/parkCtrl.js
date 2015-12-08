@@ -22,11 +22,9 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 
 	  });
 
-	  $scope.showAmenityInMap = function (activity) {
-	  	console.log(activity);
-	  	// activity.onMarkerClicked();
-    	// $scope.map.location.coords.latitude = activity.latitude;
-    	// $scope.map.location.coords.longitude = activity.longitude;
+	  $scope.showAmenityInMap = function () {
+    	$scope.map.location.coords.latitude = $scope.parks.currentPark.latitude;
+    	$scope.map.location.coords.longitude = $scope.parks.currentPark.longitude;
     	$scope.map.zoom = 18;
 	  };
 
@@ -91,8 +89,8 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
       var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
       console.log(dist);
-      $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 }
-      return (dist <= 0.012) ? $scope.mapsApi.TravelMode.WALKING : $scope.mapsApi.TravelMode.DRIVING
+      $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 };
+      return (dist <= 0.012) ? $scope.mapsApi.TravelMode.WALKING : $scope.mapsApi.TravelMode.DRIVING;
 		};
 
 		var verifyPark = function () {
