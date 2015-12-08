@@ -12,7 +12,7 @@
 
           <div class="row">
             
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 col-sm-6 text-center">
 
               <div class="img-container">
                 <img  class = "img-responsive img-thumbnail img-vertical-center" 
@@ -23,32 +23,35 @@
 
             </div>
 
-            <div class="col-md-4 text-center park-center">
+            <div class="col-md-4 col-sm-6 park-center">
 
-              <h3>{{ parks.currentPark.name }}</h3>
-              <p> <i class = "fa fa-map-marker"></i> {{ parks.currentPark.address }}</p>
+              <h3 class="text-center">{{ parks.currentPark.name }}</h3>
 
-              <p> <i class = "glyphicon glyphicon-phone"></i> {{ parks.currentPark.phone }}</p>
-              
-              <p ng-if = "routeData.duration"> 
-                If you leave now, you could be here in <span ng-class="durationColoring"> <i class = "fa fa-car"></i> {{ routeData.duration }}</span> 
-              </p>
-              
-              <p ng-if = "routeData.distance"> 
-                You are <span ng-class="distanceColoring"> <i class = "fa fa-location-arrow"></i> {{ routeData.distance }}</span> away
-              </p>
-              
-              <a ng-href="{{ parks.currentPark.url }}" target="_blank"> 
-                <i class = "fa fa-fw fa-info-circle"></i> Website
-              </a>
+              <div class="park-details-list">
+                <p> <i class = "fa fa-fw fa-map-marker"></i> {{ parks.currentPark.address }}</p>
 
-              <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> 
-                <i class = "fa fa-fw fa-compass"></i> Google Directions
-              </a>
+                <p> <i class = "fa fa-fw fa-mobile"></i> {{ parks.currentPark.phone }}</p>
+                
+                <p ng-if = "routeData.duration"> 
+                  <i class = "fa fa-fw" ng-class = "travelMode"></i> If you leave now, you could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span> 
+                </p>
+                
+                <p ng-if = "routeData.distance"> 
+                  <i class = "fa fa-fw fa-location-arrow"></i> You are <span ng-class="distanceColoring"> {{ routeData.distance }}</span> away
+                </p>
+                
+                <a ng-href="{{ parks.currentPark.url }}" target="_blank"> 
+                  <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
+                </a>
+
+                <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> 
+                  <i class = "fa fa-fw fa-compass color-default"></i> Get Directions
+                </a>
+              </div>
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-10 col-md-offset-0 col-xs-offset-1">
 
               <div id="mini-map"></div>
 

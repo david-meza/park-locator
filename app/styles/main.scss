@@ -284,7 +284,7 @@ html, body, #map-canvas {
 
   }
 
-  &:hover > .faded-edge-bottom {
+  &:hover .faded-edge-bottom {
     height: 1em;
   }
 }
@@ -299,6 +299,10 @@ html, body, #map-canvas {
 
 .full-height {
   height: 100%
+}
+
+.color-default {
+  color: #2c3e50;
 }
 
 // .edge-wrapper {
@@ -326,6 +330,19 @@ html, body, #map-canvas {
 
   .angular-google-map-container {
     height: 25em;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    .navbar-brand {
+      font-size: 0.5em;
+    }
+  }
+
+  .park-details-list {
+
   }
 
 }

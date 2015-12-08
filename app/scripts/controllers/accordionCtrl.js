@@ -81,7 +81,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     };
 
     $scope.nearestPark = function (park) {
-      // We calculate the distance between two points use Pythagorea theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
+      // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
       var a = Math.abs(park.latitude - $scope.myLoc.latitude);
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
       return Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );

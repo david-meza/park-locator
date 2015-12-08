@@ -76,12 +76,23 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  var calcRoute = function (park) {
 	  	if ( !verifyPark() ) { return; }
 
+	  	var travelMode = getBestTravelMode(park);
+
 		  var request = {
 		      origin: new $scope.mapsApi.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
 		      destination: new $scope.mapsApi.LatLng(park.latitude, park.longitude),
-		      travelMode: $scope.mapsApi.TravelMode.DRIVING,
+		      travelMode: travelMode,
 		  };
 		  directionsService.route(request, displayDirections);
+		};
+
+		var getBestTravelMode = function (park) {
+			var a = Math.abs(park.latitude - $scope.myLoc.latitude);
+      var b = Math.abs(park.longitude - $scope.myLoc.longitude);
+      var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+      console.log(dist);
+      $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 }
+      return (dist <= 0.012) ? $scope.mapsApi.TravelMode.WALKING : $scope.mapsApi.TravelMode.DRIVING
 		};
 
 		var verifyPark = function () {
@@ -139,8 +150,8 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  	// Color code the dist / dur text
 	  	var a = parseInt(dt);
 	  	var b = parseInt(dur);
-	  	$scope.distanceColoring = { 'text-green': a <= 2, 'text-warning': a > 2 && a <= 10, 'text-danger': a > 10 };
-	  	$scope.durationColoring = { 'text-green': b <= 5, 'text-warning': b > 5 && b <= 20, 'text-danger': b > 20 };
+	  	$scope.distanceColoring = { 'text-green': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warning': a > 3 && a <= 10, 'text-danger': a > 10 };
+	  	$scope.durationColoring = { 'text-green': b <= 10, 'text-warning': b > 10 && b <= 20, 'text-danger': b > 20 };
 
 	  };
 
