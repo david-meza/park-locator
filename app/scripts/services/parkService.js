@@ -6,7 +6,18 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 	var currentMarker = { obj: {} };
 	var markers = { content: [], currentPark: undefined };
 
-	var _generateMarkers = function (response) {
+	
+  var _onMarkerClicked = function () {
+    // If currentMarker is not null, meaning another marker window is shown,
+    // then set showWindow of that marker window to false.
+    var oldID = currentMarker.obj.id;
+    currentMarker.obj.showWindow = false;
+    currentMarker.obj = markers.currentPark = this;
+    this.showWindow = (oldID === this.id) ? !this.showWindow : true;
+    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
+  };
+
+  var _generateMarkers = function (response) {
 
     markers.content = [];
 
@@ -75,15 +86,6 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
       markers.content.push(marker);
     });
 
-	};
-
-	var _onMarkerClicked = function () {
-		// If currentMarker is not null, meaning another marker window is shown,
-    // then set showWindow of that marker window to false.
-    currentMarker.obj.showWindow = false;
-    currentMarker.obj = markers.currentPark = this;
-    this.showWindow = !this.showWindow;
-    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
 	};
 
 	var _logAjaxError = function (error) {

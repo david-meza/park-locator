@@ -124,7 +124,7 @@ angular.module('parkLocator').factory('mapService', ['Flash',
 
 	var _isInRaleigh = function (lat, lon) {
     // Test Raleigh address: 35.7776464, -78.63844279999999
-    return lat < 36.013561 && lat > 35.537814 && lon < -78.436890 && lon > -78.884583;
+    return lat < 36.113561 && lat > 35.437814 && lon < -78.336890 && lon > -78.984583;
   };
 
   var updateUserCoords = function (lat, lon) {
@@ -135,6 +135,7 @@ angular.module('parkLocator').factory('mapService', ['Flash',
       map.myLocationMarker.coords.latitude = lat;
       map.myLocationMarker.coords.longitude = lon;
       map.zoom = 14;
+      return true;
     } else {
       // Otherwise, keep using default coordinates
       var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> Oops.</strong>  It seems this location is not in Raleigh.';
