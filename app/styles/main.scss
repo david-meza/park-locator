@@ -225,7 +225,7 @@ ul#park-amenities {
 }
 
 .text-classes {
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
 
 input#search-box {
@@ -263,8 +263,11 @@ html, body, #map-canvas {
 }
 
 .panel-group .panel-body {
-  max-height: 26em;
-  overflow: auto;
+
+  .panel-scrollable {
+    max-height: 20em;
+    overflow: auto;
+  }
 
   .faded-edge-bottom {
     position: absolute;
@@ -281,6 +284,10 @@ html, body, #map-canvas {
     -o-transition: all .3s ease .15s;
     -ms-transition: all .3s ease .15s;
     transition: all .3s ease .15s;
+
+    &.v2 {
+      bottom: 1.5em;
+    }
 
   }
 
@@ -323,13 +330,19 @@ html, body, #map-canvas {
     }
   }
 
-  .panel-group .panel-body .faded-edge-bottom {
-    bottom: 3.1em;
-    width: 96%;
+  .panel-group .panel-body {
+    .faded-edge-bottom {
+      bottom: 3.1em;
+      width: 96%;
+
+      &.v2 {
+        bottom: 0.1em;
+      }
+    }
   }
 
   .angular-google-map-container {
-    height: 20em;
+    height: 25em;
   }
 
 }
@@ -339,6 +352,10 @@ html, body, #map-canvas {
     .navbar-brand {
       font-size: 0.5em;
     }
+  }
+
+  .angular-google-map-container {
+    height: 20em;
   }
 
   .park-details-list {
@@ -380,7 +397,7 @@ html, body, #map-canvas {
     content: attr(data-label); // Table header
     position: absolute;
     top: 10px;
-    left: 6px;
+    left: 8px;
     width: 30%; 
     padding-right: 5px; 
     white-space: nowrap;

@@ -57,39 +57,42 @@
       </div>
     </div>
 
-    <div ng-show="selectedActivities.current.length === 0">
-      <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
-    </div>
+    <div class = "panel-scrollable">
 
-    <div ng-show="selectedActivities.current.length > 0">
+      <div ng-show="selectedActivities.current.length === 0">
+        <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
+      </div>
 
-      <p class = "pull-right text-total-results" ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">Total Results: {{ parks.content.length }}</p>
+      <div ng-show="selectedActivities.current.length > 0">
 
-      <h5>Selected (with all) </h5>
+        <p class = "pull-right text-total-results" ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">Total Results: {{ parks.content.length }}</p>
 
-      <ul id = "selected-amenities-list">
-        <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
-          <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
-            <a ng-click="removeSelected(amenity)">
-              <i  class="pull-right glyphicon glyphicon-ok" 
-                  ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>  
+        <h5>Selected (parks with all) </h5>
+
+        <ul id = "selected-amenities-list">
+          <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
+            <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
+              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
+              <a ng-click="removeSelected(amenity)">
+                <i  class="pull-right glyphicon glyphicon-ok" 
+                    ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>  
+              </a>
+            </p>
+          </li>          
+        </ul>
+      </div>
+
+      <div>
+        <h5>Not Selected</h5>
+
+        <ul id = "amenities-list">
+          <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
+            <a ng-click="addToSelected(amenity)">
+              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
             </a>
-          </p>
-        </li>          
-      </ul>
-    </div>
-
-    <div>
-      <h5>Not Selected</h5>
-
-      <ul id = "amenities-list">
-        <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
-          <a ng-click="addToSelected(amenity)">
-            <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
-          </a>
-        </li>          
-      </ul>          
+          </li>          
+        </ul>          
+      </div>
     </div>
     
   </uib-accordion-group>
@@ -101,6 +104,10 @@
       Select a Park <i class="pull-right glyphicon" 
                       ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
     </uib-accordion-heading>
+
+    <div class="edge-wrapper">
+      <div class="faded-edge-bottom v2"></div>
+    </div>
 
     <div class="row mb-20">
       <div class="col-md-12">
@@ -127,7 +134,7 @@
     </div>
 
     
-    <ul id = "park-list">
+    <ul id = "park-list" class = "panel-scrollable">
       <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark ">
         <a  ng-click="centerToPark(park)" 
             scroll-to="map-canvas">

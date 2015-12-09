@@ -3,37 +3,39 @@
 				class="form-control"
 				placeholder = "e.g. Yoga or 5:30PM">
 
-<table class = "table table-striped course-details">
-	<thead>
-		<th>
-			<a ng-click="sortBy('COURSE')" >
-				<i class="fa fa-group"></i> Course <i class="fa fa-pad-right" ng-show = "sortQuery === 'COURSE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i> 
-			</a>
-		</th>
-		<th>
-			<a ng-click="sortBy('ACTIVITY')" >
-				<i class="fa fa-group"></i> Activity <i class="fa fa-pad-right" ng-show = "sortQuery === 'ACTIVITY' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
-			</a>
-		</th>
-		<th>
-			<a ng-click="sortBy('START_DATE')" >
-				<i class="fa fa-calendar"></i> Start Date <i class="fa fa-pad-right" ng-show = "sortQuery === 'START_DATE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
-			</a>
-		</th>
-		<th>
-			<i class="fa fa-external-link"></i> Info
-		</th>
-	</thead>
+<div class="course-details">
+	<table class = "table table-striped">
+		<thead>
+			<th>
+				<a ng-click="sortBy('COURSE')" >
+					<i class="fa fa-group"></i> Course <i class="fa fa-pad-right" ng-show = "sortQuery === 'COURSE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i> 
+				</a>
+			</th>
+			<th>
+				<a ng-click="sortBy('ACTIVITY')" >
+					<i class="fa fa-group"></i> Activity <i class="fa fa-pad-right" ng-show = "sortQuery === 'ACTIVITY' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
+				</a>
+			</th>
+			<th>
+				<a ng-click="sortBy('START_DATE')" >
+					<i class="fa fa-calendar"></i> Start Date <i class="fa fa-pad-right" ng-show = "sortQuery === 'START_DATE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
+				</a>
+			</th>
+			<th>
+				<i class="fa fa-external-link"></i> Info
+			</th>
+		</thead>
 
-	<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse">
-		<td data-label = "Course"> {{ course.COURSE }} </td>
-		<td data-label = "Activity"> {{ course.ACTIVITY }} </td>
-		<td data-label = "Start Date"> {{ course.START_DATE | date : 'MMM d, y h:mm a' }} </td>
-		<td data-label = "Info"> 
-			<a 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
-					target="_blank"> 
-				More
-			</a> 
-		</td>
-	</tr>
-</table>
+		<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse">
+			<td data-label = "Course"> {{ course.COURSE || 'No Course Preview' }} </td>
+			<td data-label = "Activity"> {{ course.ACTIVITY || 'No Activity Preview' }} </td>
+			<td data-label = "Start Date"> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </td>
+			<td data-label = "Info"> 
+				<a 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
+						target="_blank"> 
+					More
+				</a> 
+			</td>
+		</tr>
+	</table>	
+</div>

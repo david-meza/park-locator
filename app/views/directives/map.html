@@ -63,15 +63,14 @@
 
 
 
-    <!-- <ui-gmap-window show="activities.window.show" 
-                    coords="activities.window.model" 
-                    options="activities.window.options" 
-                    closeclick="activities.window.closeClick">
-      <div ng-non-bindable>
-        <h6> {{ subcategory.name }} </h6>
-        <p class="text-muted"> {{ name || park || subcategory.name }} </p>
-      </div>
-    </ui-gmap-window> -->
+    <ui-gmap-window show="activityWindow.show" 
+                    coords="activityWindow.coords"
+                    control = "activityWindow.control" 
+                    options="activityWindow.options" 
+                    closeclick="activityWindow.closeclick"
+                    templateurl = "activityWindow.templateUrl"
+                    templateparameter = "activityWindow.templateParameter">
+    </ui-gmap-window>
 
 
   </ui-gmap-google-map>
