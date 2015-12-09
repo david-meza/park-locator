@@ -12,6 +12,12 @@ html {
   cursor: pointer; 
 }
 
+.panel-title a {
+  &:focus {
+    outline: none;
+  }
+}
+
 #flash {
   position: absolute;
   z-index: 100;
@@ -305,8 +311,8 @@ html, body, #map-canvas {
 }
 
 #activity-window {
-  max-height: 60px;
-  // max-width: 120px;
+  max-height: 50px;
+  max-width: 80px;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
