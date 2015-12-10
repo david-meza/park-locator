@@ -234,11 +234,15 @@ ul#park-amenities {
   font-size: 1.3em;
 }
 
-input#search-box {
-  margin-top: 5px;
-  width: 50%;
-  opacity: 0.9;
+.location-search {
+
+  input#search-box {
+    margin-top: 5px;
+    max-width: 50%;
+    opacity: 1;
+  }
 }
+
 
 #autocomplete {
   // margin-bottom: 20px;
