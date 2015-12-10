@@ -1,7 +1,15 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash',
-  function (Flash) {
+angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
+  function (Flash, gMapsApi) {
+
+
+  var mapsObj;
+
+  gMapsApi.then( function (maps) {
+    mapsObj = maps;
+    map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890))
+  });
 
   // Temporary coordinates while Geoloc gets us the user's coords
   var location = {
@@ -116,10 +124,20 @@ angular.module('parkLocator').factory('mapService', ['Flash',
   // Search box
   map.searchbox = {
     template: 'views/partials/search-box.html',
+    position: 'TOP_RIGHT',
+    options: {
+      // bounds: {
+      //   east: -78.336890,
+      //   north: 36.113561,
+      //   south: 35.437814,
+      //   west: -78.984583
+      // }
+    },
     events: {
       places_changed: function (searchBox) {
-        // var loc = searchBox.getPlaces()[0].geometry.location;
-        // updateUserCoords(loc.lat(), loc.lng());
+        console.log('place changed');
+        var loc = searchBox.getPlaces()[0].geometry.location;
+        moveToPos(loc.lat(), loc.lng());
 	    }
 	  }
   };
@@ -143,6 +161,13 @@ angular.module('parkLocator').factory('mapService', ['Flash',
       var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> Oops.</strong>  It seems this location is not in Raleigh.';
       Flash.create('warning', message);
     }
+  };
+
+  var moveToPos = function (lat, lon) {
+    if (!_isInRaleigh(lat,lon)) { return updateUserCoords(lat,lon); }
+    map.location.coords.latitude = lat;
+    map.location.coords.longitude = lon;
+    map.zoom = 16;
   };
 
   return {

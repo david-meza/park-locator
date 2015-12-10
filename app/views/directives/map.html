@@ -1,5 +1,10 @@
 <div id="map-canvas">
 
+
+  <div id="searchbox-container">
+    <i class = "fa fa-search icon-search"></i>
+  </div>
+
   <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
                       options = 'map.options'
@@ -11,7 +16,10 @@
 
 
     <ui-gmap-search-box template="map.searchbox.template"
-                        events="map.searchbox.events">
+                        events="map.searchbox.events"
+                        position = "map.searchbox.position"
+                        options = "map.searchbox.options"
+                        parentdiv = "'searchbox-container'">
     </ui-gmap-search-box>
 
 

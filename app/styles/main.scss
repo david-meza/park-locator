@@ -236,9 +236,46 @@ ul#park-amenities {
 
 .location-search {
 
-  input#search-box {
-    margin-top: 5px;
-    max-width: 50%;
+}
+
+#searchbox-container {
+  position: absolute;
+  z-index: 11;
+  right: 5em;
+  top: 5px;
+
+  .icon-search {
+    position: absolute;
+    // padding-top: 10px;
+    // padding-left: 10px;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    z-index: 12;
+    background-color: #fff;
+    border: 2px solid #2c3e50;
+  }
+
+}
+
+
+
+input#search-box {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  z-index: 13;
+  cursor: pointer;
+  -webkit-transform:  all .25s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transform:     all .25s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transform:       all .25s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transform:      all .25s cubic-bezier(0.345, 0, 0.25, 1);
+  transition:         all .25s cubic-bezier(0.345, 0, 0.25, 1);
+
+  &:focus {
+    cursor: text;
+    width: 250px;
     opacity: 1;
   }
 }
