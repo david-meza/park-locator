@@ -9,12 +9,13 @@ angular.module('parkLocator').filter('parkAmenities', function() {
   	var filtered = [];
 
   	for (var i = 0; i < amenities.length; i++) {
-      if (!amenities[i].parkAttr) { console.log(amenities[i]); }
   		var parkAttribute = amenities[i].parkAttr.toLowerCase();
   		if (park[parkAttribute]) {
   			filtered.push(amenities[i]);
   		}
   	}
+
+    console.log(filtered);
 
     return filtered;
   };

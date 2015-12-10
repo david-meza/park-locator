@@ -12,8 +12,11 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  // Define some async objects from our services
     $scope.parks = parkService.markers;
     $scope.amenities = amenitiesService.list;
+    $scope.selectedActivities = amenitiesService.selectedActivities;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     $scope.map = mapService.map;
+
+    $scope.mergedActivities = $scope.amenities.uniques.concat($scope.selectedActivities.current);
 
 	  gMapsAPI.then( function (maps) {
 	  	$scope.mapsApi = maps;
