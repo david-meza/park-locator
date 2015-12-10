@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
-  function (Flash, gMapsApi) {
+angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi', '$window',
+  function (Flash, gMapsApi, $window) {
 
 
   var mapsObj;
 
   gMapsApi.then( function (maps) {
     mapsObj = maps;
-    map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890))
+    map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890));
   });
 
   // Temporary coordinates while Geoloc gets us the user's coords
@@ -29,21 +29,39 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     pan: false,
     location: location,
     control: {},
-    options: {
-      scrollwheel: false,
-      mapTypeControlOptions: {
-        mapTypeIds: ['park_theme', 'roadmap']
+    bounds: {
+      northeast: {
+        longitude: -78.336890,
+        latitude: 36.113561
+      },
+      southwest: {
+        latitude: 35.437814,
+        longitude: -78.984583
       }
     },
-    markersConfig: {
-      type: 'cluster',
-      typeOptions: {
-        title: 'Zoom in to find more parks!',
-        gridSize: 60,
-        minimumClusterSize: 3
+    options: {
+      // backgroundColor: '#2c3e50',
+      draggable: $window.innerWidth >= 992,
+      scrollwheel: false,
+      mapTypeControl: true,
+      // mapTypeId: 'HYBRID',
+      mapTypeControlOptions: {
+        mapTypeIds: ['park_theme', 'ROADMAP'],
       },
-      typeEvents: {}
-    }
+      minZoom: 8,
+      tilt: 45,
+      panControl: true //$window.innerWidth < 992
+    },
+  };
+
+  map.markersConfig = {
+    type: 'cluster',
+    typeOptions: {
+      title: 'Zoom in to find more parks!',
+      gridSize: 60,
+      minimumClusterSize: 3
+    },
+    typeEvents: {}
   };
 
   map.markersConfig.typeOptions.styles = [
@@ -118,6 +136,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
   map.events = {
     tilesloaded: function () {
       map.mapInstance = map.control.getGMap();
+      console.log(map.mapInstance);
     }
   };
 
@@ -135,7 +154,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     },
     events: {
       places_changed: function (searchBox) {
-        console.log('place changed');
         var loc = searchBox.getPlaces()[0].geometry.location;
         moveToPos(loc.lat(), loc.lng());
 	    }

@@ -48,9 +48,14 @@
             <div>
               <h5 ng-non-bindable> {{ name }} </h5>
               <p ng-non-bindable> {{ address }} </p>
-              <br>
-              <a target="_blank" href="http://www.raleighnc.gov">raleighnc.gov</a>
+              <!-- <img  style="height: 55px; width: 55px; float: right;" 
+                    ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg"
+                    fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"> -->
+              <a target="_blank" href="http://www.raleighnc.gov/parks/_parks/">raleighnc.gov</a>
               <p ng-non-bindable class="text-muted"> {{ phone }}</p>
+              <!-- <ul>
+                <li ng-class="{ 'text-success': artscenter, 'text-danger': !artscenter }" ng-show="artscenter">{{ artscenter ? 'Arts Center' : 'No arts center' }}</li>        
+              </ul> -->
             </div>
 
         </ui-gmap-windows>
@@ -59,13 +64,15 @@
 
 
 
-    <ui-gmap-markers  models="showMarkers()"
+    <ui-gmap-markers  models="activities.markers"
                       coords="'self'"
-                      icon="'icon'"
+                      icon="activities.markersConfig.icon"
                       click="onMarkerClicked()"
                       type = "activities.markersConfig.type"
                       typeOptions = "activities.markersConfig.typeOptions"
                       typeEvents = "activities.markersConfig.typeEvents"
+                      control = "activities.markersConfig.control"
+                      options = "activities.markersConfig.options"
                       modelsbyref = "true">
     </ui-gmap-markers>
 

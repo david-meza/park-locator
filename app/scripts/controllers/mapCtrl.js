@@ -7,28 +7,23 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   $scope.map = mapService.map;
   $scope.map.parkMarkers = parkService.markers;
   $scope.activities = amenitiesService.list.activitiesPos;
+  $scope.uniqueActivs = amenitiesService.list.uniques;
   $scope.activityWindow = amenitiesService.activityWindow;
   $scope.selectedActivities = amenitiesService.selectedActivities;
-  $scope.noActivities = [];
 
   // Make a new query when the activities filter changes
   $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
 
-  // Overwrite the func definition with an event that in watched in angular digest cycle
-  // var c = $scope.activityWindow.closeClick;
-  // $scope.activityWindow.closeClick = function() {
-  //   $scope.$apply( c );
-  // };
 
-  // var overwriteParkClicked = function () {
-  //   for (var i = 0; i < $scope.activities.markers.length; i++) {
-  //     var c = $scope.activities.markers[i].onMarkerClicked;
-  //     $scope.activities.markers[i].onMarkerClicked = function () {
-  //       $scope.$apply( c );
-  //     };
-  //   }
-  //   console.log('been here');
-  // };
+  $scope.map.events.zoom_changed = function (map) {
+    console.log(map);
+    var z = map.getZoom();
+    if (!$scope.activities.markersConfig.control.getPlurals) { return; }
+    var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
+    activsMarkers.allVals.forEach( function(marker) {
+      marker.gObject.setVisible(z >= 16);
+    });
+  };
 
   var _onMarkerClicked = function () {
     var self = this;
@@ -40,6 +35,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     if (typeof response.data === 'object') {
       var activsPos = response.data.features;
       activsPos.forEach( function(activity) {
+        if (!amenitiesService.list[activity.attributes.SUBCATEGORY]) { console.log( activity.attributes.SUBCATEGORY ); }
         var processed = {
           id: activity.attributes.OBJECTID,
           name: activity.attributes.LOCATION,
@@ -48,7 +44,11 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
           latitude: activity.geometry.y,
           longitude: activity.geometry.x,
           icon: amenitiesService.list[activity.attributes.SUBCATEGORY] ? ('data:image/png;base64,' + (amenitiesService.list[activity.attributes.SUBCATEGORY].imageDataSm ? amenitiesService.list[activity.attributes.SUBCATEGORY].imageDataSm : amenitiesService.list[activity.attributes.SUBCATEGORY].imageData)) : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
-          onMarkerClicked: _onMarkerClicked
+          onMarkerClicked: _onMarkerClicked,
+          options: {
+            visible: false,
+            title: amenitiesService.list[activity.attributes.SUBCATEGORY] ? amenitiesService.list[activity.attributes.SUBCATEGORY].name : activity.attributes.LOCATION || activity.attributes.PARK_NAME || 'activity',
+          }
         };
 
         amenitiesService.list.activitiesPos.markers.push(processed);
@@ -65,14 +65,10 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
   $q.all([promise1, promise2]).then(amenitiesService.completeData, amenitiesService.logAjaxError)
                               .then(amenitiesService.getJoinParkData, amenitiesService.logAjaxError)
-                              .then(amenitiesService.generateParkData, amenitiesService.logAjaxError)
+                              .then(generateParkData, amenitiesService.logAjaxError)
                               .then(amenitiesService.getJoinParkData2, amenitiesService.logAjaxError)
                               .then(generateParkData, amenitiesService.logAjaxError);
 
-
-  $scope.showMarkers = function () {
-    return ($scope.map.zoom >= 16) ? $scope.activities.markers : $scope.noActivities;
-  };
 
   var mapInstance,
       mapsApi;
@@ -87,6 +83,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   });
 
   var applyMapStyles = function () {
+    console.log($scope.map.options.styles);
   	var styledMap = new mapsApi.StyledMapType( $scope.map.options.styles, {name: 'Nature'});
 	  mapInstance.setMapTypeId('nature');
     mapInstance.mapTypes.set('nature', styledMap);

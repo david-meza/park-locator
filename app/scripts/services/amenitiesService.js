@@ -15,7 +15,10 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
       gridSize: 60,
       minimumClusterSize: 8
     },
-    typeEvents: {}
+    typeEvents: {},
+    control: {},
+    options: 'options',
+    icon: 'icon'
   };
 
   var activityWindow = {
