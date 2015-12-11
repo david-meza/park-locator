@@ -1,6 +1,8 @@
 {
-  "name": "",
-  "private": true,
+  "name": "Park Locator",
+  "version": "0.0.2",
+  "private": false,
+  "author": "david-meza",
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
