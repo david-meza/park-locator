@@ -37,7 +37,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	    directionsService = new $scope.mapsApi.DirectionsService();
 	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer({ suppressMarkers: true });
 	    generateMarkerIcons();
-	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: 'Light Dream'});
+	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: 'Styled Map'});
 	    var mapOptions = {
 		    zoom: 16,
 		    scrollwheel: false,

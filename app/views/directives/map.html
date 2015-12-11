@@ -17,7 +17,6 @@
 
     <ui-gmap-search-box template="map.searchbox.template"
                         events="map.searchbox.events"
-                        position = "map.searchbox.position"
                         options = "map.searchbox.options"
                         parentdiv = "'searchbox-container'">
     </ui-gmap-search-box>
@@ -46,15 +45,15 @@
                           closeClick="'closeClick'" ng-cloak>
             
             <div>
-              <h5 ng-non-bindable> {{ name }} </h5>
-              <p ng-non-bindable> {{ address }} </p>
+              <h5> {{ parks.currentPark.name }} </h5>
+              <p> {{ parks.currentPark.address }} </p>
+              <p> {{ parks.currentPark.phone }}</p>
               <!-- <img  style="height: 55px; width: 55px; float: right;" 
                     ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg"
                     fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"> -->
-              <a target="_blank" href="http://www.raleighnc.gov/parks/_parks/">raleighnc.gov</a>
-              <p ng-non-bindable class="text-muted"> {{ phone }}</p>
-              <!-- <ul>
-                <li ng-class="{ 'text-success': artscenter, 'text-danger': !artscenter }" ng-show="artscenter">{{ artscenter ? 'Arts Center' : 'No arts center' }}</li>        
+              <a scroll-to="panels-section">More Info</a>
+             <!--  <ul>
+                <li ng-class="{ 'text-success': parks.currentPark.artscenter, 'text-danger': !parks.currentPark.artscenter }">{{ parks.currentPark.artscenter ? 'Arts Center' : 'No arts center' }}</li>
               </ul> -->
             </div>
 

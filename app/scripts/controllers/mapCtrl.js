@@ -79,7 +79,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
   uiGmapIsReady.promise(1).then(function(instances) {
     mapInstance = instances[0].map;
-    applyMapStyles();
+    // applyMapStyles();
   });
 
   var applyMapStyles = function () {

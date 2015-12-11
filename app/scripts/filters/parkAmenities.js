@@ -15,8 +15,6 @@ angular.module('parkLocator').filter('parkAmenities', function() {
   		}
   	}
 
-    console.log(filtered);
-
     return filtered;
   };
 });
