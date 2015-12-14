@@ -1,6 +1,6 @@
 {
   "name": "ParkLocator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "author": "david-meza",
   "devDependencies": {
@@ -36,10 +36,11 @@
     "time-grunt": "^1.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "npm": ">=3.4.1"
   },
   "scripts": {
     "test": "grunt test",
-    "install": "npm install && bower install"
+    "install": "bower install"
   }
 }
