@@ -4,7 +4,7 @@
                         is-disabled="settings.first.status.disabled"
                         >
     <uib-accordion-heading>
-      Set my Location <i class="pull-right glyphicon" 
+      Set my Location <i class="pull-right glyphicon"
                       ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
     </uib-accordion-heading>
 
@@ -14,7 +14,7 @@
     </div>
 
 
-    <button class="btn btn-success btn-block" 
+    <button class="btn btn-success btn-block"
             ng-click="geoLocate()">
       <i class = "fa fa-fw fa-location-arrow"></i> Use my current location!
     </button>
@@ -25,7 +25,7 @@
                         is-disabled="settings.second.status.disabled"
                         >
     <uib-accordion-heading>
-      Filter by Activity <i class="pull-right glyphicon" 
+      Filter by Activity <i class="pull-right glyphicon"
                             ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
     </uib-accordion-heading>
 
@@ -38,15 +38,16 @@
 
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-search"></i></span>
-          
+
           <input  type="text"
-                  id = "searchActivityName" 
+                  id = "searchActivityName"
                   ng-model="activitySelected"
                   placeholder = "Pool"
                   typeahead-no-results = "noActivitiesResults"
                   typeahead-on-select = "addToSelected($item, $model, $label)"
-                  uib-typeahead="activity as activity.name for activity in amenities.uniques | filter:$viewValue | limitTo:8" 
-                  class="form-control">            
+                  typeahead-select-on-exact = "true"
+                  uib-typeahead="activity as activity.name for activity in amenities.uniques | filter:$viewValue | limitTo:8"
+                  class="form-control">
         </div>
 
       </div>
@@ -76,13 +77,13 @@
         <ul id = "selected-amenities-list">
           <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
             <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
+              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
               <a ng-click="removeSelected(amenity)">
-                <i  class="pull-right glyphicon glyphicon-ok" 
-                    ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>  
+                <i  class="pull-right glyphicon glyphicon-ok"
+                    ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>
               </a>
             </p>
-          </li>          
+          </li>
         </ul>
       </div>
 
@@ -92,20 +93,20 @@
         <ul id = "amenities-list">
           <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
             <a ng-click="addToSelected(amenity)">
-              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }} 
+              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
             </a>
-          </li>          
-        </ul>          
+          </li>
+        </ul>
       </div>
     </div>
-    
+
   </uib-accordion-group>
 
   <uib-accordion-group  is-open = "settings.third.status.open"
                         is-disabled="settings.third.status.disabled"
                         >
     <uib-accordion-heading>
-      Select a Park <i class="pull-right glyphicon" 
+      Select a Park <i class="pull-right glyphicon"
                       ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
     </uib-accordion-heading>
 
@@ -118,15 +119,15 @@
 
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-search"></i></span>
-          
+
           <input  type="text"
-                  id = "searchParkName" 
+                  id = "searchParkName"
                   ng-model="parkSelected"
                   placeholder = "Park Name"
                   typeahead-no-results = "noResults"
                   typeahead-on-select = "centerToPark($item, $model, $label)"
-                  uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8" 
-                  class="form-control">            
+                  uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8"
+                  class="form-control">
         </div>
 
       </div>
