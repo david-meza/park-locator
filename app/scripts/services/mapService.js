@@ -41,7 +41,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     },
     options: {
       // backgroundColor: '#2c3e50',
-      draggable: $window.innerWidth >= 992,
+      draggable: true, //$window.innerWidth >= 992,
       scrollwheel: false,
       // mapTypeControl: true,
       // mapTypeId: 'HYBRID',
@@ -50,7 +50,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
       // },
       minZoom: 8,
       tilt: 45,
-      panControl: true //$window.innerWidth < 992
+      panControl: false //$window.innerWidth < 992
     },
   };
 

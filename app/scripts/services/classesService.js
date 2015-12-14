@@ -18,7 +18,7 @@ angular.module('parkLocator').factory('classesService', ['$http',
       }
     }
 
-    $http({
+    return $http({
       method: 'GET',
       url: 'https://maps.raleighnc.gov/class/class.php?&ids=' + ids
     }).then(_processClasses, _logAjaxError);
@@ -39,7 +39,6 @@ angular.module('parkLocator').factory('classesService', ['$http',
       }
 
     });
-    console.log(classes);
   };
 
   var getParkIds = function (name) {

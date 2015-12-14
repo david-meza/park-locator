@@ -48,6 +48,10 @@ p {
   word-wrap: break-word;
 }
 
+.font-p-sm {
+  font-size: 0.9em
+}
+
 th {
   white-space: nowrap;
 }
@@ -314,6 +318,9 @@ html, body, #map-canvas {
   .panel-scrollable {
     max-height: 20em;
     overflow: auto;
+    margin-right: -15px;
+    padding-right: 15px;
+    clear: right;
   }
 
   .faded-edge-bottom {
@@ -387,6 +394,10 @@ html, body, #map-canvas {
     }
   }
 
+  .course-details {
+    max-height: 30em;
+  }
+
   .panel-group .panel-body {
     .faded-edge-bottom {
       bottom: 3.1em;
@@ -411,8 +422,13 @@ html, body, #map-canvas {
     }
   }
 
+  .course-details {
+    max-height: 20em;
+  }
+
   .angular-google-map-container {
     height: 20em;
+    margin-right: 5px;
   }
 
   .park-details-list {

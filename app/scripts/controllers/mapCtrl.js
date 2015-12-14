@@ -16,7 +16,6 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
 
   $scope.map.events.zoom_changed = function (map) {
-    console.log(map);
     var z = map.getZoom();
     if (!$scope.activities.markersConfig.control.getPlurals) { return; }
     var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
@@ -79,14 +78,15 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
   uiGmapIsReady.promise(1).then(function(instances) {
     mapInstance = instances[0].map;
+    // console.log( mapInstance.getMapTypeId() );
     // applyMapStyles();
   });
 
   var applyMapStyles = function () {
-    console.log($scope.map.options.styles);
   	var styledMap = new mapsApi.StyledMapType( $scope.map.options.styles, {name: 'Nature'});
 	  mapInstance.setMapTypeId('nature');
     mapInstance.mapTypes.set('nature', styledMap);
+    console.log( mapInstance.getMapTypeId() );
   };
 
 }]);

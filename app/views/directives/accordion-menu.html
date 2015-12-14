@@ -57,6 +57,11 @@
       </div>
     </div>
 
+    <p  class = "pull-right text-total-results" 
+        ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">
+        Number of Parks: {{ parks.content.length }}
+    </p>
+
     <div class = "panel-scrollable">
 
       <div ng-show="selectedActivities.current.length === 0">
@@ -65,7 +70,6 @@
 
       <div ng-show="selectedActivities.current.length > 0">
 
-        <p class = "pull-right text-total-results" ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">Total Results: {{ parks.content.length }}</p>
 
         <h5>Selected (parks with all) </h5>
 
@@ -133,15 +137,22 @@
       </div>
     </div>
 
+    <div class = "panel-scrollable">
+
+      <ul id = "park-list">
+        <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
+          <a  ng-click="centerToPark(park)" 
+              scroll-to="map-canvas">
+            <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
+          </a>
+        </li>          
+      </ul>
+
+      <p class="font-p-sm">
+        Listing the nearest {{ parksLimit }} parks. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length"> List all</a>
+      </p>
     
-    <ul id = "park-list" class = "panel-scrollable">
-      <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark ">
-        <a  ng-click="centerToPark(park)" 
-            scroll-to="map-canvas">
-          <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
-        </a>
-      </li>          
-    </ul>
+    </div>
 
   </uib-accordion-group>
 

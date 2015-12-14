@@ -91,7 +91,6 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 			var a = Math.abs(park.latitude - $scope.myLoc.latitude);
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
       var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
-      console.log(dist);
       $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 };
       return (dist <= 0.012) ? $scope.mapsApi.TravelMode.WALKING : $scope.mapsApi.TravelMode.DRIVING;
 		};

@@ -12,6 +12,15 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     // Filter by activity section
     $scope.selectedActivities = amenitiesService.selectedActivities;
+    // Limit to number of parks initially shown
+    $scope.parksLimit = undefined;
+    $scope.$watch('parks.content.length', function (newVal) {
+      $scope.parksLimit = Math.min(10, newVal);
+    });
+    // Expand the list of park results
+    $scope.showAll = function () {
+      $scope.parksLimit = $scope.parks.content.length;
+    };
 
     var parkResults = $scope.parks.content.length;
 
