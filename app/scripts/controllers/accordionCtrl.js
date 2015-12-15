@@ -69,6 +69,9 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
           parkResults = $scope.parks.content.length;
         }
       }, 0);
+      $timeout(function(){
+        Flash.dismiss();
+      }, 3000);
     });
 
     $scope.addToSelected = function (amenity) {

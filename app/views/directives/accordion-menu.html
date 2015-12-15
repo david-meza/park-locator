@@ -120,12 +120,13 @@
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-search"></i></span>
 
-          <input  type="text"
+          <input  type="search"
                   id = "searchParkName"
                   ng-model="parkSelected"
                   placeholder = "Park Name"
                   typeahead-no-results = "noResults"
                   typeahead-on-select = "centerToPark($item, $model, $label)"
+                  typeahead-select-on-exact = "true"
                   uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8"
                   class="form-control">
         </div>
@@ -150,7 +151,7 @@
       </ul>
 
       <p class="font-p-sm">
-        Listing the nearest {{ parksLimit }} parks. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length"> List all</a>
+        Listing the nearest {{ parksLimit }} parks. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length && !parkSelected.name"> List all</a>
       </p>
     
     </div>
