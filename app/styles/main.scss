@@ -26,6 +26,14 @@ html {
   position: fixed;
 }
 
+#mobile-nav {
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between; 
+  }
+}
+
 h1 {
   margin: 0;
 
@@ -423,7 +431,7 @@ html, body, #map-canvas {
 @media screen and (max-width: 767px) {
   h1 {
     .navbar-brand {
-      font-size: 0.5em;
+      font-size: 0.46em;
     }
   }
 
