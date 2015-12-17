@@ -27,10 +27,40 @@ html {
 }
 
 #mobile-nav {
+  display: none;
+
+  ul.fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+  }
+
   ul {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between; 
+    justify-content: space-between;
+    margin: auto -15px;
+    z-index: 999;
+    background-color: #2C3E50;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 4px 7px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 4px 7px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 4px 7px 0 rgba(0, 0, 0, 0.19);
+
+    li {
+      a {
+        color: #fff;
+        padding: 10px 15px;
+        -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+        -moz-transition:    all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition:         all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
+        &:focus, &:hover {
+          padding: 10px 45px;
+          outline: none;
+          background-color: #4C5E70
+        }
+      }
+    }
   }
 }
 
@@ -429,6 +459,10 @@ html, body, #map-canvas {
 }
 
 @media screen and (max-width: 767px) {
+  #mobile-nav {
+    display: block;
+  }
+
   h1 {
     .navbar-brand {
       font-size: 0.46em;
@@ -444,8 +478,10 @@ html, body, #map-canvas {
     margin-right: 5px;
   }
 
-  .park-details-list {
-
+  .footer {
+    p {
+      font-size: 0.9em;
+    }
   }
 
   table {

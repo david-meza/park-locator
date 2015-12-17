@@ -18,23 +18,14 @@
     
     <div id = "flash" flash-message="2500" ></div>
     
-    <nav ui-view = "navbar"></nav>
+    <ng-navbar></ng-navbar>
 
 
     <div class="container">
       <ui-view></ui-view>
     </div>
 
-    <div class="footer">
-      <div class="container">
-        <p>
-          Copyright © 2015 | <a href = "https://www.raleighnc.gov/" target="_blank">raleighnc.gov</a> | All Rights Reserved <span class = "pull-right small-font"><a href="https://icons8.com" target="_blank">Icon pack by Icons8</a></span> 
-        </p>
-        <p>Made by CORaleigh GIS team</p>
-      </div>
-    </div>
-
-
+    <ng-footer></ng-footer>
 
     <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -85,6 +76,9 @@
     <script src="scripts/controllers/sectionCtrl.js"></script>
 
     <!-- Directives -->
+    <script src="scripts/directives/navbar.js"></script>
+    <script src="scripts/directives/footer.js"></script>
+    <script src="scripts/directives/navbarFixed.js"></script>
     <script src="scripts/directives/mainMap.js"></script>
     <script src="scripts/directives/accordionMenu.js"></script>
     <script src="scripts/directives/classesInfo.js"></script>

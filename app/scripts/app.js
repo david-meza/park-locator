@@ -29,17 +29,7 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
       $stateProvider
         .state('home', {
           url: '/',
-          views: {
-
-            'navbar': {
-              templateUrl: 'views/partials/navbar.html'
-            },
-
-            '': {
-              templateUrl: 'views/main.html'
-            }
-
-          }
+          templateUrl: 'views/main.html'
         })
 
         .state('home.park', {
