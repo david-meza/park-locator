@@ -15,5 +15,11 @@ angular.module('parkLocator').controller('sectionCtrl', ['$scope', 'classesServi
     	$scope.sortQuery = query;
     };
 
+    $scope.coursesLimit = 7;
+    // Expand the list of park results
+    $scope.showAll = function () {
+      $scope.coursesLimit = $scope.classes[$scope.sectionName].length;
+    };
+
 
 }]);

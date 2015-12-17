@@ -26,7 +26,7 @@
 			</th>
 		</thead>
 
-		<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse">
+		<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses">
 			<td data-label = "Course"> {{ course.COURSE || 'No Course Preview' }} </td>
 			<td data-label = "Activity"> {{ course.ACTIVITY || 'No Activity Preview' }} </td>
 			<td data-label = "Start Date"> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </td>
@@ -37,5 +37,6 @@
 				</a> 
 			</td>
 		</tr>
-	</table>	
+	</table>
 </div>
+<p style="margin-top: 10px;">Displaying {{ (coursesLimit < classes[sectionName].length) ? ('the first ' + coursesLimit) : (filteredCourses.length) }} results. <a ng-click="showAll()" ng-if="coursesLimit < classes[sectionName].length">Show all</a></p>

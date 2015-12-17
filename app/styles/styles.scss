@@ -2,6 +2,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 // @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 @import "./flatly.min.css";
+@import "./font-awesome.css";
 
 
 html {
@@ -40,6 +41,7 @@ html {
     flex-flow: row nowrap;
     justify-content: space-between;
     margin: auto -15px;
+    height: 41px;
     z-index: 999;
     background-color: #2C3E50;
     -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 4px 7px 0 rgba(0, 0, 0, 0.19);
@@ -114,6 +116,8 @@ th {
 .course-details {
   max-height: 40em;
   overflow: auto;
+  margin-right: -15px;
+  padding-right: 15px;
 }
 
 .img-container {

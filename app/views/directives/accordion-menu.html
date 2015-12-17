@@ -144,14 +144,16 @@
       <ul id = "park-list">
         <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
           <a  ng-click="centerToPark(park)" 
-              scroll-to="map-canvas">
+              scroll-to="map-canvas"
+              duration = "500"
+              offset = "10">
             <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
           </a>
         </li>          
       </ul>
 
       <p class="font-p-sm">
-        Listing the nearest {{ parksLimit }} parks. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length && !parkSelected.name"> List all</a>
+        Listing the nearest {{ (filteredParks.length <= 1) ? 'park' : '' + filteredParks.length + ' parks' }}. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length && !parkSelected.name"> List all</a>
       </p>
     
     </div>

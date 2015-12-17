@@ -48,13 +48,9 @@
               <h5> {{ parks.currentPark.name }} </h5>
               <p> {{ parks.currentPark.address }} </p>
               <p> {{ parks.currentPark.phone }}</p>
-              <!-- <img  style="height: 55px; width: 55px; float: right;" 
-                    ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg"
-                    fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"> -->
-              <a scroll-to="panels-section">More Info</a>
-             <!--  <ul>
-                <li ng-class="{ 'text-success': parks.currentPark.artscenter, 'text-danger': !parks.currentPark.artscenter }">{{ parks.currentPark.artscenter ? 'Arts Center' : 'No arts center' }}</li>
-              </ul> -->
+              <a  scroll-to="panels-section"
+                  duration = "500"
+                  offset = "10">More Info</a>
             </div>
 
         </ui-gmap-windows>
