@@ -1,6 +1,6 @@
 # Park Locator
 
-Park locator will find the parks in Raleigh nearest to you and display them in a map.
+Park Locator is a mapping tool for Raleigh parks that allows you to find the closest park to your home, search for parks by amenity, get directions to a park, and explore program offerings at the parks.
 
 ## Build & development
 
