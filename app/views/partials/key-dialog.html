@@ -1,0 +1,73 @@
+<md-dialog aria-label="Map Icons Key">
+  <form>
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        
+        <h2>Map Icons Key</h2>
+        
+        <span flex></span>
+        
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-icon="fa-times" class = "fa fa-2x" aria-label="Close dialog"></md-icon>
+        </md-button>
+      
+      </div>
+    </md-toolbar>
+
+    
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-list>
+
+        <md-subheader class="md-no-sticky">User Icon</md-subheader>
+        
+        <md-list-item>
+          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/user.png" class="md-avatar" alt="user" />
+          <div class="md-list-item-text">
+            <h4>You are here</h4>
+          </div>
+        </md-list-item>
+
+        <md-divider ></md-divider>
+
+        <md-subheader class="md-no-sticky">Park Icons</md-subheader>
+        
+        <md-list-item>
+          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png" class="md-avatar" alt="Park Location" />
+          <div class="md-list-item-text">
+            <h4>Park Marker</h4>
+          </div>
+        </md-list-item>
+        
+        <md-list-item>
+          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png" class="md-avatar" alt="Park Location" />
+          <div class="md-list-item-text">
+            <h4>Parks Cluster</h4>
+          </div>
+        </md-list-item>
+        
+        
+        <md-divider ></md-divider>
+        
+        <md-subheader class="md-no-sticky">Activity Icons</md-subheader>
+        <md-list-item ng-repeat="activity in activities">
+          <img  class = "md-avatar" 
+                ng-src="data:image/png;base64,{{ activity.imageDataLg || activity.imageDataSm || activity.imageData }}"
+                alt="{{ activity.name }}" />
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ activity.name }}</h4>
+          </div>
+        </md-list-item>
+      
+      </md-list>
+    </md-dialog-content>
+    
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="answer('ok')" style="margin-right:10px;" md-autofocus>
+        Ok!
+      </md-button>
+    </md-dialog-actions>
+
+  </form>
+</md-dialog>

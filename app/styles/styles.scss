@@ -1,12 +1,10 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-
-// @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "../bower_components/angular-material/angular-material.css";
 @import "./flatly.min.css";
 @import "./font-awesome.css";
 
 
 html {
-  font-family: Helvetica, Verdana, sans-serif;
+  font-family: Roboto, Helvetica, Verdana, sans-serif;
 }
 
 .nav, .pagination, .carousel, .panel-title a, a { 
@@ -81,7 +79,7 @@ h1 {
 }
 
 h2 {
-  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  font: 400 40px/1.5 Roboto, Helvetica, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -119,6 +117,12 @@ th {
   overflow: auto;
   margin-right: -15px;
   padding-right: 15px;
+  
+  table, .table {
+    a:not(.btn){
+      text-decoration: none;
+    }
+  }
 }
 
 .img-container {
@@ -143,7 +147,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
   padding: 0;
 
   li {
-    font: 200 1em/2.3 Helvetica, Verdana, sans-serif;
+    font: 200 1em/2.3 Roboto, Helvetica, Verdana, sans-serif;
     min-height: 2.88em;
     border-bottom: 1px solid #ccc;
 
@@ -308,6 +312,13 @@ ul#park-amenities {
     border: 2px solid #669834;
   }
 
+}
+
+.map-bottom-right {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  text-transform: capitalize;
 }
 
 

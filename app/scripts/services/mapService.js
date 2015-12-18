@@ -136,7 +136,6 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
   map.events = {
     tilesloaded: function () {
       map.mapInstance = map.control.getGMap();
-      console.log(map.mapInstance);
     }
   };
 

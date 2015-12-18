@@ -13,12 +13,11 @@
 
   </head>
 
-  <body ng-app="parkLocator">
+  <body ng-app="parkLocator" ng-cloak>
     
     <div id = "flash" flash-message="2500" ></div>
     
     <ng-navbar></ng-navbar>
-
 
     <div class="container">
       <ui-view></ui-view>
@@ -41,7 +40,9 @@
 
     <!-- Angular Dependencies -->
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src='bower_components/lodash/lodash.min.js'></script>
     <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
@@ -82,5 +83,5 @@
     <script src="scripts/directives/accordionMenu.js"></script>
     <script src="scripts/directives/classesInfo.js"></script>
 
-</body>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q',
-	function($scope, mapService, parkService, amenitiesService, gMapsAPI, uiGmapIsReady, $q){
+angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog',
+	function($scope, mapService, parkService, amenitiesService, gMapsAPI, uiGmapIsReady, $q, $mdDialog){
 
 	// Map settings
   $scope.map = mapService.map;
@@ -14,6 +14,35 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   // Make a new query when the activities filter changes
   $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
 
+  $scope.openKey = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/partials/key-dialog.html',
+      targetEvent: ev,
+      // fullscreen: true,
+      clickOutsideToClose:true,
+      controller: DialogCtrl,
+      locals: {
+        activities: $scope.uniqueActivs
+      },
+      bindToController: true
+    });
+  };
+
+  function DialogCtrl($scope, $mdDialog, amenitiesService) {
+    $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
+    
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  };
 
   $scope.map.events.zoom_changed = function (map) {
     var z = map.getZoom();
