@@ -13,11 +13,12 @@
       <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
     </div>
 
-
-    <button class="btn btn-success btn-block"
-            ng-click="geoLocate()">
-      <i class = "fa fa-fw fa-location-arrow"></i> Use my current location!
-    </button>
+    <md-button  class="md-primary md-raised geolocate-button capitalize" 
+                aria-label="Use my current location"
+                ng-click="geoLocate()">
+      <md-icon md-font-icon="fa-location-arrow" class = "fa fa-lg"></md-icon>
+      &nbsp; Use my current location!
+    </md-button>
 
   </uib-accordion-group>
 
@@ -66,7 +67,11 @@
     <div class = "panel-scrollable">
 
       <div ng-show="selectedActivities.current.length === 0">
-        <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
+        <md-button  class="md-accent md-raised capitalize pull-right skip-button"
+                    aria-label="Skip Step"
+                    ng-click = "goToPanel('second', 'third')">
+          Skip Step
+        </md-button>
       </div>
 
       <div ng-show="selectedActivities.current.length > 0">

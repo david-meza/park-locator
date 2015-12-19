@@ -43,4 +43,4 @@
 		</tr>
 	</table>
 </div>
-<p style="margin-top: 10px;">Displaying {{ (coursesLimit < classes[sectionName].length) ? ('the first ' + coursesLimit) : (filteredCourses.length) }} results. <a ng-click="showAll()" ng-if="coursesLimit < classes[sectionName].length">Show all</a></p>
+<p style="margin-top: 10px;">Displaying {{ (coursesLimit < classes[sectionName].length) ? ('the first ' + coursesLimit) : (filteredCourses.length) }} {{ filteredCourses.length === 1 ? 'result' : 'results' }}. <a ng-click="showAll()" ng-if="coursesLimit < classes[sectionName].length">Show all</a></p>
