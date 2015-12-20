@@ -27,22 +27,24 @@
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
-    <ui-gmap-markers  models="map.parkMarkers.content"
+    <ui-gmap-markers  models="parks.content"
                       coords="'self'"
                       icon="'icon'"
                       click="onMarkerClicked()"
                       type = "map.markersConfig.type"
                       typeOptions = "map.markersConfig.typeOptions"
                       typeEvents = "map.markersConfig.typeEvents"
-                      modelsbyref="true"
+                      modelsbyref="parks.shallowWatch"
                       fit = "true"
                       options="'options'"
-                      events="map.parkMarkerEvents">
+                      events="map.parkMarkerEvents"
+                      doRebuildAll = "parks.rebuild">
 
 
         <ui-gmap-windows  isIconVisibleOnClick = "true"
                           show="'showWindow'"
-                          closeClick="'closeClick'" ng-cloak>
+                          closeClick="'closeClick'"
+                          ng-cloak>
             
             <div>
               <h5> {{ parks.currentPark.name }} </h5>

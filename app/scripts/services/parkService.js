@@ -4,7 +4,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 	function ($http, $state) {
 	
 	var currentMarker = { obj: {} };
-	var markers = { content: [], currentPark: undefined };
+	var markers = { content: [], currentPark: undefined, rebuild: false, shallowWatch: false };
 
 	
   var _onMarkerClicked = function () {
@@ -21,6 +21,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 
     if (typeof response.data === 'object') {
 
+      // Empty the existing parks array before adding the new results
       if (markers.content.length > 0) {
         markers.content.splice(0, markers.content.length);
       }
@@ -95,7 +96,6 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     } else {
       console.log('error', response);
     }
-
 	};
 
 	var _logAjaxError = function (error) {
@@ -104,6 +104,8 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 
   var updateParkMarkers = function (selectedActivities) {
     var query = '';
+    if (!selectedActivities) return;
+
     selectedActivities.forEach( function (activity, idx) {
       query += activity.parkAttr + '%3D' + '%27Yes%27';
       if (idx <= selectedActivities.length - 2) { query += '+AND+'; }

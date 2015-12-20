@@ -5,14 +5,16 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
 	// Map settings
   $scope.map = mapService.map;
-  $scope.map.parkMarkers = parkService.markers;
+  $scope.parks = parkService.markers;
   $scope.activities = amenitiesService.list.activitiesPos;
   $scope.uniqueActivs = amenitiesService.list.uniques;
   $scope.activityWindow = amenitiesService.activityWindow;
   $scope.selectedActivities = amenitiesService.selectedActivities;
 
   // Make a new query when the activities filter changes
-  $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
+  $scope.$watchCollection('selectedActivities.current', function (selected) {
+    parkService.updateParkMarkers(selected);
+  });
 
   $scope.openKey = function (ev) {
     $mdDialog.show({
@@ -43,7 +45,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     $scope.answer = function(answer) {
       $mdDialog.hide(answer);
     };
-  };
+  }
 
   $scope.map.events.zoom_changed = function (map) {
     var z = map.getZoom();
