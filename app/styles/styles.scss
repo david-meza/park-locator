@@ -176,7 +176,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
       transition:         font-size 0.3s ease, background-color 0.3s ease;
 
       &:hover {
-        color: #18bc9c;
+        color: #3f51b5;
         text-decoration: none;
         font-size: 1.2em;
         background-color: #f6f6f6;
@@ -435,15 +435,16 @@ html, body, #map-canvas {
   color: #2c3e50;
 }
 
-// .edge-wrapper {
-//   position: relative;
-// }
+.navbar {
+  margin-bottom: 0;
+}
 
-/* Custom page footer */
 .footer {
   padding-top: 19px;
-  color: #777;
   border-top: 1px solid #e5e5e5;
+  p {
+    color: #777;
+  }
 }
 
 @media screen and (max-width: 991px) {

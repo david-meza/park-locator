@@ -16,49 +16,67 @@
     </md-toolbar>
 
     
-    <md-dialog-content style="max-width:800px;max-height:810px; ">
+    <md-dialog-content style = "max-width:800px;max-height:810px; " md-theme="altTheme">
       <md-list>
 
-        <md-subheader class="md-no-sticky">User Icon</md-subheader>
         
-        <md-list-item>
-          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/user.png" class="md-avatar" alt="user" />
-          <div class="md-list-item-text">
-            <h4>You are here</h4>
-          </div>
-        </md-list-item>
+        <md-subheader class = "">Miscellaneous</md-subheader>
+        
+        <div layout="row" layout-xs="column" layout-align = "start stretch"> 
+          <md-list-item flex = "50" flex-gt-sm = "33">
+            <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/user.png" class="md-avatar" alt="user" />
+            <div class="md-list-item-text">
+              <h4>You are here</h4>
+            </div>
+          </md-list-item>
+
+          <md-list-item flex = "50" flex-gt-sm = "33">
+            <img  class = "md-avatar" 
+                  ng-src="data:image/png;base64,{{ amenitiesService['Restroom'].imageDataLg || amenitiesService['Restroom'].imageDataSm || amenitiesService['Restroom'].imageData }}"
+                  alt="{{ amenitiesService['Restroom'].name }}" />
+            <div class="md-list-item-text">
+              <h4>{{ amenitiesService['Restroom'].name }}</h4>
+            </div>
+          </md-list-item>
+        </div>
 
         <md-divider ></md-divider>
 
-        <md-subheader class="md-no-sticky">Park Icons</md-subheader>
+        <md-subheader class = "">Park Icons</md-subheader>
         
-        <md-list-item>
-          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png" class="md-avatar" alt="Park Location" />
-          <div class="md-list-item-text">
-            <h4>Park Marker</h4>
-          </div>
-        </md-list-item>
-        
-        <md-list-item>
-          <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png" class="md-avatar" alt="Park Location" />
-          <div class="md-list-item-text">
-            <h4>Parks Cluster</h4>
-          </div>
-        </md-list-item>
+        <div layout="row" layout-xs="column" layout-align = "start stretch">  
+          <md-list-item flex = "50" flex-gt-sm = "33">
+            <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png" class="md-avatar" alt="Park Location" />
+            <div class="md-list-item-text">
+              <h4>Park Marker</h4>
+            </div>
+          </md-list-item>
+          
+          <md-list-item flex = "50" flex-gt-sm = "33">
+            <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png" class="md-avatar" alt="Park Location" />
+            <div class="md-list-item-text">
+              <h4>Parks Cluster</h4>
+            </div>
+          </md-list-item>
+        </div>
         
         
         <md-divider ></md-divider>
         
-        <md-subheader class="md-no-sticky">Activity Icons</md-subheader>
-        <md-list-item ng-repeat="activity in activities">
-          <img  class = "md-avatar" 
-                ng-src="data:image/png;base64,{{ activity.imageDataLg || activity.imageDataSm || activity.imageData }}"
-                alt="{{ activity.name }}" />
-          <div class="md-list-item-text" layout="column">
-            <h4>{{ activity.name }}</h4>
-          </div>
-        </md-list-item>
+        <md-subheader class = "">Activity Icons</md-subheader>
+        
+        <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
+          <md-list-item ng-repeat="activity in activities | orderBy: 'name' " flex = "50" flex-gt-sm = "33">
+            <img  class = "md-avatar" 
+                  ng-src="data:image/png;base64,{{ activity.imageDataLg || activity.imageDataSm || activity.imageData }}"
+                  alt="{{ activity.name }}" />
+            <div class="md-list-item-text">
+              <h4>{{ activity.name }}</h4>
+            </div>
+          </md-list-item>
+        </div>
       
+
       </md-list>
     </md-dialog-content>
     
