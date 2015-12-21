@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps', 'flash', 'smoothScroll', 'dcbImgFallback', 'ngAnimate'])
+angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps', 'flash', 'smoothScroll', 'dcbImgFallback', 'ngAnimate'])
 
   .config(['uiGmapGoogleMapApiProvider', 
     function(uiGmapGoogleMapApiProvider) {
@@ -18,6 +18,11 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps',
     $httpProvider.defaults.headers.common.Accept = 'application/json';
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     
+  }])
+
+  .config([ '$mdThemingProvider', function ($mdThemingProvider) {
+    $mdThemingProvider.theme('altTheme')
+      .primaryPalette('purple');
   }])
 
   .config(['$stateProvider', '$urlRouterProvider', 

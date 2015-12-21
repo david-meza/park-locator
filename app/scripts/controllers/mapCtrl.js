@@ -1,19 +1,51 @@
 'use strict';
 
-angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q',
-	function($scope, mapService, parkService, amenitiesService, gMapsAPI, uiGmapIsReady, $q){
+angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog',
+	function($scope, mapService, parkService, amenitiesService, gMapsAPI, uiGmapIsReady, $q, $mdDialog){
 
 	// Map settings
   $scope.map = mapService.map;
-  $scope.map.parkMarkers = parkService.markers;
+  $scope.parks = parkService.markers;
   $scope.activities = amenitiesService.list.activitiesPos;
   $scope.uniqueActivs = amenitiesService.list.uniques;
   $scope.activityWindow = amenitiesService.activityWindow;
   $scope.selectedActivities = amenitiesService.selectedActivities;
 
   // Make a new query when the activities filter changes
-  $scope.$watchCollection('selectedActivities.current', parkService.updateParkMarkers );
+  $scope.$watchCollection('selectedActivities.current', function (selected) {
+    parkService.updateParkMarkers(selected);
+  });
 
+  $scope.openKey = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/partials/key-dialog.html',
+      targetEvent: ev,
+      // fullscreen: true,
+      clickOutsideToClose:true,
+      controller: DialogCtrl,
+      locals: {
+        activities: $scope.uniqueActivs
+      },
+      bindToController: true
+    });
+  };
+
+  function DialogCtrl($scope, $mdDialog, amenitiesService) {
+    $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
+    $scope.amenitiesService = amenitiesService.list;
+
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
 
   $scope.map.events.zoom_changed = function (map) {
     var z = map.getZoom();

@@ -1,35 +1,29 @@
 'use strict';
 
-angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$rootScope', '$timeout',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $rootScope, $timeout) {
+angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService) {
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
-	  // Define some async objects from our services
+	  
+    // Define some async objects from our services
     $scope.parks = parkService.markers;
     $scope.amenities = amenitiesService.list;
     $scope.map = mapService.map;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
+    
     // Filter by activity section
     $scope.selectedActivities = amenitiesService.selectedActivities;
+    
     // Limit to number of parks initially shown
     $scope.parksLimit = undefined;
     $scope.$watch('parks.content.length', function (newVal) {
       $scope.parksLimit = Math.min(10, newVal);
     });
+    
     // Expand the list of park results
     $scope.showAll = function () {
       $scope.parksLimit = $scope.parks.content.length;
-    };
-
-    var parkResults = $scope.parks.content.length;
-
-    var informUser = function() {
-      if ($scope.parks.content.length > 0) {
-        Flash.create('success', '<i class="fa fa-lg fa-check"></i> There are ' + $scope.parks.content.length + ' parks that meet your criteria.');
-      } else {
-        Flash.create('danger', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> No parks matched your search.');
-      }
     };
 
     $scope.goToPanel = function (from, to) {
@@ -57,23 +51,6 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
     $scope.geoLocate();
 
-    $rootScope.$on('loading:progress', function(){
-      Flash.create('info', '<i class="fa fa-lg fa-spinner fa-pulse"></i> Processing park results.');
-    });
-
-    $rootScope.$on('loading:finish', function(){
-      $timeout(function(){
-        Flash.dismiss();
-        if ($scope.parks.content.length !== parkResults) {
-          informUser();
-          parkResults = $scope.parks.content.length;
-        }
-      }, 0);
-      $timeout(function(){
-        Flash.dismiss();
-      }, 3000);
-    });
-
     $scope.addToSelected = function (amenity) {
     	$scope.selectedActivities.current.push(amenity);
     	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
@@ -92,8 +69,8 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     	$scope.map.zoom = 16;
     };
 
+    // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
     $scope.nearestPark = function (park) {
-      // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
       var a = Math.abs(park.latitude - $scope.myLoc.latitude);
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
       return Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
