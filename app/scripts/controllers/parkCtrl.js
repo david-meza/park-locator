@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService',
-	function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI, amenitiesService) {
+angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', 'accordionService', '$timeout',
+	function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI, amenitiesService, accordionService, $timeout) {
 
 		var parkName = $stateParams.name,
+				accordionSettings = accordionService.settings,
 				directionsService,
 	  		directionsDisplay,
 	  		icons,
@@ -24,6 +25,15 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
       initializeDirectionsMap();
 
 	  });
+
+	  $scope.openLocationPanel = function () {
+      accordionSettings.second.status.open = false;
+      accordionSettings.third.status.open = false;
+      accordionSettings.first.status.open = true;
+      $timeout(function(){
+      	document.getElementById("autocomplete").focus();
+      }, 0);
+	  };
 
 	  $scope.showAmenityInMap = function () {
     	$scope.map.location.coords.latitude = $scope.parks.currentPark.latitude;

@@ -34,7 +34,8 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGma
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'views/main.html'
+          templateUrl: 'views/main.html',
+          controller: 'devicesCtrl'
         })
 
         .state('home.park', {

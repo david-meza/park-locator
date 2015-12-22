@@ -51,11 +51,13 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
     $scope.geoLocate();
 
+    // Add an activity to filter array
     $scope.addToSelected = function (amenity) {
     	$scope.selectedActivities.current.push(amenity);
     	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
     };
 
+    // Remove a selected activity
     $scope.removeSelected = function (amenity) {
     	$scope.amenities.uniques.push( amenity );
     	$scope.selectedActivities.current.splice($scope.selectedActivities.current.indexOf(amenity), 1);
@@ -63,10 +65,10 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
     // Select a park section
     $scope.centerToPark = function (park) {
-    	park.onMarkerClicked();
-    	$scope.map.location.coords.latitude = park.latitude;
-    	$scope.map.location.coords.longitude = park.longitude;
     	$scope.map.zoom = 16;
+      $scope.map.location.coords.latitude = park.latitude;
+      $scope.map.location.coords.longitude = park.longitude;
+      park.markerClick(null, 'click', park);
     };
 
     // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
