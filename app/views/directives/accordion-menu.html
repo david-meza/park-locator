@@ -9,9 +9,10 @@
     </uib-accordion-heading>
 
 
-    <md-input-container md-no-float class="md-icon-float md-block">
-      <md-icon md-font-icon="fa-map-marker" class = "fa fa-lg"></md-icon>
-      <input type = "text" class="form-control" id="autocomplete" placeholder = "Address or Location">
+    <md-input-container class="md-icon-float md-block">
+      <label>Address or Location</label>
+      <md-icon md-font-icon="fa-map-marker" class = "fa fa-2x"></md-icon>
+      <input type = "text" id="autocomplete" placeholder = "">
     </md-input-container>
 
     <md-button  class="md-primary md-raised geolocate-button capitalize" 
@@ -35,27 +36,24 @@
       <div class="faded-edge-bottom"></div>
     </div>
 
-    <div class="row mb-20">
+    <div class="row">
       <div class="col-md-12">
 
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-search"></i></span>
-
-          <input  type="text"
+        <md-input-container class="md-icon-float md-block no-mb">
+          <label>Activity</label>
+          <md-icon md-font-icon="fa-search" class = "fa fa-lg"></md-icon>
+          <input  type="search"
                   id = "searchActivityName"
                   ng-model="activitySelected"
-                  placeholder = "Pool"
                   typeahead-no-results = "noActivitiesResults"
                   typeahead-on-select = "addToSelected($item, $model, $label)"
                   typeahead-select-on-exact = "true"
-                  uib-typeahead="activity as activity.name for activity in amenities.uniques | filter:$viewValue | limitTo:8"
-                  class="form-control">
-        </div>
+                  uib-typeahead="activity as activity.name for activity in amenities.uniques | filter:$viewValue | limitTo:8">
+        </md-input-container>
 
       </div>
 
-      <div class = "col-md-12" ng-show="noActivitiesResults">
-        <br>
+      <div class = "col-md-12 mb-20" ng-show="noActivitiesResults">
         <i class="glyphicon glyphicon-remove"></i> No activities matched your search.
       </div>
     </div>
@@ -120,27 +118,24 @@
       <div class="faded-edge-bottom v2"></div>
     </div>
 
-    <div class="row mb-20">
+    <div class="row">
       <div class="col-md-12">
 
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-search"></i></span>
-
+        <md-input-container class="md-icon-float md-block no-mb">
+          <label>Park Name</label>
+          <md-icon md-font-icon="fa-search" class = "fa fa-lg"></md-icon>
           <input  type="search"
                   id = "searchParkName"
                   ng-model="parkSelected"
-                  placeholder = "Park Name"
-                  typeahead-no-results = "noResults"
+                  typeahead-no-results = "noParkResults"
                   typeahead-on-select = "centerToPark($item, $model, $label)"
                   typeahead-select-on-exact = "true"
-                  uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8"
-                  class="form-control">
-        </div>
+                  uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8">
+        </md-input-container>
 
       </div>
 
-      <div class = "col-md-12" ng-show="noResults">
-        <br>
+      <div class = "col-md-12 mb-10" ng-show="noParkResults">
         <i class="glyphicon glyphicon-remove"></i> No Parks With This Name
       </div>
     </div>

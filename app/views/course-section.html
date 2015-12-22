@@ -23,9 +23,6 @@
 			</th>
 			<th>
 				<i class="fa fa-external-link"></i> Info
-				<md-tooltip md-direction = "top">
-					Please click again if there is a cookies alert.
-				</md-tooltip>
 			</th>
 		</thead>
 
@@ -33,7 +30,10 @@
 			<td data-label = "Course"> {{ course.COURSE || 'No Course Preview' }} </td>
 			<td data-label = "Activity"> {{ course.ACTIVITY || 'No Activity Preview' }} </td>
 			<td data-label = "Start Date"> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </td>
-			<td data-label = "Info"> 
+			<td data-label = "Info">
+				<md-tooltip md-direction = "top">
+					Please click again if there is a cookies alert.
+				</md-tooltip>
 				<a 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
 						target="_blank"
 						aria-label="Learn more about this course"> 

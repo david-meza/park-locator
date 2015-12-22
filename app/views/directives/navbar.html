@@ -1,17 +1,23 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header hide-on-mobile">
 
       <h1><a class="navbar-brand" ui-sref = "home">{{ title }}</a></h1>
     </div>
     
     <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="60"></md-progress-circular>
 
-    <div id="mobile-nav" fix-on-scroll = "60">
+    <div id="mobile-nav" fix-on-scroll = "0">
       <ul class="nav navbar-right">
-        <li><a scroll-to = "search" duration = "400" offset = "50">Search</a></li>
-        <li><a scroll-to = "map-canvas" duration = "400" offset = "50">Map</a></li>
-        <li><a scroll-to = "panels-section" duration = "400" offset = "50">Park</a></li>
+        <li>
+          <a scroll-to = "search" duration = "400" offset = "50" ng-click="activeTab.name = 'search' ">Search</a>
+        </li>
+        <li>
+          <a scroll-to = "map-canvas" duration = "400" offset = "50" ng-click="activeTab.name = 'map' ">Map</a>
+        </li>
+        <li>
+          <a scroll-to = "panels-section" duration = "400" offset = "50" ng-click="activeTab.name = 'park' ">Park</a>
+        </li>
       </ul>
     </div>
 

@@ -385,6 +385,10 @@ html, body, #map-canvas {
   margin-bottom: 10px;
 }
 
+.no-mb {
+  margin-bottom: 0;
+}
+
 .glyphicon-ok {
   color: #669834;
 }
@@ -396,7 +400,7 @@ html, body, #map-canvas {
 .panel-group .panel-body {
 
   .panel-scrollable {
-    max-height: 19.3em;
+    max-height: 18.3em;
     overflow: auto;
     margin-right: -15px;
     padding-right: 15px;
@@ -523,6 +527,14 @@ html, body, #map-canvas {
     display: block;
   }
 
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .navbar {
+    min-height: 0px;
+  }
+
   h1 {
     .navbar-brand {
       font-size: 0.46em;
@@ -534,7 +546,7 @@ html, body, #map-canvas {
   }
 
   .angular-google-map-container {
-    height: 20em;
+    height: 30em;
     margin-right: 5px;
   }
 
