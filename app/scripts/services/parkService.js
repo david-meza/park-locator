@@ -4,17 +4,56 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 	function ($http, $state) {
 	
 	var currentMarker = { obj: {} };
-	var markers = { content: [], currentPark: undefined, rebuild: false, shallowWatch: false };
-
 	
-  var _onMarkerClicked = function () {
-    // Hide old window (stored), show new window, and store new window
-    var oldID = currentMarker.obj.id;
-    currentMarker.obj.showWindow = false;
-    currentMarker.obj = markers.currentPark = this;
-    this.showWindow = (oldID === this.id) ? !this.showWindow : true;
+  var markers = { 
+    content: [], 
+    currentPark: undefined, 
+    rebuild: false, 
+    shallowWatch: false, 
+    fitToMap: false, 
+    control: {} 
+  };
+
+  var parkWindow = {
+    show: false,
+    coords: {},
+    control: {},
+    options: {
+      pixelOffset: { width: 0, height: -48 }
+    },
+    closeclick: function (childScope) { console.log(childScope); },
+    templateUrl: 'views/partials/park-window.html',
+    templateParameter: {},
+  };
+
+  var _positionParkWindow = function(model) {
+    parkWindow.show = true;
+    parkWindow.coords.latitude = model.latitude;
+    parkWindow.coords.longitude = model.longitude;
+    parkWindow.templateParameter.name = model.name;
+    parkWindow.templateParameter.address = model.address;
+    parkWindow.templateParameter.phone = model.phone;
+  };
+	
+  var _markerClick = function (gInstance, evnt, model) {
+    console.log(gInstance, evnt, model);
+    currentMarker.obj = markers.currentPark = model;
+    
+    // Place the info window above park marker and pass in the park info
+    _positionParkWindow(model);
+    
     // Trigger a state change and show the park details
     $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
+  };
+
+  var _closeClick = function () {
+    this.model.showWindow = false;
+    // Fallback on the stored marker in case this (childscope model) fails
+    currentMarker.obj.showWindow = false;
+  };
+
+  var _hideWindow = function () {
+    this.showWindow = false;
   };
 
   var _generateMarkers = function (response) {
@@ -75,11 +114,14 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
           active_adult: p.ACTIVE_ADULT === 'Yes',
           teen: p.TEEN === 'Yes',
           museum: p.MUSEUM === 'Yes',
+          
           icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
           latitude: park.geometry.y,
           longitude: park.geometry.x,
           showWindow: false,
-          onMarkerClicked: _onMarkerClicked,
+          hideWindow: _hideWindow,
+          closeClick: _closeClick,
+          markerClick: _markerClick,
           options: {
             title: p.NAME,
             labelAnchor: '0 0'
@@ -128,7 +170,8 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
 
 	return {
 		markers: markers,
-    updateParkMarkers: updateParkMarkers
+    updateParkMarkers: updateParkMarkers,
+    parkWindow: parkWindow
 	};
 
 }]);

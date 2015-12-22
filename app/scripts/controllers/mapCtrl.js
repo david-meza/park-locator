@@ -5,24 +5,38 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
 	// Map settings
   $scope.map = mapService.map;
+  
+  // Park Markers
   $scope.parks = parkService.markers;
+  
+  // Activities Markers
   $scope.activities = amenitiesService.list.activitiesPos;
+  
+  // Non-duplicate activities model
   $scope.uniqueActivs = amenitiesService.list.uniques;
-  $scope.activityWindow = amenitiesService.activityWindow;
+  
+  // Non-duplicate filtering (selected) activities
   $scope.selectedActivities = amenitiesService.selectedActivities;
+  
+  // Park Info Window
+  $scope.parkWindow = parkService.parkWindow;
+  
+  // Activity Info window
+  $scope.activityWindow = amenitiesService.activityWindow;
 
   // Make a new query when the activities filter changes
   $scope.$watchCollection('selectedActivities.current', function (selected) {
     parkService.updateParkMarkers(selected);
   });
 
+  // Opens the dialog showing the map icons key
   $scope.openKey = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/partials/key-dialog.html',
       targetEvent: ev,
-      // fullscreen: true,
+      fullscreen: true,
       clickOutsideToClose:true,
-      controller: DialogCtrl,
+      controller: 'DialogCtrl',
       locals: {
         activities: $scope.uniqueActivs
       },
@@ -30,30 +44,22 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     });
   };
 
-  function DialogCtrl($scope, $mdDialog, amenitiesService) {
-    $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
-    $scope.amenitiesService = amenitiesService.list;
-
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }
-
   $scope.map.events.zoom_changed = function (map) {
     var z = map.getZoom();
     if (!$scope.activities.markersConfig.control.getPlurals) { return; }
+    
+    // Get all the activities markers, then only show them if we are zoomed in >= 16
     var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
-    activsMarkers.allVals.forEach( function(marker) {
+    activsMarkers.allVals.forEach( function (marker) {
       marker.gObject.setVisible(z >= 16);
     });
+
+    // Get all the park markers and close their window on a zoom event (if they are left open and they get clustered there's an annoying bug)
+    // var parkMarkers = $scope.parks.control.getPlurals();
+    // parkMarkers.allVals.forEach( function (marker) {
+    //   marker.model.showWindow = false;
+    //   marker.gObject.model.showWindow = false;
+    // });
   };
 
   var _onMarkerClicked = function () {

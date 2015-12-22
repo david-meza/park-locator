@@ -22,45 +22,59 @@
     </ui-gmap-search-box>
 
 
+    <!-- User Marker -->
     <ui-gmap-marker idKey='map.myLocationMarker.id'
                     coords='map.myLocationMarker.coords'
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
+    
+    <!-- Park Markers -->
     <ui-gmap-markers  models="parks.content"
                       coords="'self'"
                       icon="'icon'"
-                      click="onMarkerClicked()"
+                      click="markerClick"
                       type = "map.markersConfig.type"
                       typeOptions = "map.markersConfig.typeOptions"
                       typeEvents = "map.markersConfig.typeEvents"
                       modelsbyref="parks.shallowWatch"
-                      fit = "true"
+                      fit = "parks.fitToMap"
                       options="'options'"
                       events="map.parkMarkerEvents"
-                      doRebuildAll = "parks.rebuild">
+                      doRebuildAll = "parks.rebuild"
+                      control = "parks.control">
 
 
-        <ui-gmap-windows  isIconVisibleOnClick = "true"
-                          show="'showWindow'"
-                          closeClick="'closeClick'"
-                          ng-cloak>
-            
-            <div>
-              <h5> {{ parks.currentPark.name }} </h5>
-              <p> {{ parks.currentPark.address }} </p>
-              <p> {{ parks.currentPark.phone }}</p>
-              <a  scroll-to="panels-section"
-                  duration = "500"
-                  offset = "10">More Info</a>
-            </div>
+      <!-- <ui-gmap-windows  isIconVisibleOnClick = "true"
+                        show="'showWindow'"
+                        closeClick="'closeClick'"
+                        ng-cloak>
+          
+          <div>
+            <h5> {{ parks.currentPark.name }} </h5>
+            <p> {{ parks.currentPark.address }} </p>
+            <p> {{ parks.currentPark.phone }}</p>
+            <a  scroll-to="panels-section"
+                duration = "500"
+                offset = "10">More Info</a>
+          </div>
 
-        </ui-gmap-windows>
+      </ui-gmap-windows> -->
 
     </ui-gmap-markers>
 
+    <ui-gmap-window show="parkWindow.show" 
+                    coords="parkWindow.coords"
+                    control = "parkWindow.control" 
+                    options="parkWindow.options" 
+                    closeclick="parkWindow.closeclick"
+                    templateurl = "parkWindow.templateUrl"
+                    templateparameter = "parkWindow.templateParameter"
+                    ng-cloak>
+    </ui-gmap-window>
 
 
+    <!-- Activities Markers -->
     <ui-gmap-markers  models="activities.markers"
                       coords="'self'"
                       icon="activities.markersConfig.icon"
