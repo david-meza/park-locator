@@ -1,10 +1,11 @@
 <div id="map-canvas">
 
-
+  <!-- Search Container and Input Field (ui-gmap-search-box) -->
   <div id="searchbox-container">
     <i class = "fa fa-search icon-search"></i>
   </div>
 
+  <!-- Main Map Directive -->
   <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
                       options = 'map.options'
@@ -15,6 +16,7 @@
                       control = 'map.control' >
 
 
+    <!-- Map Positioning Autocomplete Search Box -->
     <ui-gmap-search-box template="map.searchbox.template"
                         events="map.searchbox.events"
                         options = "map.searchbox.options"
@@ -43,26 +45,10 @@
                       events="map.parkMarkerEvents"
                       doRebuildAll = "parks.rebuild"
                       control = "parks.control">
-
-
-      <!-- <ui-gmap-windows  isIconVisibleOnClick = "true"
-                        show="'showWindow'"
-                        closeClick="'closeClick'"
-                        ng-cloak>
-          
-          <div>
-            <h5> {{ parks.currentPark.name }} </h5>
-            <p> {{ parks.currentPark.address }} </p>
-            <p> {{ parks.currentPark.phone }}</p>
-            <a  scroll-to="panels-section"
-                duration = "500"
-                offset = "10">More Info</a>
-          </div>
-
-      </ui-gmap-windows> -->
-
     </ui-gmap-markers>
 
+    
+    <!-- Park Info Window -->
     <ui-gmap-window show="parkWindow.show" 
                     coords="parkWindow.coords"
                     control = "parkWindow.control" 
@@ -88,7 +74,7 @@
     </ui-gmap-markers>
 
 
-
+    <!-- Activities Info Window -->
     <ui-gmap-window show="activityWindow.show" 
                     coords="activityWindow.coords"
                     control = "activityWindow.control" 
@@ -102,6 +88,7 @@
 
   </ui-gmap-google-map>
 
+  <!-- Map Icons Key Button -->
   <md-button class="md-primary md-raised map-bottom-right md-fab md-mini" ng-click="openKey($event)">
     Key
   </md-button>

@@ -54,12 +54,9 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
       marker.gObject.setVisible(z >= 16);
     });
 
-    // Get all the park markers and close their window on a zoom event (if they are left open and they get clustered there's an annoying bug)
-    // var parkMarkers = $scope.parks.control.getPlurals();
-    // parkMarkers.allVals.forEach( function (marker) {
-    //   marker.model.showWindow = false;
-    //   marker.gObject.model.showWindow = false;
-    // });
+    // Close info windows
+    $scope.parkWindow.show = false;
+    $scope.activityWindow.show = false;
   };
 
   var _onMarkerClicked = function () {

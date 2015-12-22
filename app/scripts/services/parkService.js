@@ -10,7 +10,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     currentPark: undefined, 
     rebuild: false, 
     shallowWatch: false, 
-    fitToMap: false, 
+    fitToMap: true, 
     control: {} 
   };
 
@@ -36,7 +36,6 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
   };
 	
   var _markerClick = function (gInstance, evnt, model) {
-    console.log(gInstance, evnt, model);
     currentMarker.obj = markers.currentPark = model;
     
     // Place the info window above park marker and pass in the park info

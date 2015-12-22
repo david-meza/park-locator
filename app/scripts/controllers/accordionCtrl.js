@@ -63,10 +63,10 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
     // Select a park section
     $scope.centerToPark = function (park) {
-    	park.markerClick();
-    	$scope.map.location.coords.latitude = park.latitude;
-    	$scope.map.location.coords.longitude = park.longitude;
     	$scope.map.zoom = 16;
+      $scope.map.location.coords.latitude = park.latitude;
+      $scope.map.location.coords.longitude = park.longitude;
+      park.markerClick(null, 'click', park);
     };
 
     // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
