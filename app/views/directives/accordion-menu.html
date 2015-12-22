@@ -8,10 +8,11 @@
                       ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}"></i>
     </uib-accordion-heading>
 
-    <div class="input-group mb-20">
-      <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-      <input type = "text" class="form-control" id="autocomplete" placeholder = "Enter your address or location">
-    </div>
+
+    <md-input-container md-no-float class="md-icon-float md-block">
+      <md-icon md-font-icon="fa-map-marker" class = "fa fa-lg"></md-icon>
+      <input type = "text" class="form-control" id="autocomplete" placeholder = "Address or Location">
+    </md-input-container>
 
     <md-button  class="md-primary md-raised geolocate-button capitalize" 
                 aria-label="Use my current location"

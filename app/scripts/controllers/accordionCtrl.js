@@ -51,11 +51,13 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
     $scope.geoLocate();
 
+    // Add an activity to filter array
     $scope.addToSelected = function (amenity) {
     	$scope.selectedActivities.current.push(amenity);
     	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
     };
 
+    // Remove a selected activity
     $scope.removeSelected = function (amenity) {
     	$scope.amenities.uniques.push( amenity );
     	$scope.selectedActivities.current.splice($scope.selectedActivities.current.indexOf(amenity), 1);

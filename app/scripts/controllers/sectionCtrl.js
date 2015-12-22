@@ -7,6 +7,7 @@ angular.module('parkLocator').controller('sectionCtrl', ['$scope', 'classesServi
 
     $scope.classes = classesService.classes;
 
+    // Start sorting by courses descending
     $scope.sortQuery = 'COURSE';
     $scope.reverse = false;
 
@@ -15,8 +16,10 @@ angular.module('parkLocator').controller('sectionCtrl', ['$scope', 'classesServi
     	$scope.sortQuery = query;
     };
 
+    // Show only 7 results initially in table
     $scope.coursesLimit = 7;
-    // Expand the list of park results
+    
+    // Expand the list of courses results
     $scope.showAll = function () {
       $scope.coursesLimit = $scope.classes[$scope.sectionName].length;
     };
