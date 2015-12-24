@@ -165,23 +165,21 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
   };
 
   var updateUserCoords = function (lat, lon) {
-    if (_isInRaleigh(lat, lon)) {
-      // Update the location obj with the accurate user coords
-      map.location.coords.latitude = lat;
-      map.location.coords.longitude = lon;
-      map.myLocationMarker.coords.latitude = lat;
-      map.myLocationMarker.coords.longitude = lon;
-      map.zoom = 14;
-      return true;
-    } else {
+    // Update the location obj with the accurate user coords
+    map.location.coords.latitude = lat;
+    map.location.coords.longitude = lon;
+    map.myLocationMarker.coords.latitude = lat;
+    map.myLocationMarker.coords.longitude = lon;
+    map.zoom = 14;
+    if (!_isInRaleigh(lat, lon)) {
       // Otherwise, keep using default coordinates
-      var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> Oops.</strong>  It seems this location is not in Raleigh.';
+      var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> </strong>  It seems this location is not in Raleigh.';
       Flash.create('warning', message);
     }
   };
 
   var moveToPos = function (lat, lon) {
-    if (!_isInRaleigh(lat,lon)) { return updateUserCoords(lat,lon); }
+    // if (!_isInRaleigh(lat,lon)) { return updateUserCoords(lat,lon); }
     map.location.coords.latitude = lat;
     map.location.coords.longitude = lon;
     map.zoom = 16;
