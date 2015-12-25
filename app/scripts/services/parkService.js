@@ -21,7 +21,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     options: {
       pixelOffset: { width: 0, height: -48 }
     },
-    closeclick: function (childScope) { console.log(childScope); },
+    closeclick: function (windowScope) { console.log(windowScope);windowScope.show = false; },
     templateUrl: 'views/partials/park-window.html',
     templateParameter: {},
   };
@@ -45,15 +45,6 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
   };
 
-  var _closeClick = function () {
-    this.model.showWindow = false;
-    // Fallback on the stored marker in case this (childscope model) fails
-    currentMarker.obj.showWindow = false;
-  };
-
-  var _hideWindow = function () {
-    this.showWindow = false;
-  };
 
   var _generateMarkers = function (response) {
 
@@ -117,9 +108,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
           icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
           latitude: park.geometry.y,
           longitude: park.geometry.x,
-          showWindow: false,
-          hideWindow: _hideWindow,
-          closeClick: _closeClick,
+          
           markerClick: _markerClick,
           options: {
             title: p.NAME,
