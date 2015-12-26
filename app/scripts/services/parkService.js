@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('parkLocator').factory('parkService', ['$http', '$state',
-	function ($http, $state) {
+angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmapGoogleMapApi',
+	function ($http, $state, gMapsApi) {
 	
-	var currentMarker = { obj: {} };
+  var mapsApi;
+
+	gMapsApi.then( function (maps) {
+    mapsApi = maps;
+  });
+
+  var currentMarker = { obj: {} };
 	
   var markers = { 
     content: [], 
@@ -26,13 +32,14 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     templateParameter: {},
   };
 
+
   var _positionParkWindow = function(model) {
-    parkWindow.show = true;
     parkWindow.coords.latitude = model.latitude;
     parkWindow.coords.longitude = model.longitude;
     parkWindow.templateParameter.name = model.name;
     parkWindow.templateParameter.address = model.address;
     parkWindow.templateParameter.phone = model.phone;
+    parkWindow.show = true;
   };
 	
   var _markerClick = function (gInstance, evnt, model) {
@@ -108,11 +115,12 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
           icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
           latitude: park.geometry.y,
           longitude: park.geometry.x,
-          
+
           markerClick: _markerClick,
           options: {
             title: p.NAME,
-            labelAnchor: '0 0'
+            labelAnchor: '0 0',
+            animation: mapsApi.Animation.DROP
           },
         };
 

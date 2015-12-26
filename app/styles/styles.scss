@@ -11,6 +11,10 @@ html {
   cursor: pointer; 
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 .panel-title a {
   &:focus {
     outline: none;
@@ -278,6 +282,11 @@ ul#park-amenities {
 }
 
 .park-center {
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
   a {
     display: block;
     margin-bottom: 10px; 

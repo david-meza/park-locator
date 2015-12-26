@@ -30,7 +30,8 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
     	isHidden: true,
     	maxWidth: 150,
     	pixelOffset: { width: 0, height: -25 }
-    }
+    },
+    closeclick: function (windowScope) { windowScope.show = false; }
   };
 
 	var logAjaxError = function (error) {
@@ -158,12 +159,9 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 	};
 
 	var updateActivityWindow = function (activityMarker) {
-		console.log(activityMarker);
-    console.log(activityWindow);
-    activityWindow.show = true;
     activityWindow.coords = { latitude: activityMarker.latitude, longitude: activityMarker.longitude };
     activityWindow.templateParameter = { name: activityMarker.name, park: activityMarker.park, subcategoryName: activityMarker.subcategory.name };
-    // activityWindow.control.showWindow();
+    activityWindow.show = true;
 	};
 
 
