@@ -3,7 +3,7 @@
 angular.module('parkLocator').factory('classesService', ['$http', 
   function($http){
 
-    var classes = { content: [], sections: [] };
+  var classes = { content: [], sections: [] };
 
 
   var getParkClasses = function (ids) {
@@ -29,8 +29,16 @@ angular.module('parkLocator').factory('classesService', ['$http',
     // Typical response for no results is "null"
     if (response.data === null) { return; }
     response.data.forEach( function (course) {
+      // Turn date string into Date object for proper sorting
+      if (course.START_DATE) { course.sDate = Date.parse(course.START_DATE.substring(0,course.START_DATE.length - 2)); }
+      
+      // Push into all classes array
       classes.content.push(course);
+      
+      // Override section name because of ui-router bug
       if (course.SECTION === 'Athletic teams/leagues') { course.SECTION = 'Athletic teams and leagues'; }
+      
+      // Collect unique section names and divide all classes into sections/categories
       if (classes[course.SECTION]) {
         classes[course.SECTION].push(course);
       } else {
