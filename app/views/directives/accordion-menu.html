@@ -76,7 +76,7 @@
       <div ng-show="selectedActivities.current.length > 0">
 
 
-        <h5>Selected (parks with all) </h5>
+        <h5>Parks With All Selected</h5>
 
         <ul id = "selected-amenities-list">
           <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
@@ -95,6 +95,9 @@
         <h5>Not Selected</h5>
 
         <ul id = "amenities-list">
+          <li>
+            <i class = "icon-bg icon-bg-sm active-adult-center-sm"></i> Test
+          </li>
           <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
             <a ng-click="addToSelected(amenity)">
               <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}

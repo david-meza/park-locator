@@ -2,7 +2,7 @@
 @import "./flatly.min.css";
 @import "./font-awesome.css";
 @import "../bower_components/angular-flash-alert/dist/angular-flash.min.css";
-
+@import "./activity-icons.css";
 
 
 html {
@@ -11,6 +11,13 @@ html {
 
 .nav, .pagination, .carousel, .panel-title a, a { 
   cursor: pointer; 
+}
+
+*::selection {
+  background: rgba(37,208,117,0.3);
+}
+*::-moz-selection {
+  background: rgba(37,208,117,0.3);
 }
 
 .pac-container {
