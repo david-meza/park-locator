@@ -34,7 +34,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     // Set Location Section
     $scope.geoLocate = function() {
 
-      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> We are attempting to obtain your location. Please wait a few seconds.');
+      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> Obtaining your location to find the nearest parks.');
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
