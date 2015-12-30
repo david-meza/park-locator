@@ -130,6 +130,8 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
 
         markers.content.push(marker);
       });
+      
+      // if (markers.content.length > 0) { $state.go('home.park', { 'name': markers.content[0].name.replace(/\W+/g, '').toLowerCase() }); }
 
     } else {
       console.log('error', response);

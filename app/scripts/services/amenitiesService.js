@@ -69,7 +69,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 			if (c.name === 'Theatre') { c.name = 'Theater'; c.imageDataLg = 'theater-lg'; c.imageDataSm = 'theater-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Cinema/theatre_mask-24.png'; }
 			if (c.name === 'Tennis Center') { c.imageDataLg = 'tennis-center-lg'; c.imageDataSm = 'tennis-center-sm'; c.imageData = 'tennis-center-fallback'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Household/front_desk-24.png'; }
 			if (c.name === 'Aquatic Center') { c.id = 1302; c.name = 'Swimming'; c.parkAttr = 'POOL'; c.imageDataLg = 'swimming-lg'; c.imageDataSm = 'swimming-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/swimming-24.png'; }
-			if (c.name === 'Bocceball') { c.name = 'Bocce'; c.imageDataLg = 'bocce-lg'; c.imageDataSm = 'bocce-sm'; c.imageUrlSm = 'https://s3.amazonaws.com/davidmeza/Park_Locator/bocce-sm.png'; }
+			if (c.name === 'Bocceball') { c.name = 'Bocce'; c.imageDataLg = 'bocce-lg'; c.imageDataSm = 'bocce-sm'; c.imageUrlSm = 'https://s3.amazonaws.com/davidmeza/Park_Locator/bocce-sm.png'; c.imageUrlLg = 'https://s3.amazonaws.com/davidmeza/Park_Locator/bocce-lg.png'; }
 			if (c.name === 'Off Leash Dog Area') { c.name = 'Dog Park'; c.imageDataLg = 'dog-park-lg'; c.imageDataSm = 'dog-park-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/City/dog_park-24.png'; }
 			if (c.name === 'Informal Playfield' || c.name === 'Multipurpose') { c.name = 'Multipurpose Field'; c.imageDataLg = 'multipurpose-field-lg'; c.imageDataSm = 'multipurpose-field-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/City/stadium-24.png'; }
 
@@ -114,8 +114,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 
 			var c = list.uniques[mm];
 			
-			c.parkAttr = c.parkAttr || c.name.replace( /\s+/g, '').toUpperCase();
-			
 			if (c.name === 'Amusement Train') { c.imageDataLg = 'amusement-train-lg'; c.imageDataSm = 'amusement-train-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Transport/train-24.png'; }
 			if (c.name === 'Art Center') { c.parkAttr = 'ARTSCENTER'; c.imageDataLg = 'art-center-lg'; c.imageDataSm = 'art-center-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Editing/paint_palette-24.png'; }
 			if (c.name === 'Boat Ramp') { c.parkAttr = 'BOATRENTALS'; c.imageDataLg = 'boat-ramp-lg'; c.imageDataSm = 'boat-ramp-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/City/wharf-24.png'; }
@@ -141,6 +139,9 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 
 			// No parks can be searched by restroom
 			if (c.name === 'Restroom') { rridx = mm; c.imageDataSm = 'restroom-sm'; c.imageDataLg = 'restroom-lg'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Household/toilet_bowl-24.png'; }
+
+      c.parkAttr = c.parkAttr || c.name.replace( /\s+/g, '').toUpperCase();
+      c.imageUrlLg = c.imageUrlLg || c.imageUrlSm.replace( /24/g, '96');
 			
 		}
 

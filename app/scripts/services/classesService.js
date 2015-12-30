@@ -48,7 +48,6 @@ angular.module('parkLocator').factory('classesService', ['$http',
 
     });
 
-    console.log(classes);
   };
 
   var getParkIds = function (name) {

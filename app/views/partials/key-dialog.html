@@ -23,15 +23,15 @@
         <md-subheader class = "">Miscellaneous</md-subheader>
         
         <div layout="row" layout-xs="column" layout-align = "start stretch"> 
-          <md-list-item flex = "50" flex-gt-sm = "33">
+          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
             <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/user.png" class="md-avatar" alt="user" />
             <div class="md-list-item-text">
               <h4>You are here</h4>
             </div>
           </md-list-item>
 
-          <md-list-item flex = "50" flex-gt-sm = "33">
-            <i class = "md-avatar icon-bg icon-bg-lg restroom-lg" alt="{{ amenitiesService['Restroom'].name }}"></i>
+          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+            <img class = "md-avatar" ng-src="{{ amenitiesService['Restroom'].imageUrlLg }}" alt="{{ amenitiesService['Restroom'].name }}" />
             <div class="md-list-item-text">
               <h4>{{ amenitiesService['Restroom'].name }}</h4>
             </div>
@@ -43,14 +43,14 @@
         <md-subheader class = "">Park Icons</md-subheader>
         
         <div layout="row" layout-xs="column" layout-align = "start stretch">  
-          <md-list-item flex = "50" flex-gt-sm = "33">
+          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
             <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png" class="md-avatar" alt="Park Location" />
             <div class="md-list-item-text">
               <h4>Park Marker</h4>
             </div>
           </md-list-item>
           
-          <md-list-item flex = "50" flex-gt-sm = "33">
+          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
             <img src = "https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png" class="md-avatar" alt="Park Location" />
             <div class="md-list-item-text">
               <h4>Parks Cluster</h4>
@@ -64,8 +64,8 @@
         <md-subheader class = "">Activity Icons</md-subheader>
         
         <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
-          <md-list-item ng-repeat="activity in activities | orderBy: 'name' " flex = "50" flex-gt-sm = "33">
-            <i class = "md-avatar icon-bg icon-bg-lg" ng-class="activity.imageDataLg" alt="{{ activity.name }}"></i>
+          <md-list-item ng-repeat="activity in activities | orderBy: 'name' " flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+            <img class = "md-avatar" ng-src="{{ activity.imageUrlLg }}" alt="{{ activity.name }}" />
             <div class="md-list-item-text">
               <h4>{{ activity.name }}</h4>
             </div>
