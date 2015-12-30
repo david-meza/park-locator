@@ -89,7 +89,7 @@
               <a ng-click="showAmenityInMap(amenity)">
                 
                 <div class="view">
-                  <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataLg}}" />
+                  <i class = "icon-bg icon-bg-lg" ng-class="amenity.imageDataLg"></i>
                   <div class="mask">  
                     <h6>{{ amenity.name }}</h6>  
                   </div>  
@@ -106,21 +106,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
+  
+  <classes-info current-park = "parks.currentPark"></classes-info>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h2 class="panel-title">Classes</h2>
-        </div>
-        <div class="panel-body">
-
-          <classes-info current-park = "parks.currentPark"></classes-info>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
 
 </div>

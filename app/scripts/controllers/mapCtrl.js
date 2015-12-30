@@ -64,24 +64,25 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     $scope.$apply(amenitiesService.updateActivityWindow(self));
   };
 
-  var generateParkData = function (response) {
+  var generateActivsMarkers = function (response) {
 
     if (typeof response.data === 'object') {
       var activsPos = response.data.features;
       activsPos.forEach( function(activity) {
-        if (!amenitiesService.list[activity.attributes.SUBCATEGORY]) { console.log( activity.attributes.SUBCATEGORY ); }
+        var subCat = activity.attributes.SUBCATEGORY;
+        if (!amenitiesService.list[subCat]) { console.log( subCat ); }
         var processed = {
           id: activity.attributes.OBJECTID,
           name: activity.attributes.LOCATION,
           park: activity.attributes.PARK_NAME,
-          subcategory: amenitiesService.list[activity.attributes.SUBCATEGORY] || activity.attributes.SUBCATEGORY,
+          subcategory: amenitiesService.list[subCat] || subCat,
           latitude: activity.geometry.y,
           longitude: activity.geometry.x,
-          icon: amenitiesService.list[activity.attributes.SUBCATEGORY] ? ('data:image/png;base64,' + (amenitiesService.list[activity.attributes.SUBCATEGORY].imageDataSm ? amenitiesService.list[activity.attributes.SUBCATEGORY].imageDataSm : amenitiesService.list[activity.attributes.SUBCATEGORY].imageData)) : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
+          icon: amenitiesService.list[subCat] ? amenitiesService.list[subCat].imageUrlSm : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
           onMarkerClicked: _onMarkerClicked,
           options: {
             visible: false,
-            title: amenitiesService.list[activity.attributes.SUBCATEGORY] ? amenitiesService.list[activity.attributes.SUBCATEGORY].name : activity.attributes.LOCATION || activity.attributes.PARK_NAME || 'activity',
+            title: amenitiesService.list[subCat] ? amenitiesService.list[subCat].name : activity.attributes.LOCATION || activity.attributes.PARK_NAME || 'activity',
           }
         };
 
@@ -99,9 +100,9 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
 
   $q.all([promise1, promise2]).then(amenitiesService.completeData, amenitiesService.logAjaxError)
                               .then(amenitiesService.getJoinParkData, amenitiesService.logAjaxError)
-                              .then(generateParkData, amenitiesService.logAjaxError)
+                              .then(generateActivsMarkers, amenitiesService.logAjaxError)
                               .then(amenitiesService.getJoinParkData2, amenitiesService.logAjaxError)
-                              .then(generateParkData, amenitiesService.logAjaxError);
+                              .then(generateActivsMarkers, amenitiesService.logAjaxError);
 
 
   var mapInstance,

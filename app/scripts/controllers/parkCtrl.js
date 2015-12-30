@@ -32,7 +32,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
       accordionSettings.first.status.open = true;
       $timeout(function(){
       	document.getElementById("autocomplete").focus();
-      }, 0);
+      }, 501);
 	  };
 
 	  $scope.showAmenityInMap = function () {

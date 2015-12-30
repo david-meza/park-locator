@@ -31,9 +31,7 @@
           </md-list-item>
 
           <md-list-item flex = "50" flex-gt-sm = "33">
-            <img  class = "md-avatar" 
-                  ng-src="data:image/png;base64,{{ amenitiesService['Restroom'].imageDataLg || amenitiesService['Restroom'].imageDataSm || amenitiesService['Restroom'].imageData }}"
-                  alt="{{ amenitiesService['Restroom'].name }}" />
+            <i class = "md-avatar icon-bg icon-bg-lg restroom-lg" alt="{{ amenitiesService['Restroom'].name }}"></i>
             <div class="md-list-item-text">
               <h4>{{ amenitiesService['Restroom'].name }}</h4>
             </div>
@@ -67,9 +65,7 @@
         
         <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
           <md-list-item ng-repeat="activity in activities | orderBy: 'name' " flex = "50" flex-gt-sm = "33">
-            <img  class = "md-avatar" 
-                  ng-src="data:image/png;base64,{{ activity.imageDataLg || activity.imageDataSm || activity.imageData }}"
-                  alt="{{ activity.name }}" />
+            <i class = "md-avatar icon-bg icon-bg-lg" ng-class="activity.imageDataLg" alt="{{ activity.name }}"></i>
             <div class="md-list-item-text">
               <h4>{{ activity.name }}</h4>
             </div>

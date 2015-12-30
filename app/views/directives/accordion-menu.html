@@ -81,9 +81,9 @@
         <ul id = "selected-amenities-list">
           <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
             <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
+              <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
               <a ng-click="removeSelected(amenity)">
-                <i  class="pull-right glyphicon glyphicon-ok"
+                <i  class="pull-right glyphicon-padding glyphicon glyphicon-ok"
                     ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>
               </a>
             </p>
@@ -95,12 +95,9 @@
         <h5>Not Selected</h5>
 
         <ul id = "amenities-list">
-          <li>
-            <i class = "icon-bg icon-bg-sm active-adult-center-sm"></i> Test
-          </li>
           <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
             <a ng-click="addToSelected(amenity)">
-              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
+              <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
             </a>
           </li>
         </ul>

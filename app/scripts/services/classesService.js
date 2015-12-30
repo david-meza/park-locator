@@ -47,6 +47,8 @@ angular.module('parkLocator').factory('classesService', ['$http',
       }
 
     });
+
+    console.log(classes);
   };
 
   var getParkIds = function (name) {
@@ -92,7 +94,7 @@ angular.module('parkLocator').factory('classesService', ['$http',
     },
     {
       'ids': '60',
-      'name': 'Brookhaven'
+      'name': 'Brookhaven Nature Park'
     },
     {
       'ids': '58,89',

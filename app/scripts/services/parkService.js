@@ -33,12 +33,12 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
   };
 
 
-  var _positionParkWindow = function(model) {
-    parkWindow.coords.latitude = model.latitude;
-    parkWindow.coords.longitude = model.longitude;
-    parkWindow.templateParameter.name = model.name;
-    parkWindow.templateParameter.address = model.address;
-    parkWindow.templateParameter.phone = model.phone;
+  var _positionParkWindow = function(parkModel) {
+    parkWindow.coords.latitude = parkModel.latitude;
+    parkWindow.coords.longitude = parkModel.longitude;
+    parkWindow.templateParameter.name = parkModel.name;
+    parkWindow.templateParameter.address = parkModel.address;
+    parkWindow.templateParameter.phone = parkModel.phone;
     parkWindow.show = true;
   };
 	
@@ -49,7 +49,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
     _positionParkWindow(model);
     
     // Trigger a state change and show the park details
-    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
+    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
   };
 
 
@@ -120,12 +120,12 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
           options: {
             title: p.NAME,
             labelAnchor: '0 0',
-            animation: mapsApi.Animation.DROP
+            animation: (mapsApi ? mapsApi.Animation.DROP : 2)
           },
         };
 
         // Storing parks both individually as key on markers object and as an array of parks
-        var parkName = p.NAME.replace(/\s+/g, '').toLowerCase();
+        var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
         if (!markers[parkName]) { markers[parkName] = marker; }
 
         markers.content.push(marker);
