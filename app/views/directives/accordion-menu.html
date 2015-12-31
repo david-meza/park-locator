@@ -32,9 +32,9 @@
                             ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
     </uib-accordion-heading>
 
-    <div class="edge-wrapper">
+    <!-- <div class="edge-wrapper">
       <div class="faded-edge-bottom"></div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="col-md-12">
@@ -63,45 +63,42 @@
         Number of Parks: {{ parks.content.length }}
     </p>
 
-    <div class = "panel-scrollable">
 
-      <div ng-show="selectedActivities.current.length === 0">
-        <md-button  class="md-accent md-raised capitalize pull-right skip-button"
-                    aria-label="Skip Step"
-                    ng-click = "goToPanel('second', 'third')">
-          Skip Step
-        </md-button>
-      </div>
+    <div ng-show="selectedActivities.current.length === 0" style="position: relative;">
+      <md-button  class="md-accent md-raised capitalize pull-right skip-button"
+                  aria-label="Skip Step"
+                  ng-click = "goToPanel('second', 'third')">
+        Skip Step
+      </md-button>
+    </div>
 
-      <div ng-show="selectedActivities.current.length > 0">
+    
+    <div ng-show="selectedActivities.current.length > 0">
+      <h5>Parks With All Selected</h5>
 
-
-        <h5>Parks With All Selected</h5>
-
-        <ul id = "selected-amenities-list">
-          <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
-            <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-              <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
-              <a ng-click="removeSelected(amenity)">
-                <i  class="pull-right glyphicon-padding glyphicon glyphicon-ok"
-                    ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>
-              </a>
-            </p>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h5>Not Selected</h5>
-
-        <ul id = "amenities-list">
-          <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
-            <a ng-click="addToSelected(amenity)">
-              <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
+      <ul id = "selected-amenities-list">
+        <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
+          <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
+            <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
+            <a ng-click="removeSelected(amenity)">
+              <i  class="pull-right glyphicon-padding glyphicon glyphicon-ok"
+                  ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>
             </a>
-          </li>
-        </ul>
-      </div>
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <h5>Not Selected</h5>
+    <div scrolling-buttons>
+
+      <ul id = "amenities-list">
+        <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
+          <a ng-click="addToSelected(amenity)">
+            <i class = "icon-bg icon-bg-sm" ng-class="amenity.imageDataSm"></i> {{ amenity.name }}
+          </a>
+        </li>
+      </ul>
     </div>
 
   </uib-accordion-group>

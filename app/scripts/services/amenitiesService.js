@@ -65,7 +65,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 			var c = list.content[i];
 
 			// Name overrides
-			if (c.name === 'Tennis') { c.name = 'Tennis Courts'; c.imageDataLg = 'tennis-courts-lg'; c.imageDataSm = 'tennis-courts-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/tennis-24.png'; }
+			if (c.name === 'Tennis') { c.parkAttr = 'TENNISCOURTS'; c.imageDataLg = 'tennis-courts-lg'; c.imageDataSm = 'tennis-courts-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/tennis-24.png'; }
 			if (c.name === 'Theatre') { c.name = 'Theater'; c.imageDataLg = 'theater-lg'; c.imageDataSm = 'theater-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Cinema/theatre_mask-24.png'; }
 			if (c.name === 'Tennis Center') { c.imageDataLg = 'tennis-center-lg'; c.imageDataSm = 'tennis-center-sm'; c.imageData = 'tennis-center-fallback'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Household/front_desk-24.png'; }
 			if (c.name === 'Aquatic Center') { c.id = 1302; c.name = 'Swimming'; c.parkAttr = 'POOL'; c.imageDataLg = 'swimming-lg'; c.imageDataSm = 'swimming-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/swimming-24.png'; }
