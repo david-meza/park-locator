@@ -18,7 +18,7 @@ angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 
       if (!markers.currentPark) { 
         flash.create('warning', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> Please select a park first.');
       }
-    }
+    };
 
     $rootScope.$on('loading:progress', function(){
       $scope.progress = 'indeterminate';

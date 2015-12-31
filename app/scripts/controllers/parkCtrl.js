@@ -160,7 +160,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  	// Color code the dist / dur text
 	  	var a = parseInt(dt);
 	  	var b = parseInt(dur);
-	  	$scope.distanceColoring = { 'text-green': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warning': a > 3 && a <= 10, 'text-danger': a > 10 };
+	  	$scope.distanceColoring = { 'text-green': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warning': a > 3 && a <= 10 && dt.substring(dt.length - 2, dt.length) !== 'ft', 'text-danger': a > 10 && dt.substring(dt.length - 2, dt.length) !== 'ft' };
 	  	$scope.durationColoring = { 'text-green': b <= 10, 'text-warning': b > 10 && b <= 20, 'text-danger': b > 20 };
 
 	  };

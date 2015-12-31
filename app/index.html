@@ -1,93 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+  
+<head>
 
-    <title>City of Raleigh Park Locator</title>
+  <title>City of Raleigh Park Locator</title>
 
-    <meta charset="utf-8">
-    <meta name="description" content="Find the your nearest park in Raleigh">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="description" content="Find the your nearest park in Raleigh">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
 
-  </head>
 
-  <body ng-app="parkLocator" ng-cloak>
-    
-    <div id = "flash" flash-message="3000" ></div>
-    
-    <ng-navbar></ng-navbar>
+<body ng-app="parkLocator" ng-cloak>
+  
+  <div id = "flash" flash-message="3000" ></div>
+  
+  <ng-navbar></ng-navbar>
 
-    <md-content layout-padding layout-margin>
-      <ui-view></ui-view>
-    </md-content>
+  <md-content layout-padding layout-margin>
+    <ui-view></ui-view>
+  </md-content>
 
-    <ng-footer></ng-footer>
+  <back-to-top>
+    <md-button  class="md-accent md-raised md-fab md-mini" 
+                aria-label="Back to Top"
+                scroll-to = "navbar" duration = "400" offset = "0">
+    <md-icon md-font-icon="fa-angle-double-up" class = "fa fa-lg"></md-icon>
+  </md-button>
+  </back-to-top>
 
-    <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <ng-footer></ng-footer>
 
-       ga('create', 'UA-71382325-1');
-       ga('send', 'pageview');
-    </script>
+  <script>
+     !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+     (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+     r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+     }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    <!-- Angular -->
-    <script src="bower_components/angular/angular.js"></script>
+     ga('create', 'UA-71382325-1');
+     ga('send', 'pageview');
+  </script>
 
-    <!-- Angular Dependencies -->
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-material/angular-material.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src='bower_components/lodash/lodash.min.js'></script>
-    <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
-    <script src='bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
-    <script src='bower_components/angular-flash-alert/dist/angular-flash.min.js'></script>
-    <script src='bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js'></script>
-    <script src='bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js'></script>
+  <!-- Angular -->
+  <script src="bower_components/angular/angular.js"></script>
 
-    <!-- Main -->
-    <script src="scripts/app.js"></script>
+  <!-- Angular Dependencies -->
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-material/angular-material.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src='bower_components/lodash/lodash.min.js'></script>
+  <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+  <script src='bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
+  <script src='bower_components/angular-flash-alert/dist/angular-flash.min.js'></script>
+  <script src='bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js'></script>
+  <script src='bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js'></script>
 
-    <!-- Services -->
-    <script src="scripts/services/deviceService.js"></script>
-    <script src="scripts/services/accordionConfig.js"></script>
-    <script src="scripts/services/mapService.js"></script>
-    <script src="scripts/services/parkService.js"></script>
-    <script src="scripts/services/amenitiesService.js"></script>
-    <script src="scripts/services/classesService.js"></script>
-    
-    <script src="scripts/services/httpInterceptor.js"></script>
-    
-    <!-- Filters -->
-    <script src="scripts/filters/parkAmenities.js"></script>
-    <script src="scripts/filters/selectedActivities.js"></script>
-    
+  <!-- Main -->
+  <script src="scripts/app.js"></script>
 
-    <!-- Controllers -->
-    <script src="scripts/controllers/navbarCtrl.js"></script>
-    <script src="scripts/controllers/devicesCtrl.js"></script>
-    <script src="scripts/controllers/accordionCtrl.js"></script>
-    <script src="scripts/controllers/mapCtrl.js"></script>
-    <script src="scripts/controllers/dialogCtrl.js"></script>
-    <script src="scripts/controllers/parkCtrl.js"></script>
-    <script src="scripts/controllers/classesCtrl.js"></script>
-    <script src="scripts/controllers/sectionCtrl.js"></script>
+  <!-- Services -->
+  <script src="scripts/services/deviceService.js"></script>
+  <script src="scripts/services/accordionConfig.js"></script>
+  <script src="scripts/services/mapService.js"></script>
+  <script src="scripts/services/parkService.js"></script>
+  <script src="scripts/services/amenitiesService.js"></script>
+  <script src="scripts/services/classesService.js"></script>
+  
+  <script src="scripts/services/httpInterceptor.js"></script>
+  
+  <!-- Filters -->
+  <script src="scripts/filters/parkAmenities.js"></script>
+  <script src="scripts/filters/selectedActivities.js"></script>
+  
 
-    <!-- Directives -->
-    <script src="scripts/directives/navbar.js"></script>
-    <script src="scripts/directives/footer.js"></script>
-    <script src="scripts/directives/navbarFixed.js"></script>
-    <script src="scripts/directives/mainMap.js"></script>
-    <script src="scripts/directives/accordionMenu.js"></script>
-    <script src="scripts/directives/classesInfo.js"></script>
+  <!-- Controllers -->
+  <script src="scripts/controllers/navbarCtrl.js"></script>
+  <script src="scripts/controllers/devicesCtrl.js"></script>
+  <script src="scripts/controllers/accordionCtrl.js"></script>
+  <script src="scripts/controllers/mapCtrl.js"></script>
+  <script src="scripts/controllers/dialogCtrl.js"></script>
+  <script src="scripts/controllers/parkCtrl.js"></script>
+  <script src="scripts/controllers/classesCtrl.js"></script>
+  <script src="scripts/controllers/sectionCtrl.js"></script>
 
-    <!-- Non-critical CSS Icons -->
-    <link rel="stylesheet" href="styles/activity-icons.css">
+  <!-- Directives -->
+  <script src="scripts/directives/navbar.js"></script>
+  <script src="scripts/directives/footer.js"></script>
+  <script src="scripts/directives/backToTop.js"></script>
+  <script src="scripts/directives/navbarFixed.js"></script>
+  <script src="scripts/directives/mainMap.js"></script>
+  <script src="scripts/directives/accordionMenu.js"></script>
+  <script src="scripts/directives/classesInfo.js"></script>
 
-  </body>
+  <!-- Non-critical CSS Icons -->
+  <link rel="stylesheet" href="styles/activity-icons.css">
+
+</body>
 </html>

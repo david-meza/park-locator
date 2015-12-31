@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi', '$window',
-  function (Flash, gMapsApi, $window) {
+angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
+  function (Flash, gMapsApi) {
 
 
   var mapsObj;

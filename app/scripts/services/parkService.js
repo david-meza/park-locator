@@ -144,7 +144,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
 
   var updateParkMarkers = function (selectedActivities) {
     var query = '';
-    if (!selectedActivities) return;
+    if (!selectedActivities) { return; }
 
     selectedActivities.forEach( function (activity, idx) {
       query += activity.parkAttr + '%3D' + '%27Yes%27';

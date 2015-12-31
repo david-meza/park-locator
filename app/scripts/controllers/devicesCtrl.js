@@ -9,6 +9,6 @@ angular.module('parkLocator').controller('devicesCtrl', ['$scope', 'deviceServic
 
     $scope.showTab = function (tab) {
       return $scope.isMobile() && $scope.activeTab.name !== tab;
-    }
+    };
 
 }]);

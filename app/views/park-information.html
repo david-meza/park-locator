@@ -40,13 +40,13 @@
                   <i class = "fa fa-fw fa-location-arrow"></i> You are <span ng-class="distanceColoring"> {{ routeData.distance }}</span> away
                 </p>
                 
-                <a ng-href="{{ parks.currentPark.url }}" target="_blank"> 
+                <md-button class = "md-primary capitalize list-button" ng-href="{{ parks.currentPark.url }}" target="_blank"> 
                   <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
-                </a>
+                </md-button>
 
-                <a ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> 
+                <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{parks.currentPark.latitude}},{{parks.currentPark.longitude}}" target="_blank"> 
                   <i class = "fa fa-fw fa-compass color-default"></i> Get Directions
-                </a>
+                </md-button>
               </div>
 
             </div>

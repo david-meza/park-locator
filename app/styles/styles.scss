@@ -89,6 +89,35 @@ img, h1, h2, h3, h4, h5, h6 {
   position: fixed;
 }
 
+#back-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 10px;
+  z-index: 21;
+
+  -webkit-transform: translateY(100px);
+     -moz-transform: translateY(100px);
+       -o-transform: translateY(100px);
+      -ms-transform: translateY(100px);
+          transform: translateY(100px);
+
+  opacity: 0;
+  -webkit-transform:  all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transform:     all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transform:       all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transform:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+}
+
+.bring-to-screen #back-to-top {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+       -o-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+          transform: translateY(0px);
+}
+
 #mobile-nav {
   display: none;
 
@@ -169,6 +198,12 @@ th {
 
 .fa-pad-right {
   padding-left: 5px;
+}
+
+.list-button {
+  text-align: left;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .text-green {
@@ -353,7 +388,7 @@ ul#park-amenities {
 
   a {
     display: block;
-    margin-bottom: 10px; 
+    // margin-bottom: 10px; 
   }
 
   padding-bottom: 1em;

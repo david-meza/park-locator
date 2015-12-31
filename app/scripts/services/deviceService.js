@@ -7,7 +7,7 @@ angular.module('parkLocator').factory('deviceService', ['$window',
     var activeTab = { name: 'search' };
 
     var isMobile = function () {
-      return _width < 768
+      return _width < 768;
     };
   
 
