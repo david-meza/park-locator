@@ -32,9 +32,6 @@
                             ng-class="{'glyphicon-chevron-down': settings.second.status.open, 'glyphicon-chevron-right': !settings.second.status.open}"></i>
     </uib-accordion-heading>
 
-    <!-- <div class="edge-wrapper">
-      <div class="faded-edge-bottom"></div>
-    </div> -->
 
     <div class="row">
       <div class="col-md-12">
@@ -111,9 +108,6 @@
                       ng-class="{'glyphicon-chevron-down': settings.third.status.open, 'glyphicon-chevron-right': !settings.third.status.open}"></i>
     </uib-accordion-heading>
 
-    <div class="edge-wrapper">
-      <div class="faded-edge-bottom v2"></div>
-    </div>
 
     <div class="row">
       <div class="col-md-12">
@@ -137,7 +131,7 @@
       </div>
     </div>
 
-    <div class = "panel-scrollable">
+    <div class = "panel-scrollable" scrolling-buttons>
 
       <ul id = "park-list">
         <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">

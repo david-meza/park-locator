@@ -1,14 +1,14 @@
 <div style = "position: relative;"> 
   <div class = "scroll-button-top">
-    <md-button ng-click = "scrollup()" class="md-icon-button md-primary" aria-label="Scroll up in panel">
+    <md-button ng-click = "scrollup()" class="md-icon-button md-primary md-button-top" aria-label="Scroll up in panel">
       <md-icon md-font-icon="fa-chevron-up" class = "fa fa-lg"></md-icon>
     </md-button>
   </div> 
   
   <div ng-transclude class = "panel-scrollable"></div>
   
-  <div class = "scroll-button-bottom">
-    <md-button class="md-icon-button md-primary" aria-label="Scroll down in panel">
+  <div class = "scroll-button-bottom show-button">
+    <md-button class="md-icon-button md-primary md-button-bottom" aria-label="Scroll down in panel">
       <md-icon ng-click = "scrolldown()" md-font-icon="fa-chevron-down" class = "fa fa-lg"></md-icon>
     </md-button>
   </div>

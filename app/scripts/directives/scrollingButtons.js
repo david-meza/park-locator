@@ -11,36 +11,27 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
 
       // Cheatsheet for HTML element properties:
       // scrollHeight: Full element height including scrollable area
-      // offsetHeight and clientHeight: Visible height 
+      // offsetHeight and clientHeight: Visible height.
       // scrollTop: Number of pixels from the top, changes with scrolling
-      // offsetTop and clientTop: Number of pixels to the top border relative to parent element 
+      // offsetTop and clientTop: Number of pixels to the top border relative to parent element. OffsetTop seems to include pixels from padding
 
+
+      var buttonTop = angular.element(element.children().children()[0]);
+      var buttonBottom = angular.element(element.children().children()[2]);
       var panel = element.children().children()[1];
+      var animationInProgress = false;
 
-      var getScrollLocation = function () {
-        return panel.scrollTop;
-      };
       
       scope.scrollup = function () {
-        // panel.scrollTop -= panel.clientHeight;
-        autoScroll(panel.scrollTop, panel.scrollTop - panel.clientHeight);
-
-        // if (panel.scrollTop < 0) { panel.scrollTop = 0; }
-
-        
+        _autoScroll(panel.scrollTop, panel.scrollTop - panel.clientHeight);        
       };
 
       scope.scrolldown = function () {
-        // var max = panel.scrollHeight - panel.clientHeight;
-
-        // panel.scrollTop += panel.clientHeight;
-
-        // if (panel.scrollTop > max) { panel.scrollTop = max; }
-
-        autoScroll(panel.scrollTop, panel.scrollTop + panel.clientHeight);
+        _autoScroll(panel.scrollTop, panel.scrollTop + panel.clientHeight);
       };
 
-      function autoScroll(startLocation, endLocation) {
+      function _autoScroll(startLocation, endLocation) {
+        if (animationInProgress) { return; }
         
         var currentLocation = null,
             timeLapsed = 0,
@@ -57,12 +48,13 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
         };
 
         var stopAnimation = function () {
-          currentLocation = getScrollLocation();
+          currentLocation = panel.scrollTop;
           scrollHeight = panel.scrollHeight;
           internalHeight = panel.clientHeight + currentLocation;
 
-          if ( position == endLocation || currentLocation == endLocation || internalHeight >= scrollHeight) {
+          if ( position === endLocation || currentLocation === endLocation || internalHeight >= scrollHeight) {
             clearInterval(runAnimation);
+            animationInProgress = false;
           }
         };
 
@@ -72,6 +64,7 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
           percentage = ( percentage > 1 ) ? 1 : percentage;
           position = startLocation + ( distance * getEasingPattern(percentage) );
 
+          // Move slightly following the easing pattern
           panel.scrollTop = position;
           
           // Check if we have reached our destination          
@@ -79,7 +72,33 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
         };
 
         var runAnimation = setInterval(animateScroll, 16);
+        animationInProgress = true;
       }
+
+
+      // Show and hide the buttons when we reach the top or bottom of the scrollable area
+      angular.element(panel).bind('scroll', function() {
+        // if (this.scrollTop <= 0) {
+        //   buttonTop.removeClass('show-button');
+        // } else if (this.scrollTop >= this.scrollHeight - this.clientHeight) {
+        //   buttonBottom.removeClass('show-button');
+        // } else {
+        //   buttonBottom.addClass('show-button');
+        //   buttonTop.addClass('show-button');
+        // }
+
+        if (this.scrollTop <= 0) {
+          buttonTop.removeClass('show-button');
+        } 
+        if (this.scrollTop >= this.scrollHeight - this.clientHeight) {
+          buttonBottom.removeClass('show-button');
+        } 
+        if (this.scrollTop > 0 && this.scrollTop < this.scrollHeight - this.clientHeight) {
+          buttonBottom.addClass('show-button');
+          buttonTop.addClass('show-button');
+        }
+        
+      });
 
     }
   };
