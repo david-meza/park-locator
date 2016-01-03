@@ -84,6 +84,8 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 		}
 	};
 
+	// Unfortunately we pre-process these data so heavily that it defeats the purpose of requesting the database for the activities information.
+	// TODO: Extract all activities to a JSON file and load them async instead of using ARCGIS database
 	var _addMissingAmenities = function () {
 		var missing = [
 			{ name: 'Active Adult Center', parkAttr: 'ACTIVE_ADULT', imageDataLg: 'active-adult-center-lg', imageDataSm: 'active-adult-center-sm', imageData: 'active-adult-center-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Sports/exercise-24.png'},

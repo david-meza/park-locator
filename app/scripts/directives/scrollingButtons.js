@@ -78,15 +78,8 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
 
       // Show and hide the buttons when we reach the top or bottom of the scrollable area
       angular.element(panel).bind('scroll', function() {
-        // if (this.scrollTop <= 0) {
-        //   buttonTop.removeClass('show-button');
-        // } else if (this.scrollTop >= this.scrollHeight - this.clientHeight) {
-        //   buttonBottom.removeClass('show-button');
-        // } else {
-        //   buttonBottom.addClass('show-button');
-        //   buttonTop.addClass('show-button');
-        // }
-
+        
+        // Can't do if/else because of cases when we have to remove both classes. Small performance change
         if (this.scrollTop <= 0) {
           buttonTop.removeClass('show-button');
         } 
@@ -97,7 +90,7 @@ angular.module('parkLocator').directive('scrollingButtons', function () {
           buttonBottom.addClass('show-button');
           buttonTop.addClass('show-button');
         }
-        
+
       });
 
     }

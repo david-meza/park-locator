@@ -5,7 +5,7 @@ angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 
     
     var markers = parkService.markers;
     
-    $scope.title = "City of Raleigh Park Locator";
+    $scope.title = "Raleigh Park Locator";
     
     // Start the circular progress icon
     $scope.progress = 'indeterminate';
