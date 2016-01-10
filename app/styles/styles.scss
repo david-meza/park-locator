@@ -466,6 +466,7 @@ ul#park-amenities {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 30;
 }
 
 #searchbox-container {
@@ -654,6 +655,9 @@ html, body, #map-canvas {
 }
 
 .navbar-default {
+  background:     -moz-linear-gradient(top,       #61A035 0%, #519025 100%);
+  background:  -webkit-linear-gradient(top,       #61A035 0%, #519025 100%); 
+  background:          linear-gradient(to bottom, #61A035 0%, #519025 100%);
   background-color: #71B045;
 }
 
@@ -662,13 +666,13 @@ html, body, #map-canvas {
 }
 
 .panel-primary {
-  border-color: #71B045;
+  border-color: #61A035;
   .panel-heading {
-    background-color: #71B045;
-    border-color: #71B045;
+    background-color: #61A035;
+    border-color: #61A035;
 
     &+.panel-collapse>.panel-body {
-      border-top-color: #71B045;
+      border-top-color: #61A035;
     }
   }
 }
@@ -690,7 +694,7 @@ html, body, #map-canvas {
 .nav-pills>li.active>a, 
 .nav-pills>li.active>a:hover, 
 .nav-pills>li.active>a:focus {
-  background-color: #71B045;
+  background-color: #61A035;
 }
 
 .panel-group .panel+.panel {
