@@ -1,41 +1,38 @@
-<div class="row" ng-if="classes.sections.length > 0">
-  <div class="col-md-12">
+<div flex = "100" ng-if="classes.sections.length > 0">
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h2 class="panel-title">Classes</h2>
-      </div>
-      <div class="panel-body">
-
-				<!-- <p class = "text-classes">No scheduled classes in this park.</p> -->
-
-				<div class="row">
-					<div class="col-sm-4">
-						
-						<uib-tabset vertical="{{ classesTabs.vertical }}"
-												justified = "{{ classesTabs.justified }}" 
-												type="{{ classesTabs.type }}">
-
-						  <uib-tab 	ng-repeat="section in classes.sections" 
-						  					heading="{{section.name}}" 
-						  					active="section.active" 
-						  					disable="section.disabled"
-						  					select = "goToSection(section.name)">
-				    	</uib-tab>
-
-
-						</uib-tabset>
-						
-					</div>
-					<div class="col-sm-8">
-						
-						<ui-view></ui-view>
-
-					</div>
-				</div>
-
-			</div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title">Classes</h2>
     </div>
+    <div class="panel-body">
 
+			<!-- <p class = "text-classes">No scheduled classes in this park.</p> -->
+
+			<div class="row">
+				<div class="col-sm-4">
+					
+					<uib-tabset vertical="{{ classesTabs.vertical }}"
+											justified = "{{ classesTabs.justified }}" 
+											type="{{ classesTabs.type }}">
+
+					  <uib-tab 	ng-repeat="section in classes.sections" 
+					  					heading="{{section.name}}" 
+					  					active="section.active" 
+					  					disable="section.disabled"
+					  					select = "goToSection(section.name)">
+			    	</uib-tab>
+
+
+					</uib-tabset>
+					
+				</div>
+				<div class="col-sm-8">
+					
+					<ui-view></ui-view>
+
+				</div>
+			</div>
+
+		</div>
   </div>
 </div>

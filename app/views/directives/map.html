@@ -1,4 +1,4 @@
-<div id="map-canvas">
+<div id="map-canvas" flex layout = "column">
 
   <!-- Search Container and Input Field (ui-gmap-search-box) -->
   <div id="searchbox-container">
@@ -13,7 +13,8 @@
                       refresh='map.refresh'
                       pan='map.pan'
                       events = 'map.events'
-                      control = 'map.control' >
+                      control = 'map.control' 
+                      layout = "column" flex>
 
 
     <!-- Map Positioning Autocomplete Search Box -->

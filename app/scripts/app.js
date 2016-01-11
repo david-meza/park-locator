@@ -22,7 +22,9 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGma
 
   .config([ '$mdThemingProvider', function ($mdThemingProvider) {
     $mdThemingProvider.theme('altTheme')
-      .primaryPalette('purple');
+      .primaryPalette('purple')
+      .accentPalette('red')
+      .warnPalette('yellow');
   }])
 
   .config(['$stateProvider', '$urlRouterProvider', 
