@@ -79,7 +79,7 @@
       </div>
       <div class="panel-body" layout = "row">
 
-        <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "start center">
+        <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
           <li ng-repeat="amenity in mergedActivities | parkAmenities: parks.currentPark | orderBy: 'name'">
             
             <a ng-click="showAmenityInMap(amenity)">

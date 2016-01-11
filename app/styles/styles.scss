@@ -342,13 +342,13 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
 // List thumbnail grid style
 ul#park-amenities {
   list-style-type: none;
+  padding-left: 0;
 
   .view {
 
     width: 110px;
     height: 110px;
-    margin: 13px;
-    float: left;
+    margin: 12px;
     border: 5px solid #fff;
     overflow: hidden;
     position: relative;
