@@ -733,6 +733,7 @@ html, body, #map-canvas {
   p {
     color: #777;
     margin: 0;
+    padding: 2px;
   }
 }
 
@@ -756,6 +757,11 @@ html, body, #map-canvas {
 
   #mobile-nav {
     display: block;
+    height: 40px;
+  }
+
+  #navbar {
+    margin-bottom: 40px;
   }
 
   .hide-on-mobile {
