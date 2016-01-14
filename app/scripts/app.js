@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps', 'flash', 'smoothScroll', 'dcbImgFallback', 'ngAnimate'])
+angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps', 'flash', 'duScroll', 'dcbImgFallback', 'ngAnimate'])
 
   .config(['uiGmapGoogleMapApiProvider', 
     function(uiGmapGoogleMapApiProvider) {

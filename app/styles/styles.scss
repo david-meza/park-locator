@@ -109,7 +109,7 @@ img, h1, h2, h3, h4, h5, h6 {
   transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
 }
 
-.bring-to-screen #back-to-top {
+#back-to-top.bring-to-screen {
   opacity: 1;
   -webkit-transform: translateY(0px);
      -moz-transform: translateY(0px);
@@ -727,9 +727,27 @@ html, body, #map-canvas {
 
 // Overrides end
 
+#navbar {
+  -webkit-box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.19);
+     -moz-box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.19);
+
+}
+
 .footer {
   padding-top: 0;
   border-top: 1px solid #e5e5e5;
+
+  md-content {
+    -webkit-box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
+       -moz-box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .layout-padding {
+    padding: 4px 8px;
+  }
+
   p {
     color: #777;
     margin: 0;
@@ -762,7 +780,7 @@ html, body, #map-canvas {
   }
 
   #navbar {
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
 
   .hide-on-mobile {

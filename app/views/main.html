@@ -1,18 +1,23 @@
+<back-to-top>
+  <md-button  class="md-accent md-raised md-fab md-mini" 
+              aria-label="Back to Top"
+              ng-click="scroll()">
+    <md-icon md-font-icon="fa-angle-double-up" class = "fa fa-lg"></md-icon>
+  </md-button>
+</back-to-top>
+
+<div id="anchor-top"></div>
+
 <md-content layout-padding layout = "row" layout-wrap>
   
   <div flex = "100" flex-gt-sm = "33" layout = "column" id = "search" >
-
     <accordion-menu></accordion-menu>
-    
   </div>   
 
   <div flex = "100" flex-gt-sm = "66" layout = "column">
-    
     <main-map></main-map>
-  
   </div>
-
-  
+    
 </md-content>
 
 

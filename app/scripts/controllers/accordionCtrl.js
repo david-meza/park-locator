@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService) {
+angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$timeout',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $timeout) {
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
@@ -34,7 +34,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     // Set Location Section
     $scope.geoLocate = function() {
 
-      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> Obtaining your location to find the nearest parks.');
+      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> Obtaining your location.');
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
@@ -68,7 +68,9 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     	$scope.map.zoom = 16;
       $scope.map.location.coords.latitude = park.latitude;
       $scope.map.location.coords.longitude = park.longitude;
-      park.markerClick(null, 'click', park);
+      $timeout(function(){
+        park.markerClick(null, 'click', park);
+       }, 100); 
     };
 
     // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
