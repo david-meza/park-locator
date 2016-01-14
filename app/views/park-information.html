@@ -26,9 +26,9 @@
             <h3 class="text-center">{{ parks.currentPark.name }}</h3>
 
             <div class="park-details-list">
-              <p> <i class = "fa fa-fw fa-map-marker"></i> {{ parks.currentPark.address }}</p>
+              <p ng-if="parks.currentPark.address"> <i class = "fa fa-fw fa-map-marker"></i> {{ parks.currentPark.address }}</p>
 
-              <p> <i class = "fa fa-fw fa-mobile"></i> {{ parks.currentPark.phone }}</p>
+              <p ng-if="parks.currentPark.phone"> <i class = "fa fa-fw fa-mobile"></i> {{ parks.currentPark.phone }}</p>
               
               <p ng-if = "routeData.duration"> 
                 <i class = "fa fa-fw" ng-class = "travelMode"></i> If you leave now, you could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span> 
