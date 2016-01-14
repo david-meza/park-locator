@@ -67,27 +67,20 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
   map.markersConfig.typeOptions.styles = [
     {
       textColor: '#FFF',
-      textSize: 20,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
+      textSize: 19,
+      fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',
       anchor: [20, 20],
+      anchorIcon: [10,25],
       url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
       height: 50,
       width: 50
     },
     {
       textColor: '#FFF',
-      textSize: 16,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
+      textSize: 15,
+      fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',
       anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-    {
-      textColor: '#FFF',
-      textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
+      anchorIcon: [10,25],
       url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
       height: 50,
       width: 50
@@ -95,8 +88,9 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     {
       textColor: '#FFF',
       textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
+      fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',
       anchor: [20, 20],
+      anchorIcon: [10,25],
       url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
       height: 50,
       width: 50
@@ -104,8 +98,19 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     {
       textColor: '#FFF',
       textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
+      fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',
       anchor: [20, 20],
+      anchorIcon: [10,25],
+      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
+      height: 50,
+      width: 50
+    },
+    {
+      textColor: '#FFF',
+      textSize: 12,
+      fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',
+      anchor: [20, 20],
+      anchorIcon: [10,25],
       url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
       height: 50,
       width: 50
