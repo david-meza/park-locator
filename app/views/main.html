@@ -6,19 +6,15 @@
   </md-button>
 </back-to-top>
 
-<div id="anchor-top"></div>
-
-<md-content layout-padding layout = "row" layout-wrap>
   
-  <div flex = "100" flex-gt-sm = "33" layout = "column" id = "search" >
-    <accordion-menu></accordion-menu>
-  </div>   
+<div flex = "100" flex-gt-sm = "33" layout = "column" id = "search" >
+  <accordion-menu></accordion-menu>
+</div>   
 
-  <div flex = "100" flex-gt-sm = "66" layout = "column">
-    <main-map></main-map>
-  </div>
-    
-</md-content>
+<div flex = "100" flex-gt-sm = "66" layout = "column">
+  <main-map></main-map>
+</div>
+  
+<ui-view flex = "100" layout = "column"></ui-view>
 
 
-<ui-view></ui-view>

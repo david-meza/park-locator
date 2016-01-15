@@ -1,35 +1,26 @@
-<nav class="navbar navbar-default" role="navigation" id = "navbar">
-  <div class="container-fluid">
-    <div class="navbar-header hide-on-mobile">
-
-      <h1><a class="navbar-brand" ui-sref = "home">{{ title }}</a></h1>
-    </div>
+<md-toolbar layout = "row" id = "navbar" role = "navigation" md-scroll-shrink>
+  <div class="md-toolbar-tools">
     
-    <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="60"></md-progress-circular>
+    <h1 layout = "row" hide-xs hide-sm>
+      <a ui-sref = "home">{{ title }}</a>
+    </h1>
 
-    <div id="mobile-nav">
-      <ul class="nav navbar-right fixed">
-        
-        <li>
-          <a ng-click="scrollTo('search')">
-            Search
-          </a>
-        </li>
-        
-        <li>
-          <a ng-click="scrollTo('map-canvas')">
-            Map
-          </a>
-        </li>
-        
-        <li>
-          <a ng-click="scrollTo('panels-section')">
-            Park
-          </a>
-        </li>
+    <div flex hide-gt-sm id="mobile-nav" layout = "row" layout-align = "space-around stretch">
+      
+      <div class = "nav-item" flex>
+        <a ng-click="scrollTo('search')">Search</a>
+      </div>
+      
+      <div class = "nav-item" flex>
+        <a ng-click="scrollTo('map-canvas')">Map</a>
+      </div>
+      
+      <div class = "nav-item" flex>
+        <a ng-click="scrollTo('panels-section')">Park</a>
+      </div>
 
-      </ul>
     </div>
 
+    <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="60"></md-progress-circular>
   </div>
-</nav>
+</md-toolbar>
