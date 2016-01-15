@@ -1,23 +1,30 @@
 'use strict';
 
-angular.module('parkLocator').directive('collapseFooter', ['$window', function ($window) {
+angular.module('parkLocator').directive('collapseFooter', ['$document', '$timeout', function ($document, $timeout) {
   
   return { 
     restrict: 'E',
-    transclude: true,
     replace: true,
-    template: '<div id = "collapse-footer" ng-transclude></div>',
+    templateUrl: 'views/directives/collapse-footer.html',
     link: function(scope, element) {
+      $document.ready( function() {
+        
+        var footer = angular.element(document.getElementById('footer'));
+        var animationInProgress = false;
 
-      element.on('click', function() {
-        console.log('parent', this.parent());
-        if (this.pageYOffset >= 100) {
-          element.addClass('bring-to-screen');
-        } else {
-          element.removeClass('bring-to-screen');
-        }
+        element.on('click', function() {
+          if (animationInProgress) return;
+          animationInProgress = true;
+          
+          footer.toggleClass('collapsed');
+          element.children().toggleClass('rotated');
+          
+          $timeout(function(){
+            animationInProgress = false;
+          }, 500);
+        });
+      
       });
-
     }
   };
 

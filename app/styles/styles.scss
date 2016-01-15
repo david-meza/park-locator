@@ -91,8 +91,8 @@ img, h1, h2, h3, h4, h5, h6 {
 
 #back-to-top {
   position: fixed;
-  right: 15px;
-  bottom: 10px;
+  right: 10px;
+  bottom: 25px;
   z-index: 21;
 
   -webkit-transform: translateY(100px);
@@ -441,8 +441,8 @@ ul#park-amenities {
 #searchbox-container {
   position: absolute;
   z-index: 11;
-  right: 8em;
-  top: 20px;
+  right: 100px;
+  top: 5px;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   -moz-box-shadow:    0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-shadow:         0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -482,8 +482,8 @@ ul#park-amenities {
 
 .map-bottom-right {
   position: absolute;
-  right: 15px;
-  bottom: 30px;
+  right: 5px;
+  bottom: 10px;
   text-transform: capitalize;
 }
 
@@ -687,17 +687,36 @@ html, body, #map-canvas {
   background:  -webkit-linear-gradient(top,       #61A035 0%, #519025 100%); 
   background:          linear-gradient(to bottom, #61A035 0%, #519025 100%);
   background-color: #71B045;
+  
+  h1 {
+    font-size: 24px;
+  }
 
   a:hover, a:focus {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
   }
 
 }
 
 .footer {
+  max-height: 55px;
   padding-top: 0;
   border-top: 1px solid #e5e5e5;
+  -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+  transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+
+  &.collapsed {
+    // -webkit-transform: scale(0, 0);
+    //    -moz-transform: scale(0, 0);
+    //      -o-transform: scale(0, 0);
+    //     -ms-transform: scale(0, 0);
+    //         transform: scale(0, 0);
+    max-height: 0;
+  }
 
   md-content {
     -webkit-box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
@@ -714,6 +733,50 @@ html, body, #map-canvas {
     margin: 0;
     padding: 2px;
     font-size: 13px;
+  }
+
+}
+
+#collapse-footer {
+  position: relative;
+  
+  .collapse-button {
+    position: absolute;
+      -webkit-transform: translate(0px, -2px);
+         -moz-transform: translate(0px, -2px);
+           -o-transform: translate(0px, -2px);
+          -ms-transform: translate(0px, -2px);
+              transform: translate(0px, -2px);
+    left: 0;
+    top: -75px;
+    z-index: 1;
+
+    -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+
+    md-icon {
+      color: #B71C1C;
+      -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    }
+
+    &.rotated {
+      -webkit-transform: translateY(20px) rotate(45deg);
+         -moz-transform: translateY(20px) rotate(45deg);
+           -o-transform: translateY(20px) rotate(45deg);
+          -ms-transform: translateY(20px) rotate(45deg);
+              transform: translateY(20px) rotate(45deg);
+
+      md-icon {
+        color: #55B53F;
+      }
+    }
   }
 }
 
@@ -732,7 +795,7 @@ html, body, #map-canvas {
   }
 
   .layout-padding, .layout-padding-gt-sm, .layout-padding-md, .layout-padding > *, .layout-padding-gt-sm > *, .layout-padding-md > *, .layout-padding > .flex, .layout-padding > .flex-gt-sm, .layout-padding > .flex-md {
-    padding: 4px;
+    padding: 6px 4px 8px;
   }
 
   #mobile-nav {
@@ -745,12 +808,17 @@ html, body, #map-canvas {
     display: none;
   }
 
+  #navbar {
+    h1 {
+      font-size: 20px;
+    }
+  }
 
-  // h1 {
-  //   .navbar-brand {
-  //     font-size: 0.46em;
-  //   }
-  // }
+  #main-scrollable {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+  }
 
   .course-details {
     max-height: 20em;
