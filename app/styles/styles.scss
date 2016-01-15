@@ -466,7 +466,11 @@ ul#park-amenities {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 30;
+  z-index: -1;
+
+  &[md-mode="indeterminate"] {
+    z-index: 30;
+  }
 }
 
 #searchbox-container {

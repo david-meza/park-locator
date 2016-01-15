@@ -11,28 +11,19 @@
       <ul class="nav navbar-right fixed">
         
         <li>
-          <a  scroll-to = "search" 
-              duration = "400" 
-              offset = "45"
-              ng-click="activeTab.name = 'search' ">
+          <a ng-click="scrollTo('search')">
             Search
           </a>
         </li>
         
         <li>
-          <a  scroll-to = "map-canvas" 
-              duration = "400" 
-              offset = "45" 
-              ng-click="activeTab.name = 'map' ">
+          <a ng-click="scrollTo('map-canvas')">
             Map
           </a>
         </li>
         
         <li>
-          <a  scroll-to = "panels-section" 
-              duration = "400" 
-              offset = "45" 
-              ng-click="selectPark()">
+          <a ng-click="scrollTo('panels-section')">
             Park
           </a>
         </li>

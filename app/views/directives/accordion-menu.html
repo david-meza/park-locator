@@ -136,9 +136,7 @@
       <ul id = "park-list">
         <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
           <a  ng-click="centerToPark(park)" 
-              scroll-to="map-canvas"
-              duration = "500"
-              offset = "10">
+              du-smooth-scroll="map-canvas">
             <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
           </a>
         </li>          

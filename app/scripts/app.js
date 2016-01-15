@@ -1,6 +1,14 @@
 'use strict';
 
+function easeInOutCubic (t) { 
+  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 
+}
+
 angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps', 'flash', 'duScroll', 'dcbImgFallback', 'ngAnimate'])
+
+  .value('duScrollDuration', 600)
+  .value('duScrollOffset', 0)
+  .value('duScrollEasing', easeInOutCubic)
 
   .config(['uiGmapGoogleMapApiProvider', 
     function(uiGmapGoogleMapApiProvider) {
