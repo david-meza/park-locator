@@ -15,13 +15,22 @@
 
 <body ng-app="parkLocator" ng-cloak layout = "column">
   
-  <div id = "flash" flash-message="3000" ></div>
+  <div id = "flash" flash-message="2500" ></div>
   
   <ng-navbar></ng-navbar>
 
-  <md-content id = "main-scrollable" du-scroll-container ui-view flex layout-padding layout = "row" layout-wrap></md-content>
+  <md-content id = "main-scrollable"
+              layout = "column" 
+              layout-gt-sm = "row" 
+              du-scroll-container 
+              ui-view 
+              flex 
+              layout-padding
+              layout-wrap>
+  </md-content>
 
   <ng-footer></ng-footer>
+  <collapse-footer></collapse-footer>
 
   <script>
      !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -80,6 +89,7 @@
   <!-- Directives -->
   <script src="scripts/directives/navbar.js"></script>
   <script src="scripts/directives/footer.js"></script>
+  <script src="scripts/directives/collapseFooter.js"></script>
   <script src="scripts/directives/backToTop.js"></script>
   <script src="scripts/directives/navbarFixed.js"></script>
   <script src="scripts/directives/mainMap.js"></script>
