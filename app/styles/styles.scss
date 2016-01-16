@@ -107,6 +107,11 @@ img, h1, h2, h3, h4, h5, h6 {
   -o-transform:       all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   -ms-transform:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+
+
+  .md-button: {
+    z-index: 22;
+  }
 }
 
 #back-to-top.bring-to-screen {
@@ -667,7 +672,12 @@ html, body, #map-canvas {
 }
 
 .panel-group {
-  margin-bottom: 0;
+  // margin-bottom: 20px;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .panel {
