@@ -45,7 +45,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       } else {
         var message = '<i class="fa fa-lg fa-meh-o"></i> <strong> Oops!</strong>  Your browser does not support Geolocation.';
         Flash.create('warning', message);
-        console.log('Geolocation not supported');
+        console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };
 

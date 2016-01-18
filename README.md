@@ -5,6 +5,7 @@ Park Locator is a mapping tool for Raleigh parks that allows you to find the clo
 # Demo
 
 Github Pages: [Open](https://david-meza.github.io/park-locator/#/)
+
 Surge: [Open](https://park-locator.surge.sh)
 
 ## Build & development

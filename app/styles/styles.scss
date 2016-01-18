@@ -700,6 +700,7 @@ html, body, #map-canvas {
 }
 
 .footer {
+  z-index: 1;
   max-height: 55px;
   padding-top: 0;
   border-top: 1px solid #e5e5e5;
