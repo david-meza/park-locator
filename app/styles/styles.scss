@@ -830,9 +830,9 @@ html, body, #map-canvas {
   }
 
   #main-scrollable {
-    -webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-            flex-wrap: nowrap;
+    // -webkit-flex-wrap: nowrap;
+    //     -ms-flex-wrap: nowrap;
+    //         flex-wrap: nowrap;
   }
 
   .course-details {
