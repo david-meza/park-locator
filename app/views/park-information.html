@@ -1,4 +1,4 @@
-<div flex = "grow">
+<div flex = "100">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -67,7 +67,7 @@
 
 </div>
 
-<div flex = "grow" ng-if="(mergedActivities | parkAmenities: parks.currentPark).length > 0">
+<div flex = "100" ng-if="(mergedActivities | parkAmenities: parks.currentPark).length > 0">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -97,4 +97,6 @@
 </div>
 
 
-<classes-info current-park = "parks.currentPark"></classes-info>
+<classes-info current-park = "parks.currentPark"
+              flex = "100">
+</classes-info>

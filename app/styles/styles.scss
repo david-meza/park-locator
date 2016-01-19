@@ -543,6 +543,10 @@ html, body, #map-canvas {
   padding-left: 10px;
 }
 
+#panels-section > * {
+  margin-top: 10px;
+}
+
 .panel-group .panel-body {
 
   .panel-scrollable {
@@ -778,11 +782,11 @@ html, body, #map-canvas {
     }
 
     &.rotated {
-      -webkit-transform: translateY(20px) rotate(45deg);
-         -moz-transform: translateY(20px) rotate(45deg);
-           -o-transform: translateY(20px) rotate(45deg);
-          -ms-transform: translateY(20px) rotate(45deg);
-              transform: translateY(20px) rotate(45deg);
+      -webkit-transform: translateY(30px) rotate(45deg);
+         -moz-transform: translateY(30px) rotate(45deg);
+           -o-transform: translateY(30px) rotate(45deg);
+          -ms-transform: translateY(30px) rotate(45deg);
+              transform: translateY(30px) rotate(45deg);
 
       md-icon {
         color: #55B53F;
