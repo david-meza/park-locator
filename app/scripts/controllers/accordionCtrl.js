@@ -38,9 +38,16 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( function (position) {
-          $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
-        });
+        navigator.geolocation.getCurrentPosition( 
+          function (position) {
+            $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
+          },
+          function (error) {
+            alert(error.message);
+          }, {
+            enableHighAccuracy: true,
+            timeout: 5000
+          });
         $scope.goToPanel('first', 'third');
       } else {
         var message = '<i class="fa fa-lg fa-meh-o"></i> <strong> Oops!</strong>  Your browser does not support Geolocation.';
@@ -49,7 +56,10 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       }
     };
 
-    $scope.geoLocate();
+    // Get user's coordinates async a few seconds after the app loaded
+    $timeout(function(){
+      $scope.geoLocate();
+    }, 5000);
 
     // Add an activity to filter array
     $scope.addToSelected = function (amenity) {
