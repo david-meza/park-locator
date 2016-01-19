@@ -10,9 +10,11 @@ angular.module('parkLocator').directive('backToTop', function () {
     link: function(scope, element) {
 
       var container = element.parent();
+      var footer = angular.element(document.getElementById('footer'));
       
       container.on('scroll', function() {
-        (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen')
+        footer.hasClass('collapsed') ? element.addClass('lower') : element.removeClass('lower');
+        (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
       });
 
 
