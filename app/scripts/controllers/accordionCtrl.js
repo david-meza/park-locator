@@ -45,8 +45,9 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
           function (error) {
             alert(error.message);
           }, {
-            enableHighAccuracy: true,
-            timeout: 5000
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 60000
           });
         $scope.goToPanel('first', 'third');
       } else {

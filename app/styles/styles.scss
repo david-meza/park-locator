@@ -205,6 +205,18 @@ md-icon {
   }
 }
 
+#map-icons-dialog {
+  md-toolbar {
+    background-color: rgba(40,64,34,1);
+  }
+
+  .map-icons-list {
+    .md-avatar {
+      border-radius: 0;
+    }
+  }
+}
+
 
 h2 {
   font: 400 40px/1.5 Roboto, Helvetica, Verdana, sans-serif;

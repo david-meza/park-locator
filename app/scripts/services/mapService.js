@@ -64,54 +64,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     typeEvents: {}
   };
 
-  map.markersConfig.typeOptions.styles = [
-    {
-      textColor: '#FFF',
-      textSize: 20,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-    {
-      textColor: '#FFF',
-      textSize: 16,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-    {
-      textColor: '#FFF',
-      textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-    {
-      textColor: '#FFF',
-      textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-    {
-      textColor: '#FFF',
-      textSize: 12,
-      fontFamily: 'Helvetica, Verdana, sans-serif',
-      anchor: [20, 20],
-      url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-icon-small.png',
-      height: 50,
-      width: 50
-    },
-
-  ];
+  map.markersConfig.typeOptions.styles = [{textColor: '#FFF',textSize: 16,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 15,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 14,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 13,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 12,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60}];
 
   // Optional map themes
   // Light browns and greens (nature)
