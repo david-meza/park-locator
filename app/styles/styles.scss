@@ -725,7 +725,7 @@ html, body, #map-canvas {
 
 .footer {
   z-index: 1;
-  max-height: 55px;
+  max-height: 58px;
   padding-top: 0;
   border-top: 1px solid #e5e5e5;
   -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
@@ -858,15 +858,6 @@ html, body, #map-canvas {
 
     input#search-box:focus {
       width: 190px;
-    }
-  }
-
-  .footer {
-    padding-top: 0;
-
-    p {
-      font-size: 0.8em;
-      padding: 3px;
     }
   }
 
