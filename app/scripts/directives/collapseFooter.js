@@ -12,6 +12,9 @@ angular.module('parkLocator').directive('collapseFooter', ['$document', '$timeou
         var footer = angular.element(document.getElementById('footer'));
         var animationInProgress = false;
 
+        footer.addClass('collapsed');
+        element.children().addClass('rotated');
+
         element.on('click', function() {
           if (animationInProgress) return;
           animationInProgress = true;
