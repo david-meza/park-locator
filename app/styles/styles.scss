@@ -28,6 +28,10 @@ img, h1, h2, h3, h4, h5, h6 {
           user-select: none;  
 }
 
+.opaque {
+  opacity: 0;
+}
+
 .pac-container {
   // z-index: 1 !important;
   // width: auto !important;
@@ -111,10 +115,10 @@ img, h1, h2, h3, h4, h5, h6 {
           transform: translateY(100px) scale(0,0);
 
   opacity: 0;
-  -webkit-transform:  all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transform:     all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transform:       all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transform:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -webkit-transition:  all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transition:     all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transition:       all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transition:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
 
 
@@ -153,11 +157,11 @@ md-icon {
   height: 25px;
   width: 100%;
 
-  -webkit-transform:  visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transform:     visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transform:       visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transform:      visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  transition:         visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -webkit-transition:  visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transition:     visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transition:       visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transition:      visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  transition:          visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
 
   &.show-button {
     opacity: 1;
@@ -502,10 +506,10 @@ ul#park-amenities {
     opacity: 0;
     z-index: 13;
     cursor: pointer;
-    -webkit-transform:  all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transform:     all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transform:       all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transform:      all .25s cubic-bezier(0.345, 0, 0.25, 1);
+    -webkit-transition:  all .25s cubic-bezier(0.345, 0, 0.25, 1);
+    -moz-transition:     all .25s cubic-bezier(0.345, 0, 0.25, 1);
+    -o-transition:       all .25s cubic-bezier(0.345, 0, 0.25, 1);
+    -ms-transition:      all .25s cubic-bezier(0.345, 0, 0.25, 1);
     transition:         all .25s cubic-bezier(0.345, 0, 0.25, 1);
 
     &:focus {
@@ -752,10 +756,10 @@ html, body, #map-canvas {
   border-top: 1px solid #e5e5e5;
 
   &, p {
-    -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
     transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
   }
 
@@ -814,18 +818,18 @@ html, body, #map-canvas {
     top: -68px;
     z-index: 1;
 
-    -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
     transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
 
     md-icon {
       color: #B71C1C;
-      -webkit-transform:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -moz-transform:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -o-transform:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -ms-transform:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
       transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
     }
 

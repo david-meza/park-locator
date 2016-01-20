@@ -3,6 +3,7 @@
 /.tmp
 /.sass-cache
 /bower_components
+/test/bower_components
 /app/styles/paper.min.css
 
 npm-debug.log
