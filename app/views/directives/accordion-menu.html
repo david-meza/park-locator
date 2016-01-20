@@ -161,7 +161,12 @@
         <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
           <a  ng-click="centerToPark(park)" 
               du-smooth-scroll="map-canvas">
-            <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
+            <span class = "park-title">
+              <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
+            </span>
+            <span class = "park-distance" ng-show="park.distance">
+              <i class = "fa fa-fw fa-location-arrow"></i> Apx. <b>{{ park.distance * 85 | number: 1 }} mi</b> away
+            </span>
           </a>
         </li>          
       </ul>

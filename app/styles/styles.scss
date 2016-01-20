@@ -299,6 +299,21 @@ th {
   
 }
 
+.park-title {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.9em;
+}
+
+.park-distance {
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  line-height: 1.5em;
+}
+
 
 ul#park-list, ul#amenities-list, ul#selected-amenities-list {
   list-style-type: none;
@@ -307,7 +322,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
 
   li {
     font: 400 1em/2.3 Roboto, Helvetica, Verdana, sans-serif;
-    min-height: 2.88em;
+    min-height: 3.45em;
     border-bottom: 1px solid #ccc;
 
     .activity-img {
@@ -338,7 +353,8 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
         color: #689F38;
         text-decoration: none;
         font-size: 1.2em;
-        background-color: #f8f8f8;
+        background-color: rgba(0,0,0,0.01);
+
       }
     }
   }

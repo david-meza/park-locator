@@ -1,6 +1,6 @@
 <div flex = "100">
 
-  <div class="panel panel-primary">
+  <div class="panel panel-primary" fade-up-when-ready>
     <div class="panel-heading">
       <h2 class="panel-title">General Information</h2>
     </div>
@@ -33,7 +33,7 @@
             </p>
             
             <p ng-if = "routeData.distance"> 
-              <i class = "fa fa-fw fa-location-arrow"></i> You are <span ng-class="distanceColoring"> {{ routeData.distance }}</span> away
+              <i class = "fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
             </p>
             
             <md-button class = "md-primary capitalize list-button" ng-href="{{ parks.currentPark.url }}" target="_blank"> 
@@ -69,7 +69,7 @@
 
 <div flex = "100" ng-if="(mergedActivities | parkAmenities: parks.currentPark).length > 0">
 
-  <div class="panel panel-primary">
+  <div class="panel panel-primary" fade-up-when-ready>
     <div class="panel-heading">
       <h2 class="panel-title">Activities</h2>
     </div>

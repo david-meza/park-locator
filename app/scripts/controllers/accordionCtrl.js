@@ -88,7 +88,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.nearestPark = function (park) {
       var a = Math.abs(park.latitude - $scope.myLoc.latitude);
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
-      return Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+      return park.distance = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
     };
 
     // Search box inside set my location panel
