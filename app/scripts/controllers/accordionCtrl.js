@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$timeout',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $timeout) {
+angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$timeout', '$mdToast',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $timeout, $mdToast) {
     
     // Basic accordion config
     $scope.settings = accordionService.settings;
@@ -31,6 +31,15 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       $scope.settings[to].status.open = true;
     };
 
+    var informUser = function (message) {
+      var toast = $mdToast.simple()
+        .textContent(message)
+        .action('ok')
+        .highlightAction(false)
+        .position('top right');
+      $mdToast.show(toast);
+    };
+
     // Set Location Section
     $scope.geoLocate = function() {
 
@@ -43,9 +52,9 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
             $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
           },
           function (error) {
-            alert(error.message);
+            informUser('Could not locate you due to: ' + error.message);
           }, {
-            enableHighAccuracy: false,
+            enableHighAccuracy: true,
             timeout: 10000,
             maximumAge: 60000
           });
@@ -88,7 +97,8 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.nearestPark = function (park) {
       var a = Math.abs(park.latitude - $scope.myLoc.latitude);
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
-      return park.distance = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+      park.distance = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+      return park.distance;
     };
 
     // Search box inside set my location panel

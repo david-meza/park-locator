@@ -15,7 +15,7 @@ angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 
 
 
     $scope.scrollTo = function (target) {
-      if (target == 'panels-section' && !markers.currentPark) { return flash.create('warning', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> Please select a park first.'); }
+      if (target === 'panels-section' && !markers.currentPark) { return flash.create('warning', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> Please select a park first.'); }
       var contentArea = angular.element(document.getElementById('main-scrollable'));
       var ngTarget = angular.element(document.getElementById(target));
       contentArea.scrollTo(ngTarget, 0, 600);

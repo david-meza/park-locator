@@ -1,7 +1,7 @@
 'use strict';
 
 function easeInOutCubic (t) { 
-  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 
+  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 }
 
 angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGmapgoogle-maps', 'flash', 'duScroll', 'dcbImgFallback', 'ngAnimate'])
@@ -13,17 +13,15 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGma
   .config(['uiGmapGoogleMapApiProvider', 
     function(uiGmapGoogleMapApiProvider) {
       uiGmapGoogleMapApiProvider.configure({
-          v: '3.20',
-          libraries: 'places, geometry'
+        signed_in: true,
+        // v: '3.21',
+        libraries: 'places'
       });
   }])
 
   .config([ '$httpProvider', function ($httpProvider) {
 
     $httpProvider.interceptors.push('httpInterceptor');
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    $httpProvider.defaults.headers.common.Accept = 'application/json';
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     
   }])

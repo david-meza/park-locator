@@ -115,14 +115,6 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   uiGmapIsReady.promise(1).then(function(instances) {
     mapInstance = instances[0].map;
     // console.log( mapInstance.getMapTypeId() );
-    // applyMapStyles();
   });
-
-  var applyMapStyles = function () {
-  	var styledMap = new mapsApi.StyledMapType( $scope.map.options.styles, {name: 'Nature'});
-	  mapInstance.setMapTypeId('nature');
-    mapInstance.mapTypes.set('nature', styledMap);
-    console.log( mapInstance.getMapTypeId() );
-  };
 
 }]);
