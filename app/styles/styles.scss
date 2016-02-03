@@ -546,7 +546,7 @@ ul#park-amenities {
 
 .map-bottom-right {
   position: absolute;
-  right: 35px;
+  right: 40px;
   bottom: 15px;
   text-transform: capitalize;
 }
@@ -772,11 +772,11 @@ html, body, #map-canvas {
 
 }
 
-.footer {
+#footer {
   z-index: 1;
   max-height: 58px;
   opacity: 1;
-  padding-top: 0 !important;
+  padding: 0 8px 4px;
   border-top: 1px solid #e5e5e5;
 
   &, p {
