@@ -7,13 +7,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 	var selectedActivities = { current: [] };
 
 	list.activitiesPos.markersConfig = {
-    type: 'cluster',
-    typeOptions: {
-      title: 'Zoom in to find more activities!',
-      gridSize: 60,
-      minimumClusterSize: 8
-    },
-    typeEvents: {},
     control: {},
     options: 'options',
     icon: 'icon'
@@ -46,8 +39,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 				var processed = {
 					id: amenity.value,
 					name: amenity.label
-					// url: amenity.symbol.url,
-					// imageData: amenity.symbol.imageData
 				};
 
 				list.content.push(processed);
@@ -95,7 +86,6 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 			{ name: 'Greenway Trail', imageData: 'greenway-trail-fallback', parkAttr: 'GREENWAYACCESS', imageDataLg: 'greenway-trail-lg', imageDataSm: 'greenway-trail-sm', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Travel/forest-24.png' },
 			{ name: 'Gym', imageDataLg: 'gym-lg', imageDataSm: 'gym-sm', imageData: 'gym-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Sports/dumbbell-24.png' },
 			{ name: 'Kiddie Boats', parkAttr: 'BOATRIDE', imageDataLg: 'kiddie-boats-lg', imageDataSm: 'kiddie-boats-sm', imageData: 'kiddie-boats-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Transport/sail_boat-24.png' },
-			{ name: 'Library', imageDataLg: 'library-lg', imageDataSm: 'library-sm', imageData: 'library-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Business/library-24.png' },
 			{ name: 'Museum', imageDataLg: 'museum-lg', imageDataSm: 'museum-sm', imageData: 'museum-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Travel/museum-24.png' },
 			{ name: 'Teen Center', parkAttr: 'TEEN', imageDataLg: 'teen-center-lg', imageDataSm: 'teen-center-sm', imageData: 'teen-center-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/City/students-24.png' },
 			{ name: 'Walking', parkAttr: 'WALKINGTRAILS', imageDataLg: 'walking-trails-lg', imageDataSm: 'walking-trails-sm', imageData: 'walking-trails-fallback', imageUrlSm: 'https://maxcdn.icons8.com/Color/PNG/24/Sports/trekking-24.png' },
@@ -119,7 +109,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http',
 			if (c.name === 'Amusement Train') { c.imageDataLg = 'amusement-train-lg'; c.imageDataSm = 'amusement-train-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Transport/train-24.png'; }
 			if (c.name === 'Art Center') { c.parkAttr = 'ARTSCENTER'; c.imageDataLg = 'art-center-lg'; c.imageDataSm = 'art-center-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Editing/paint_palette-24.png'; }
 			if (c.name === 'Boat Ramp') { c.parkAttr = 'BOATRENTALS'; c.imageDataLg = 'boat-ramp-lg'; c.imageDataSm = 'boat-ramp-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/City/wharf-24.png'; }
-			if (c.name === 'Baseball' || c.name === 'Softball' ) { c.parkAttr = 'BALLFIELDS'; c.imageDataLg = 'baseball-lg'; c.imageDataSm = 'baseball-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/baseball-24.png'; }
+			if (c.name === 'Baseball' || c.name === 'Softball' ) { c.name = 'Ball Fields'; c.parkAttr = 'BALLFIELDS'; c.imageDataLg = 'baseball-lg'; c.imageDataSm = 'baseball-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/baseball-24.png'; }
 			if (c.name === 'Canoe Launch') { c.parkAttr = 'CANOE'; c.imageDataSm = 'canoe-launch-sm'; c.imageDataLg = 'canoe-launch-lg'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Transport/dinghy-24.png'; }
 			if (c.name === 'Fishing Area') { c.name = 'Fishing'; c.parkAttr = 'FISHING'; c.imageDataLg = 'fishing-area-lg'; c.imageDataSm = 'fishing-area-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Sports/fishing-24.png'; }
 			if (c.name === 'Horseshoe Pit') { c.parkAttr = 'HORSESHOE'; c.imageDataLg = 'horseshoe-pit-lg'; c.imageDataSm = 'horseshoe-pit-sm'; c.imageUrlSm = 'https://maxcdn.icons8.com/Color/PNG/24/Gaming/horseshoe-24.png'; }

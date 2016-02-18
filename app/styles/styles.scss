@@ -3,9 +3,14 @@
 @import "./font-awesome.css";
 @import "../bower_components/angular-flash-alert/dist/angular-flash.min.css";
 
+$primary: #1565C0;
+$indigo: #3F51B5;
+$light-white: rgba(255,255,255,0.87);
+$warn: #EF6C00;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
+  font-weight: 400;
 }
 
 .nav, .pagination, .carousel, .panel-title a, a { 
@@ -156,6 +161,7 @@ md-icon {
   position: absolute;
   height: 25px;
   width: 100%;
+  z-index: 5;
 
   -webkit-transition:  visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   -moz-transition:     visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
@@ -203,7 +209,7 @@ md-icon {
   .nav-item {
     text-align: center;
     a {
-      color: #fff;
+      color: $light-white;
       padding: 10px;
       -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
       -moz-transition:    all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -212,7 +218,7 @@ md-icon {
       &:focus, &:hover {
         padding: 10px 30%;
         outline: none;
-        background-color: #317005;
+        background-color: darken($primary, 15%);
       }
     }
   }
@@ -220,7 +226,7 @@ md-icon {
 
 #map-icons-dialog {
   md-toolbar {
-    background-color: rgba(40,64,34,1);
+    background-color: darken($primary, 10%);
   }
 
   .map-icons-list {
@@ -347,7 +353,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      color: #20400B;
+      color: darken($primary, 30%);
       display: block;
       width: 100%;
 
@@ -358,7 +364,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
       transition:         all 0.3s ease;
 
       &:hover {
-        color: #689F38;
+        color: darken($primary, 20%);
         text-decoration: none;
         font-size: 1.2em;
         background-color: rgba(0,0,0,0.01);
@@ -395,7 +401,7 @@ ul#park-amenities {
       top: -5px;
       left: -5px;
       opacity: 0;
-      background-color: rgba(219,127,8, 0.7);
+      background-color: rgba($warn, 0.7);
       -webkit-transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
       -o-transition: all 0.4s ease-in-out;
@@ -418,8 +424,7 @@ ul#park-amenities {
       position: relative;
       font-size: 1em;
       padding: 10px;
-      // background: rgba(44, 62, 80, 0.8);
-      background: rgba(51,105,30,0.75);
+      background: rgba($indigo, 0.82);
       margin: 30px 0 0 0;
       -webkit-transform: translateY(-100px);
       -moz-transform: translateY(-100px);
@@ -663,6 +668,19 @@ html, body, #map-canvas {
   height: 20em;
 }
 
+#park-window {
+  .more-info {
+    color: $indigo;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: none;
+      color: darken($indigo, 10%);
+    }
+  }
+}
+
 #activity-window, #park-window {
   opacity: 0;
 
@@ -699,13 +717,13 @@ html, body, #map-canvas {
 }
 
 .panel-primary {
-  border-color: #61A035;
+  border-color: $primary;
   .panel-heading {
-    background-color: #61A035;
-    border-color: #61A035;
+    background-color: $primary;
+    border-color: $primary;
 
     &+.panel-collapse>.panel-body {
-      border-top-color: #61A035;
+      border-top-color: $primary;
     }
   }
 }
@@ -713,21 +731,20 @@ html, body, #map-canvas {
 .dropdown-menu>.active>a,
 .dropdown-menu>.active>a:hover, 
 .dropdown-menu>li>a:hover {
-  background-color: #689F38;
+  background-color: darken($primary, 20%);
 }
 
  
 .dropdown-menu>.active>a:focus,
 .dropdown-menu>li>a:focus {
-  background-color: #558B2F;
-  // background-color: #689F38;
+  background-color: darken($primary, 25%);
 }
 
 
 .nav-pills>li.active>a, 
 .nav-pills>li.active>a:hover, 
 .nav-pills>li.active>a:focus {
-  background-color: #61A035;
+  background-color: $primary;
 }
 
 .panel-group .panel+.panel {
@@ -756,10 +773,10 @@ html, body, #map-canvas {
 // Overrides end
 
 #navbar {
-  background:     -moz-linear-gradient(top,       #61A035 0%, #519025 100%);
-  background:  -webkit-linear-gradient(top,       #61A035 0%, #519025 100%); 
-  background:          linear-gradient(to bottom, #61A035 0%, #519025 100%);
-  background-color: #71B045;
+  background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%);
+  background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%); 
+  background:          linear-gradient(to bottom, $primary 0%, darken($primary, 10%) 100%);
+  background-color: $primary;
   
   h1 {
     font-size: 24px;
@@ -967,6 +984,5 @@ html, body, #map-canvas {
     padding-right: 5px; 
     white-space: nowrap;
   }
-
 
 }
