@@ -59,62 +59,11 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     $scope.activityWindow.show = false;
   };
 
-  var _onMarkerClicked = function () {
-    var self = this;
-    $scope.$apply(amenitiesService.updateActivityWindow(self));
-  };
-
-  var generateActivsMarkers = function (response) {
-
-    if (typeof response.data === 'object') {
-      var activsPos = response.data.features;
-      activsPos.forEach( function(activity) {
-        var subCat = activity.attributes.SUBCATEGORY;
-        if (!amenitiesService.list[subCat]) { console.log( subCat ); }
-        var processed = {
-          id: activity.attributes.OBJECTID,
-          name: activity.attributes.LOCATION,
-          park: activity.attributes.PARK_NAME,
-          subcategory: amenitiesService.list[subCat] || subCat,
-          latitude: activity.geometry.y,
-          longitude: activity.geometry.x,
-          icon: amenitiesService.list[subCat] ? amenitiesService.list[subCat].imageUrlSm : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
-          onMarkerClicked: _onMarkerClicked,
-          options: {
-            visible: false,
-            title: amenitiesService.list[subCat] ? amenitiesService.list[subCat].name : activity.attributes.LOCATION || activity.attributes.PARK_NAME || 'activity',
-          }
-        };
-
-        amenitiesService.list.activitiesPos.markers.push(processed);
-      });
-
-    } else {
-      console.log('error', response);
-    }
-
-  };
-
-  var promise1 = amenitiesService.getAmenitiesData().then(amenitiesService.generateList, amenitiesService.logAjaxError);
-  var promise2 = amenitiesService.getAmenitiesData2().then(amenitiesService.generateList, amenitiesService.logAjaxError);
-
-  $q.all([promise1, promise2]).then(amenitiesService.completeData, amenitiesService.logAjaxError)
-                              .then(amenitiesService.getJoinParkData, amenitiesService.logAjaxError)
-                              .then(generateActivsMarkers, amenitiesService.logAjaxError)
-                              .then(amenitiesService.getJoinParkData2, amenitiesService.logAjaxError)
-                              .then(generateActivsMarkers, amenitiesService.logAjaxError);
-
-
   var mapInstance,
       mapsApi;
 
   gMapsAPI.then( function (maps) {
   	mapsApi = maps;
-  });
-
-  uiGmapIsReady.promise(1).then(function(instances) {
-    mapInstance = instances[0].map;
-    // console.log( mapInstance.getMapTypeId() );
   });
 
 }]);
