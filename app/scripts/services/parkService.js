@@ -112,7 +112,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
           teen: p.TEEN === 'Yes',
           museum: p.MUSEUM === 'Yes',
           
-          icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
+          icon: '/img/icons/park-marker.svg',
           latitude: park.geometry.y,
           longitude: park.geometry.x,
 

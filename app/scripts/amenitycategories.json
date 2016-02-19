@@ -106,9 +106,9 @@
       "name": "Amusement Train",
       "imageDataLg": "amusement-train-lg",
       "imageDataSm": "amusement-train-sm",
-      "imageUrlSm": "https://maxcdn.icons8.com/Color/PNG/24/Transport/train-24.png",
+      "imageUrlSm": "/img/icons/train.svg",
       "parkAttr": "AMUSEMENTTRAIN",
-      "imageUrlLg": "https://maxcdn.icons8.com/Color/PNG/96/Transport/train-96.png"
+      "imageUrlLg": "/img/icons/train.svg"
     },
     "Swimming": {
       "id": 1302,

@@ -1,44 +1,12 @@
 <uib-accordion close-others="settings.closeOthers" flex layout = "column">
 
-  <uib-accordion-group  is-open = "settings.first.status.open"
-                        is-disabled="settings.first.status.disabled"
-                        panel-class = "panel-primary">
-    
-    <uib-accordion-heading>
-      <span class = "accordion-heading" flex layout = "row">
-        <span>Set my Location</span>
-        <span flex></span>
-        <span> 
-          <i  class="pull-right glyphicon"
-              ng-class="{'glyphicon-chevron-down': settings.first.status.open, 'glyphicon-chevron-right': !settings.first.status.open}">
-          </i>
-        </span>
-      </span>
-    </uib-accordion-heading>
-
-
-    <md-input-container class="md-icon-float md-block">
-      <label>Address or Location</label>
-      <md-icon md-font-icon="fa-map-marker" class = "fa fa-2x"></md-icon>
-      <input type = "text" id="autocomplete" placeholder = "">
-    </md-input-container>
-
-    <md-button  class="md-primary md-raised geolocate-button capitalize" 
-                aria-label="Use my current location"
-                ng-click="geoLocate()">
-      <md-icon md-font-icon="fa-location-arrow" class = "fa fa-lg"></md-icon>
-      &nbsp; Use my current location!
-    </md-button>
-
-  </uib-accordion-group>
-
   <uib-accordion-group  is-open = "settings.second.status.open"
                         is-disabled="settings.second.status.disabled"
                         panel-class = "panel-primary">
     
     <uib-accordion-heading>
       <span class = "accordion-heading" flex layout = "row">
-        <span>Filter by Activity</span>
+        <span>I am Looking For</span>
         <span flex></span>
         <span> 
           <i  class="pull-right glyphicon"
@@ -98,7 +66,7 @@
     
     <uib-accordion-heading>
       <span class = "accordion-heading" flex layout = "row">
-        <span>Select a Park</span>
+        <span>Find a Park</span>
         <span flex></span>
         <span> 
           <i  class="pull-right glyphicon"
@@ -133,8 +101,10 @@
 
     <div class = "panel-scrollable" scrolling-buttons>
 
+      <a ng-click="sortVar = nearestPark">Test Sort</a>
+
       <ul id = "park-list">
-        <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
+        <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: sortVar | limitTo: parksLimit as filteredParks ">
           <a  ng-click="centerToPark(park)" 
               du-smooth-scroll="map-canvas">
             <span class = "park-title">
