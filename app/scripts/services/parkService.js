@@ -16,7 +16,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
     currentPark: undefined, 
     rebuild: false, 
     shallowWatch: false, 
-    fitToMap: true, 
+    fitToMap: false, 
     control: {} 
   };
 
@@ -142,15 +142,21 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
 		console.log(error);
 	};
 
-  var updateParkMarkers = function (selectedActivities) {
+  var updateParkMarkers = function (activities) {
     var query = '';
-    if (!selectedActivities) { return; }
+    var selectedActivities = [];
 
-    selectedActivities.forEach( function (activity, idx) {
+    angular.forEach(activities, function (activity) {
+      if (activity.selected) { this.push(activity); }
+    }, selectedActivities);
+
+    if (selectedActivities.length === 0) { query += '1%3D1'; }
+
+    angular.forEach(selectedActivities, function (activity, idx) {
       query += activity.parkAttr + '%3D' + '%27Yes%27';
       if (idx <= selectedActivities.length - 2) { query += '+AND+'; }
-      
     });
+
     getParksInfo(query);
   };
 
@@ -162,8 +168,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
   	}).then(_generateMarkers, _logAjaxError);
   };
 
-  // This gets automatically called because of the $watchCollection in MapCtrl
-  // getParksInfo();
+  getParksInfo();
 
 
 	return {

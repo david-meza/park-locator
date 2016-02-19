@@ -2,8 +2,7 @@
 
 angular.module('parkLocator').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
   function DialogCtrl($scope, $mdDialog, amenitiesService) {
-    $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
-    $scope.amenitiesService = amenitiesService.list;
+    $scope.activities = amenitiesService.list.categories;
 
     $scope.hide = function() {
       $mdDialog.hide();

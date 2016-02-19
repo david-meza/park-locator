@@ -20,7 +20,7 @@
       <md-list class = "map-icons-list">
 
         
-        <md-subheader class = "">Miscellaneous</md-subheader>
+        <md-subheader class = "">You</md-subheader>
         
         <div layout="row" layout-xs="column" layout-align = "start stretch"> 
           <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
@@ -30,12 +30,6 @@
             </div>
           </md-list-item>
 
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img class = "md-avatar" ng-src="{{ amenitiesService['Restroom'].imageUrlLg }}" alt="{{ amenitiesService['Restroom'].name }}" />
-            <div class="md-list-item-text">
-              <h4>{{ amenitiesService['Restroom'].name }}</h4>
-            </div>
-          </md-list-item>
         </div>
 
         <md-divider ></md-divider>
@@ -64,7 +58,7 @@
         <md-subheader class = "">Activity Icons</md-subheader>
         
         <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
-          <md-list-item ng-repeat="activity in activities | orderBy: 'name' " flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <md-list-item ng-repeat="activity in activities" flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
             <img class = "md-avatar" ng-src="{{ activity.imageUrlLg }}" alt="{{ activity.name }}" />
             <div class="md-list-item-text">
               <h4>{{ activity.name }}</h4>

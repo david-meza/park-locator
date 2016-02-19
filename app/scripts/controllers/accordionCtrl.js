@@ -12,9 +12,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.map = mapService.map;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
 
-    $scope.sortCategories = function (a, b, c) {
-      console.log(a, b, c);
-    }
+    $scope.updateParks = parkService.updateParkMarkers;
 
     // Limit to number of parks initially shown
     $scope.parksLimit = undefined;
@@ -32,49 +30,10 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       $scope.settings[to].status.open = true;
     };
 
-    var informUser = function (message) {
-      var toast = $mdToast.simple()
-        .textContent(message)
-        .action('ok')
-        .highlightAction(false)
-        .position('top right');
-      $mdToast.show(toast);
-    };
-
-    // Set Location Section
-    $scope.geoLocate = function() {
-
-      informUser('Obtaining your location...');
-
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( 
-          function (position) {
-            $scope.$apply(mapService.updateUserCoords(position.coords.latitude, position.coords.longitude));
-          },
-          function (error) {
-            informUser('Could not locate you due to: ' + error.message);
-          }, {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 60000
-          });
-        $scope.goToPanel('first', 'third');
-      } else {
-        informUser('Oops! Your browser does not support Geolocation.');
-        console.log('Geolocation not supported. Defaulting to backup location.');
-      }
-    };
-
-    // Get user's coordinates async a few seconds after the app loaded
-    $timeout(function(){
-      $scope.geoLocate();
-    }, 5000);
-
     // Toggle an activity and trigger a park search
     $scope.toggleSelected = function (amenity) {
       amenity.selected = !amenity.selected;
-      console.log(amenity);
+      $scope.updateParks($scope.amenities.categories);
     };
 
     // Select a park section
@@ -95,34 +54,9 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       return park.distance;
     };
 
-    // Search box inside set my location panel
-	  var autocomplete;
-
 	  gMapsAPI.then(function(maps) {
-	  	$scope.mapsApi = maps;
-	  	// Address typeahead
-	    var input = document.getElementById('autocomplete');
-	    var options = {
-	      componentRestrictions: {country: 'us'}
-	    };
-	    autocomplete = new maps.places.Autocomplete( input, options );
-	    autocomplete.addListener('place_changed', updateUserMarker);
-	    var circle = new maps.Circle({
-        center: {lat: 35.79741992502266, lng: -78.64118938203126 },
-        // Radius is in meters - 15km
-        radius: 15000
-      });
-      // Bias autocomplete results to locations in Raleigh
-      autocomplete.setBounds(circle.getBounds());
 
 	  });
-
-	  // Function used by address typeahead on a place selected
-	  var updateUserMarker = function() {
-	    var loc = autocomplete.getPlace().geometry.location;
-	    $scope.$apply(mapService.updateUserCoords(loc.lat(), loc.lng()));
-      $scope.goToPanel('first', 'third');
-	  };
 
 
   }]);

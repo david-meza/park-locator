@@ -21,18 +21,13 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   // Activity Info window
   $scope.activityWindow = amenitiesService.activityWindow;
 
-  // Make a new query when the activities filter changes
-  $scope.$watchCollection('selectedActivities.current', function (selected) {
-    parkService.updateParkMarkers(selected);
-  });
-
   // Opens the dialog showing the map icons key
   $scope.openKey = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/partials/key-dialog.html',
       targetEvent: ev,
       fullscreen: true,
-      clickOutsideToClose:true,
+      clickOutsideToClose: true,
       controller: 'DialogCtrl',
       locals: {
         activities: amenitiesService.list.categories
@@ -48,7 +43,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
     // Get all the activities markers, then only show them if we are zoomed in >= 16
     var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
     activsMarkers.allVals.forEach( function (marker) {
-      marker.gObject.setVisible(z >= 16);
+      marker.gObject.setVisible(z >= 15);
     });
 
     // Close info windows

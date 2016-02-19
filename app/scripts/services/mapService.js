@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapApi',
-  function (Flash, gMapsApi) {
+angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout',
+  function (gMapsApi, $mdToast, $timeout) {
 
-
-  var mapsObj;
-
-  gMapsApi.then( function (maps) {
-    mapsObj = maps;
-    map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890));
-  });
 
   // Temporary coordinates while Geoloc gets us the user's coords
   var location = {
@@ -21,7 +14,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
 
   var map = {
   	// 1 to 20 - 20 being closely zoomed in
-    zoom: 14,
+    zoom: 13,
     // turns to true when the map is being dragged
     dragging: false,
     // set to true to trigger a map refresh when necessary
@@ -29,6 +22,7 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     pan: false,
     location: location,
     control: {},
+    events: {},
     bounds: {
       northeast: {
         longitude: -78.336890,
@@ -40,17 +34,27 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
       }
     },
     options: {
-      // backgroundColor: '#2c3e50',
-      draggable: true, //$window.innerWidth >= 992,
+      disableDefaultUI: true,
+      draggable: true,
       scrollwheel: false,
-      // mapTypeControl: true,
-      // mapTypeId: 'HYBRID',
-      // mapTypeControlOptions: {
-        // mapTypeIds: ['park_theme', 'ROADMAP'],
-      // },
-      minZoom: 8,
-      tilt: 45,
-      panControl: false //$window.innerWidth < 992
+      minZoom: 9,
+      tilt: 0,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: undefined,
+        style: undefined,
+      },
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        position: undefined
+      },
+      scaleControl: false,
+      streetViewControl: true,
+      streetViewControlOptions: {
+        position: undefined
+      },
+      rotateControl: false,
+      panControl: false
     },
   };
 
@@ -77,37 +81,19 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     id: 0,
     coords: { latitude: location.coords.latitude, longitude: location.coords.longitude },
     options: {
-      draggable: false,
+      draggable: true,
       clickable: false,
       icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
     },
   };
 
-  // Get our map instance when it loads
-  map.events = {
-    tilesloaded: function () {
-      map.mapInstance = map.control.getGMap();
-    }
-  };
-
-  // Search box
-  map.searchbox = {
-    template: 'views/partials/search-box.html',
-    position: 'TOP_RIGHT',
-    options: {
-      // bounds: {
-      //   east: -78.336890,
-      //   north: 36.113561,
-      //   south: 35.437814,
-      //   west: -78.984583
-      // }
-    },
-    events: {
-      places_changed: function (searchBox) {
-        var loc = searchBox.getPlaces()[0].geometry.location;
-        moveToPos(loc.lat(), loc.lng());
-	    }
-	  }
+  var informUser = function (message) {
+    var toast = $mdToast.simple()
+      .textContent(message)
+      .action('ok')
+      .highlightAction(false)
+      .position('top right');
+    $mdToast.show(toast);
   };
 
 	var _isInRaleigh = function (lat, lon) {
@@ -123,22 +109,58 @@ angular.module('parkLocator').factory('mapService', ['Flash', 'uiGmapGoogleMapAp
     map.myLocationMarker.coords.longitude = lon;
     map.zoom = 14;
     if (!_isInRaleigh(lat, lon)) {
-      // Otherwise, keep using default coordinates
-      var message = '<strong><i class = "fa fa-fw fa-exclamation-circle"></i> </strong>  It seems this location is not in Raleigh.';
-      Flash.create('warning', message);
+      informUser('Oops! It seems this location is not in Raleigh.');
     }
   };
 
-  var moveToPos = function (lat, lon) {
-    // if (!_isInRaleigh(lat,lon)) { return updateUserCoords(lat,lon); }
-    map.location.coords.latitude = lat;
-    map.location.coords.longitude = lon;
-    map.zoom = 16;
+  map.searchbox = {
+    template: 'views/partials/search-box.html',
+    position: 'TOP_RIGHT',
+    options: {},
+    events: {
+      places_changed: function (searchBox) {
+        var loc = searchBox.getPlaces()[0].geometry.location;
+        updateUserCoords(loc.lat(), loc.lng());
+      }
+    }
   };
+
+  var geoLocate = function () {
+    informUser('Obtaining your location...');
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( 
+        function (position) {
+          updateUserCoords(position.coords.latitude, position.coords.longitude);
+        },
+        function (error) {
+          informUser('Could not locate you due to: ' + error.message);
+        }, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        });
+    } else {
+      informUser('Oops! Your browser does not support Geolocation.');
+      console.log('Geolocation not supported. Defaulting to backup location.');
+    }
+  };
+
+  // Get user's coordinates async a few seconds after the app loaded
+  $timeout(function(){
+    geoLocate();
+  }, 5000);
+
+  gMapsApi.then( function (maps) {
+    map.searchbox.options.bounds = new maps.LatLngBounds(new maps.LatLng(35.437814,-78.984583), new maps.LatLng(36.113561,-78.336890));
+    map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
+    map.options.zoomControlOptions.style = maps.ZoomControlStyle.SMALL;
+    map.options.streetViewControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
+    map.options.mapTypeControlOptions.position = maps.ControlPosition.TOP_LEFT;
+  });
 
   return {
     map: map,
-    updateUserCoords: updateUserCoords,
   };
 
 }]);
