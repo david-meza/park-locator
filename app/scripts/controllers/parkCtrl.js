@@ -17,7 +17,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     $scope.map = mapService.map;
 
-    $scope.mergedActivities = $scope.amenities.uniques.concat($scope.selectedActivities.current);
+    $scope.mergedActivities = $scope.amenities.categories;
 
 	  gMapsAPI.then( function (maps) {
 	  	$scope.mapsApi = maps;

@@ -12,9 +12,6 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   // Activities Markers
   $scope.activities = amenitiesService.list.activitiesPos;
   
-  // Non-duplicate activities model
-  $scope.uniqueActivs = amenitiesService.list.uniques;
-  
   // Non-duplicate filtering (selected) activities
   $scope.selectedActivities = amenitiesService.selectedActivities;
   
@@ -38,7 +35,7 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
       clickOutsideToClose:true,
       controller: 'DialogCtrl',
       locals: {
-        activities: $scope.uniqueActivs
+        activities: amenitiesService.list.categories
       },
       bindToController: true
     });

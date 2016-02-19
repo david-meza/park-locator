@@ -11,10 +11,11 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     $scope.amenities = amenitiesService.list;
     $scope.map = mapService.map;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
-    
-    // Filter by activity section
-    $scope.selectedActivities = amenitiesService.selectedActivities;
-    
+
+    $scope.sortCategories = function (a, b, c) {
+      console.log(a, b, c);
+    }
+
     // Limit to number of parks initially shown
     $scope.parksLimit = undefined;
     $scope.$watch('parks.content.length', function (newVal) {
@@ -43,7 +44,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
     // Set Location Section
     $scope.geoLocate = function() {
 
-      Flash.create('info', '<i class="fa fa-lg fa-cog fa-spin"></i> Obtaining your location.');
+      informUser('Obtaining your location...');
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
@@ -60,8 +61,7 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
           });
         $scope.goToPanel('first', 'third');
       } else {
-        var message = '<i class="fa fa-lg fa-meh-o"></i> <strong> Oops!</strong>  Your browser does not support Geolocation.';
-        Flash.create('warning', message);
+        informUser('Oops! Your browser does not support Geolocation.');
         console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };
@@ -71,16 +71,10 @@ angular.module('parkLocator').controller('accordionCtrl', [ '$scope', 'mapServic
       $scope.geoLocate();
     }, 5000);
 
-    // Add an activity to filter array
-    $scope.addToSelected = function (amenity) {
-    	$scope.selectedActivities.current.push(amenity);
-    	$scope.amenities.uniques.splice( $scope.amenities.uniques.indexOf(amenity), 1);
-    };
-
-    // Remove a selected activity
-    $scope.removeSelected = function (amenity) {
-    	$scope.amenities.uniques.push( amenity );
-    	$scope.selectedActivities.current.splice($scope.selectedActivities.current.indexOf(amenity), 1);
+    // Toggle an activity and trigger a park search
+    $scope.toggleSelected = function (amenity) {
+      amenity.selected = !amenity.selected;
+      console.log(amenity);
     };
 
     // Select a park section
