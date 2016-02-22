@@ -54,7 +54,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', '$q',
 	        subcategory: list[subCat] || subCat,
 	        latitude: activity.geometry.y,
 	        longitude: activity.geometry.x,
-	        icon: list[subCat] ? list[subCat].imageUrlSm : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
+	        icon: list[subCat] ? list[subCat].icon : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
 	        onMarkerClicked: markerclick,
 	        options: {
 	          visible: false,
@@ -88,6 +88,7 @@ angular.module('parkLocator').factory('amenitiesService', ['$http', '$q',
 			});
 			// Delete the unnecessary activities by PRCR request
 			delete list.categories.Library;
+			delete list.categories.Restroom;
 			delete list.categories.Softball;
 			delete list.categories['Youth Baseball'];
 			delete list.categories['Tennis Center'];

@@ -6,7 +6,7 @@ angular.module('parkLocator').factory('accordionService', function(){
     closeOthers: true,
   };
 
-  settings.first = {
+  settings.activities = {
     classes: 'panel-default',
     status: {
       open: true,
@@ -14,15 +14,7 @@ angular.module('parkLocator').factory('accordionService', function(){
     }
   };
 
-  settings.second = {
-    classes: 'panel-default',
-    status: {
-      open: false,
-      disabled: false,
-    }
-  };
-
-  settings.third = {
+  settings.parks = {
     classes: 'panel-default',
     status: {
       open: false,

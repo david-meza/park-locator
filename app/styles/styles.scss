@@ -722,8 +722,11 @@ html, body, #map-canvas {
 .panel-primary {
   border-color: $primary;
   .panel-heading {
+    background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
+    background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
+    background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
     background-color: $primary;
-    border-color: $primary;
+    border-color: darken($primary, 5%);
 
     &+.panel-collapse>.panel-body {
       border-top-color: $primary;
