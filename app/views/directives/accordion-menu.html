@@ -48,8 +48,8 @@
       <ul id = "amenities-list">
         <li ng-repeat="(activityName, activityData) in amenities.categories">
           <a ng-click="toggleSelected(activityData)" ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-            <i class = "icon-bg icon-bg-sm" ng-class="activityData.imageDataSm"></i> 
-            {{ activityData.name }}
+            <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activity.name }}"></md-icon>
+            {{ ::activityData.name }}
             <i  class="pull-right glyphicon-padding glyphicon glyphicon-ok"
                 ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"
                 ng-show="activityData.selected"></i>

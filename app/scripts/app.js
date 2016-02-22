@@ -49,8 +49,12 @@ angular.module('parkLocator', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'uiGma
         .state('home.park', {
           url: ':name',
           templateUrl: 'views/park-information.html',
-          controller: 'parkCtrl'
-
+          controller: 'parkCtrl',
+          resolve: {
+            maps: ['uiGmapGoogleMapApi', function(uiGmapGoogleMapApi) {
+              return uiGmapGoogleMapApi;
+            }]
+          }
         })
 
         .state('home.park.section', {

@@ -2,18 +2,18 @@
 
 angular.module('parkLocator').filter('parkAmenities', function() {
   
-  return function(amenities, park) {
+  return function(activities, park) {
 
-  	if (!park) {return amenities;}
+  	if (!park) {return activities;}
 
   	var filtered = [];
 
-  	for (var i = 0; i < amenities.length; i++) {
-  		var parkAttribute = amenities[i].parkAttr.toLowerCase();
+  	angular.forEach(activities, function (activity) {
+  		var parkAttribute = activity.parkAttr.toLowerCase();
   		if (park[parkAttribute]) {
-  			filtered.push(amenities[i]);
+  			this.push(activity);
   		}
-  	}
+    }, filtered);
 
     return filtered;
   };

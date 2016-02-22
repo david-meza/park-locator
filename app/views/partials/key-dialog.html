@@ -59,9 +59,9 @@
         
         <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
           <md-list-item ng-repeat="activity in activities" flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img class = "md-avatar" ng-src="{{ activity.imageUrlLg }}" alt="{{ activity.name }}" />
+            <md-icon class="md-avatar-icon" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
             <div class="md-list-item-text">
-              <h4>{{ activity.name }}</h4>
+              <h4>{{ ::activity.name }}</h4>
             </div>
           </md-list-item>
         </div>

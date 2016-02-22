@@ -104,6 +104,7 @@
     "Amusement Train": {
       "id": 3002,
       "name": "Amusement Train",
+      "icon": "/img/icons/train.svg",
       "imageDataLg": "amusement-train-lg",
       "imageDataSm": "amusement-train-sm",
       "imageUrlSm": "/img/icons/train.svg",
@@ -114,6 +115,7 @@
       "id": 1302,
       "name": "Swimming",
       "parkAttr": "POOL",
+      "icon": "/img/icons/swimming.svg",
       "imageDataLg": "swimming-lg",
       "imageDataSm": "swimming-sm",
       "imageUrlSm": "https://maxcdn.icons8.com/Color/PNG/24/Sports/swimming-24.png",
@@ -366,6 +368,7 @@
     "Active Adult Center": {
       "name": "Active Adult Center",
       "parkAttr": "ACTIVE_ADULT",
+      "icon": "/img/icons/active-adult-center.svg",
       "imageDataLg": "active-adult-center-lg",
       "imageDataSm": "active-adult-center-sm",
       "imageData": "active-adult-center-fallback",

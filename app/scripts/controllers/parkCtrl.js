@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', 'accordionService', '$timeout',
-	function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI, amenitiesService, accordionService, $timeout) {
+angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'maps', 'amenitiesService', 'accordionService', '$timeout',
+	function ($scope, $state, $stateParams, mapService, parkService, maps, amenitiesService, accordionService, $timeout) {
 
 		var parkName = $stateParams.name,
 				accordionSettings = accordionService.settings,
@@ -16,15 +16,6 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
     $scope.selectedActivities = amenitiesService.selectedActivities;
     $scope.myLoc = mapService.map.myLocationMarker.coords;
     $scope.map = mapService.map;
-
-    $scope.mergedActivities = $scope.amenities.categories;
-
-	  gMapsAPI.then( function (maps) {
-	  	$scope.mapsApi = maps;
-      // Directions Service
-      initializeDirectionsMap();
-
-	  });
 
 	  $scope.openLocationPanel = function () {
       accordionSettings.second.status.open = false;
@@ -44,43 +35,43 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  var initializeDirectionsMap = function () {
 	  	if ( !document.getElementById('mini-map') ) { return; }
 	  	
-	    directionsService = new $scope.mapsApi.DirectionsService();
-	    directionsDisplay = new $scope.mapsApi.DirectionsRenderer({ suppressMarkers: true });
+	    directionsService = new maps.DirectionsService();
+	    directionsDisplay = new maps.DirectionsRenderer({ suppressMarkers: true });
 	    generateMarkerIcons();
-	    var styledMap = new $scope.mapsApi.StyledMapType($scope.map.options.secondaryStyles, {name: 'Styled Map'});
+	    var styledMap = new maps.StyledMapType($scope.map.options.secondaryStyles, {name: 'Styled Map'});
 	    var mapOptions = {
 		    zoom: 16,
 		    scrollwheel: false,
-		    center: new $scope.mapsApi.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
+		    center: new maps.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
 		    mapTypeControlOptions: {
-		      mapTypeIds: [$scope.mapsApi.MapTypeId.ROADMAP, 'light_dream']
+		      mapTypeIds: [maps.MapTypeId.ROADMAP, 'light_dream']
 		    }
 		  };
-		  map = new $scope.mapsApi.Map(document.getElementById('mini-map'), mapOptions);
+		  map = new maps.Map(document.getElementById('mini-map'), mapOptions);
 	  	directionsDisplay.setMap( map );
 		  map.mapTypes.set('light_dream', styledMap);
 		  map.setMapTypeId('light_dream');
-      // $scope.mapsApi.event.addListenerOnce(map, 'idle', function() {
-      //    $scope.mapsApi.event.trigger(map, 'resize');
+      // maps.event.addListenerOnce(map, 'idle', function() {
+      //    maps.event.trigger(map, 'resize');
       // });
 	  };
 
 	  var generateMarkerIcons = function () {
 	  	icons = {
-			  start: new $scope.mapsApi.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
+			  start: new maps.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
 			    // (width,height)
-			    new $scope.mapsApi.Size( 45, 45 ),
+			    new maps.Size( 45, 45 ),
 			    // The origin point (x,y)
-			    new $scope.mapsApi.Point( 0, 0 ),
+			    new maps.Point( 0, 0 ),
 			    // The anchor point (x,y)
-			    new $scope.mapsApi.Point( 24, 39 ) ),
-			  end: new $scope.mapsApi.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
+			    new maps.Point( 24, 39 ) ),
+			  end: new maps.MarkerImage('https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
 			   // (width,height)
-			   new $scope.mapsApi.Size( 45, 50 ),
+			   new maps.Size( 45, 50 ),
 			   // The origin point (x,y)
-			   new $scope.mapsApi.Point( 0, 0 ),
+			   new maps.Point( 0, 0 ),
 			   // The anchor point (x,y)
-			   new $scope.mapsApi.Point( 25, 46 ) )
+			   new maps.Point( 25, 46 ) )
 			};
 	  };
 
@@ -90,8 +81,8 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	  	var travelMode = getBestTravelMode(park);
 
 		  var request = {
-		      origin: new $scope.mapsApi.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
-		      destination: new $scope.mapsApi.LatLng(park.latitude, park.longitude),
+		      origin: new maps.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
+		      destination: new maps.LatLng(park.latitude, park.longitude),
 		      travelMode: travelMode,
 		  };
 		  directionsService.route(request, displayDirections);
@@ -102,7 +93,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
       var b = Math.abs(park.longitude - $scope.myLoc.longitude);
       var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
       $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 };
-      return (dist <= 0.012) ? $scope.mapsApi.TravelMode.WALKING : $scope.mapsApi.TravelMode.DRIVING;
+      return (dist <= 0.012) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
 		};
 
 		var verifyPark = function () {
@@ -114,7 +105,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 		};
 
 		var displayDirections = function (response, status) {
-	    if (status === $scope.mapsApi.DirectionsStatus.OK) {
+	    if (status === maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
 	      placeCustomMarkers(response);
 	      extractDirectionsInfo(response);
@@ -122,6 +113,9 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 	    	console.log('Error happened... Maybe over query limit?');
 	    }
 	  };
+
+	  // Directions Service
+    initializeDirectionsMap();
 
 	  $scope.$watchGroup(['parks.currentPark', 'myLoc.latitude', 'myLoc.longitude'], function () {
 	  	calcRoute($scope.parks.currentPark);
@@ -137,12 +131,12 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 
 	  var makeMarker = function ( position, icon, title ) {
 	  	if (startEndMarkers[startEndMarkers.length - 2]) { startEndMarkers[startEndMarkers.length - 2].setMap(null); }
-	  	var marker = new $scope.mapsApi.Marker({
+	  	var marker = new maps.Marker({
 	  		position: position,
 	  		map: map,
 	  		icon: icon,
 	  		title: title,
-	  		animation: $scope.mapsApi.Animation.DROP
+	  		animation: maps.Animation.DROP
 	  	});
 	  	startEndMarkers.push(marker);
 	  };
