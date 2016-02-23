@@ -16,6 +16,18 @@
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
 
+
+    <!-- Activities Markers -->
+    <ui-gmap-markers  models="activities.markers"
+                      coords="'self'"
+                      icon="activities.markersConfig.icon"
+                      control = "activities.markersConfig.control"
+                      options = "activities.markersConfig.options"
+                      fit="::activities.markersConfig.fitToMap"
+                      modelsbyref = "::activities.markersConfig.shallowWatch"
+                      events="::activities.markersConfig.markerEvents">
+    </ui-gmap-markers>
+
     
     <!-- Park Markers -->
     <ui-gmap-markers  models="parks.content"
@@ -25,11 +37,10 @@
                       type = "map.markersConfig.type"
                       typeOptions = "map.markersConfig.typeOptions"
                       typeEvents = "map.markersConfig.typeEvents"
-                      modelsbyref="parks.shallowWatch"
-                      fit = "parks.fitToMap"
+                      modelsbyref="::parks.shallowWatch"
+                      fit = "::parks.fitToMap"
                       options="'options'"
                       events="map.parkMarkerEvents"
-                      doRebuildAll = "parks.rebuild"
                       control = "parks.control">
     </ui-gmap-markers>
 
@@ -44,19 +55,6 @@
                     templateparameter = "parkWindow.templateParameter"
                     ng-cloak>
     </ui-gmap-window>
-
-
-    <!-- Activities Markers -->
-    <ui-gmap-markers  models="activities.markers"
-                      coords="'self'"
-                      icon="activities.markersConfig.icon"
-                      control = "activities.markersConfig.control"
-                      options = "activities.markersConfig.options"
-                      fit="activities.markersConfig.fitToMap"
-                      modelsbyref = "activities.markersConfig.shallowWatch"
-                      doRebuildAll="activities.markersConfig.rebuild"
-                      events="activities.markersConfig.markerEvents">
-    </ui-gmap-markers>
 
 
   </ui-gmap-google-map>
