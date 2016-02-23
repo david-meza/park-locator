@@ -1,0 +1,35 @@
+<md-autocomplete  md-selected-item="search.selectedItem"
+                  md-search-text="search.searchText"
+                  md-search-text-change="search.searchTextChange(search.searchText)"
+                  md-selected-item-change="search.selectedItemChange(activity)"
+                  md-items="activity in search.querySearch(search.searchText)"
+                  md-item-text="activity.name"
+                  placeholder="Find an activity"
+                  md-menu-class="activity-custom-template">
+  <md-item-template>
+    <span class="item-title">
+      <md-icon md-svg-icon="{{ ::activity.icon }}"></md-icon>
+      <span> {{ activity.name }} </span>
+      <md-icon md-svg-icon="{{ ::activity.icon }}"></md-icon>
+    </span>
+  </md-item-template>
+  <md-not-found>No matching activities found.</md-not-found>
+</md-autocomplete>
+
+<div layout="row" class="pull-down-lg">
+  <span flex></span>
+  <p  class = "text-total-results" 
+      ng-class="{ 'text-info': parks.length > 0, 'text-danger': parks.length <= 0 }">
+    Number of Parks: {{ parks.length }}
+  </p>
+</div>
+
+<div scrolling-buttons>
+  <md-list id="activities-list">
+    <md-list-item ng-click="toggleSelected(activityData)" ng-repeat="(activityName, activityData) in activities.categories">
+      <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activityName }}" class="activity-icon"></md-icon>
+      <p class="limit-text capitalize limit-activity-name"> {{ ::activityData.name }} </p>
+      <md-switch class="md-secondary" ng-model="activityData.selected" ng-change="updateParks(activities.categories)" aria-label="Toggle activity filter"></md-switch>
+    </md-list-item>
+  </md-list>
+</div>

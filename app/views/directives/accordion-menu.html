@@ -16,43 +16,7 @@
       </span>
     </uib-accordion-heading>
 
-
-    <div class="row">
-      <div class="col-md-12">
-
-        <md-input-container class="md-icon-float md-block no-mb">
-          <label>Activity</label>
-          <md-icon md-font-icon="fa-search" class = "fa fa-lg"></md-icon>
-          <input  type="search"
-                  id = "searchActivityName"
-                  ng-model="activitySelected"
-                  typeahead-no-results = "noActivitiesResults"
-                  typeahead-on-select = "toggleSelected($item, $model, $label)"
-                  typeahead-select-on-exact = "true"
-                  uib-typeahead="activity as activity.name for activity in amenities.categories | filter:$viewValue | limitTo:8">
-        </md-input-container>
-
-      </div>
-
-      <div class = "col-md-12 mb-20" ng-show="noActivitiesResults">
-        <i class="glyphicon glyphicon-remove"></i> No activities matched your search.
-      </div>
-    </div>
-
-    <p  class = "pull-right text-total-results" 
-        ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">
-        Number of Parks: {{ parks.content.length }}
-    </p>
-
-    <div scrolling-buttons>
-      <md-list id="activities-list">
-        <md-list-item ng-click="toggleSelected(activityData)" ng-repeat="(activityName, activityData) in amenities.categories">
-          <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activityName }}" class="activity-icon"></md-icon>
-          <p class="limit-text capitalize limit-activity-name"> {{ ::activityData.name }} </p>
-          <md-switch class="md-secondary" ng-model="activityData.selected" ng-change="updateParks(amenities.categories)" aria-label="Toggle activity filter"></md-switch>
-        </md-list-item>
-      </md-list>
-    </div>
+    <activities-selection layout="column" flex></activities-selection>
 
   </uib-accordion-group>
 

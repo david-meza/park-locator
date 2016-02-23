@@ -44,6 +44,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
       longitude: activity.geometry.x,
       icon: activities[subCat] ? activities[subCat].icon : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
       options: {
+      	visible: false,
         labelContent: activities[subCat] ? activities[subCat].name : act.LOCATION || 'activity',
         labelClass: 'activity-label',
         labelVisible: false,

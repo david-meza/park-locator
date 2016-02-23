@@ -650,45 +650,20 @@ html, body {
 .panel-group .panel-body {
 
   .panel-scrollable {
-    max-height: 18.3em;
+    max-height: 24em;
     overflow: auto;
     margin-right: -15px;
     padding-right: 15px;
     clear: right;
   }
 
-  .faded-edge-bottom {
-    position: absolute;
-    opacity: 1;
-    height: 4em;
-    width: 90%;
-    border-radius: 5px;
-    margin-left: -15px;
-    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-    bottom: 73px;
-    z-index: 10;
-    -webkit-transition: all .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -moz-transition:    all .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -o-transition:      all .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -ms-transition:     all .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition:         all .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    &.v2 {
-      bottom: 23px;
-    }
-
-  }
-
-  &:hover .faded-edge-bottom {
-    height: 0.5em;
-  }
 }
 
-// .angular-google-map-container {
-//   height: 35em;
-// }
+activities-selection {
+  .pull-down-lg {
+    margin-top: 30px;
+  }
+}
 
 .angular-google-map {
   flex: 1;

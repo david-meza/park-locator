@@ -113,6 +113,7 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
 
       markerClick: _markerClick,
       options: {
+        visible: true,
         title: p.NAME,
         labelAnchor: '0 0',
         animation: (mapsApi ? mapsApi.Animation.DROP : 2)

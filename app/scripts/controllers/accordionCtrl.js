@@ -1,18 +1,15 @@
 'use strict';
 
-angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'Flash', 'amenitiesService', '$timeout', '$mdToast',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, Flash, amenitiesService, $timeout, $mdToast) {
+angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', '$timeout', '$mdToast',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, amenitiesService, $timeout, $mdToast) {
     
   // Basic accordion config
   $scope.settings = accordionService.settings;
   
   // Define some async objects from our services
   $scope.parks = parkService.markers;
-  $scope.amenities = amenitiesService.activities;
   $scope.map = mapService.map;
   $scope.myLoc = mapService.map.myLocationMarker.coords;
-
-  $scope.updateParks = parkService.updateParkMarkers;
 
   // Limit to number of parks initially shown
   $scope.parksLimit = undefined;
@@ -23,12 +20,6 @@ angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapSer
   // Expand the list of park results
   $scope.showAll = function () {
     $scope.parksLimit = $scope.parks.content.length;
-  };
-
-  // Toggle an activity and trigger a park search
-  $scope.toggleSelected = function (activity) {
-    activity.selected = !activity.selected;
-    $scope.updateParks($scope.amenities.categories);
   };
 
   // Select a park section
