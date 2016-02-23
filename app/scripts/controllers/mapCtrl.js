@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog',
-	function($scope, mapService, parkService, amenitiesService, gMapsAPI, uiGmapIsReady, $q, $mdDialog){
+angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'amenitiesService',
+  function($scope, mapService, parkService, amenitiesService){
 
 	// Map settings
   $scope.map = mapService.map;
@@ -10,52 +10,29 @@ angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 
   $scope.parks = parkService.markers;
   
   // Activities Markers
-  $scope.activities = amenitiesService.list.activitiesPos;
-  
-  // Non-duplicate filtering (selected) activities
-  $scope.selectedActivities = amenitiesService.selectedActivities;
-  
+  $scope.activities = amenitiesService.activities;
+    
   // Park Info Window
   $scope.parkWindow = parkService.parkWindow;
   
-  // Activity Info window
-  $scope.activityWindow = amenitiesService.activityWindow;
-
-  // Opens the dialog showing the map icons key
-  $scope.openKey = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/partials/key-dialog.html',
-      targetEvent: ev,
-      fullscreen: true,
-      clickOutsideToClose: true,
-      controller: 'DialogCtrl',
-      locals: {
-        activities: amenitiesService.list.categories
-      },
-      bindToController: true
-    });
-  };
-
   $scope.map.events.zoom_changed = function (map) {
     var z = map.getZoom();
-    if (!$scope.activities.markersConfig.control.getPlurals) { return; }
-    
-    // Get all the activities markers, then only show them if we are zoomed in >= 16
-    var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
-    activsMarkers.allVals.forEach( function (marker) {
-      marker.gObject.setVisible(z >= 15);
+    if ( angular.isUndefined($scope.activities.markersConfig.control.getPlurals) || angular.isUndefined($scope.parks.control.getPlurals) ) { return; }
+    // Get all the activities markers, then only show them if we are zoomed in close to any particular park
+    var activityMarkers = $scope.activities.markersConfig.control.getPlurals().values();
+    angular.forEach(activityMarkers, function (marker) {
+      marker.gObject.setVisible(z > 14);
+      // marker.opts.visible = z > 14;
+    });
+
+    var parkMarkers = $scope.parks.control.getPlurals().values();
+    angular.forEach(parkMarkers, function (marker) {
+      marker.gObject.setVisible(z < 17);
+      // marker.opts.visible = z < 17;
     });
 
     // Close info windows
     $scope.parkWindow.show = false;
-    $scope.activityWindow.show = false;
   };
-
-  var mapInstance,
-      mapsApi;
-
-  gMapsAPI.then( function (maps) {
-  	mapsApi = maps;
-  });
 
 }]);

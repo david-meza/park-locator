@@ -3,28 +3,25 @@
 angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	function($http, $q){
 	
-	var list = { categories: {}, activitiesPos: { markers: [] } };
-	var selectedActivities = { current: [] };
+	var activities = { categories: {}, markers: [], markersConfig: {} };
 
-	list.activitiesPos.markersConfig = {
+	activities.markersConfig = {
     control: {},
     options: 'options',
-    icon: 'icon'
-  };
-
-  var activityWindow = {
-  	show: false,
-    coords: {},
-    templateUrl: 'views/partials/activity-window.html',
-    templateParameter: {},
-    control: {},
-    options: {
-    	visible: true,
-    	isHidden: true,
-    	maxWidth: 150,
-    	pixelOffset: { width: 0, height: -25 }
-    },
-    closeclick: function (windowScope) { windowScope.show = false; }
+    icon: 'icon',
+    shallowWatch: false,
+    fitToMap: false,
+    rebuild: false,
+    markerEvents: {
+      mouseover: function (gMarker) {
+        gMarker.labelVisible = true;
+        gMarker.label.setVisible();
+      },
+      mouseout: function (gMarker) {
+        gMarker.labelVisible = false;
+        gMarker.label.setVisible();
+      }
+    }
   };
 
 	var logError = function (response) {
@@ -32,39 +29,34 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	  return $q.reject(response);
 	};
 
-	var updateActivityWindow = function (activityMarker) {
-    activityWindow.coords = { latitude: activityMarker.latitude, longitude: activityMarker.longitude };
-    activityWindow.templateParameter = { name: activityMarker.name, park: activityMarker.park, subcategoryName: activityMarker.subcategory.name };
-    activityWindow.show = true;
-	};
+	var extractIndividualActivity = function (activity) {
+  	var act = activity.attributes;
+    var subCat = act.SUBCATEGORY;
+    
+    if (!activities[subCat]) { console.log( subCat ); }
+    
+    var processed = {
+      id: act.OBJECTID,
+      name: act.LOCATION,
+      park: act.PARK_NAME,
+      subcategory: activities[subCat] || subCat,
+      latitude: activity.geometry.y,
+      longitude: activity.geometry.x,
+      icon: activities[subCat] ? activities[subCat].icon : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
+      options: {
+        labelContent: activities[subCat] ? activities[subCat].name : act.LOCATION || 'activity',
+        labelClass: 'activity-label',
+        labelVisible: false,
+      }
+    };
 
-	var markerclick = function () {
-	  updateActivityWindow(this);
-	};
+    this.push(processed);
+  };
 
 	var generateActivityMarkers = function (response) {
 	  if (response.status === 200) {
-	    angular.forEach(response.data.features, function(activity) {
-	      var subCat = activity.attributes.SUBCATEGORY;
-	      if (!list[subCat]) { console.log( subCat ); }
-	      var processed = {
-	        id: activity.attributes.OBJECTID,
-	        name: activity.attributes.LOCATION,
-	        park: activity.attributes.PARK_NAME,
-	        subcategory: list[subCat] || subCat,
-	        latitude: activity.geometry.y,
-	        longitude: activity.geometry.x,
-	        icon: list[subCat] ? list[subCat].icon : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
-	        onMarkerClicked: markerclick,
-	        options: {
-	          visible: false,
-	          title: list[subCat] ? list[subCat].name : activity.attributes.LOCATION || activity.attributes.PARK_NAME || 'activity',
-	        }
-	      };
-
-	      list.activitiesPos.markers.push(processed);
-	    });
-	    return list.activitiesPos.markers;
+	    angular.forEach(response.data.features, extractIndividualActivity, activities.markers);
+	    return activities.markers;
 	  } else {
 	    return logError();
 	  }
@@ -79,21 +71,21 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 
 		if (response.status === 200) {
 			// Copy all category attributes to our local object
-			angular.extend(list.categories, response.data.categories);
+			angular.extend(activities.categories, response.data.categories);
 			// Store each unique category by its multiple ids so we can get the right icon and reference when necessary
 			angular.forEach(response.data.idReferences, function (categoryIds, categoryName) {
 				angular.forEach(categoryIds, function (id) {
-					list[id] = list.categories[categoryName];
+					activities[id] = activities.categories[categoryName];
 				});
 			});
 			// Delete the unnecessary activities by PRCR request
-			delete list.categories.Library;
-			delete list.categories.Restroom;
-			delete list.categories.Softball;
-			delete list.categories['Youth Baseball'];
-			delete list.categories['Tennis Center'];
+			delete activities.categories.Library;
+			delete activities.categories.Restroom;
+			delete activities.categories.Softball;
+			delete activities.categories['Youth Baseball'];
+			delete activities.categories['Tennis Center'];
 			// Return the unique categories in case we chain the resolution of this promise
-			return list.categories;
+			return activities.categories;
 		} else {
 			// Reject the deferred and stop any further promise chaining
 			return logError();
@@ -128,9 +120,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	$q.all([categoriesPromise, getJoinParkData(), getJoinParkData2()]).then(processParkActivities, logError);
 
 	return {
-		list: list,
-		selectedActivities: selectedActivities,
-		activityWindow: activityWindow,
+		activities: activities
 	};
 
 }]);

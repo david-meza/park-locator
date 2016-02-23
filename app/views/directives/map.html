@@ -50,10 +50,12 @@
     <ui-gmap-markers  models="activities.markers"
                       coords="'self'"
                       icon="activities.markersConfig.icon"
-                      click="onMarkerClicked()"
                       control = "activities.markersConfig.control"
                       options = "activities.markersConfig.options"
-                      modelsbyref = "true">
+                      fit="activities.markersConfig.fitToMap"
+                      modelsbyref = "activities.markersConfig.shallowWatch"
+                      doRebuildAll="activities.markersConfig.rebuild"
+                      events="activities.markersConfig.markerEvents">
     </ui-gmap-markers>
 
 

@@ -8,7 +8,7 @@ angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapSer
   
   // Define some async objects from our services
   $scope.parks = parkService.markers;
-  $scope.amenities = amenitiesService.list;
+  $scope.amenities = amenitiesService.activities;
   $scope.map = mapService.map;
   $scope.myLoc = mapService.map.myLocationMarker.coords;
 
