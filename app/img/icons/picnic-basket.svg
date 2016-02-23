@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.53333 104.53333" id="picnic-basket" height="24" width="24">
+  
+  <defs id="defs6">
+    <clipPath id="clipPath20" clipPathUnits="userSpaceOnUse">
+      <path id="path18" d="M 783.98,391.996 C 783.98,175.488 608.492,0 391.992,0 175.488,0 0,175.488 0,391.996 0,608.5 175.488,783.988 391.992,783.988 c 216.5,0 391.988,-175.488 391.988,-391.992 z" />
+    </clipPath>
+  </defs>
+
   <g transform="matrix(1.3333333,0,0,-1.3333333,0,104.53333)" id="g10">
     <g transform="scale(0.1)" id="g12">
       <g id="g14">

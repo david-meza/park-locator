@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appServices').factory('parkService', ['$http', '$state', 'uiGmapGoogleMapApi',
-	function ($http, $state, gMapsApi) {
+angular.module('appServices').factory('parkService', ['$http', '$q', '$state', 'uiGmapGoogleMapApi',
+	function ($http, $q, $state, gMapsApi) {
 	
   var mapsApi;
 
@@ -52,94 +52,95 @@ angular.module('appServices').factory('parkService', ['$http', '$state', 'uiGmap
     $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
   };
 
+  var logError = function (response) {
+    console.log('Failed to get data from activities server', response);
+    return $q.reject(response);
+  };
+
+  var extractIndividualMarker = function (park) {
+    var p = park.attributes;
+    var marker = {
+      id: p.OBJECTID,
+      name: p.NAME,
+      address: p.ADDRESS,
+      url: p.URL,
+      phone: p.PHONE,
+      alias1: p.ALIAS1,
+      alias2: p.ALIAS2,
+      scale: p.SCALE,
+      artscenter: p.ARTSCENTER === 'Yes',
+      ballfields: p.BALLFIELDS === 'Yes',
+      boatrentals: p.BOATRENTALS === 'Yes',
+      bocce: p.BOCCE === 'Yes',
+      bmxtrack: p.BMXTRACK === 'Yes',
+      canoe: p.CANOE === 'Yes',
+      canoelaunch: p.CANOE === 'Yes',
+      carousel: p.CAROUSEL === 'Yes',
+      discgolf: p.DISCGOLF === 'Yes',
+      dogpark: p.DOGPARK === 'Yes',
+      envctr: p.ENVCTR === 'Yes',
+      fishing: p.FISHING === 'Yes',
+      greenwayaccess: p.GREENWAYACCESS === 'Yes',
+      gym: p.GYM === 'Yes',
+      horseshoe: p.HORSESHOE === 'Yes',
+      inlineskating: p.INLINESKATING === 'Yes',
+      boatride: p.BOATRIDE === 'Yes',
+      library: p.LIBRARY === 'Yes',
+      amusementtrain: p.AMUSEMENTTRAIN === 'Yes',
+      multipurposefield: p.MULTIPURPOSEFIELD === 'Yes',
+      outdoorbasketball: p.OUTDOORBASKETBALL === 'Yes',
+      picnicshelter: p.PICNICSHELTER === 'Yes',
+      playground: p.PLAYGROUND === 'Yes',
+      pool: p.POOL === 'Yes',
+      communitycenter: p.COMMUNITYCENTER === 'Yes',
+      neighborhoodcenter: p.NEIGHBORHOODCENTER === 'Yes',
+      sandvolleyball: p.SANDVOLLEYBALL === 'Yes',
+      skatepark: p.SKATEPARK === 'Yes',
+      tenniscenter: p.TENNISCENTER === 'Yes',
+      tenniscourts: p.TENNISCOURTS === 'Yes',
+      theater: p.THEATER === 'Yes',
+      track: p.TRACK === 'Yes',
+      walkingtrails: p.WALKINGTRAILS === 'Yes',
+      uniquesp: p.UNIQUESP === 'Yes',
+      handball: p.HANDBALL === 'Yes',
+      active_adult: p.ACTIVE_ADULT === 'Yes',
+      teen: p.TEEN === 'Yes',
+      museum: p.MUSEUM === 'Yes',
+      
+      icon: '/img/icons/park-marker.svg',
+      latitude: park.geometry.y,
+      longitude: park.geometry.x,
+
+      markerClick: _markerClick,
+      options: {
+        title: p.NAME,
+        labelAnchor: '0 0',
+        animation: (mapsApi ? mapsApi.Animation.DROP : 2)
+      },
+    };
+
+    // Storing parks both individually as key on markers object and as an array of parks
+    var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
+    if (!this[parkName]) { this[parkName] = marker; }
+
+    this.content.push(marker);
+  };
+
 
   var _generateMarkers = function (response) {
-
-    if (typeof response.data === 'object') {
-
+    if (response.status === 200) {
       // Empty the existing parks array before adding the new results
       if (markers.content.length > 0) {
         markers.content.splice(0, markers.content.length);
       }
-
-      response.data.features.forEach(function(park){
-        var p = park.attributes;
-        var marker = {
-          id: p.OBJECTID,
-          name: p.NAME,
-          address: p.ADDRESS,
-          url: p.URL,
-          phone: p.PHONE,
-          alias1: p.ALIAS1,
-          alias2: p.ALIAS2,
-          scale: p.SCALE,
-          artscenter: p.ARTSCENTER === 'Yes',
-          ballfields: p.BALLFIELDS === 'Yes',
-          boatrentals: p.BOATRENTALS === 'Yes',
-          bocce: p.BOCCE === 'Yes',
-          bmxtrack: p.BMXTRACK === 'Yes',
-          canoe: p.CANOE === 'Yes',
-          canoelaunch: p.CANOE === 'Yes',
-          carousel: p.CAROUSEL === 'Yes',
-          discgolf: p.DISCGOLF === 'Yes',
-          dogpark: p.DOGPARK === 'Yes',
-          envctr: p.ENVCTR === 'Yes',
-          fishing: p.FISHING === 'Yes',
-          greenwayaccess: p.GREENWAYACCESS === 'Yes',
-          gym: p.GYM === 'Yes',
-          horseshoe: p.HORSESHOE === 'Yes',
-          inlineskating: p.INLINESKATING === 'Yes',
-          boatride: p.BOATRIDE === 'Yes',
-          library: p.LIBRARY === 'Yes',
-          amusementtrain: p.AMUSEMENTTRAIN === 'Yes',
-          multipurposefield: p.MULTIPURPOSEFIELD === 'Yes',
-          outdoorbasketball: p.OUTDOORBASKETBALL === 'Yes',
-          picnicshelter: p.PICNICSHELTER === 'Yes',
-          playground: p.PLAYGROUND === 'Yes',
-          pool: p.POOL === 'Yes',
-          communitycenter: p.COMMUNITYCENTER === 'Yes',
-          neighborhoodcenter: p.NEIGHBORHOODCENTER === 'Yes',
-          sandvolleyball: p.SANDVOLLEYBALL === 'Yes',
-          skatepark: p.SKATEPARK === 'Yes',
-          tenniscenter: p.TENNISCENTER === 'Yes',
-          tenniscourts: p.TENNISCOURTS === 'Yes',
-          theater: p.THEATER === 'Yes',
-          track: p.TRACK === 'Yes',
-          walkingtrails: p.WALKINGTRAILS === 'Yes',
-          uniquesp: p.UNIQUESP === 'Yes',
-          handball: p.HANDBALL === 'Yes',
-          active_adult: p.ACTIVE_ADULT === 'Yes',
-          teen: p.TEEN === 'Yes',
-          museum: p.MUSEUM === 'Yes',
-          
-          icon: '/img/icons/park-marker.svg',
-          latitude: park.geometry.y,
-          longitude: park.geometry.x,
-
-          markerClick: _markerClick,
-          options: {
-            title: p.NAME,
-            labelAnchor: '0 0',
-            animation: (mapsApi ? mapsApi.Animation.DROP : 2)
-          },
-        };
-
-        // Storing parks both individually as key on markers object and as an array of parks
-        var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
-        if (!markers[parkName]) { markers[parkName] = marker; }
-
-        markers.content.push(marker);
-      });
-      
-      // if (markers.content.length > 0) { $state.go('home.park', { 'name': markers.content[0].name.replace(/\W+/g, '').toLowerCase() }); }
-
+      // Make markers from the response data
+      angular.forEach(response.data.features, extractIndividualMarker, markers);
+      // Return an array of markers in case we chain the promise
+      return markers.content;
     } else {
-      console.log('error', response);
+      // Log and reject the promise
+      return logError();
     }
-	};
-
-	var _logAjaxError = function (error) {
-		console.log(error);
 	};
 
   var updateParkMarkers = function (activities) {
@@ -157,18 +158,21 @@ angular.module('appServices').factory('parkService', ['$http', '$state', 'uiGmap
       if (idx <= selectedActivities.length - 2) { query += '+AND+'; }
     });
 
-    getParksInfo(query);
+    getParksInfo(query).then(_generateMarkers, logError);
   };
 
   var getParksInfo = function (where) {
     var url = 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=' + (where ? where : '1%3D1') + '&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson';
-  	$http({
+  	
+    // Returns a chainable promise object
+    return $http({
   		method: 'GET',
   		url: url
-  	}).then(_generateMarkers, _logAjaxError);
+  	});
   };
 
-  getParksInfo();
+  // Initialize the map by filling it with all, unfiltered parks
+  getParksInfo().then(_generateMarkers, logError);
 
 
 	return {
