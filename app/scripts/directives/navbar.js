@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('ngNavbar', function(){
+angular.module('appDirectives').directive('ngNavbar', function(){
   
   return { 
     restrict: 'E',

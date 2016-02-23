@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').filter('selectedActivities', function() {
+angular.module('appFilters').filter('selectedActivities', function() {
   
   var filtered = [];
   

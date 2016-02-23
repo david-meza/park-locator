@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'maps', 'amenitiesService', 'accordionService', '$timeout',
+angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'maps', 'amenitiesService', 'accordionService', '$timeout',
 	function ($scope, $state, $stateParams, mapService, parkService, maps, amenitiesService, accordionService, $timeout) {
 
 		var parkName = $stateParams.name,

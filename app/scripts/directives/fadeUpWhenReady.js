@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('fadeUpWhenReady', ['$document', function ($document) {
+angular.module('appDirectives').directive('fadeUpWhenReady', ['$document', function ($document) {
   
   return { 
     restrict: 'A',

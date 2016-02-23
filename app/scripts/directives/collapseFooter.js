@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('collapseFooter', ['$document', '$timeout', function ($document, $timeout) {
+angular.module('appDirectives').directive('collapseFooter', ['$document', '$timeout', function ($document, $timeout) {
   
   return { 
     restrict: 'E',

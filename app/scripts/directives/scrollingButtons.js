@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('scrollingButtons', function () {
+angular.module('appDirectives').directive('scrollingButtons', function () {
   
   return { 
     restrict: 'A',

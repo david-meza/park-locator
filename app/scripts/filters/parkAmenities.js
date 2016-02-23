@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').filter('parkAmenities', function() {
+angular.module('appFilters').filter('parkAmenities', function() {
   
   return function(activities, park) {
 

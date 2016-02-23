@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('deviceService', ['$window', 
+angular.module('appServices').factory('deviceService', ['$window', 
   function($window){
 
     var _width = $window.innerWidth;

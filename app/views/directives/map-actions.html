@@ -1,0 +1,32 @@
+<md-fab-speed-dial  ng-hide="speedDial.hidden" 
+                    md-direction="{{ ::speedDial.openDirection }}" 
+                    md-open="speedDial.isOpen"
+                    class="md-scale md-fab-bottom-right"
+                    id = "map-actions">
+  
+  <md-fab-trigger>
+    <md-button aria-label="Map Actions" class="md-raised md-fab">
+      <md-tooltip md-direction="top">Map Actions</md-tooltip>
+      <md-icon md-svg-icon="img/icons/settings.svg" aria-label="actions"></md-icon>
+    </md-button>
+  </md-fab-trigger>
+  
+  <md-fab-actions>
+    <div ng-repeat="item in speedDial.items">
+      <md-button  aria-label="{{::item.name}}" 
+                  class="md-fab md-raised md-mini"
+                  ng-click="item.action($event)">
+        
+        <md-tooltip md-direction="{{::item.tooltipDirection}}" 
+                    md-visible="item.tooltipVisible"
+                    md-autohide="true"
+                    md-delay = "50">
+          {{::item.name}}
+        </md-tooltip>
+        
+        <md-icon md-svg-icon="{{::item.icon}}" ng-class = "item.addIconClass" aria-label="{{::item.name}}"></md-icon>
+
+      </md-button>
+    </div>
+  </md-fab-actions>
+</md-fab-speed-dial>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('ngFooter', function(){
+angular.module('appDirectives').directive('ngFooter', function(){
   
   return { 
     restrict: 'E',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('classesCtrl', ['$scope', 'classesService', '$state', '$window',
+angular.module('appControllers').controller('classesCtrl', ['$scope', 'classesService', '$state', '$window',
 	function($scope, classesService, $state, $window){
 
     var parkIds = classesService.getParkIds($scope.currentPark.name);

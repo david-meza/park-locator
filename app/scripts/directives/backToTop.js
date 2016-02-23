@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('backToTop', function () {
+angular.module('appDirectives').directive('backToTop', function () {
   
   return { 
     restrict: 'E',

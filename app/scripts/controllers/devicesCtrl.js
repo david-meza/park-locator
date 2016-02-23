@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('devicesCtrl', ['$scope', 'deviceService',
+angular.module('appControllers').controller('devicesCtrl', ['$scope', 'deviceService',
 	function($scope, deviceService){
 
     $scope.isMobile = deviceService.isMobile;

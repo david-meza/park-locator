@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('accordionService', function(){
+angular.module('appServices').factory('accordionService', function(){
 	
 	var settings = {
     closeOthers: true,

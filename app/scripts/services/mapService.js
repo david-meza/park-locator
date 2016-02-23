@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout',
+angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout',
   function (gMapsApi, $mdToast, $timeout) {
 
 
@@ -87,12 +87,13 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
     },
   };
 
-  var informUser = function (message) {
+  var informUser = function (message, hide) {
     var toast = $mdToast.simple()
       .textContent(message)
       .action('ok')
       .highlightAction(false)
-      .position('top right');
+      .hideDelay(hide || 3000)
+      .position('bottom right');
     $mdToast.show(toast);
   };
 
@@ -126,7 +127,7 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
   };
 
   var geoLocate = function () {
-    informUser('Obtaining your location...');
+    informUser('Attempting to find you.', 1500);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition( 
@@ -134,7 +135,8 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
           updateUserCoords(position.coords.latitude, position.coords.longitude);
         },
         function (error) {
-          informUser('Could not locate you due to: ' + error.message);
+          informUser('Sorry. Could not find you. Try manually dragging your pin.');
+          console.log('Error: ' + error);
         }, {
           enableHighAccuracy: true,
           timeout: 10000,
@@ -146,7 +148,7 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
     }
   };
 
-  // Get user's coordinates async a few seconds after the app loaded
+  // Get user's coordinates a few seconds after the app loaded
   $timeout(function(){
     geoLocate();
   }, 5000);
@@ -161,6 +163,8 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
 
   return {
     map: map,
+    updateUserCoords: updateUserCoords,
+    geoLocate: geoLocate
   };
 
 }]);

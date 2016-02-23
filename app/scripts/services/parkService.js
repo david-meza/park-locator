@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmapGoogleMapApi',
+angular.module('appServices').factory('parkService', ['$http', '$state', 'uiGmapGoogleMapApi',
 	function ($http, $state, gMapsApi) {
 	
   var mapsApi;

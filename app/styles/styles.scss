@@ -1,3 +1,5 @@
+@import 'mixins';
+
 @import "../bower_components/angular-material/angular-material.css";
 @import "./flatly.min.css";
 @import "./font-awesome.css";
@@ -7,6 +9,10 @@ $primary: #1565C0;
 $indigo: #3F51B5;
 $light-white: rgba(255,255,255,0.87);
 $warn: #EF6C00;
+$alert: #E65100;
+$success: #3C763D;
+$success-alt: #669834;
+$danger: #E63125;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -38,19 +44,25 @@ img, h1, h2, h3, h4, h5, h6 {
 }
 
 .pac-container {
-  // z-index: 1 !important;
-  // width: auto !important;
-  // position: initial !important;
-  // left: 0 !important;
-  // right: 0 !important;
-  // display: block !important;
+  width: auto !important;
+  position: initial !important;
+  left: 0 !important;
+  right: 0 !important;
+  display: block !important;
+  @include box-shadow( none !important );
+  border-top: none !important;
 
   .pac-item {
+    padding: 5px;
+    font-size: 14px !important;
 
-    .pac-matched {
-      // color: #FF565D; // Red
-      color: #3F51B5 // Indigo Blue
-      // color: #B3A1E9; // Light Purple
+    .pac-item-query {
+      font-size: 15px;
+      .pac-matched {
+        // color: #FF565D; // Red
+        color: #3F51B5 // Indigo Blue
+        // color: #B3A1E9; // Light Purple
+      } 
     }
 
     .pac-icon {
@@ -63,18 +75,19 @@ img, h1, h2, h3, h4, h5, h6 {
       // Red marker
       // background-position: 16px -160px;
       // Indigo search icon
-      background-position: 16px -1px;
+      // background-position: 16px -1px;
     }
 
     .pac-item-query {
 
     }
   }
+  
+  &:empty{
+    display: none !important;
+  }
+}
 
-}
-.pac-container:empty{
-  display: none !important;
-}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -230,8 +243,14 @@ md-icon {
   }
 
   .map-icons-list {
+    .user-icon {
+      height: 45px !important;
+    }
+
     .md-avatar {
       border-radius: 0;
+      height: 50px;
+      width: 50px;
     }
   }
 }
@@ -318,6 +337,19 @@ th {
   display: block;
   text-align: right;
   line-height: 1.5em;
+}
+
+#activities-list {
+  .activity-icon {
+    margin: 5px 8px 5px 5px;
+  }
+  md-list-item > .md-button:not(.md-secondary-container) {
+    padding: 0;
+  }
+
+  .limit-activity-name {
+    max-width: 60%;
+  }
 }
 
 
@@ -552,27 +584,18 @@ ul#park-amenities {
   }
 }
 
-.map-bottom-right {
-  position: absolute;
-  right: 40px;
-  bottom: 15px;
-  text-transform: capitalize;
-}
-
 .capitalize {
   text-transform: capitalize;
 }
 
-
-
-
-
-#autocomplete {
-  // margin-bottom: 20px;
+.limit-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 
-html, body, #map-canvas {
+html, body {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -580,9 +603,8 @@ html, body, #map-canvas {
 }
 
 #map-canvas, #mini-map {
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow:    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow:         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  @include box-shadow( 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) );
 }
 
 .mb-20 {

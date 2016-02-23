@@ -1,0 +1,41 @@
+@mixin user-select($select) {
+  -webkit-user-select: $select;  
+     -moz-user-select: $select;    
+      -ms-user-select: $select;
+       -o-user-select: $select;
+          user-select: $select;   
+}
+
+@mixin transform($transformation) {
+  -webkit-transform: $transformation;
+     -moz-transform: $transformation;
+      -ms-transform: $transformation;
+       -o-transform: $transformation;
+          transform: $transformation;
+}
+
+@mixin transition($transitions...) {
+  -webkit-transition: $transitions;
+     -moz-transition: $transitions;
+      -ms-transition: $transitions;
+       -o-transition: $transitions;
+          transition: $transitions;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+     -moz-box-shadow: $shadows;
+          box-shadow: $shadows;
+}
+
+@mixin display-flex() {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+      -ms-flex-direction: $direction;
+          flex-direction: $direction;
+}

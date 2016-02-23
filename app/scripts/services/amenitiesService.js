@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('amenitiesService', ['$http', '$q',
+angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	function($http, $q){
 	
 	var list = { categories: {}, activitiesPos: { markers: [] } };

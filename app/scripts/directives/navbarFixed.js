@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('fixOnScroll', ['$window', function ($window) {
+angular.module('appDirectives').directive('fixOnScroll', ['$window', function ($window) {
   
   return {
     restrict: 'A',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('classesInfo', function(){
+angular.module('appDirectives').directive('classesInfo', function(){
   
   return { 
     controller: 'classesCtrl',

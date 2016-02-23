@@ -1,11 +1,4 @@
-<div id="map-canvas" flex layout = "column">
-
-  <!-- Search Container and Input Field (ui-gmap-search-box) -->
-  <div style="position:relative;">
-    <div id="searchbox-container">
-      <i class = "fa fa-search icon-search"></i>
-    </div>
-  </div>
+<div id="map-canvas" layout = "row" flex>
 
   <!-- Main Map Directive -->
   <ui-gmap-google-map center='map.location.coords'
@@ -15,17 +8,7 @@
                       refresh='map.refresh'
                       pan='map.pan'
                       events = 'map.events'
-                      control = 'map.control' 
-                      layout = "column" flex>
-
-
-    <!-- Map Positioning Autocomplete Search Box -->
-    <ui-gmap-search-box template="map.searchbox.template"
-                        events="map.searchbox.events"
-                        options = "map.searchbox.options"
-                        parentdiv = "'searchbox-container'">
-    </ui-gmap-search-box>
-
+                      control = 'map.control'>
 
     <!-- User Marker -->
     <ui-gmap-marker idKey='map.myLocationMarker.id'
@@ -76,11 +59,7 @@
 
   </ui-gmap-google-map>
 
-  <!-- Map Icons Key Button -->
-  <div style="position:relative;">
-    <md-button class="md-primary md-raised map-bottom-right md-fab md-mini" ng-click="openKey($event)">
-      Key
-    </md-button>  
-  </div>
-    
+
+  <map-actions></map-actions>
+
 </div>

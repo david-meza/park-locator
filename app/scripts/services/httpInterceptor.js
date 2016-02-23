@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('httpInterceptor', ['$q', '$rootScope', 
+angular.module('appServices').factory('httpInterceptor', ['$q', '$rootScope', 
   function ($q, $rootScope) {
 
   var loadingCount = 0;

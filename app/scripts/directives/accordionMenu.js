@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').directive('accordionMenu', function(){
+angular.module('appDirectives').directive('accordionMenu', function(){
   
   return { 
     controller: 'accordionCtrl',

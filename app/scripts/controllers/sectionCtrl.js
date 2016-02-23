@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('sectionCtrl', ['$scope', 'classesService', '$stateParams',
+angular.module('appControllers').controller('sectionCtrl', ['$scope', 'classesService', '$stateParams',
 	function ($scope, classesService, $stateParams) {
 
     $scope.sectionName = $stateParams.sectionName;

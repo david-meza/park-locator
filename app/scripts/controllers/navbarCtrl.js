@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'Flash', 'deviceService',
+angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'Flash', 'deviceService',
 	function ($scope, $rootScope, parkService, flash, deviceService) {
     
     var markers = parkService.markers;

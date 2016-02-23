@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').factory('classesService', ['$http', 
+angular.module('appServices').factory('classesService', ['$http', 
   function($http){
 
   var classes = { content: [], sections: [] };

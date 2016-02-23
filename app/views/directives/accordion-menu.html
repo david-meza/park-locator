@@ -45,17 +45,13 @@
     </p>
 
     <div scrolling-buttons>
-      <ul id = "amenities-list">
-        <li ng-repeat="(activityName, activityData) in amenities.categories">
-          <a ng-click="toggleSelected(activityData)" ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
-            <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activity.name }}"></md-icon>
-            {{ ::activityData.name }}
-            <i  class="pull-right glyphicon-padding glyphicon glyphicon-ok"
-                ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"
-                ng-show="activityData.selected"></i>
-          </a>
-        </li>
-      </ul>
+      <md-list id="activities-list">
+        <md-list-item ng-click="toggleSelected(activityData)" ng-repeat="(activityName, activityData) in amenities.categories">
+          <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activityName }}" class="activity-icon"></md-icon>
+          <p class="limit-text capitalize limit-activity-name"> {{ ::activityData.name }} </p>
+          <md-switch class="md-secondary" ng-model="activityData.selected" ng-change="updateParks(amenities.categories)" aria-label="Toggle activity filter"></md-switch>
+        </md-list-item>
+      </md-list>
     </div>
 
   </uib-accordion-group>

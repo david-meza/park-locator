@@ -1,0 +1,43 @@
+<md-dialog aria-label="Edit Location">
+  <form>
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        
+        <h2>Edit my location</h2>
+        
+        <span flex></span>
+        
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-icon="fa-times" class = "fa fa-2x" aria-label="Close dialog"></md-icon>
+        </md-button>
+      
+      </div>
+    </md-toolbar>
+
+    
+    <md-dialog-content style = "max-width: 800px; max-height: 810px; min-height: 100px; min-width: 400px">
+        
+      <gmaps-address id = "address-search-box" input-id = "'edit-my-location'">
+
+        <md-input-container class="md-icon-float md-block" style = "margin-top: 20px; padding-right: 10px;">
+
+          <label>Address</label>
+          <md-icon md-svg-icon = "/img/icons/person-pin.svg"></md-icon>
+          <input id="edit-my-location" type = "text" placeholder = "" class="md-primary" md-autofocus />
+
+        </md-input-container>
+
+      </gmaps-address>
+
+    </md-dialog-content>
+    
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="hide()" style="margin-right:10px;">
+        Close
+      </md-button>
+    </md-dialog-actions>
+
+  </form>
+</md-dialog>

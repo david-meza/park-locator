@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('parkLocator').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
+angular.module('appControllers').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
   function DialogCtrl($scope, $mdDialog, amenitiesService) {
     $scope.activities = amenitiesService.list.categories;
 
