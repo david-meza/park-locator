@@ -13,8 +13,17 @@ angular.module('appDirectives').directive('backToTop', function () {
       var footer = angular.element(document.getElementById('footer'));
       
       container.on('scroll', function() {
-        footer.hasClass('collapsed') ? element.addClass('lower') : element.removeClass('lower');
-        (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
+        if (footer.hasClass('collapsed')) {
+          element.addClass('lower');
+        } else {
+          element.removeClass('lower');
+        }
+
+        if (this.scrollTop >= 50) {
+          element.addClass('bring-to-screen');
+        } else {
+          element.removeClass('bring-to-screen');
+        }
       });
 
 

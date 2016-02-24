@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', '$timeout', '$mdToast',
-	function ($scope, mapService, accordionService, parkService, gMapsAPI, amenitiesService, $timeout, $mdToast) {
+angular.module('appControllers').controller('accordionCtrl', [ '$scope', 'mapService', 'accordionService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', '$timeout',
+	function ($scope, mapService, accordionService, parkService, gMapsAPI, amenitiesService, $timeout) {
     
   // Basic accordion config
   $scope.settings = accordionService.settings;

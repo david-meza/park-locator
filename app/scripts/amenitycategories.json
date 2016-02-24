@@ -111,7 +111,8 @@
       "id": 1302,
       "name": "Swimming",
       "parkAttr": "POOL",
-      "icon": "/img/icons/swimming.svg"
+      "icon": "/img/icons/swimming.svg",
+      "searchable": "swimming pool aquatic"
     },
     "Art Center": {
       "id": 1304,
@@ -165,7 +166,8 @@
       "id": 2114,
       "name": "Ball Fields",
       "parkAttr": "BALLFIELDS",
-      "icon": "/img/icons/ball-fields.svg"
+      "icon": "/img/icons/ball-fields.svg",
+      "searchable": "baseball softball kickball ball fields"
     },
     "Youth Baseball": {
       "id": 2113,
@@ -231,7 +233,8 @@
       "id": 2108,
       "name": "Multipurpose Field",
       "icon": "/img/icons/multipurpose-field.svg",
-      "parkAttr": "MULTIPURPOSEFIELD"
+      "parkAttr": "MULTIPURPOSEFIELD",
+      "searchable": "multipurpose field soccer lacrosse kickball"
     },
     "Dog Park": {
       "id": 2607,
@@ -267,7 +270,8 @@
       "id": 2309,
       "name": "Tennis",
       "parkAttr": "TENNISCOURTS",
-      "icon": "/img/icons/tennis.svg"
+      "icon": "/img/icons/tennis.svg",
+      "searchable": "tennis courts"
     },
     "Running": {
       "id": 2610,

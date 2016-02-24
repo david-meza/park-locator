@@ -3,7 +3,7 @@
 angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	function($http, $q){
 	
-	var activities = { categories: {}, markers: [], markersConfig: {} };
+	var activities = { categories: {}, categoriesArr: [], markers: [], markersConfig: {} };
 
 	activities.markersConfig = {
     control: {},
@@ -42,7 +42,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
       subcategory: activities[subCat] || subCat,
       latitude: activity.geometry.y,
       longitude: activity.geometry.x,
-      icon: activities[subCat] ? activities[subCat].icon : 'https://maxcdn.icons8.com/Color/PNG/24/Very_Basic/info-24.png',
+      icon: activities[subCat] ? activities[subCat].icon : '/img/icons/help.svg',
       options: {
       	visible: false,
         labelContent: activities[subCat] ? activities[subCat].name : act.LOCATION || 'activity',
@@ -85,6 +85,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 			delete activities.categories.Softball;
 			delete activities.categories['Youth Baseball'];
 			delete activities.categories['Tennis Center'];
+			storeAsArray(activities.categories);
 			// Return the unique categories in case we chain the resolution of this promise
 			return activities.categories;
 		} else {
@@ -92,6 +93,18 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 			return logError();
 		}
 	};
+
+	function storeAsArray (categoriesObj) {
+		angular.forEach(categoriesObj, function(categoryValue) {
+      categoryValue.searchable = categoryValue.searchable || categoryValue.name.toLowerCase();
+			this.push(categoryValue);
+		}, activities.categoriesArr);
+
+    // Instead of using angular's orderBy filter, just sort the array once
+    activities.categoriesArr.sort(function(act1, act2) {
+      return act1.searchable > act2.searchable ? 1 : -1;
+    });
+	}
 
 	var getAmenitiesData = function () {
 		// First set of amenities (buildings)

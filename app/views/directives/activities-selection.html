@@ -1,16 +1,15 @@
 <md-autocomplete  md-selected-item="search.selectedItem"
                   md-search-text="search.searchText"
-                  md-search-text-change="search.searchTextChange(search.searchText)"
                   md-selected-item-change="search.selectedItemChange(activity)"
                   md-items="activity in search.querySearch(search.searchText)"
                   md-item-text="activity.name"
                   placeholder="Find an activity"
                   md-menu-class="activity-custom-template">
   <md-item-template>
-    <span class="item-title">
-      <md-icon md-svg-icon="{{ ::activity.icon }}"></md-icon>
-      <span> {{ activity.name }} </span>
-      <md-icon md-svg-icon="{{ ::activity.icon }}"></md-icon>
+    <span class="item-title" layout="row">
+      <md-icon md-svg-icon="{{ activity.icon }}"></md-icon>
+      <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ activity.name }} </span>
+      <md-icon md-svg-icon="/img/icons/ok.svg" ng-if="activity.selected"></md-icon>
     </span>
   </md-item-template>
   <md-not-found>No matching activities found.</md-not-found>
@@ -26,10 +25,10 @@
 
 <div scrolling-buttons>
   <md-list id="activities-list">
-    <md-list-item ng-click="toggleSelected(activityData)" ng-repeat="(activityName, activityData) in activities.categories">
-      <md-icon md-svg-icon="{{ ::activityData.icon }}" alt="{{ ::activityName }}" class="activity-icon"></md-icon>
-      <p class="limit-text capitalize limit-activity-name"> {{ ::activityData.name }} </p>
-      <md-switch class="md-secondary" ng-model="activityData.selected" ng-change="updateParks(activities.categories)" aria-label="Toggle activity filter"></md-switch>
+    <md-list-item ng-click="toggleSelected(activity)" ng-repeat="activity in activities.categoriesArr">
+      <md-icon md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}" class="activity-icon"></md-icon>
+      <p class="limit-text capitalize limit-activity-name"> {{ ::activity.name }} </p>
+      <md-switch class="md-secondary" ng-model="activity.selected" ng-change="updateParks(activities.categories)" aria-label="Toggle activity filter"></md-switch>
     </md-list-item>
   </md-list>
 </div>
