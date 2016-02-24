@@ -1,11 +1,21 @@
 'use strict';
 
-angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'Flash', 'deviceService',
-	function ($scope, $rootScope, parkService, flash, deviceService) {
+angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', '$mdToast', 'deviceService',
+	function ($scope, $rootScope, parkService, $mdToast, deviceService) {
     
-    var markers = parkService.markers;
+    var markers = parkService.parks;
+
+    var informUser = function (message, hide) {
+      var toast = $mdToast.simple()
+        .textContent(message)
+        .action('ok')
+        .highlightAction(false)
+        .hideDelay(hide || 3000)
+        .position('bottom right');
+      $mdToast.show(toast);
+    };
     
-    $scope.title = "Raleigh Park Locator";
+    $scope.title = "Park Locator";
     
     // Start the circular progress icon
     $scope.progress = 'indeterminate';
@@ -15,7 +25,7 @@ angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope
 
 
     $scope.scrollTo = function (target) {
-      if (target === 'panels-section' && !markers.currentPark) { return flash.create('warning', '<i class="fa fa-lg fa-meh-o"></i> <strong>Oops!</strong> Please select a park first.'); }
+      if (target === 'panels-section' && !markers.currentPark) { return informUser('Oops! Please select a park first.'); }
       var contentArea = angular.element(document.getElementById('main-scrollable'));
       var ngTarget = angular.element(document.getElementById(target));
       contentArea.scrollTo(ngTarget, 0, 600);
@@ -27,7 +37,6 @@ angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope
 
     $rootScope.$on('loading:finish', function(){
     	$scope.progress = undefined;
-      // informUser();
     });
 
 }]);

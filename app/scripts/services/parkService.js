@@ -3,22 +3,39 @@
 angular.module('appServices').factory('parkService', ['$http', '$q', '$state', 'uiGmapGoogleMapApi',
 	function ($http, $q, $state, gMapsApi) {
 	
-  var mapsApi;
+  var maps;
 
-	gMapsApi.then( function (maps) {
-    mapsApi = maps;
+	gMapsApi.then( function (mapsObj) {
+    maps = mapsObj;
   });
 
-  var currentMarker = { obj: {} };
-	
-  var markers = { 
-    content: [], 
-    currentPark: undefined, 
+  var parks = { markers: [], currentPark: undefined, };
+
+  parks.markersConfig = {
     rebuild: false, 
     shallowWatch: false, 
     fitToMap: false, 
-    control: {} 
+    control: {},
+    type: 'cluster',
+    typeOptions: {
+      title: 'Click to zoom in and find more parks!',
+      gridSize: 56,
+      minimumClusterSize: 4
+    },
+    typeEvents: {},
+    markerEvents: {
+      mouseover: function (gMarker) {
+        gMarker.labelVisible = true;
+        gMarker.label.setVisible();
+      },
+      mouseout: function (gMarker) {
+        gMarker.labelVisible = false;
+        gMarker.label.setVisible();
+      }
+    }
   };
+
+  parks.markersConfig.typeOptions.styles = [{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 40,width: 40},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 44,width: 44},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 48,width: 48},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 52,width: 52},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 56,width: 56}];
 
   var parkWindow = {
     show: false,
@@ -43,13 +60,13 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
   };
 	
   var _markerClick = function (gInstance, evnt, model) {
-    currentMarker.obj = markers.currentPark = model;
+    parks.currentPark = model;
     
     // Place the info window above park marker and pass in the park info
     _positionParkWindow(model);
     
     // Trigger a state change and show the park details
-    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
+    $state.go('home.park', { 'name': parks.currentPark.name.replace(/\W+/g, '').toLowerCase() });
   };
 
   var logError = function (response) {
@@ -62,6 +79,7 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
     var marker = {
       id: p.OBJECTID,
       name: p.NAME,
+      searchable: p.NAME.toLowerCase(),
       address: p.ADDRESS,
       url: p.URL,
       phone: p.PHONE,
@@ -114,9 +132,10 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
       markerClick: _markerClick,
       options: {
         visible: true,
-        title: p.NAME,
-        labelAnchor: '0 0',
-        animation: (mapsApi ? mapsApi.Animation.DROP : 2)
+        labelContent: p.NAME,
+        labelClass: 'park-label',
+        labelVisible: false,
+        animation: (maps ? maps.Animation.DROP : 2)
       },
     };
 
@@ -124,20 +143,20 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
     var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
     if (!this[parkName]) { this[parkName] = marker; }
 
-    this.content.push(marker);
+    this.markers.push(marker);
   };
 
 
   var _generateMarkers = function (response) {
     if (response.status === 200) {
       // Empty the existing parks array before adding the new results
-      if (markers.content.length > 0) {
-        markers.content.splice(0, markers.content.length);
+      if (parks.markers.length > 0) {
+        parks.markers.splice(0, parks.markers.length);
       }
       // Make markers from the response data
-      angular.forEach(response.data.features, extractIndividualMarker, markers);
+      angular.forEach(response.data.features, extractIndividualMarker, parks);
       // Return an array of markers in case we chain the promise
-      return markers.content;
+      return parks.markers;
     } else {
       // Log and reject the promise
       return logError();
@@ -177,7 +196,7 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
 
 
 	return {
-		markers: markers,
+		parks: parks,
     updateParkMarkers: updateParkMarkers,
     parkWindow: parkWindow
 	};

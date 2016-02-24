@@ -9,7 +9,7 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/activities-selection.html',
-      controller: ['$scope', 'amenitiesService', 'parkService', function ($scope, amenitiesService, parkService) {
+      controller: ['$scope', 'amenitiesService', 'parkService', '$timeout', function ($scope, amenitiesService, parkService, $timeout) {
 
         // Internal controller functions
         function createFilterFor (query) {
@@ -29,7 +29,9 @@
         // The activities object
         $scope.activities = amenitiesService.activities;
         // Park markers array
-        $scope.parks = parkService.markers.content;
+        $scope.parks = parkService.parks.markers;
+        // ng-class expression
+        $scope.totalParks = { 'text-info': $scope.parks.length > 0, 'text-danger': $scope.parks.length <= 0 };
 
         // Toggle an activity and trigger a park search
         $scope.toggleSelected = function (activity) {
@@ -37,11 +39,12 @@
           $scope.updateParks($scope.activities.categories);
         };
 
+        // md-autocomplete directive config
         $scope.search = {
           selectedItem: undefined,
           searchText: undefined,
           selectedItemChange: function(activity) { 
-            console.log(activity);
+            // Ignore results when the input is cleared
             if (angular.isUndefined(activity)) { return; }
             activity.selected = !activity.selected;
             $scope.updateParks($scope.activities.categories);

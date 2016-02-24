@@ -34,7 +34,7 @@
             clickOutsideToClose: true,
             controller: 'DialogCtrl',
             locals: {
-              activities: amenitiesService.list.categories
+              activities: amenitiesService.activities.categoriesArr
             },
             bindToController: true
           });

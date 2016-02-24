@@ -17,8 +17,7 @@
 
 <div layout="row" class="pull-down-lg">
   <span flex></span>
-  <p  class = "text-total-results" 
-      ng-class="{ 'text-info': parks.length > 0, 'text-danger': parks.length <= 0 }">
+  <p class = "text-total-results" ng-class="::totalParks">
     Number of Parks: {{ parks.length }}
   </p>
 </div>

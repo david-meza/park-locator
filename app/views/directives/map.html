@@ -30,18 +30,18 @@
 
     
     <!-- Park Markers -->
-    <ui-gmap-markers  models="parks.content"
+    <ui-gmap-markers  models="parks.markers"
                       coords="'self'"
                       icon="'icon'"
                       click="markerClick"
-                      type = "map.markersConfig.type"
-                      typeOptions = "map.markersConfig.typeOptions"
-                      typeEvents = "map.markersConfig.typeEvents"
-                      modelsbyref="::parks.shallowWatch"
-                      fit = "::parks.fitToMap"
+                      type = "::parks.markersConfig.type"
+                      typeOptions = "::parks.markersConfig.typeOptions"
+                      typeEvents = "::parks.markersConfig.typeEvents"
+                      modelsbyref="::parks.markersConfig.shallowWatch"
+                      fit = "::parks.markersConfig.fitToMap"
                       options="'options'"
-                      events="map.parkMarkerEvents"
-                      control = "parks.control">
+                      events="::parks.markersConfig.markerEvents"
+                      control = "parks.markersConfig.control">
     </ui-gmap-markers>
 
     

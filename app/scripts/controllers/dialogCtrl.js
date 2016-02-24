@@ -2,7 +2,7 @@
 
 angular.module('appControllers').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
   function DialogCtrl($scope, $mdDialog, amenitiesService) {
-    $scope.activities = amenitiesService.list.categories;
+    $scope.activities = amenitiesService.activities.categoriesArr;
 
     $scope.hide = function() {
       $mdDialog.hide();

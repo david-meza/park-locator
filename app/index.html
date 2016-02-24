@@ -24,9 +24,7 @@
 </head>
 
 
-<body ng-app="parkLocator" ng-cloak layout = "column">
-  
-  <div id = "flash" flash-message="2500" ></div>
+<body ng-app="parkLocator" ng-cloak layout = "column" flex="100">
   
   <ng-navbar></ng-navbar>
 
@@ -34,7 +32,7 @@
               layout = "row" 
               du-scroll-container 
               ui-view 
-              flex = "100"
+              flex
               layout-padding
               layout-wrap>
   </md-content>
@@ -55,7 +53,6 @@
   <script src='bower_components/lodash/lodash.min.js'></script>
   <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
   <script src='bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
-  <script src='bower_components/angular-flash-alert/dist/angular-flash.min.js'></script>
   <script src='bower_components/angular-scroll/angular-scroll.min.js'></script>
   <script src='bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js'></script>
 
@@ -94,6 +91,7 @@
   <!-- Directives -->
   <script src="scripts/directives/fadeUpWhenReady.js"></script>
   <script src="scripts/directives/activitiesSelection.js"></script>
+  <script src="scripts/directives/parkSelection.js"></script>
   <script src="scripts/directives/gmapsAddress.js"></script>
   <script src="scripts/directives/mapActions.js"></script>
   <script src="scripts/directives/navbar.js"></script>

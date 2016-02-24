@@ -1,8 +1,8 @@
-<md-toolbar layout = "row" id = "navbar" role = "navigation" flex = "none">
-  <div class="md-toolbar-tools">
+<md-toolbar layout = "row" id = "navbar">
+  <div class="md-toolbar-tools" layout="row" layout-align="start center">
     
     <h1 layout = "row" hide-xs hide-sm>
-      <a ui-sref = "home">{{ title }}</a>
+      <a ui-sref = "home">{{ ::title }}</a>
     </h1>
 
     <div flex hide-gt-sm id="mobile-nav" layout = "row" layout-align = "space-around stretch">
@@ -21,6 +21,7 @@
 
     </div>
 
-    <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="50"></md-progress-circular>
+    <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="55"></md-progress-circular>
+  
   </div>
 </md-toolbar>

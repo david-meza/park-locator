@@ -43,7 +43,11 @@ img, h1, h2, h3, h4, h5, h6 {
   opacity: 0;
 }
 
-.activity-label {
+.text-primary {
+  color: $indigo;
+}
+
+.activity-label, .park-label {
   background-color: #fff;
   color: rgba(0,0,0,0.8);
   font-size: 14px;
@@ -363,6 +367,36 @@ th {
   }
 }
 
+#parks-list {
+  .md-list-item-text {
+    margin: 0;
+    p {
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+
+.text-before-dropdown, .inline-dropdown {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.text-before-dropdown {
+  margin: auto;
+  padding-top: 3px;
+}
+
+.inline-dropdown {
+  margin: 0 0 3px 2px;
+  align-self: center;
+
+  .md-select-value {
+    border-bottom: transparent;
+    align-self: flex-end;
+  }
+}
+
 
 ul#park-list, ul#amenities-list, ul#selected-amenities-list {
   list-style-type: none;
@@ -607,10 +641,9 @@ ul#park-amenities {
 
 
 html, body {
-  height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #map-canvas, #mini-map {
@@ -630,19 +663,6 @@ html, body {
   margin-bottom: 0;
 }
 
-.glyphicon-ok {
-  color: #669834;
-}
-
-.glyphicon-remove {
-  color: #E63125;
-}
-
-.glyphicon-padding {
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
 #panels-section > * {
   margin-top: 10px;
 }
@@ -659,10 +679,16 @@ html, body {
 
 }
 
-activities-selection {
-  .pull-down-lg {
-    margin-top: 30px;
-  }
+.pull-down-lg {
+  margin-top: 30px;
+}
+
+.pull-down-md {
+  margin-top: 20px;
+}
+
+.pull-down-sm {
+  margin-top: 10px;
 }
 
 .angular-google-map {
@@ -724,7 +750,7 @@ activities-selection {
 // Bootstrap Overrides
 
 .form-control:focus {
-  border-color: #558b2f
+  border-color: darken($primary, 5%);
 }
 
 .panel-primary {
@@ -805,45 +831,26 @@ activities-selection {
 
 #footer {
   z-index: 1;
-  max-height: 58px;
+  max-height: 45px;
+  min-height: 45px;
+  height: 45px;
   opacity: 1;
-  padding: 0 8px 4px;
+  padding: 2px 8px;
   border-top: 1px solid #e5e5e5;
 
-  &, p {
-    -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-  }
-
-  p {
-    // max-height: 25px;
-  }
+  @include transition( all 500ms cubic-bezier(0.345, 0, 0.25, 1) );
 
   &.collapsed {
-    // -webkit-transform: scale(0, 0);
-    //    -moz-transform: scale(0, 0);
-    //      -o-transform: scale(0, 0);
-    //     -ms-transform: scale(0, 0);
-    //         transform: scale(0, 0);
+    min-height: 0;
+    height: 0;
     max-height: 0;
     opacity: 0;
-    padding: 0 4px;
-
-    p {
-      opacity: 0;
-      visibility: hidden;
-      // max-height: 0;
-      padding: 0 4px;
-    }
+    visibility: hidden;
+    // @include transform( translateY(50px) );
   }
 
   md-content {
-    -webkit-box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
-       -moz-box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 -3px 7px 0 rgba(0, 0, 0, 0.19);
+    @include box-shadow( 0 -3px 7px 0 rgba(0, 0, 0, 0.19) );
   }
 
   .layout-padding {
@@ -851,12 +858,33 @@ activities-selection {
   }
 
   p {
-    color: #777;
+    color: rgba(0,0,0,0.45);
     margin: 0;
     padding: 2px;
     font-size: 13px;
   }
 
+  .fa-heart {
+    -moz-animation:     pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+    -webkit-animation:  pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+    -o-animation:       pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+    animation:          pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
+
+}
+
+@keyframes pulsate {
+  0% { @include transform( scale(1,1) ); }
+  10% { @include transform( scale(1.2,1.2) ); }
+  20% { @include transform( scale(1,1) ); }
+}
+@-webkit-keyframes pulsate {
+  0% { @include transform( scale(1,1) ); }
+  10% { @include transform( scale(1.2,1.2) ); }
+  20% { @include transform( scale(1,1) ); }
 }
 
 #collapse-footer {

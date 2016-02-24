@@ -50,12 +50,6 @@
         <div class="col-md-4 col-sm-10 col-xs-12 col-md-offset-0 col-sm-offset-1 col-xs-offset-0">
 
           <div id="mini-map"></div>
-          
-          <md-button  class="md-primary md-hue-1 pull-right capitalize" 
-                      ng-click="openLocationPanel()" 
-                      du-smooth-scroll = "search">
-            Change my starting location
-          </md-button>
 
         </div>
 
@@ -67,7 +61,7 @@
 
 </div>
 
-<div flex = "100" ng-if="(amenities.categories | parkAmenities: parks.currentPark).length > 0">
+<div flex = "100" ng-if="(activities.categories | parkAmenities: parks.currentPark).length > 0">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -76,19 +70,13 @@
     <div class="panel-body" layout = "row">
 
       <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
-        <li ng-repeat="activity in amenities.categories | parkAmenities: parks.currentPark | orderBy: 'name' as activitiesInPark">
-          
-          <a ng-click="showAmenityInMap(activity)">
-            
+        <li ng-repeat="activity in activities.categoriesArr | parkAmenities: parks.currentPark as activitiesInPark">
             <div class="view">
               <md-icon class="icon-contain" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
               <div class="mask">  
                 <h6>{{ ::activity.name }}</h6>  
               </div>  
             </div>
-          
-          </a>
-
         </li>          
       </ul>
 

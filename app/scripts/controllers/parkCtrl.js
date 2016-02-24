@@ -1,36 +1,18 @@
 'use strict';
 
-angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'maps', 'amenitiesService', 'accordionService', '$timeout',
-	function ($scope, $state, $stateParams, mapService, parkService, maps, amenitiesService, accordionService, $timeout) {
+angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'maps', 'amenitiesService',
+	function ($scope, $state, $stateParams, mapService, parkService, maps, amenitiesService) {
 
 		var parkName = $stateParams.name,
-				accordionSettings = accordionService.settings,
 				directionsService,
 	  		directionsDisplay,
 	  		icons,
 	  		map;
 
 	  // Define some async objects from our services
-    $scope.parks = parkService.markers;
-    $scope.amenities = amenitiesService.list;
-    $scope.selectedActivities = amenitiesService.selectedActivities;
-    $scope.myLoc = mapService.map.myLocationMarker.coords;
+    $scope.parks = parkService.parks;
+    $scope.activities = amenitiesService.activities;
     $scope.map = mapService.map;
-
-	  $scope.openLocationPanel = function () {
-      accordionSettings.second.status.open = false;
-      accordionSettings.third.status.open = false;
-      accordionSettings.first.status.open = true;
-      $timeout(function(){
-      	document.getElementById("autocomplete").focus();
-      }, 501);
-	  };
-
-	  $scope.showAmenityInMap = function () {
-    	$scope.map.location.coords.latitude = $scope.parks.currentPark.latitude;
-    	$scope.map.location.coords.longitude = $scope.parks.currentPark.longitude;
-    	$scope.map.zoom = 18;
-	  };
 
 	  var initializeDirectionsMap = function () {
 	  	if ( !document.getElementById('mini-map') ) { return; }
@@ -42,7 +24,7 @@ angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$
 	    var mapOptions = {
 		    zoom: 16,
 		    scrollwheel: false,
-		    center: new maps.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
+		    center: new maps.LatLng($scope.map.myLocationMarker.coords.latitude, $scope.map.myLocationMarker.coords.longitude),
 		    mapTypeControlOptions: {
 		      mapTypeIds: [maps.MapTypeId.ROADMAP, 'light_dream']
 		    }
@@ -51,9 +33,6 @@ angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$
 	  	directionsDisplay.setMap( map );
 		  map.mapTypes.set('light_dream', styledMap);
 		  map.setMapTypeId('light_dream');
-      // maps.event.addListenerOnce(map, 'idle', function() {
-      //    maps.event.trigger(map, 'resize');
-      // });
 	  };
 
 	  var generateMarkerIcons = function () {
@@ -76,12 +55,10 @@ angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$
 	  };
 
 	  var calcRoute = function (park) {
-	  	if ( !verifyPark() ) { return; }
-
 	  	var travelMode = getBestTravelMode(park);
 
 		  var request = {
-		      origin: new maps.LatLng($scope.myLoc.latitude, $scope.myLoc.longitude),
+		      origin: new maps.LatLng($scope.map.myLocationMarker.coords.latitude, $scope.map.myLocationMarker.coords.longitude),
 		      destination: new maps.LatLng(park.latitude, park.longitude),
 		      travelMode: travelMode,
 		  };
@@ -89,19 +66,12 @@ angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$
 		};
 
 		var getBestTravelMode = function (park) {
-			var a = Math.abs(park.latitude - $scope.myLoc.latitude);
-      var b = Math.abs(park.longitude - $scope.myLoc.longitude);
+			console.log(park, $scope.map.myLocationMarker.coords);
+			var a = Math.abs(park.latitude - $scope.map.myLocationMarker.coords.latitude);
+      var b = Math.abs(park.longitude - $scope.map.myLocationMarker.coords.longitude);
       var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
       $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 };
       return (dist <= 0.012) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
-		};
-
-		var verifyPark = function () {
-			if ($scope.parks[parkName]) {
-				$scope.parks.currentPark = $scope.parks[parkName];
-				return true;
-			} 
-			$state.go('home');
 		};
 
 		var displayDirections = function (response, status) {
@@ -110,7 +80,7 @@ angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$
 	      placeCustomMarkers(response);
 	      extractDirectionsInfo(response);
 	    } else {
-	    	console.log('Error happened... Maybe over query limit?');
+	    	console.log('Error', status, response);
 	    }
 	  };
 
