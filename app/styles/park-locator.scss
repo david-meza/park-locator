@@ -6,7 +6,7 @@ $light-white: rgba(255,255,255,0.87);
 $warn: #EF6C00;
 $alert: #E65100;
 $success: #3C763D;
-$success-alt: #669834;
+$success-light: #669834;
 $danger: #E63125;
 
 html {
@@ -52,6 +52,10 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
 .text-info {
   color: $primary;
+}
+
+.text-success {
+  color: $success;
 }
 
 .text-danger {
@@ -314,12 +318,8 @@ th {
 
 .list-button {
   text-align: left;
-  margin-left: 0;
+  margin: 0;
   padding-left: 0;
-}
-
-.text-green {
-  color: #3C763D;
 }
 
 .text-total-results {
@@ -354,19 +354,13 @@ th {
   
 }
 
-.park-title {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  line-height: 1.9em;
+.img-responsive {
+  height: 100%;
+  width: auto;
 }
 
-.park-distance {
-  font-size: 12px;
-  display: block;
-  text-align: right;
-  line-height: 1.5em;
+.park-detail {
+  margin: 5px 0;
 }
 
 #activities-list {

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appServices').factory('parkService', ['$http', '$q', '$state', 'uiGmapGoogleMapApi',
-	function ($http, $q, $state, gMapsApi) {
+angular.module('appServices').factory('parkService', ['$http', '$q', '$state', 'uiGmapGoogleMapApi', '$timeout',
+	function ($http, $q, $state, gMapsApi, $timeout) {
 	
   var maps;
 
@@ -181,6 +181,18 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
     getParksInfo(query).then(_generateMarkers, logError);
   };
 
+  function getCurrentPark(deferred, parkName) {
+    // Queue a call once every half second until it is resolved
+    if (parks[parkName]) {
+      parks.currentPark = parks[parkName];
+      deferred.resolve(parks.currentPark);
+    } else {
+      $timeout(function(){
+        getCurrentPark(deferred, parkName);
+      }, 500, false);
+    }
+  }
+
   var getParksInfo = function (where) {
     var url = 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=' + (where ? where : '1%3D1') + '&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson';
   	
@@ -198,7 +210,8 @@ angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '
 	return {
 		parks: parks,
     updateParkMarkers: updateParkMarkers,
-    parkWindow: parkWindow
+    parkWindow: parkWindow,
+    getCurrentPark: getCurrentPark
 	};
 
 }]);

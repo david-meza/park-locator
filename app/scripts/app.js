@@ -53,6 +53,13 @@ angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'a
           resolve: {
             maps: ['uiGmapGoogleMapApi', function(uiGmapGoogleMapApi) {
               return uiGmapGoogleMapApi;
+            }],
+            currentPark: ['parkService', '$stateParams', '$timeout', '$q', function(parkService, $stateParams, $timeout, $q) {
+              var deferred = $q.defer();
+              $timeout( function () {
+                parkService.getCurrentPark(deferred, $stateParams.name);
+              }, 0, false);
+              return deferred.promise;
             }]
           }
         })
