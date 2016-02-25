@@ -1,6 +1,6 @@
-<div id = "park-window">
-  <h5 ng-bind="parameter.name"></h5>
-  <p ng-bind="parameter.address"></p>
-  <p ng-bind="parameter.phone"></p>
+<div id = "park-window" flex layout="column">
+  <h3>{{ ::parameter.name }}</h3>
+  <p>{{ ::parameter.address }}</p>
+  <p>{{ ::parameter.phone }}</p>
   <a du-smooth-scroll = "panels-section" class="more-info">More Info</a>
 </div>

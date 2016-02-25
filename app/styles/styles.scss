@@ -1,10 +1,5 @@
 @import 'mixins';
 
-@import "../bower_components/angular-material/angular-material.css";
-@import "./flatly.min.css";
-@import "./font-awesome.css";
-@import "../bower_components/angular-flash-alert/dist/angular-flash.min.css";
-
 $primary: #1565C0;
 $indigo: #3F51B5;
 $light-white: rgba(255,255,255,0.87);
@@ -41,6 +36,10 @@ img, h1, h2, h3, h4, h5, h6 {
 
 .opaque {
   opacity: 0;
+}
+
+.light {
+  color: $light-white;
 }
 
 .text-primary {
@@ -587,48 +586,6 @@ ul#park-amenities {
   }
 }
 
-#searchbox-container {
-  position: absolute;
-  z-index: 11;
-  right: 100px;
-  top: 5px;
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  -moz-box-shadow:    0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  box-shadow:         0 2px 5px 0 rgba(0, 0, 0, 0.26);
-
-  .icon-search {
-    position: absolute;
-    // padding-top: 10px;
-    // padding-left: 10px;
-    padding: 10px;
-    width: 40px;
-    height: 40px;
-    z-index: 12;
-    background-color: #fff;
-    border: 2px solid #669834;
-  }
-
-  input#search-box {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    opacity: 0;
-    z-index: 13;
-    cursor: pointer;
-    -webkit-transition:  all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transition:     all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transition:       all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transition:      all .25s cubic-bezier(0.345, 0, 0.25, 1);
-    transition:          all .25s cubic-bezier(0.345, 0, 0.25, 1);
-
-    &:focus {
-      cursor: text;
-      width: 250px;
-      opacity: 1;
-    }
-  }
-}
-
 .capitalize {
   text-transform: capitalize;
 }
@@ -663,20 +620,12 @@ html, body {
   margin-bottom: 0;
 }
 
-#panels-section > * {
-  margin-top: 10px;
-}
-
-.panel-group .panel-body {
-
-  .panel-scrollable {
-    max-height: 24em;
-    overflow: auto;
-    margin-right: -15px;
-    padding-right: 15px;
-    clear: right;
-  }
-
+.panel-scrollable {
+  max-height: 360px;
+  overflow: auto;
+  margin-right: -15px;
+  padding-right: 15px;
+  clear: right;
 }
 
 .pull-down-lg {
@@ -812,11 +761,84 @@ html, body {
 
 // Overrides end
 
-#navbar {
+.gradient-primary {
   background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%);
   background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%); 
   background:          linear-gradient(to bottom, $primary 0%, darken($primary, 10%) 100%);
   background-color: $primary;
+}
+
+.gradient-primary-light {
+  background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
+  background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
+  background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
+  background-color: $primary;
+}
+
+#menu-sidenav {
+  
+  .nav-header {
+    margin: 25px 8px 40px;
+    box-sizing: border-box;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  md-content {
+    background: transparent;
+    background-color: transparent;
+
+    .menu-item {
+      color: $light-white;
+      font-size: 16px;
+      border-bottom: 1px solid lighten($primary, 1%);
+
+      &:first-child {
+        border-top: 1px solid lighten($primary, 1%);
+      }
+
+      &:hover, &:focus {
+        background-color: lighten($primary, 3%);
+      }
+
+      .md-button:hover, .md-button:focus {
+        background-color: transparent;
+      }
+
+      .list-icon {
+        @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
+
+        &.rotate {
+          @include transform( rotate(180deg) );
+        }
+      }
+    }
+
+
+    .selection-menu {
+      @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
+      background-color: #fff;
+      height: 100%;
+      max-height: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      padding: 12px;
+
+      &.ng-hide {
+        // @include transform( scale(0,0) );
+        height: 0;
+        max-height: 0;
+        min-height: 0;
+      }
+    }
+
+  }
+}
+
+#navbar {
   
   h1 {
     font-size: 24px;
@@ -834,9 +856,10 @@ html, body {
   max-height: 45px;
   min-height: 45px;
   height: 45px;
-  opacity: 1;
-  padding: 2px 8px;
   border-top: 1px solid #e5e5e5;
+  opacity: 1;
+  visibility: visible;
+  padding: 2px 8px;
 
   @include transition( all 500ms cubic-bezier(0.345, 0, 0.25, 1) );
 
@@ -844,6 +867,7 @@ html, body {
     min-height: 0;
     height: 0;
     max-height: 0;
+    border: 0;
     opacity: 0;
     visibility: hidden;
     // @include transform( translateY(50px) );
@@ -862,6 +886,8 @@ html, body {
     margin: 0;
     padding: 2px;
     font-size: 13px;
+    line-height: 15px;
+    height: 20px;
   }
 
   .fa-heart {
@@ -964,18 +990,8 @@ html, body {
     }
   }
 
-  #main-scrollable {
-    // -webkit-flex-wrap: nowrap;
-    //     -ms-flex-wrap: nowrap;
-    //         flex-wrap: nowrap;
-  }
-
   .course-details {
     max-height: 20em;
-  }
-
-  .angular-google-map-container {
-    // min-height: 30em;
   }
 
   #searchbox-container {

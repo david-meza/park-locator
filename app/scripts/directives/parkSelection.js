@@ -21,7 +21,7 @@
         }
 
         function querySearch (searchText) {
-          return searchText ? $scope.parks.content.filter( createFilterFor(searchText) ) : $scope.parks.content;
+          return searchText ? $scope.parks.markers.filter( createFilterFor(searchText) ) : $scope.parks.markers;
         }
 
         // Park markers object

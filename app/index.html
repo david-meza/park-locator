@@ -9,6 +9,8 @@
   <meta name="description" content="Find the your nearest park in Raleigh">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="styles/font-awesome.css">
   <link rel="stylesheet" href="styles/styles.css">
 
   <script>
@@ -24,21 +26,39 @@
 </head>
 
 
-<body ng-app="parkLocator" ng-cloak layout = "column" flex="100">
+<body ng-app="parkLocator" ng-cloak layout = "row">
   
-  <ng-navbar></ng-navbar>
+  <!-- Menu button -> Left Sidenav -> Opened from navbarCtrl -->
+  <md-sidenav class="gradient-primary md-sidenav-left md-whiteframe-z2" 
+              md-component-id="left" 
+              md-is-locked-open="$mdMedia('gt-sm')"
+              id="menu-sidenav">
+      
+      <header class="nav-header">
+        <a ng-href="https://parks.raleighnc.gov" target="_blank" class="parks-logo">
+          <img src="img/icons/parks-logo-white.svg" alt="Parks Logo" />
+        </a>
+      </header>
 
-  <md-content id = "main-scrollable"
-              layout = "row" 
-              du-scroll-container 
-              ui-view 
-              flex
-              layout-padding
-              layout-wrap>
-  </md-content>
+      <sidenav-content></sidenav-content>
+    
+  </md-sidenav>
+  
+  <div id="main" layout="column" role="main" flex>
+    <ng-navbar></ng-navbar>
 
-  <ng-footer></ng-footer>
-  <collapse-footer></collapse-footer>
+    <md-content id = "main-scrollable"
+                layout = "row" 
+                du-scroll-container 
+                ui-view 
+                flex
+                layout-padding
+                layout-wrap>
+    </md-content>
+
+    <ng-footer></ng-footer>
+    <collapse-footer></collapse-footer>
+  </div>
 
 
   <!-- Angular -->
@@ -94,6 +114,7 @@
   <script src="scripts/directives/parkSelection.js"></script>
   <script src="scripts/directives/gmapsAddress.js"></script>
   <script src="scripts/directives/mapActions.js"></script>
+  <script src="scripts/directives/sidenavContent.js"></script>
   <script src="scripts/directives/navbar.js"></script>
   <script src="scripts/directives/footer.js"></script>
   <script src="scripts/directives/collapseFooter.js"></script>
