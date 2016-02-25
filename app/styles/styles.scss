@@ -27,7 +27,7 @@ html {
   background: rgba(37,208,117,0.3);
 }
 
-img, h1, h2, h3, h4, h5, h6 {
+img, h1, h2, h3, h4, h5, h6, #map-canvas {
   -webkit-user-select: none;  
      -moz-user-select: none;    
       -ms-user-select: none;
@@ -44,6 +44,18 @@ img, h1, h2, h3, h4, h5, h6 {
 
 .text-primary {
   color: $indigo;
+}
+
+.text-info {
+  color: $primary;
+}
+
+.text-danger {
+  color: $danger;
+}
+
+.text-warn {
+  color: $warn;
 }
 
 .activity-label, .park-label {
@@ -307,7 +319,7 @@ th {
 }
 
 .text-total-results {
-  margin: -15px 0 0;
+  font-size: 15px;  
 }
 
 .course-details {
@@ -655,10 +667,23 @@ html, body {
 }
 
 #park-window {
+
+  h3 {
+    margin: 0;
+    padding: 5px 0 8px;
+  }
+
+  p {
+    margin: 0;
+    padding: 4px 0;
+    color: rgba(0,0,0,0.6);
+  }
+
   .more-info {
     color: $indigo;
     font-size: 14px;
     font-weight: 500;
+    padding: 4px 0;
 
     &:hover {
       text-decoration: none;

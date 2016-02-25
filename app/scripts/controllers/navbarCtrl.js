@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', '$mdToast', 'deviceService',
-	function ($scope, $rootScope, parkService, $mdToast, deviceService) {
+angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', '$mdToast', 'deviceService', '$mdSidenav',
+	function ($scope, $rootScope, parkService, $mdToast, deviceService, $mdSidenav) {
     
     var markers = parkService.parks;
 
@@ -16,13 +16,15 @@ angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope
     };
     
     $scope.title = "Park Locator";
-    
     // Start the circular progress icon
     $scope.progress = 'indeterminate';
 
     $scope.activeTab = deviceService.activeTab;
     $scope.isMobile = deviceService.isMobile;
 
+    $scope.toggleSidenav = function () {
+      $mdSidenav('left').toggle();
+    };
 
     $scope.scrollTo = function (target) {
       if (target === 'panels-section' && !markers.currentPark) { return informUser('Oops! Please select a park first.'); }
