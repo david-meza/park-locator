@@ -4,7 +4,9 @@
                   md-items="activity in search.querySearch(search.searchText)"
                   md-item-text="activity.name"
                   placeholder="Find an activity"
-                  md-menu-class="activity-custom-template">
+                  md-menu-class="activity-custom-template"
+                  md-autoselect="true"
+                  md-select-on-match="true">
   <md-item-template>
     <span class="item-title" layout="row">
       <md-icon md-svg-icon="{{ activity.icon }}"></md-icon>

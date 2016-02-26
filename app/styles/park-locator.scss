@@ -286,6 +286,11 @@ md-icon {
       height: 50px;
       width: 50px;
     }
+
+    h4 {
+      font-weight: 500;
+      color: rgba(0,0,0,0.75);
+    }
   }
 }
 
@@ -599,7 +604,7 @@ html, body {
   overflow: hidden;
 }
 
-#map-canvas, #mini-map {
+#map-canvas, #directions-map {
   position: relative;
   @include box-shadow( 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) );
 }
@@ -617,7 +622,7 @@ html, body {
 }
 
 .panel-scrollable {
-  max-height: 360px;
+  max-height: 340px;
   overflow: auto;
   margin-right: -15px;
   padding-right: 15px;
@@ -646,9 +651,6 @@ html, body {
   flex: 1;
 }
 
-#mini-map {
-  height: 20em;
-}
 
 #park-window {
 
@@ -970,9 +972,11 @@ html, body {
   padding: 0;
 }
 
-// @media screen and (max-width: 599px) {
-  // Extra Small
-// }
+@media screen and (max-width: 599px) {
+  #directions-map {
+    min-height: 300px;
+  }
+}
 
 @media screen and (max-width: 959px) {
   #flash span {

@@ -11,6 +11,8 @@
       controller: ['$scope', '$mdSidenav', 'deviceService',
         function ($scope, $mdSidenav, deviceService) {
 
+        $scope.currentList = '';
+
         $scope.toggleList = function (listName) {
           $scope.currentList = $scope.currentList === listName ? '' : listName;
         }

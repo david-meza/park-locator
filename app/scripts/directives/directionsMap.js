@@ -14,10 +14,12 @@
       
       link: function ($scope, element, attrs) {
         var maps = $scope.$parent.maps;
-        var directionsService,
-            directionsDisplay,
-            icons,
-            map;
+        var currentPark = $scope.$parent.currentPark;
+        $scope.map = $scope.$parent.map;
+
+        var directionsService, directionsDisplay, icons, map;
+
+        var startEndMarkers = [];
             
         (function initializeDirectionsMap() {
           directionsService = new maps.DirectionsService();
@@ -42,11 +44,11 @@
           icons = {
             start: new maps.MarkerImage('/img/icons/user-marker.svg',
               // (width,height)
-              new maps.Size( 48, 48 ),
+              new maps.Size( 52, 52 ),
               // The origin point (x,y)
               new maps.Point( 0, 0 ),
               // The anchor point (x,y)
-              new maps.Point( 24, 39 ) ),
+              new maps.Point( 24, 46 ) ),
             end: new maps.MarkerImage('/img/icons/park-marker.svg',
              // (width,height)
              new maps.Size( 48, 48 ),
@@ -55,8 +57,14 @@
              // The anchor point (x,y)
              new maps.Point( 25, 46 ) )
           };
+          return icons;
         };
 
+        $scope.$watch('map.myLocationMarker.coords.latitude', function() {
+          calcRoute(currentPark);
+        });
+
+        // Functions that triggers the drawing of a route on the map
         function calcRoute(park) {
           var travelMode = getBestTravelMode(park);
 
@@ -72,7 +80,7 @@
           var a = Math.abs(park.latitude - $scope.map.myLocationMarker.coords.latitude);
           var b = Math.abs(park.longitude - $scope.map.myLocationMarker.coords.longitude);
           var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
-          $scope.travelMode = { 'fa-car': dist > 0.012, 'fa-male': dist <= 0.012 };
+          $scope.$parent.travelMode = dist > 0.012 ? 'fa-car' : 'fa-male';
           return (dist <= 0.012) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
         };
 
@@ -93,8 +101,6 @@
           makeMarker( leg.end_location, icons.end, 'Park' );
         };
 
-        var startEndMarkers = [];
-
         function makeMarker( position, icon, title ) {
           if (startEndMarkers[startEndMarkers.length - 2]) { startEndMarkers[startEndMarkers.length - 2].setMap(null); }
           var marker = new maps.Marker({
@@ -112,7 +118,7 @@
           var dt = r.distance.text;
           var dur = r.duration.text;
           // Other valuable information may include waypoints, steps, coordinates, etc.
-          $scope.routeData = {
+          $scope.$parent.routeData = {
             distance: dt,
             duration: dur
           };
@@ -120,8 +126,8 @@
           // Color code the dist / dur text
           var a = parseInt(dt);
           var b = parseInt(dur);
-          $scope.distanceColoring = { 'text-success': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warn': a > 3 && a <= 10 && dt.substring(dt.length - 2, dt.length) !== 'ft', 'text-danger': a > 10 && dt.substring(dt.length - 2, dt.length) !== 'ft' };
-          $scope.durationColoring = { 'text-success': b <= 10, 'text-warn': b > 10 && b <= 20, 'text-danger': b > 20 };
+          $scope.$parent.distanceColoring = { 'text-success': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warn': a > 3 && a <= 10 && dt.substring(dt.length - 2, dt.length) !== 'ft', 'text-danger': a > 10 && dt.substring(dt.length - 2, dt.length) !== 'ft' };
+          $scope.$parent.durationColoring = { 'text-success': b <= 10, 'text-warn': b > 10 && b <= 20, 'text-danger': b > 20 };
 
         };
       }

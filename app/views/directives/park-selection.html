@@ -4,7 +4,9 @@
                   md-items="park in search.querySearch(search.searchText)"
                   md-item-text="park.name"
                   placeholder="Park Name"
-                  md-menu-class="park-custom-template">
+                  md-menu-class="park-custom-template"
+                  md-autoselect="true"
+                  md-select-on-match="true">
   <md-item-template>
     <span class="item-title" layout="row">
       <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>

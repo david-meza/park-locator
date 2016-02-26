@@ -1,7 +1,7 @@
 <md-tabs md-dynamic-height md-border-bottom fade-up-when-ready flex="100" md-stretch-tabs="always" md-center-tabs="true" md-swipe-content="true">
   
   <md-tab label="About this Park">
-    <md-content class="md-padding" layout="row">
+    <md-content class="md-padding" layout="row" layout-xs="column">
 
       <div flex layout="column" layout-align="space-between center">
         <h3>{{ ::currentPark.name }}</h3>
@@ -27,8 +27,8 @@
             <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
           </md-button>
 
-          <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{myLoc.latitude}},{{myLoc.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank"> 
-            <i class = "fa fa-fw fa-compass color-default"></i> Get Directions
+          <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank"> 
+            <i class = "fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
           </md-button>
         </div>
         
@@ -41,11 +41,11 @@
   </md-tab>
   
   
-  <md-tab label="Things to Do">
+  <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0">
     <md-content class="md-padding">
       
       <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
-        <li ng-repeat="activity in activities.categoriesArr | parkAmenities: currentPark as activitiesInPark">
+        <li ng-repeat="activity in activitiesInPark">
             <div class="view">
               <md-icon class="icon-contain" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
               <div class="mask">  
