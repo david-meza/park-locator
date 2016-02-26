@@ -48,8 +48,16 @@ angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'a
 
         .state('home.park', {
           url: ':name',
-          templateUrl: 'views/park-information.html',
-          controller: 'parkCtrl',
+          views: {
+            '': {
+              templateUrl: 'views/partials/park-information.html',
+              controller: 'parkCtrl',
+            },
+            'classes-info@home.park': {
+              templateUrl: 'views/partials/class-section-selection.html',
+              controller: 'classesCtrl'
+            }
+          },
           resolve: {
             maps: ['uiGmapGoogleMapApi', function(uiGmapGoogleMapApi) {
               return uiGmapGoogleMapApi;
@@ -66,8 +74,12 @@ angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'a
 
         .state('home.park.section', {
           url: '/:sectionName',
-          templateUrl: 'views/course-section.html',
-          controller: 'sectionCtrl'
+          views: {
+            'classes-info@home.park': {
+              templateUrl: 'views/partials/course-section.html',
+              controller: 'sectionCtrl'
+            }
+          }
         });
 
   }]);

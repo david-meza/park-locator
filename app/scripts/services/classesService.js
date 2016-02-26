@@ -41,8 +41,8 @@
       if (data === null) { return; }
 
       angular.forEach(data, function (course) {
-        // Turn date string into Date object for proper sorting
-        if (course.START_DATE) { course.sDate = Date.parse(course.START_DATE.substring(0,course.START_DATE.length - 2)); }
+        // Turn date string into Date object for proper sorting. This will make mistakes if in the same day because we remove AM/PM to parse.
+        if (course.START_DATE) { course.sDate = new Date( Date.parse(course.START_DATE.substring(0,course.START_DATE.length - 2)) ); }
         
         var urlName = course.SECTION.replace(/\W+/ig, '').toLowerCase();
         

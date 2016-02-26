@@ -1,21 +1,7 @@
 <md-tab label="Classes" ng-if="classes.sections.length">
   <md-content class="md-padding">
 		
-    <h3 class="text-center">What kind of classes interest you?</h3>
-	  
-    <ul id = "class-sections" flex layout = "row" layout-wrap layout-align = "center center">
-      <li ng-repeat="section in classes.sections">
-          <div class="view" ng-click="goToSection(section.urlName)">
-            <md-icon class="icon-contain" md-svg-icon="{{ ::section.icon }}" alt="{{ ::section.name }}"></md-icon>
-            <div class="mask">  
-              <h6>{{ ::section.name }}</h6>  
-            </div>  
-          </div>
-      </li>          
-    </ul>
-
-
-		<ui-view></ui-view>
+    <div ui-view="classes-info"></div>
 
   </md-content>
 </md-tab>
