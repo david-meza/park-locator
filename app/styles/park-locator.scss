@@ -10,6 +10,7 @@ $success-light: #669834;
 $danger: #E63125;
 $heart: #B71C1C;
 $black: #000;
+$accent: #FF4081;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -337,19 +338,19 @@ th {
   font-size: 15px;  
 }
 
-.course-details {
-  max-height: 40em;
-  overflow: auto;
-  margin-right: -15px;
-  padding-right: 15px;
+// .course-details {
+//   max-height: 40em;
+//   overflow: auto;
+//   margin-right: -15px;
+//   padding-right: 15px;
   
-  table, .table {
-    a.md-button{
-      margin: 0;
-      text-decoration: none;
-    }
-  }
-}
+//   table, .table {
+//     a.md-button{
+//       margin: 0;
+//       text-decoration: none;
+//     }
+//   }
+// }
 
 .img-container {
   position: relative;
@@ -1012,9 +1013,6 @@ html, body {
 }
 
 @media screen and (max-width: 959px) {
-  #flash span {
-    font-size: 0.9em;
-  }
 
   .layout-padding, .layout-padding-gt-sm, .layout-padding-md, .layout-padding > *, .layout-padding-gt-sm > *, .layout-padding-md > *, .layout-padding > .flex, .layout-padding > .flex-gt-sm, .layout-padding > .flex-md {
     padding: 6px 4px 8px;
@@ -1036,58 +1034,46 @@ html, body {
     }
   }
 
-  .course-details {
-    max-height: 20em;
-  }
+  // table {
+  //   margin-top: 1em;
+  // }
 
-  #searchbox-container {
-    display: none;
-
-    input#search-box:focus {
-      width: 190px;
-    }
-  }
-
-  table {
-    margin-top: 1em;
-  }
-
-  /* Force table to not be like tables anymore */
-  table, thead, tbody, th, td, tr { 
-    display: block; 
-  }
+  // /* Force table to not be like tables anymore */
+  // table, thead, tbody, th, td, tr { 
+  //   display: block; 
+  // }
   
-  /* Hide table headers (but not display: none;, for accessibility) */
-  thead tr { 
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
+  // /* Hide table headers (but not display: none;, for accessibility) */
+  // thead tr { 
+  //   position: absolute;
+  //   top: -9999px;
+  //   left: -9999px;
+  // }
   
-  tr { 
-    border: 1px solid #ccc; 
-  }
+  // tr { 
+  //   border: 1px solid #ccc; 
+  // }
   
-  td { 
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee; 
-    position: relative;
-    padding-left: 35% !important;
-    padding-top: 10px;
-    padding-bottom: 10px; 
-  }
+  // td { 
+  //   /* Behave  like a "row" */
+  //   border: none;
+  //   border-bottom: 1px solid #eee; 
+  //   position: relative;
+  //   padding-left: 35% !important;
+  //   padding-top: 10px;
+  //   padding-bottom: 10px; 
+  // }
   
-  td:before { 
-    // Get the label information from the HTML template
-    content: attr(data-label); // Table header
-    position: absolute;
-    top: 10px;
-    left: 8px;
-    width: 30%; 
-    padding-right: 5px; 
-    white-space: nowrap;
-  }
+  // td:before { 
+  //   // Get the label information from the HTML template
+  //   content: attr(data-label); // Table header
+  //   position: absolute;
+  //   top: 10px;
+  //   left: 8px;
+  //   width: 30%; 
+  //   padding-right: 5px; 
+  //   white-space: nowrap;
+  // }
 
 }
 
@@ -1115,4 +1101,52 @@ div[ui-view="classes-info"] {
     opacity: 0;
     @include transform( translateX(-500px) );
   }
+}
+
+
+.md-card {
+
+  box-sizing: border-box;
+  margin: 5px;
+  @include display-flex;
+  @include flex-direction( column );
+  @include box-shadow( 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12) );
+  @include transition( all 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
+
+  
+  &:hover, &:focus {
+    @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
+    @include transform( translateY(-1px) );
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid rgba(103,58,183,0.4);
+  }
+
+  &.odd-card {
+    background-color: rgba($black, .01);
+  }
+
+  .md-card-content {
+    padding: 8px 16px 0;
+    @include display-flex;
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .card-actions {
+    .md-button {
+      &:hover, &:focus {
+        background-color: rgba($accent, 0.13);
+      }
+    }
+  }
+  
 }

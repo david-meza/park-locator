@@ -12,8 +12,8 @@
 </div>
 
 
-<div class="course-details">
-	<table class = "table table-striped">
+<div class="course-details" layout="row" layout-wrap layout-align="center center">
+<!-- 	<table class = "table table-striped">
 		<thead>
 			<th>
 				<a ng-click="sortBy('COURSE')" >
@@ -30,27 +30,33 @@
 					<i class="fa fa-calendar"></i> Start Date <i class="fa fa-pad-right" ng-show = "sortQuery === 'sDate' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
 				</a>
 			</th>
-			<th>
-				<i class="fa fa-external-link"></i> Info
-			</th>
 		</thead>
 
-		<tr ng-repeat="course in classes[sectionName] | filter: textSearch | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses">
-			<td data-label = "Course"> {{ course.COURSE || 'No Course Preview' }} </td>
-			<td data-label = "Activity"> {{ course.ACTIVITY || 'No Activity Preview' }} </td>
-			<td data-label = "Start Date"> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </td>
-			<td data-label = "Info">
-				<md-tooltip md-direction = "top">
-					Please click again if there is a cookies alert.
-				</md-tooltip>
-				<md-button 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
-						target="_blank"
-						class="md-accent"
-						aria-label="Learn more about this course"> 
-					More
-				</md-button> 
-			</td>
-		</tr>
-	</table>
+	</table> -->
+	<div  class="md-card" ng-class-odd="'odd-card'"
+	      ng-repeat="course in classes[sectionName] | filter: textSearch | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses" 
+	      flex="100" flex-gt-xs="45" flex-gt-md="30">
+	  
+	  <div class="md-card-content" layout="column">
+	    <span class="limit-text class-detail" flex> <b>Course:</b> {{ course.COURSE || 'No Course Preview' }} </span>
+			<span class="limit-text class-detail" flex> <b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} </span>
+			<span class="limit-text class-detail" flex> <b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </span>
+	  </div>
+	  
+
+	  <div layout="row" layout-align="end center" class = "card-actions md-card-actions">
+	    <md-button 	ng-href="https://reclink.raleighnc.gov/Activities/ActivitiesCourseDetails.asp?aid={{course.ACTIVITY_ID}}&cid={{course.COURSE_ID}}" 
+					    		target="_blank"
+					    		class="md-accent more-info"
+					    		aria-label="Learn more about this course"> 
+		    <md-tooltip md-direction = "top">Please click again if there is a cookies alert.</md-tooltip>
+	      <md-icon aria-label="External Link" md-svg-icon="/img/icons/external-link.svg"></md-icon>
+	    	More
+	    </md-button> 
+	  </div>
+
+
+	</div>
 </div>
+
 <p style="margin-top: 10px;">Showing {{ notShowingAllResults() ? ('the first ' + coursesLimit) : (filteredCourses.length) }} {{ filteredCourses.length === 1 ? 'result' : 'results' }}. <a ng-click="showAll()" class="text-primary" ng-if="notShowingAllResults()">Show all</a></p>

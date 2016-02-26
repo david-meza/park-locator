@@ -55,7 +55,7 @@ module.exports = function (grunt) {
         files: [
           '<%= config.app %>/**/*.html',
           '.tmp/styles/**/*.css',
-          '<%= config.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= config.app %>/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         src: [
           '<%= config.dist %>/scripts/{,*/}*.js',
           '<%= config.dist %>/styles/{,*/}*.css',
-          '<%= config.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp}'
+          '<%= config.dist %>/img/**/*.{png,jpg,jpeg,gif,webp}'
         ]
       }
     },
@@ -404,7 +404,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '{index,404}.html',
-            'img/{,*/}*.{webp,svg}',
+            'img/**/*.{webp,svg}',
             'scripts/{,*/}*.json',
             'styles/fonts/{,*/}*.*'
           ]

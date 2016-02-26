@@ -1,0 +1,7 @@
+<svg id="external-link"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+  <rect x="6" y="10" fill="#BBDEFB" width="32" height="32"/>
+  <g>
+    <polygon fill="#3F51B5" points="42,6 42,21 27,6  "/>
+    <rect x="26.132" y="10.368" transform="matrix(0.7071 0.7071 -0.7071 0.7071 21.4601 -16.073)" fill="#3F51B5" width="8.001" height="15"/>
+  </g>
+</svg>
