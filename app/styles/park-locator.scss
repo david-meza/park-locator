@@ -405,8 +405,8 @@ th {
 }
 
 .text-before-dropdown {
-  margin: auto;
-  padding-top: 3px;
+  margin: auto 0;
+  padding-top: 2px;
 }
 
 .inline-dropdown {
@@ -569,6 +569,10 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
 }
 
 md-input-container {
+  &.classes-search-container {
+    margin: 5px 0 0;
+  }
+
   .hint {
     color: rgba($black, 0.42);
     font-size: 12px;
@@ -1129,7 +1133,7 @@ div[ui-view="classes-info"] {
   }
 
   .md-card-content {
-    padding: 8px 16px 0;
+    padding: 8px 8px 0;
     @include display-flex;
 
     p:first-child {

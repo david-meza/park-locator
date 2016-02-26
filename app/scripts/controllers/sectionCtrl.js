@@ -4,29 +4,20 @@ angular.module('appControllers').controller('sectionCtrl', ['$scope', 'classesSe
 	function ($scope, classesService, $stateParams) {
 
   $scope.sectionName = $stateParams.sectionName;
+  
   // Yeah... quite brittle, but it doesn't make sense to create a service if we need to wipe out the classes obj every time we change parks.
   $scope.classes = $scope.$parent.$parent.classes;
 
+  $scope.sortOptions = [
+    { model: 'sDate', view: 'the earliest'},
+    { model: '-sDate', view: 'the latest'},
+    { model: 'COURSE', view: 'course title (A-Z)'},
+    { model: '-COURSE', view: 'course title (Z-A)'},
+    { model: 'ACTIVITY', view: 'activity title (A-Z)'},
+    { model: '-ACTIVITY', view: 'activity title (Z-A)'}
+  ];
+
   // Start sorting by courses descending
-  $scope.sortQuery = 'sDate';
-  $scope.reverse = false;
-
-  $scope.sortBy = function (query) {
-  	$scope.reverse = ($scope.sortQuery === query) ? !$scope.reverse : false;
-  	$scope.sortQuery = query;
-  };
-
-  // Show only 7 results initially in table
-  $scope.coursesLimit = 7;
-  
-  // Expand the list of courses results
-  $scope.showAll = function () {
-    $scope.coursesLimit = $scope.classes[$scope.sectionName].length;
-  };
-
-  $scope.notShowingAllResults = function () {
-    return $scope.coursesLimit < $scope.classes[$scope.sectionName].length;
-  };
-
+  $scope.sortQuery = $scope.sortOptions[0];
 
 }]);

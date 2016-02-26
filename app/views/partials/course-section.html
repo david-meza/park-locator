@@ -1,5 +1,5 @@
 <div layout="row" layout-align="start center">
-	<md-input-container class="md-icon-float md-block">
+	<md-input-container class="md-icon-float md-block classes-search-container">
 	  <label>Search</label>
 	  <md-icon md-svg-src="img/icons/search.svg" class="search-icon"></md-icon>
 	  <input ng-model="textSearch" type="search">
@@ -11,36 +11,27 @@
 	<md-button class="md-primary md-hue-1 back-to-sections" ui-sref="^">Back To Sections</md-button>
 </div>
 
+<div layout="row" layout-align="start center" style="height:40px;">
+	<span class="text-primary text-before-dropdown">Show classes starting with</span>
+	<md-select  ng-model = "sortQuery" 
+	            aria-label = "Sort course details" 
+	            class = "inline-dropdown text-primary" 
+	            md-container-class = "inline-dropdown">
+	  <md-option ng-value="::option" ng-repeat="option in sortOptions">{{ ::option.view }}</md-option>
+	</md-select>
+</div>
+
 
 <div class="course-details" layout="row" layout-wrap layout-align="center center">
-<!-- 	<table class = "table table-striped">
-		<thead>
-			<th>
-				<a ng-click="sortBy('COURSE')" >
-					<i class="fa fa-group"></i> Course <i class="fa fa-pad-right" ng-show = "sortQuery === 'COURSE' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i> 
-				</a>
-			</th>
-			<th>
-				<a ng-click="sortBy('ACTIVITY')" >
-					<i class="fa fa-group"></i> Activity <i class="fa fa-pad-right" ng-show = "sortQuery === 'ACTIVITY' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
-				</a>
-			</th>
-			<th>
-				<a ng-click="sortBy('sDate')" >
-					<i class="fa fa-calendar"></i> Start Date <i class="fa fa-pad-right" ng-show = "sortQuery === 'sDate' " ng-class = "{ 'fa-sort-desc': !reverse, 'fa-sort-asc': reverse }"></i>
-				</a>
-			</th>
-		</thead>
 
-	</table> -->
 	<div  class="md-card" ng-class-odd="'odd-card'"
-	      ng-repeat="course in classes[sectionName] | filter: textSearch | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses" 
+	      ng-repeat="course in classes[sectionName] | filter: textSearch | orderBy: sortQuery.model as filteredClasses" 
 	      flex="100" flex-gt-xs="45" flex-gt-md="30">
 	  
 	  <div class="md-card-content" layout="column">
-	    <span class="limit-text class-detail" flex> <b>Course:</b> {{ course.COURSE || 'No Course Preview' }} </span>
-			<span class="limit-text class-detail" flex> <b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} </span>
-			<span class="limit-text class-detail" flex> <b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </span>
+	    <span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/course.svg" class="icon-course"></md-icon> <b>Course:</b> {{ course.COURSE || 'No Course Preview' }} </span>
+			<span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/activity.svg" class="icon-activity"></md-icon> <b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} </span>
+			<span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/calendar.svg" class="icon-start-date"></md-icon> <b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </span>
 	  </div>
 	  
 
@@ -55,8 +46,7 @@
 	    </md-button> 
 	  </div>
 
-
 	</div>
 </div>
 
-<p style="margin-top: 10px;">Showing {{ notShowingAllResults() ? ('the first ' + coursesLimit) : (filteredCourses.length) }} {{ filteredCourses.length === 1 ? 'result' : 'results' }}. <a ng-click="showAll()" class="text-primary" ng-if="notShowingAllResults()">Show all</a></p>
+<h4 ng-hide="filteredClasses.length"><strong>Oops!</strong> There are no results matching this search. Try different terms.</h4>
