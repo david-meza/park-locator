@@ -1,38 +1,21 @@
-<div flex = "100">
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2 class="panel-title">Classes</h2>
-    </div>
-    <div class="panel-body">
-
-			<!-- <p class = "text-classes">No scheduled classes in this park.</p> -->
-
-			<div class="row">
-				<div class="col-sm-4">
-					
-					<uib-tabset vertical="{{ classesTabs.vertical }}"
-											justified = "{{ classesTabs.justified }}" 
-											type="{{ classesTabs.type }}">
-
-					  <uib-tab 	ng-repeat="section in classes.sections" 
-					  					heading="{{section.name}}" 
-					  					active="section.active" 
-					  					disable="section.disabled"
-					  					select = "goToSection(section.name)">
-			    	</uib-tab>
+<md-tab label="Classes" ng-if="classes.sections.length">
+  <md-content class="md-padding">
+		
+    <h3 class="text-center">What kind of classes interest you?</h3>
+	  
+    <ul id = "class-sections" flex layout = "row" layout-wrap layout-align = "center center">
+      <li ng-repeat="section in classes.sections">
+          <div class="view" ng-click="goToSection(section.urlName)">
+            <md-icon class="icon-contain" md-svg-icon="{{ ::section.icon }}" alt="{{ ::section.name }}"></md-icon>
+            <div class="mask">  
+              <h6>{{ ::section.name }}</h6>  
+            </div>  
+          </div>
+      </li>          
+    </ul>
 
 
-					</uib-tabset>
-					
-				</div>
-				<div class="col-sm-8">
-					
-					<ui-view></ui-view>
+		<ui-view></ui-view>
 
-				</div>
-			</div>
-
-		</div>
-  </div>
-</div>
+  </md-content>
+</md-tab>

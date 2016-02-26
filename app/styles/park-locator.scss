@@ -8,6 +8,7 @@ $alert: #E65100;
 $success: #3C763D;
 $success-light: #669834;
 $danger: #E63125;
+$heart: #B71C1C;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -64,6 +65,10 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
 .text-warn {
   color: $warn;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .activity-label, .park-label {
@@ -466,9 +471,18 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
 }
 
 // List thumbnail grid style
-ul#park-amenities {
+#park-amenities, #class-sections {
   list-style-type: none;
   padding-left: 0;
+
+  .view[ng-click] {
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
+    }
+  }
 
   .view {
 
@@ -830,7 +844,7 @@ html, body {
 
 
     .selection-menu {
-      @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
+      @include transition( all 800ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
       background-color: #fff;
       max-height: 500px;
       // height: 100%;
@@ -902,6 +916,7 @@ html, body {
   }
 
   .fa-heart {
+    color: $heart;
     -moz-animation:     pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
     -webkit-animation:  pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
     -o-animation:       pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
@@ -945,7 +960,7 @@ html, body {
     transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
 
     md-icon {
-      color: #B71C1C;
+      color: $heart;
       -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
       -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
       -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);

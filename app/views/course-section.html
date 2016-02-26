@@ -1,5 +1,5 @@
 <input 	type="text" 
-				ng-model="courseSelected" 
+				ng-model="textSearch" 
 				class="form-control"
 				placeholder = "e.g. Yoga or 5:30PM">
 
@@ -26,7 +26,7 @@
 			</th>
 		</thead>
 
-		<tr ng-repeat="course in classes[sectionName] | filter: courseSelected | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses">
+		<tr ng-repeat="course in classes[sectionName] | filter: textSearch | orderBy: sortQuery : reverse | limitTo: coursesLimit as filteredCourses">
 			<td data-label = "Course"> {{ course.COURSE || 'No Course Preview' }} </td>
 			<td data-label = "Activity"> {{ course.ACTIVITY || 'No Activity Preview' }} </td>
 			<td data-label = "Start Date"> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </td>

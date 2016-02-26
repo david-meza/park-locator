@@ -8,11 +8,7 @@
       restrict: 'E',
       scope: true,
       template: '<div id="directions-map" flex layout-fill></div>',
-      controller: ['$scope', function($scope){
-
-      }],
-      
-      link: function ($scope, element, attrs) {
+      link: function ($scope, element) {
         var maps = $scope.$parent.maps;
         var currentPark = $scope.$parent.currentPark;
         $scope.map = $scope.$parent.map;
@@ -58,7 +54,7 @@
              new maps.Point( 25, 46 ) )
           };
           return icons;
-        };
+        }
 
         $scope.$watch('map.myLocationMarker.coords.latitude', function() {
           calcRoute(currentPark);
@@ -74,7 +70,7 @@
               travelMode: travelMode,
           };
           directionsService.route(request, displayDirections);
-        };
+        }
 
         function getBestTravelMode(park) {
           var a = Math.abs(park.latitude - $scope.map.myLocationMarker.coords.latitude);
@@ -82,7 +78,7 @@
           var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
           $scope.$parent.travelMode = dist > 0.012 ? 'fa-car' : 'fa-male';
           return (dist <= 0.012) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
-        };
+        }
 
         function displayDirections(response, status) {
           if (status === maps.DirectionsStatus.OK) {
@@ -92,14 +88,14 @@
           } else {
             console.log('Error', status, response);
           }
-        };
+        }
 
 
         function placeCustomMarkers(response) {
           var leg = response.routes[0].legs[0];
           makeMarker( leg.start_location, icons.start, 'You' );
           makeMarker( leg.end_location, icons.end, 'Park' );
-        };
+        }
 
         function makeMarker( position, icon, title ) {
           if (startEndMarkers[startEndMarkers.length - 2]) { startEndMarkers[startEndMarkers.length - 2].setMap(null); }
@@ -111,7 +107,7 @@
             animation: maps.Animation.DROP
           });
           startEndMarkers.push(marker);
-        };
+        }
 
         function extractDirectionsInfo(response) {
           var r = response.routes[0].legs[0];
@@ -129,7 +125,7 @@
           $scope.$parent.distanceColoring = { 'text-success': a <= 3 || dt.substring(dt.length - 2, dt.length) === 'ft', 'text-warn': a > 3 && a <= 10 && dt.substring(dt.length - 2, dt.length) !== 'ft', 'text-danger': a > 10 && dt.substring(dt.length - 2, dt.length) !== 'ft' };
           $scope.$parent.durationColoring = { 'text-success': b <= 10, 'text-warn': b > 10 && b <= 20, 'text-danger': b > 20 };
 
-        };
+        }
       }
     };
 

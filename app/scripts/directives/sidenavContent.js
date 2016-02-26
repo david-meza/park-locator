@@ -8,20 +8,13 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'views/directives/sidenav-content.html',
-      controller: ['$scope', '$mdSidenav', 'deviceService',
-        function ($scope, $mdSidenav, deviceService) {
+      controller: ['$scope', function ($scope) {
 
         $scope.currentList = '';
 
         $scope.toggleList = function (listName) {
           $scope.currentList = $scope.currentList === listName ? '' : listName;
-        }
-
-        // Close any sidenav
-        $scope.closeSidenav = function (name) {
-          $mdSidenav(name).close();
         };
-
 
       }]
     };

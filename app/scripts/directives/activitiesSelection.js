@@ -9,7 +9,7 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/activities-selection.html',
-      controller: ['$scope', 'amenitiesService', 'parkService', '$timeout', function ($scope, amenitiesService, parkService, $timeout) {
+      controller: ['$scope', 'amenitiesService', 'parkService', function ($scope, amenitiesService, parkService) {
 
         // Internal controller functions
         function createFilterFor (query) {

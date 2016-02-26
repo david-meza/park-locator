@@ -4,8 +4,8 @@ angular.module('appControllers').controller('sectionCtrl', ['$scope', 'classesSe
 	function ($scope, classesService, $stateParams) {
 
   $scope.sectionName = $stateParams.sectionName;
-
-  $scope.classes = classesService.classes;
+  // Yeah... quite brittle, but it doesn't make sense to create a service if we need to wipe out the classes obj every time we change parks.
+  $scope.classes = $scope.$parent.$parent.classes;
 
   // Start sorting by courses descending
   $scope.sortQuery = 'sDate';
