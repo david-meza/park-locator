@@ -548,11 +548,7 @@ ul#park-list, ul#amenities-list, ul#selected-amenities-list {
     &:hover {
 
       md-icon {
-        -webkit-transform: scale(1.1,1.1);
-        -moz-transform: scale(1.1,1.1);
-        -o-transform: scale(1.1,1.1);
-        -ms-transform: scale(1.1,1.1);
-        transform: scale(1.1,1.1);
+        @include transform( scale(1.1,1.1) );
       }
 
       .mask {
@@ -1013,6 +1009,43 @@ html, body {
 @media screen and (max-width: 599px) {
   #directions-map {
     min-height: 300px;
+  }
+
+  #park-info {
+    .md-tab {
+      font-size: 12px;
+      padding: 12px 5px;
+    }
+
+    .back-to-sections {
+      white-space: normal;
+      line-height: 18px;
+      margin: auto 0;
+    }
+
+    #class-sections {
+      .view {
+        md-icon {
+          @include transform( scale(1.1,1.1) );
+        }
+
+        .mask {
+          opacity: 1;
+        }
+
+        h6 {
+          opacity: 1;
+          @include transform( translateY(25px) );
+        }
+
+        &:hover, &:focus {
+          .mask {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
   }
 }
 
