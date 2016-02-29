@@ -30,8 +30,6 @@
         $scope.activities = amenitiesService.activities;
         // Park markers array
         $scope.parks = parkService.parks.markers;
-        // ng-class expression
-        $scope.totalParks = { 'text-info': $scope.parks.length > 0, 'text-danger': $scope.parks.length <= 0 };
 
         // Toggle an activity and trigger a park search
         $scope.toggleSelected = function (activity) {

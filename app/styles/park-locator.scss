@@ -681,7 +681,7 @@ html, body {
 .angular-google-map {
   flex: 1;
   display: flex;
-  min-height: 35em;
+  min-height: 400px;
 }
 
 .angular-google-map-container {
@@ -1019,7 +1019,7 @@ html, body {
 @media screen and (max-width: 959px) {
 
   .layout-padding, .layout-padding-gt-sm, .layout-padding-md, .layout-padding > *, .layout-padding-gt-sm > *, .layout-padding-md > *, .layout-padding > .flex, .layout-padding > .flex-gt-sm, .layout-padding > .flex-md {
-    padding: 6px 4px 8px;
+    padding: 0;
   }
 
   #mobile-nav {
