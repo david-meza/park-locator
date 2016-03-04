@@ -1,12 +1,12 @@
 <md-tabs md-dynamic-height md-border-bottom fade-up-when-ready flex="100" md-stretch-tabs="always" md-center-tabs="true" md-swipe-content="true">
-  
+
   <md-tab label="About this Park">
     <md-content class="md-padding" layout="row" layout-xs="column">
 
       <div flex layout="column" layout-align="space-between center">
         <h3>{{ ::currentPark.name }}</h3>
-        
-        <img  class = "img-responsive" 
+
+        <img  class = "img-responsive"
               fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
               ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
 
@@ -14,24 +14,24 @@
           <span class="park-detail"> <i class = "fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>
 
           <span class="park-detail"> <i class = "fa fa-fw fa-mobile"></i> {{ ::currentPark.phone }}</span>
-          
-          <span class="park-detail" ng-if = "routeData.duration"> 
-            <i class = "fa fa-fw" ng-class = "travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span> 
+
+          <span class="park-detail" ng-if = "routeData.duration">
+            <i class = "fa fa-fw" ng-class = "travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span>
           </span>
-          
-          <span class="park-detail" ng-if = "routeData.distance"> 
+
+          <span class="park-detail" ng-if = "routeData.distance">
             <i class = "fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
           </span>
-          
-          <md-button class = "md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank"> 
+
+          <md-button class = "md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank">
             <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
           </md-button>
 
-          <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank"> 
+          <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank">
             <i class = "fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
           </md-button>
         </div>
-        
+
 
       </div>
 
@@ -39,27 +39,27 @@
 
     </md-content>
   </md-tab>
-  
-  
+
+
   <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0">
     <md-content class="md-padding">
-      
+
       <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
         <li ng-repeat="activity in activitiesInPark">
             <div class="view">
               <md-icon class="icon-contain" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
-              <div class="mask">  
-                <h6>{{ ::activity.name }}</h6>  
-              </div>  
+              <div class="mask">
+                <h6>{{ ::activity.name }}</h6>
+              </div>
             </div>
-        </li>          
+        </li>
       </ul>
 
     </md-content>
   </md-tab>
-  
+
 
   <classes-info current-park = "currentPark"></classes-info>
-  
+
 
 </md-tabs>

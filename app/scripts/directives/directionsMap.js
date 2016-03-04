@@ -3,12 +3,12 @@
   'use strict';
 
   angular.module('appDirectives').directive('directionsMap', function(){
-    
-    return { 
+
+    return {
       restrict: 'E',
       scope: true,
-      template: '<div id="directions-map" flex layout-fill></div>',
-      link: function ($scope, element) {
+      template: '<div id="directions-map" class="flex-100"></div>',
+      link: function postLink($scope, element) {
         var maps = $scope.$parent.maps;
         var currentPark = $scope.$parent.currentPark;
         $scope.map = $scope.$parent.map;
@@ -16,7 +16,7 @@
         var directionsService, directionsDisplay, icons, map;
 
         var startEndMarkers = [];
-            
+
         (function initializeDirectionsMap() {
           directionsService = new maps.DirectionsService();
           directionsDisplay = new maps.DirectionsRenderer({ suppressMarkers: true });
@@ -31,6 +31,13 @@
             }
           };
           map = new maps.Map(element.children()[0], mapOptions);
+          // Watch for changes on the element's size
+          maps.event.addListenerOnce(map, 'idle', function(){
+            var center = map.getCenter();
+            maps.event.trigger(map, 'resize');
+            map.setCenter(center);
+          });
+          // Show the directions on this map
           directionsDisplay.setMap( map );
           map.mapTypes.set('light_dream', styledMap);
           map.setMapTypeId('light_dream');

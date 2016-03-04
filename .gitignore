@@ -4,5 +4,6 @@
 /.sass-cache
 /bower_components
 /test/bower_components
+/report
 
 npm-debug.log
