@@ -1,14 +1,22 @@
 <md-tabs md-dynamic-height md-border-bottom fade-up-when-ready flex="100" md-stretch-tabs="always" md-center-tabs="true" md-swipe-content="true">
-
+  
   <md-tab label="About this Park">
     <div class="md-padding" layout="row" layout-xs="column">
 
       <div flex layout="column" layout-align="space-between center">
+        
+        <md-button class="md-accent back-to-map button-top-left capitalize" ui-sref="^" aria-label="back to main map">
+          <md-icon md-font-icon="fa-chevron-left fa-icon-baseline" class = "fa"></md-icon>
+          <span>Back To Map</span>
+        </md-button>
+  
         <h3>{{ ::currentPark.name }}</h3>
-
-        <img  class = "img-responsive"
-              fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
-              ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+        
+        <div class="img-container">
+          <img  class = "img-responsive"
+                fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
+                ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+        </div>
 
         <div layout="column" layout-align="space-between stretch">
           <span class="park-detail"> <i class = "fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>

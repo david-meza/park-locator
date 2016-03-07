@@ -138,19 +138,10 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   opacity: 0 !important;
 }
 
-.panel-title {
-
-  a {
-    color: rgba(255, 255, 255, 0.87);
-  }
-
-  a:hover, a:focus {
-    text-decoration: none;
-  }
-
-  a:focus {
-    outline: none;
-  }
+.button-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #flash {
@@ -207,6 +198,10 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
 md-icon {
   outline: none;
+}
+
+.fa-icon-baseline {
+  vertical-align: baseline;
 }
 
 .scroll-button-top, .scroll-button-bottom {
@@ -353,24 +348,16 @@ th {
 // }
 
 .img-container {
-  position: relative;
-  height: 15em;
+  height: 150px;
+  width: 200px;
 
-  .img-vertical-center {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  .img-responsive {
+    height: 100%;
+    width: auto;
   }
   
 }
 
-.img-responsive {
-  height: 100%;
-  width: auto;
-}
 
 .park-detail {
   margin: 5px 0;
@@ -579,6 +566,15 @@ md-input-container {
   background-color: rgba($indigo, 0.13) !important;
 }
 
+.back-to-map {
+  font-size: 12px;
+  margin: 0;
+
+  &:hover, &:focus {
+    background-color: rgba($accent, 0.1) !important;
+  }
+}
+
 .park-center {
 
   h3 {
@@ -677,7 +673,7 @@ html, body {
 .angular-google-map {
   flex: 1 1 100%;
   display: flex;
-  min-height: 250px;
+  min-height: 300px;
 }
 
 .angular-google-map-container {
