@@ -677,7 +677,7 @@ html, body {
 .angular-google-map {
   flex: 1 1 100%;
   display: flex;
-  min-height: 300px;
+  min-height: 250px;
 }
 
 .angular-google-map-container {
@@ -947,6 +947,10 @@ html, body {
 
 }
 
+#main-scrollable {
+  padding: 0;
+}
+
 @keyframes pulsate {
   0% { @include transform( scale(1,1) ); }
   10% { @include transform( scale(1.2,1.2) ); }
@@ -1001,7 +1005,11 @@ html, body {
   }
 }
 
-.layout-margin > ui-view, .layout-padding > ui-view {
+.content-box {
+  box-sizing: content-box !important;
+}
+
+.layout-margin > ui-view, .layout-padding > ui-view, .layout-margin > [ui-view], .layout-padding > [ui-view] {
   margin: 0;
   padding: 0;
 }

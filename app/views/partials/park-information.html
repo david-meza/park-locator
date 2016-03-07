@@ -1,7 +1,7 @@
 <md-tabs md-dynamic-height md-border-bottom fade-up-when-ready flex="100" md-stretch-tabs="always" md-center-tabs="true" md-swipe-content="true">
 
   <md-tab label="About this Park">
-    <md-content class="md-padding" layout="row" layout-xs="column">
+    <div class="md-padding" layout="row" layout-xs="column">
 
       <div flex layout="column" layout-align="space-between center">
         <h3>{{ ::currentPark.name }}</h3>
@@ -37,12 +37,12 @@
 
       <directions-map flex layout="column"></directions-map>
 
-    </md-content>
+    </div>
   </md-tab>
 
 
   <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0">
-    <md-content class="md-padding">
+    <div class="md-padding">
 
       <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
         <li ng-repeat="activity in activitiesInPark">
@@ -55,7 +55,7 @@
         </li>
       </ul>
 
-    </md-content>
+    </div>
   </md-tab>
 
 

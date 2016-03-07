@@ -21,7 +21,7 @@ angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 
     // Get all the activities markers, then only show them if we are zoomed in close to any particular park
     var activityMarkers = $scope.activities.markersConfig.control.getPlurals().values();
     angular.forEach(activityMarkers, function (marker) {
-      marker.gObject.setVisible(z >= 15);
+      marker.gObject.setVisible(z >= 16);
     });
 
     var parkMarkers = $scope.parks.markersConfig.control.getPlurals().values();
