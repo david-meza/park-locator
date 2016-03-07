@@ -29,9 +29,18 @@
 	      flex="100" flex-gt-xs="45" flex-gt-md="30">
 	  
 	  <div class="md-card-content" layout="column">
-	    <span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/course.svg" class="icon-course"></md-icon> <b>Course:</b> {{ course.COURSE || 'No Course Preview' }} </span>
-			<span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/activity.svg" class="icon-activity"></md-icon> <b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} </span>
-			<span class="limit-text class-detail" flex> <md-icon md-svg-icon="/img/icons/classes/calendar.svg" class="icon-start-date"></md-icon> <b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} </span>
+	    <span class="limit-text class-detail" flex> 
+	    	<md-icon md-svg-icon="/img/icons/classes/course.svg" class="icon-course"></md-icon> 
+	    	<b>Course:</b> {{ course.COURSE || 'No Course Preview' }} 
+	    </span>
+			<span class="limit-text class-detail" flex> 
+				<md-icon md-svg-icon="/img/icons/classes/activity.svg" class="icon-activity"></md-icon> 
+				<b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} 
+			</span>
+			<span class="limit-text class-detail" flex> 
+				<md-icon md-svg-icon="/img/icons/classes/calendar.svg" class="icon-start-date"></md-icon> 
+				<b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} 
+			</span>
 	  </div>
 	  
 

@@ -675,13 +675,13 @@ html, body {
 }
 
 .angular-google-map {
-  flex: 1;
+  flex: 1 1 100%;
   display: flex;
-  min-height: 400px;
+  min-height: 300px;
 }
 
 .angular-google-map-container {
-  flex: 1;
+  flex: 1 1 100%;
 }
 
 
