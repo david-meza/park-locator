@@ -83,8 +83,9 @@
           var a = Math.abs(park.latitude - $scope.map.myLocationMarker.coords.latitude);
           var b = Math.abs(park.longitude - $scope.map.myLocationMarker.coords.longitude);
           var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
-          $scope.$parent.travelMode = dist > 0.012 ? 'fa-car' : 'fa-male';
-          return (dist <= 0.012) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
+          // Walk directions if our destination is about 0.8 miles away (aprox a 15 min walk)
+          $scope.$parent.travelMode = dist > 0.011 ? 'fa-car' : 'fa-male';
+          return (dist <= 0.011) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
         }
 
         function displayDirections(response, status) {
