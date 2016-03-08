@@ -9,7 +9,7 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/park-selection.html',
-      controller: ['$scope', 'parkService', 'mapService', '$timeout', function ($scope, parkService, mapService, $timeout) {
+      controller: ['$scope', 'parkService', 'mapService', '$timeout', '$mdSidenav', function ($scope, parkService, mapService, $timeout, $mdSidenav) {
 
         // Internal controller functions
         function createFilterFor (query) {
@@ -42,13 +42,14 @@
         };
 
         // Select a park section
-        $scope.centerToPark = function (park) {
+        $scope.selectPark = function (park) {
           $scope.map.zoom = 16;
           $scope.map.location.coords.latitude = park.latitude;
           $scope.map.location.coords.longitude = park.longitude;
           $timeout(function(){
             park.markerClick(null, 'click', park);
-           }, 100); 
+           }, 100);
+          $mdSidenav('left').close();
         };
 
         // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).

@@ -28,7 +28,7 @@
 
 <div scrolling-buttons>
   <md-list id="parks-list">
-    <md-list-item class="md-2-line" ng-click="centerToPark(park)" ng-repeat="park in parks.markers | orderBy : selectedSort.model : selectedSort.reverse">
+    <md-list-item class="md-2-line" ng-click="selectPark(park)" ng-repeat="park in parks.markers | orderBy : selectedSort.model : selectedSort.reverse">
       <div class="md-list-item-text">
         <h3 class="limit-text capitalize"> {{ ::park.name }} </h3>
         <p class="park-distance" ng-show="park.distance">
