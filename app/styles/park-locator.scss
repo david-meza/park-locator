@@ -638,6 +638,23 @@ html, body {
   @include box-shadow( 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) );
 }
 
+#map-canvas {
+  box-sizing: content-box;
+  padding: 0;
+  margin: 8px;
+  min-height: 300px;
+
+  .angular-google-map, .angular-google-map-container {
+    @include flex(1 1 100%);
+    @include display-flex;
+    @include flex-direction( column );
+    min-height: 300px;
+    max-height: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -669,17 +686,6 @@ html, body {
 .pull-down-sm {
   margin-top: 10px;
 }
-
-.angular-google-map {
-  flex: 1 1 100%;
-  display: flex;
-  min-height: 300px;
-}
-
-.angular-google-map-container {
-  flex: 1 1 100%;
-}
-
 
 #park-window {
 

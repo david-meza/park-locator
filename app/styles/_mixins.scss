@@ -34,6 +34,12 @@
   display: flex;
 }
 
+@mixin flex($values) {
+  -webkit-flex: $values;
+      -ms-flex: $values;
+          flex: $values;
+}
+
 @mixin flex-direction($direction) {
   -webkit-flex-direction: $direction;
       -ms-flex-direction: $direction;
