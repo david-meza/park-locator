@@ -642,13 +642,13 @@ html, body {
   box-sizing: content-box;
   padding: 0;
   margin: 8px;
-  min-height: 300px;
+  min-height: 450px;
 
   .angular-google-map, .angular-google-map-container {
     @include flex(1 1 100%);
     @include display-flex;
     @include flex-direction( column );
-    min-height: 300px;
+    min-height: 450px;
     max-height: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -949,10 +949,6 @@ html, body {
 
 }
 
-#main-scrollable {
-  padding: 0;
-}
-
 @keyframes pulsate {
   0% { @include transform( scale(1,1) ); }
   10% { @include transform( scale(1.2,1.2) ); }
@@ -1015,115 +1011,6 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
-@media screen and (max-width: 599px) {
-  #directions-map {
-    min-height: 300px;
-  }
-
-  #park-info {
-    .md-tab {
-      font-size: 12px;
-      padding: 12px 5px;
-    }
-
-    .back-to-sections {
-      white-space: normal;
-      line-height: 18px;
-      margin: auto 0;
-    }
-
-    #class-sections {
-      .view {
-        md-icon {
-          @include transform( scale(1.1,1.1) );
-        }
-
-        .mask {
-          opacity: 1;
-        }
-
-        h6 {
-          opacity: 1;
-          @include transform( translateY(25px) );
-        }
-
-        &:hover, &:focus {
-          .mask {
-            opacity: 0;
-          }
-        }
-      }
-    }
-
-  }
-}
-
-@media screen and (max-width: 959px) {
-
-  .layout-padding, .layout-padding-gt-sm, .layout-padding-md, .layout-padding > *, .layout-padding-gt-sm > *, .layout-padding-md > *, .layout-padding > .flex, .layout-padding > .flex-gt-sm, .layout-padding > .flex-md {
-    padding: 0;
-  }
-
-  #mobile-nav {
-    a {
-      font-size: 18px;
-    }
-  }
-
-  .hide-on-mobile {
-    display: none;
-  }
-
-  #navbar {
-    h1 {
-      font-size: 20px;
-    }
-  }
-
-  // table {
-  //   margin-top: 1em;
-  // }
-
-  // /* Force table to not be like tables anymore */
-  // table, thead, tbody, th, td, tr { 
-  //   display: block; 
-  // }
-  
-  // /* Hide table headers (but not display: none;, for accessibility) */
-  // thead tr { 
-  //   position: absolute;
-  //   top: -9999px;
-  //   left: -9999px;
-  // }
-  
-  // tr { 
-  //   border: 1px solid #ccc; 
-  // }
-  
-  // td { 
-  //   /* Behave  like a "row" */
-  //   border: none;
-  //   border-bottom: 1px solid #eee; 
-  //   position: relative;
-  //   padding-left: 35% !important;
-  //   padding-top: 10px;
-  //   padding-bottom: 10px; 
-  // }
-  
-  // td:before { 
-  //   // Get the label information from the HTML template
-  //   content: attr(data-label); // Table header
-  //   position: absolute;
-  //   top: 10px;
-  //   left: 8px;
-  //   width: 30%; 
-  //   padding-right: 5px; 
-  //   white-space: nowrap;
-  // }
-
-}
-
 
 div[ui-view="classes-info"] {
   // Starting the entering transition...
@@ -1195,5 +1082,75 @@ div[ui-view="classes-info"] {
       }
     }
   }
-  
+}
+
+.display-on-mobile {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 599px) {
+  #directions-map {
+    min-height: 300px;
+  }
+
+  #map-canvas {
+    margin: 0;
+  }
+
+  #park-info {
+    .md-tab {
+      font-size: 12px;
+      padding: 12px 5px;
+    }
+
+    .back-to-sections {
+      white-space: normal;
+      line-height: 18px;
+      margin: auto 0;
+    }
+
+    #class-sections {
+      .view {
+        md-icon {
+          @include transform( scale(1.1,1.1) );
+        }
+
+        .mask {
+          opacity: 1;
+        }
+
+        h6 {
+          opacity: 1;
+          @include transform( translateY(25px) );
+        }
+
+        &:hover, &:focus {
+          .mask {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 959px) {
+
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .display-on-mobile {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #navbar {
+    h1 {
+      font-size: 20px;
+    }
+  }
+
 }
