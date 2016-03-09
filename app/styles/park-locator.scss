@@ -17,7 +17,7 @@ html {
   font-weight: 400;
 }
 
-.nav, .pagination, .carousel, .panel-title a, a { 
+.nav, .pagination, image, a { 
   cursor: pointer; 
 }
 
@@ -46,6 +46,14 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   top: 95px;
   left: 20px;
   z-index: 50;
+}
+
+.dijitPopup {
+  position: absolute;
+
+  * {
+    cursor: default;
+  }
 }
 
 .opaque {
@@ -80,7 +88,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   text-align: center;
 }
 
-.activity-label, .park-label {
+.activity-label, .park-label, .dijitPopup {
   background-color: #fff;
   color: rgba(0,0,0,0.8);
   font-size: 14px;
