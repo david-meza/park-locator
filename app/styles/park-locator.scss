@@ -41,6 +41,13 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
           user-select: none;  
 }
 
+#geolocate-button {
+  position: absolute;
+  top: 95px;
+  left: 20px;
+  z-index: 50;
+}
+
 .opaque {
   opacity: 0;
 }
@@ -591,11 +598,6 @@ md-input-container {
 
 .text-classes {
   font-size: 1.3em;
-}
-
-.geolocate-button {
-  margin: 0;
-  width: 100%;
 }
 
 .skip-button {
