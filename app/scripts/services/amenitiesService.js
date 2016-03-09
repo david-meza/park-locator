@@ -107,10 +107,18 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	}
 
 	var getAmenitiesData = function () {
+    // First set of amenities (buildings)
+    return $http({
+      method: 'GET',
+      url: '/scripts/amenitycategories.json'
+    });
+  };
+
+  var getAmenitiesIcons = function () {
 		// First set of amenities (buildings)
 		return $http({
 			method: 'GET',
-			url: '/scripts/amenitycategories.json'
+			url: '/scripts/uniqueValueInfos.json'
 		});
 	};
 
@@ -134,7 +142,8 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	$q.all([categoriesPromise, getJoinParkData(), getJoinParkData2()]).then(processParkActivities, logError);
 
 	return {
-		activities: activities
+		activities: activities,
+    getAmenitiesIcons: getAmenitiesIcons
 	};
 
 }]);
