@@ -17,7 +17,7 @@ html {
   font-weight: 400;
 }
 
-.nav, .pagination, .carousel, .panel-title a, a { 
+a { 
   cursor: pointer; 
 }
 
@@ -133,10 +133,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
-.collapsing .faded-edge-bottom {
-  // display: none;
-  opacity: 0 !important;
-}
+
 
 .button-top-left {
   position: absolute;
@@ -144,13 +141,6 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   left: 0;
 }
 
-#flash {
-  position: absolute;
-  z-index: 101;
-  right: 5px;
-  top: 3px;
-  position: fixed;
-}
 
 #back-to-top {
   position: fixed;
@@ -253,25 +243,6 @@ md-icon {
   bottom: 0;
 }
 
-#mobile-nav {
-
-  .nav-item {
-    text-align: center;
-    a {
-      color: $light-white;
-      padding: 10px;
-      -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      -moz-transition:    all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition:         all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-      &:focus, &:hover {
-        padding: 10px 30%;
-        outline: none;
-        background-color: darken($primary, 15%);
-      }
-    }
-  }
-}
 
 #map-icons-dialog {
   md-toolbar {
@@ -294,17 +265,6 @@ md-icon {
       color: rgba(0,0,0,0.75);
     }
   }
-}
-
-
-h2 {
-  font: 400 40px/1.5 Roboto, Helvetica, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.small-font {
-  font-size: 0.75em;
 }
 
 p {
@@ -332,20 +292,6 @@ th {
 .text-total-results {
   font-size: 15px;  
 }
-
-// .course-details {
-//   max-height: 40em;
-//   overflow: auto;
-//   margin-right: -15px;
-//   padding-right: 15px;
-  
-//   table, .table {
-//     a.md-button{
-//       margin: 0;
-//       text-decoration: none;
-//     }
-//   }
-// }
 
 .img-container {
   height: 150px;
