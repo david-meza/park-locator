@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout',
-  function (gMapsApi, $mdToast, $timeout) {
+angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast',
+  function (gMapsApi, $mdToast) {
 
 
   // Temporary coordinates while Geoloc gets us the user's coords
@@ -103,47 +103,7 @@ angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
     }
   };
 
-  map.searchbox = {
-    template: 'views/partials/search-box.html',
-    position: 'TOP_RIGHT',
-    options: {},
-    events: {
-      places_changed: function (searchBox) {
-        var loc = searchBox.getPlaces()[0].geometry.location;
-        updateUserCoords(loc.lat(), loc.lng());
-      }
-    }
-  };
-
-  var geoLocate = function () {
-    informUser('Attempting to find you.', 1500);
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition( 
-        function (position) {
-          updateUserCoords(position.coords.latitude, position.coords.longitude);
-        },
-        function (error) {
-          informUser('Sorry. Could not find you. Try manually dragging your pin.');
-          console.log('Error: ', error);
-        }, {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 60000
-        });
-    } else {
-      informUser('Oops! Your browser does not support Geolocation.');
-      console.log('Geolocation not supported. Defaulting to backup location.');
-    }
-  };
-
-  // Get user's coordinates a few seconds after the app loaded
-  $timeout(function(){
-    geoLocate();
-  }, 5000);
-
   gMapsApi.then( function (maps) {
-    map.searchbox.options.bounds = new maps.LatLngBounds(new maps.LatLng(35.437814,-78.984583), new maps.LatLng(36.113561,-78.336890));
     map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
     map.options.zoomControlOptions.style = maps.ZoomControlStyle.SMALL;
     map.options.streetViewControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
@@ -153,7 +113,6 @@ angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdT
   return {
     map: map,
     updateUserCoords: updateUserCoords,
-    geoLocate: geoLocate
   };
 
 }]);
