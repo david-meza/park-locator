@@ -80,6 +80,8 @@ angular.module('appDirectives').directive('mainMap', function(){
         // Change the icon for the park marker
         var parkSymbol = new SimpleRenderer({
           type: 'simple',
+          label: '${NAME}',
+          description: 'City of Raleigh Park',
           symbol: {
             type: 'esriPMS',
             url: '/img/icons/park-marker.svg',
