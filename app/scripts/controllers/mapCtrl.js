@@ -7,6 +7,11 @@
 
       Esri.modulesReady().then(function(modules) {
 
+
+        modules.on(modules.map, 'zoom-end', function(evt) {
+          modules.parks.setVisibility(evt.level <= 17);
+        });
+
         // Geolocate button
         var geoLocate = new modules.LocateButton({
           map: modules.map
