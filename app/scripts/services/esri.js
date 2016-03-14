@@ -18,17 +18,19 @@
       'esri/layers/FeatureLayer', 
       'esri/dijit/LocateButton', 
       'esri/renderers/SimpleRenderer', 
-      'esri/renderers/UniqueValueRenderer', 
+      'esri/renderers/UniqueValueRenderer',
+      'esri/geometry/Point',
       'dojo/on', 
       'dijit/TooltipDialog', 
       'dijit/popup'],
-      function(Map,b,c,d,e,f,g,h,i) {
+      function(Map,b,c,d,e,f,Point,g,h,i) {
         
         // initialize the ESRI map
         service.map = new Map('map-canvas', {
           center: [-78.646, 35.785],
           zoom: 13,
           logo: false,
+          basemap: 'streets-vector',
           fadeOnZoom: true,
           force3DTransforms: true
         });
@@ -38,6 +40,7 @@
         service.LocateButton = d;
         service.SimpleRenderer = e;
         service.UniqueValueRenderer = f;
+        service.Point = Point;
         service.on = g;
         service.TooltipDialog = h;
         service.dijitPopup = i;

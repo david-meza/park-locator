@@ -94,14 +94,14 @@
         
         
         function openTooltip(evt) {
-          console.log(evt);
           var content = evt.graphic.attributes.NAME;
           tooltip.setContent(content);
           modules.dijitPopup.open({
             popup: tooltip,
-            x: evt.pageX,
-            y: evt.pageY
+            x: evt.pageX + 10,
+            y: evt.pageY + 10
           });
+          return false;
         }
 
         function closeTooltip(evt) {

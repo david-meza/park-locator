@@ -9,7 +9,7 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/park-selection.html',
-      controller: ['$scope', 'parkService', 'mapService', '$timeout', '$mdSidenav', function ($scope, parkService, mapService, $timeout, $mdSidenav) {
+      controller: ['$scope', 'parkService', 'mapService', '$timeout', '$mdSidenav', 'Esri', function ($scope, parkService, mapService, $timeout, $mdSidenav, Esri) {
 
         // Internal controller functions
         function createFilterFor (query) {
@@ -41,6 +41,12 @@
           querySearch: querySearch
         };
 
+        var esriModules;
+
+        Esri.modulesReady().then(function(modules) {
+          esriModules = modules;
+        });
+
         // Select a park section
         $scope.selectPark = function (park) {
           $scope.map.zoom = 16;
@@ -50,6 +56,13 @@
             park.markerClick(null, 'click', park);
            }, 100);
           $mdSidenav('left').close();
+          console.log(park);
+          esriModules.map.centerAndZoom( new esriModules.Point({
+            'y': park.latitude, 
+            'x': park.longitude,
+            'spatialReference': {'wkid': 4326 }
+          }), 14);
+          
         };
 
         // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
