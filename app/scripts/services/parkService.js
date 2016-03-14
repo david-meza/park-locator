@@ -5,6 +5,11 @@
   angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri',
   	function ($http, $q, $state, $timeout, Esri) {
   	
+    var esriModules;
+    
+    Esri.modulesReady().then( function (modules) {
+      esriModules = modules;
+    });
 
     var parks = { markers: [], currentPark: undefined, };
 
@@ -159,12 +164,9 @@
       }
   	};
 
-    var updateParkMarkers = function (activities) {
-      var query = '';
 
-      var selectedActivities = activities.filter(function(activity) {
-        return activity.selected;
-      });
+    var updateParkMarkers = function (selectedActivities) {
+      var query = '';
 
       if (selectedActivities.length === 0) { query += '1 = 1'; }
 
@@ -173,11 +175,8 @@
         if (idx <= selectedActivities.length - 2) { query += ' AND '; }
       });
 
-      console.log(query);
-
-      Esri.modulesReady().then( function (modules) {
-        modules.parks.setDefinitionExpression(query);
-      });
+      esriModules.parks.setDefinitionExpression(query);
+      getParksInfo(query).then(_generateMarkers, logError);
 
     };
 

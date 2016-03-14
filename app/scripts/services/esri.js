@@ -5,8 +5,6 @@
   angular.module('appServices').service('Esri', ['$q', function ($q) {
 
     var service = this;
-    console.log('esri service');
-
     var deferred = $q.defer();
     
     service.modulesReady = function() {
