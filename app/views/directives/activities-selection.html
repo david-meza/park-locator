@@ -27,7 +27,7 @@
     <md-list-item ng-click="toggleSelected(activity)" ng-repeat="activity in activities.categoriesArr">
       <md-icon md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}" class="activity-icon"></md-icon>
       <p class="limit-text capitalize limit-activity-name"> {{ ::activity.name }} </p>
-      <md-switch class="md-secondary" ng-model="activity.selected" ng-change="updateParks(activities.categories)" aria-label="Toggle activity filter"></md-switch>
+      <md-switch class="md-secondary" ng-model="activity.selected" ng-change="updateParks(activities.categoriesArr)" aria-label="Toggle activity filter"></md-switch>
     </md-list-item>
   </md-list>
 </div>

@@ -36,7 +36,7 @@
           selectedItemChange: function(park) { 
             // Ignore results when the input is cleared
             if (angular.isUndefined(park)) { return; }
-            $scope.centerToPark(park);
+            $scope.selectPark(park);
           },
           querySearch: querySearch
         };
@@ -49,19 +49,25 @@
 
         // Select a park section
         $scope.selectPark = function (park) {
+          // Update our map service variables
           $scope.map.zoom = 16;
           $scope.map.location.coords.latitude = park.latitude;
           $scope.map.location.coords.longitude = park.longitude;
+          
+          // Trigger a state change
           $timeout(function(){
             park.markerClick(null, 'click', park);
            }, 100);
+          
+          // Close the sidenav if not locked open
           $mdSidenav('left').close();
-          console.log(park);
+          
+          // Center and zoom to the park marker on the map
           esriModules.map.centerAndZoom( new esriModules.Point({
             'y': park.latitude, 
             'x': park.longitude,
             'spatialReference': {'wkid': 4326 }
-          }), 14);
+          }), 15);
           
         };
 

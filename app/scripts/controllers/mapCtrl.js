@@ -59,11 +59,6 @@
         var greenways2 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
         modules.map.addLayer(greenways2);
 
-        // Park Markers layer
-        var parks = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
-          mode: modules.FeatureLayer.MODE_SNAPSHOT,
-          outFields: ['*']
-        });
 
         // Change the icon for the park marker
         var parkSymbol = new modules.SimpleRenderer({
@@ -75,11 +70,11 @@
             width: 28
           }
         });
-        parks.setRenderer(parkSymbol);
-        modules.map.addLayer(parks);
+        modules.parks.setRenderer(parkSymbol);
+        modules.map.addLayer(modules.parks);
         
         // Park on click event
-        modules.on(parks, 'click', function (evt) {
+        modules.on(modules.parks, 'click', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
         });
@@ -89,8 +84,8 @@
         tooltip.startup();
 
 
-        modules.on(parks, 'mouse-over', openTooltip);
-        modules.on(parks, 'mouse-out', closeTooltip);
+        modules.on(modules.parks, 'mouse-over', openTooltip);
+        modules.on(modules.parks, 'mouse-out', closeTooltip);
         
         
         function openTooltip(evt) {

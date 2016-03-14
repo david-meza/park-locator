@@ -34,7 +34,7 @@
         // Toggle an activity and trigger a park search
         $scope.toggleSelected = function (activity) {
           activity.selected = !activity.selected;
-          $scope.updateParks($scope.activities.categories);
+          $scope.updateParks($scope.activities.categoriesArr);
         };
 
         // md-autocomplete directive config
@@ -45,7 +45,7 @@
             // Ignore results when the input is cleared
             if (angular.isUndefined(activity)) { return; }
             activity.selected = !activity.selected;
-            $scope.updateParks($scope.activities.categories);
+            $scope.updateParks($scope.activities.categoriesArr);
           },
           querySearch: querySearch
         };
