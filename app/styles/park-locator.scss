@@ -45,7 +45,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   position: absolute;
   top: 95px;
   left: 20px;
-  z-index: 50;
+  z-index: 31;
 }
 
 .dijitPopup {
@@ -654,14 +654,28 @@ html, body {
   margin: 8px;
   min-height: 450px;
 
-  .angular-google-map, .angular-google-map-container {
-    @include flex(1 1 100%);
-    @include display-flex;
-    @include flex-direction( column );
-    min-height: 450px;
-    max-height: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+  #aerial-toggle {
+    position: absolute;
+    z-index: 30;
+    top: 20px;
+    right: 20px;
+
+    .md-button {
+      margin: 0;
+      padding: 0 10px;
+      min-width: initial;
+      font-size: 13px;
+      text-transform: capitalize;
+      border-radius: 0;
+      color: rgba($black, 0.6);
+      @include box-shadow( 0 4px 8px 0 rgba($black, 0.4) );
+
+      &.selected {
+        font-weight: 600;
+        background-color: #eee;
+        @include box-shadow( 0 2px 5px 0 rgba($black, 0.26) );
+      }
+    }
   }
 }
 

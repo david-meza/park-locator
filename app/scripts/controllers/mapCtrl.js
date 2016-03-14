@@ -6,17 +6,13 @@
     function($scope, $state, amenitiesService, Esri){
 
       Esri.modulesReady().then(function(modules) {
-        
+
         // Geolocate button
         var geoLocate = new modules.LocateButton({
           map: modules.map
         }, 'geolocate-button');
         geoLocate.startup();
         
-
-        // Base map layer
-        var tileLyr = new modules.VectorTileLayer('https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json');
-        modules.map.addLayer(tileLyr);
 
         // Amenity Markers (outdoors)
         var amenities1 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
