@@ -31,8 +31,6 @@ window.dojoConfig = {
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
         'esri/geometry/Point',
-        'esri/geometry/webMercatorUtils',
-        'esri/tasks/query',
         'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
@@ -42,7 +40,7 @@ window.dojoConfig = {
         'esri/renderers/ClassBreaksRenderer',
         'esri/symbols/PictureMarkerSymbol',
         'dojo/domReady!'],
-        function(Map,SpatialReference,Extent,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,SimpleRenderer,f,Point, webMercatorUtils, Query, g,h,i, ClusterFeatureLayer, SimpleMarkerSymbol, Font, ClassBreaksRenderer, PictureMarkerSymbol) {
+        function(Map,SpatialReference,Extent,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,SimpleRenderer,f,Point,g,h,i, ClusterFeatureLayer, SimpleMarkerSymbol, Font, ClassBreaksRenderer, PictureMarkerSymbol) {
           
 
           // initialize the ESRI map
@@ -50,35 +48,35 @@ window.dojoConfig = {
             center: [-78.646, 35.785],
             zoom: 13,
             // basemap: 'streets-vector',
-            extent: webMercatorUtils.geographicToWebMercator( new Extent({
-              xmin: -78.946,
-              ymin: 35.485,
-              xmax: -78.346,
-              ymax: 36.085,
-              spatialReference: { wkid: 4326 }
-            })),
+            // extent: new Extent({
+            //   xmin:-78.946,
+            //   ymin:35.485,
+            //   xmax:-78.346,
+            //   ymax:36.085,
+            //   spatialReference:{wkid:4326}
+            // }),
             logo: false
           });
 
+          // console.log(service.map.extent.getWidth(), service.map.width);
+
           // Park Markers layer
           service.parks = new ClusterFeatureLayer({
+            data: service.parks,
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
             distance: 50,
-            where: '1 = 1',
             useDefaultSymbol: false,
             id: 'clusters',
             labelColor: '#fff',
-            labelOffset: 0,
-            font: new Font('13pt').setFamily('Roboto'),
-            resolution: service.map.extent.getWidth() / service.map.width,
+            labelOffset: -5,
+            font: new Font('14pt').setFamily('Roboto'),
+            resolution: 0.5999999999999943 / 677,
             singleSymbol: new PictureMarkerSymbol('/img/icons/park-marker.svg', 28, 28),
             zoomOnClick: true,
             showSingles: false,
-            spatialReference: new SpatialReference({ 'wkid': 102719 }),
             outFields: ['*']
+            // spatialReference: new SpatialReference({ 'wkid': 4326 })
           });
-
-          console.log(service.parks);
 
           // Base map layer
           service.basemapLayer = new VectorTileLayer('https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json');
@@ -89,8 +87,8 @@ window.dojoConfig = {
           });
           
           // Add the basemap layer and aerial view layers
-          service.map.addLayer(service.basemapLayer);
           service.map.addLayer(service.aerialLayer);
+          service.map.addLayer(service.basemapLayer);
 
           // Greenways Layers
           var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
@@ -98,7 +96,7 @@ window.dojoConfig = {
           var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
           service.map.addLayer(greenways2);
 
-          var defaultSym = new SimpleMarkerSymbol().setSize(4);
+          var defaultSym = new SimpleMarkerSymbol().setSize(5);
           var renderer = new ClassBreaksRenderer(defaultSym, "clusterCount");
 
           // Change the icon for the park marker
@@ -116,7 +114,6 @@ window.dojoConfig = {
 
           // Assign other modules to the service object
           service.VectorTileLayer = VectorTileLayer;
-          service.Query = Query;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.FeatureLayer = FeatureLayer;
           service.LocateButton = LocateButton;

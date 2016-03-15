@@ -174,18 +174,14 @@
         query += activity.parkAttr + ' = \'Yes\'';
         if (idx <= selectedActivities.length - 2) { query += ' AND '; }
       });
-      console.log(esriModules.parks);
-      
-      var esriQuery = new esriModules.Query();
-      esriQuery.where = query;
-      esriModules.parks.queryTask.executeForIds(esriQuery);
 
-      esriModules.parks.queryTask.executeForExtent(new esriModules.Query(query), function(response) {
+      esriModules.parks.setDefinitionExpression(query);
+
+      esriModules.parks.queryExtent(query, function(response) {
         if (!isNaN(response.extent.xmin)) {
           esriModules.map.setExtent(response.extent.expand(1.3), true);
         }
       });
-
       getParksInfo(query).then(_generateMarkers, logError);
 
     };
