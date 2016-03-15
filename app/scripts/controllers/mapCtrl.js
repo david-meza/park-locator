@@ -80,12 +80,29 @@
         tooltip.startup();
 
 
-        modules.on(modules.parks, 'mouse-over', openTooltip);
+        modules.on(modules.parks, 'mouse-over', openParkTooltip);
         modules.on(modules.parks, 'mouse-out', closeTooltip);
         
+        modules.on(amenities1, 'mouse-over', openAmenitiesTooltip);
+        modules.on(amenities1, 'mouse-out', closeTooltip);
+        modules.on(amenities2, 'mouse-over', openAmenitiesTooltip);
+        modules.on(amenities2, 'mouse-out', closeTooltip);
         
-        function openTooltip(evt) {
+        
+        function openParkTooltip(evt) {
           var content = evt.graphic.attributes.NAME;
+          tooltip.setContent(content);
+          modules.dijitPopup.open({
+            popup: tooltip,
+            x: evt.pageX + 10,
+            y: evt.pageY + 10
+          });
+          return false;
+        }
+
+        function openAmenitiesTooltip(evt) {
+          console.log(evt.graphic.attributes.SUBCATEGORY, amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY]);
+          var content = amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY].name;
           tooltip.setContent(content);
           modules.dijitPopup.open({
             popup: tooltip,
