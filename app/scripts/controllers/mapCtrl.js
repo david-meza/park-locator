@@ -7,6 +7,11 @@
 
       Esri.modulesReady().then(function(modules) {
 
+
+        modules.on(modules.map, 'zoom-end', function(evt) {
+          modules.parks.setVisibility(evt.level <= 17);
+        });
+
         // Geolocate button
         var geoLocate = new modules.LocateButton({
           map: modules.map
@@ -101,7 +106,6 @@
         }
 
         function openAmenitiesTooltip(evt) {
-          console.log(evt.graphic.attributes.SUBCATEGORY, amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY]);
           var content = amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY].name;
           tooltip.setContent(content);
           modules.dijitPopup.open({
