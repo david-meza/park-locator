@@ -54,6 +54,26 @@
           modules.map.addLayer(amenities2);
         });
         
+        // Greenways Layers
+        var greenways = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
+        modules.map.addLayer(greenways);
+        var greenways2 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
+        modules.map.addLayer(greenways2);
+
+
+        // Change the icon for the park marker
+        var parkSymbol = new modules.SimpleRenderer({
+          type: 'simple',
+          symbol: {
+            type: 'esriPMS',
+            url: '/img/icons/park-marker.svg',
+            height: 28,
+            width: 28
+          }
+        });
+        modules.parks.setRenderer(parkSymbol);
+        modules.map.addLayer(modules.parks);
+        
         // Park on click event
         modules.on(modules.parks, 'click', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');

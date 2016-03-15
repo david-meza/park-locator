@@ -1,6 +1,5 @@
 // We must use this hack to set Dojo config
-window.dojoConfig = {
-  async: true,
+var dojoConfig = { 
   paths: {
     extras: location.pathname.replace(/\/[^/]+$/, "") + "extras"
   }
@@ -22,7 +21,6 @@ window.dojoConfig = {
     angular.element(document).ready( function() {
       require([
         'esri/map',
-        'esri/SpatialReference',
         'esri/geometry/Extent',
         'esri/layers/VectorTileLayer',
         'esri/layers/ArcGISImageServiceLayer', 
@@ -36,11 +34,10 @@ window.dojoConfig = {
         'dijit/popup',
         'extras/ClusterLayer',
         'esri/symbols/SimpleMarkerSymbol',
-        'esri/symbols/Font',
         'esri/renderers/ClassBreaksRenderer',
         'esri/symbols/PictureMarkerSymbol',
         'dojo/domReady!'],
-        function(Map,SpatialReference,Extent,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,SimpleRenderer,f,Point,g,h,i, ClusterFeatureLayer, SimpleMarkerSymbol, Font, ClassBreaksRenderer, PictureMarkerSymbol) {
+        function(Map,Extent,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,e,f,Point,g,h,i, ClusterLayer, SimpleMarkerSymbol, ClassBreaksRenderer, PictureMarkerSymbol) {
           
 
           // initialize the ESRI map
@@ -48,34 +45,20 @@ window.dojoConfig = {
             center: [-78.646, 35.785],
             zoom: 13,
             // basemap: 'streets-vector',
-            // extent: new Extent({
-            //   xmin:-78.946,
-            //   ymin:35.485,
-            //   xmax:-78.346,
-            //   ymax:36.085,
-            //   spatialReference:{wkid:4326}
-            // }),
-            logo: false
+            logo: false,
+            extent: new Extent({
+              xmin:-78.946,
+              ymin:35.485,
+              xmax:-78.346,
+              ymax:36.085,
+              spatialReference:{wkid:4326}
+            })
           });
 
-          // console.log(service.map.extent.getWidth(), service.map.width);
-
           // Park Markers layer
-          service.parks = new ClusterFeatureLayer({
-            data: service.parks,
-            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
-            distance: 50,
-            useDefaultSymbol: false,
-            id: 'clusters',
-            labelColor: '#fff',
-            labelOffset: -5,
-            font: new Font('14pt').setFamily('Roboto'),
-            resolution: 0.5999999999999943 / 677,
-            singleSymbol: new PictureMarkerSymbol('/img/icons/park-marker.svg', 28, 28),
-            zoomOnClick: true,
-            showSingles: false,
+          service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
+            mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*']
-            // spatialReference: new SpatialReference({ 'wkid': 4326 })
           });
 
           // Base map layer
@@ -85,46 +68,49 @@ window.dojoConfig = {
           service.aerialLayer = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer', {
             visible: false
           });
-          
-          // Add the basemap layer and aerial view layers
-          service.map.addLayer(service.aerialLayer);
-          service.map.addLayer(service.basemapLayer);
+          console.log(service.map);
+          // Parks cluster layer 
+          service.clusterLayer = new ClusterLayer({
+            "data": service.parks,
+            "distance": 100,
+            "id": "clusters",
+            "labelColor": "#fff",
+            "labelOffset": 10,
+            "resolution": service.map.extent.getWidth() / service.map.width,
+            "singleColor": "#888",
+            "webmap": true,
+            "spatialReference": 4326
+          });
 
-          // Greenways Layers
-          var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
-          service.map.addLayer(greenways);
-          var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
-          service.map.addLayer(greenways2);
-
-          var defaultSym = new SimpleMarkerSymbol().setSize(5);
+          var defaultSym = new SimpleMarkerSymbol().setSize(4);
           var renderer = new ClassBreaksRenderer(defaultSym, "clusterCount");
 
-          // Change the icon for the park marker
-          var parkSymbolClusterSm = new PictureMarkerSymbol('/img/icons/park-marker-cluster.svg', 40, 40).setOffset(0, 15);
-          var parkSymbolClusterMd = new PictureMarkerSymbol('/img/icons/park-marker-cluster.svg', 55, 55).setOffset(0, 15);
-          var parkSymbolClusterLg = new PictureMarkerSymbol('/img/icons/park-marker-cluster.svg', 72, 72).setOffset(0, 15);
-          renderer.addBreak(2, 10, parkSymbolClusterSm);
-          renderer.addBreak(11, 40, parkSymbolClusterMd);
-          renderer.addBreak(41, 1001, parkSymbolClusterLg);
+          var picBaseUrl = "https://static.arcgis.com/images/Symbols/Shapes/";
+          var blue = new PictureMarkerSymbol(picBaseUrl + "BluePin1LargeB.png", 32, 32).setOffset(0, 15);
+          var green = new PictureMarkerSymbol(picBaseUrl + "GreenPin1LargeB.png", 64, 64).setOffset(0, 15);
+          var red = new PictureMarkerSymbol(picBaseUrl + "RedPin1LargeB.png", 72, 72).setOffset(0, 15);
+          renderer.addBreak(0, 2, blue);
+          renderer.addBreak(2, 200, green);
+          renderer.addBreak(200, 1001, red);
 
-          // Set the parks renderer and add the layer to the map
-          service.parks.setRenderer(renderer);
-          service.map.addLayer(service.parks);
+          service.clusterLayer.setRenderer(renderer);
+          service.map.addLayer(service.clusterLayer);
+
+          service.map.addLayer(service.basemapLayer);
+          service.map.addLayer(service.aerialLayer);
 
 
-          // Assign other modules to the service object
           service.VectorTileLayer = VectorTileLayer;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.FeatureLayer = FeatureLayer;
           service.LocateButton = LocateButton;
-          service.SimpleRenderer = SimpleRenderer;
+          service.SimpleRenderer = e;
           service.UniqueValueRenderer = f;
           service.Point = Point;
           service.on = g;
           service.TooltipDialog = h;
           service.dijitPopup = i;
 
-          // Finally resolve the promise so we can use it in other controllers or services
           deferred.resolve(service);
         }
       );
