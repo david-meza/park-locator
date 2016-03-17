@@ -2,8 +2,8 @@
   
   'use strict';
 
-  angular.module('appControllers').controller('mapCtrl', ['$scope', '$state', 'amenitiesService', 'Esri',
-    function($scope, $state, amenitiesService, Esri){
+  angular.module('appControllers').controller('mapCtrl', ['$scope', '$state', 'amenitiesService', 'Esri', '$mdDialog',
+    function($scope, $state, amenitiesService, Esri, $mdDialog){
 
       Esri.modulesReady().then(function(modules) {
 
@@ -121,6 +121,21 @@
         }
 
       });
+
+    // Opens the dialog showing the map icons key
+    $scope.openKey = function (ev) {
+      $mdDialog.show({
+        templateUrl: 'views/partials/key-dialog.html',
+        targetEvent: ev,
+        fullscreen: true,
+        clickOutsideToClose: true,
+        controller: 'DialogCtrl',
+        locals: {
+          activities: amenitiesService.activities.categoriesArr
+        },
+        bindToController: true
+      });
+    };
 
   }]);
 
