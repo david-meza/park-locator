@@ -24,6 +24,13 @@
           return searchText ? $scope.activities.categoriesArr.filter( createFilterFor(searchText) ) : $scope.activities.categoriesArr;
         }
 
+        function filterSelected (activities) {
+          return activities.filter(function(activity) {
+            return activity.selected;
+          });
+        }
+
+
         // Function that queries parks that meet the categories criteria
         $scope.updateParks = parkService.updateParkMarkers;
         // The activities object
@@ -33,20 +40,21 @@
 
         // Toggle an activity and trigger a park search
         $scope.toggleSelected = function (activity) {
+          if (angular.isUndefined(activity)) { return; }
           activity.selected = !activity.selected;
-          $scope.updateParks($scope.activities.categories);
+          $scope.updateParks( filterSelected($scope.activities.categoriesArr) );
         };
+
+        // Should trigger an update when the switch is turned on or off
+        $scope.toggleSwitch = function() {
+          $scope.updateParks( filterSelected($scope.activities.categoriesArr) );
+        }
 
         // md-autocomplete directive config
         $scope.search = {
           selectedItem: undefined,
           searchText: undefined,
-          selectedItemChange: function(activity) { 
-            // Ignore results when the input is cleared
-            if (angular.isUndefined(activity)) { return; }
-            activity.selected = !activity.selected;
-            $scope.updateParks($scope.activities.categories);
-          },
+          selectedItemChange: $scope.toggleSelected,
           querySearch: querySearch
         };
 

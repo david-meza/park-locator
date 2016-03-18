@@ -1,12 +1,16 @@
-'use strict';
+(function(angular) {
 
-angular.module('appDirectives').directive('mainMap', function(){
-	return {
-		
-		controller: 'mapCtrl',
-		restrict: 'E',
-		templateUrl: 'views/directives/map.html',
-		replace: true,
+  'use strict';
 
-	};
-});
+  angular.module('appDirectives').directive('mainMap', function(){
+    return {
+      
+      controller: 'mapCtrl',
+      restrict: 'E',
+      templateUrl: 'views/directives/main-map.html',
+      replace: true,
+
+    };
+  });
+
+})(window.angular);

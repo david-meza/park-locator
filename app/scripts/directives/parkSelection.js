@@ -9,7 +9,7 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/park-selection.html',
-      controller: ['$scope', 'parkService', 'mapService', '$timeout', '$mdSidenav', function ($scope, parkService, mapService, $timeout, $mdSidenav) {
+      controller: ['$scope', 'parkService', 'mapService', '$timeout', '$mdSidenav', 'Esri', function ($scope, parkService, mapService, $timeout, $mdSidenav, Esri) {
 
         // Internal controller functions
         function createFilterFor (query) {
@@ -36,20 +36,39 @@
           selectedItemChange: function(park) { 
             // Ignore results when the input is cleared
             if (angular.isUndefined(park)) { return; }
-            $scope.centerToPark(park);
+            $scope.selectPark(park);
           },
           querySearch: querySearch
         };
 
+        var esriModules;
+
+        Esri.modulesReady().then(function(modules) {
+          esriModules = modules;
+        });
+
         // Select a park section
         $scope.selectPark = function (park) {
+          // Update our map service variables
           $scope.map.zoom = 16;
           $scope.map.location.coords.latitude = park.latitude;
           $scope.map.location.coords.longitude = park.longitude;
+          
+          // Trigger a state change
           $timeout(function(){
             park.markerClick(null, 'click', park);
            }, 100);
+          
+          // Close the sidenav if not locked open
           $mdSidenav('left').close();
+          
+          // Center and zoom to the park marker on the map
+          esriModules.map.centerAndZoom( new esriModules.Point({
+            'y': park.latitude, 
+            'x': park.longitude,
+            'spatialReference': {'wkid': 4326 }
+          }), 15);
+          
         };
 
         // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
