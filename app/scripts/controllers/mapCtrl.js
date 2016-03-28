@@ -12,6 +12,19 @@
           modules.parks.setVisibility(evt.level <= 17);
         });
 
+        modules.on(modules.map, 'extent-change', function(evt) {
+          if ( !modules.basemapLayer.visible ) {
+            console.log(evt);
+            modules.queryInstance.geometry = evt.extent.getCenter();
+            modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
+              var bool = count === 0;
+              modules.aerialLayer2013.setVisibility(bool);
+              modules.aerialLayer.setVisibility(!bool);
+            });
+            
+          }
+        });
+
         // Geolocate button
         var geoLocate = new modules.LocateButton({
           map: modules.map
