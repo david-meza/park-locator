@@ -19,6 +19,8 @@
             $scope.aerial = button === 'aerial';
             
             modules.aerialLayer.setVisibility($scope.aerial);
+            modules.aerialLayer2013.setVisibility($scope.aerial);
+            modules.map.setExtent(modules.map.extent);
             modules.basemapLayer.setVisibility(!$scope.aerial);
           }
 
