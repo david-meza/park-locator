@@ -10,7 +10,7 @@
       templateUrl: 'views/directives/sidenav-content.html',
       controller: ['$scope', function ($scope) {
 
-        $scope.currentList = '';
+        $scope.currentList = 'activities';
 
         $scope.toggleList = function (listName) {
           $scope.currentList = $scope.currentList === listName ? '' : listName;
