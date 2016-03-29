@@ -2,6 +2,7 @@
 
 $primary: #1565C0;
 $indigo: #3F51B5;
+$light-blue: #ABC5E9;
 $light-white: rgba(255,255,255,0.87);
 $warn: #EF6C00;
 $alert: #E65100;
@@ -39,10 +40,6 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
      -moz-user-select: none;    
       -ms-user-select: none;
           user-select: none;  
-}
-
-.opaque {
-  opacity: 0;
 }
 
 .light {
@@ -786,10 +783,10 @@ html, body {
     .menu-item {
       color: $light-white;
       font-size: 16px;
-      border-bottom: 1px solid lighten($primary, 1%);
+      border-bottom: 1px solid $light-blue;
 
       &:first-child {
-        border-top: 1px solid lighten($primary, 1%);
+        border-top: 1px solid $light-blue;
       }
 
       &:hover, &:focus {
