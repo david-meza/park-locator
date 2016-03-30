@@ -22,6 +22,7 @@
         'esri/layers/GraphicsLayer',
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
+        'esri/symbols/PictureMarkerSymbol',
         'esri/geometry/Point',
         'esri/geometry/Extent',
         'esri/tasks/support/Query',
@@ -40,6 +41,7 @@
                   GraphicsLayer,
                   SimpleRenderer,
                   UniqueValueRenderer,
+                  PictureMarkerSymbol,
                   Point,
                   Extent,
                   Query,
@@ -71,9 +73,9 @@
             center: [-78.646, 35.785],
             zoom: 13,
             constraints: {
-              snapToZoom: true,
-              minZoom: 9,
-              maxZoom: 20
+              // snapToZoom: true,
+              // maxZoom: 20,
+              minZoom: 9
             },
             map: service.map
           });
@@ -84,16 +86,17 @@
           });
 
           // Change the icon for the park marker
-          var parkSymbol = new SimpleRenderer({
+          var customParkRenderer = new SimpleRenderer({
             type: 'simple',
-            symbol: {
-              type: 'esriPMS',
-              url: '/img/icons/park-marker.svg',
-              height: 28,
-              width: 28
-            }
+            symbol: new PictureMarkerSymbol({
+              type: 'picturemarkersymbol',
+              url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-marker.svg',
+              size: 36,
+              height: 40,
+              width: 40
+            })
           });
-          service.parks.renderer = parkSymbol;
+          service.parks.renderer = customParkRenderer;
           
           // Park on click event
           on(service.parks, 'click', function (evt) {
