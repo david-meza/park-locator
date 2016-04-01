@@ -13,69 +13,167 @@
 
     angular.element(document).ready( function() {
       require([
-        'esri/map', 
+        'esri/Map',
+        'esri/views/MapView',
+        'esri/Basemap',
         'esri/layers/VectorTileLayer',
-        'esri/layers/ArcGISImageServiceLayer', 
-        'esri/layers/FeatureLayer', 
-        'esri/dijit/LocateButton', 
+        'esri/layers/ArcGISImageLayer', 
+        'esri/layers/FeatureLayer',
+        'esri/layers/GraphicsLayer',
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
+        'esri/symbols/PictureMarkerSymbol',
         'esri/geometry/Point',
-        'esri/tasks/query',
+        'esri/geometry/Extent',
+        'esri/tasks/support/Query',
         'esri/tasks/QueryTask',
         'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
         'dojo/domReady!'],
-        function(Map,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,e,f,Point, Query, QueryTask, g,h,i) {
+        
+        function( Map,
+                  MapView,
+                  Basemap,
+                  VectorTileLayer,
+                  ArcGISImageLayer,
+                  FeatureLayer,
+                  GraphicsLayer,
+                  SimpleRenderer,
+                  UniqueValueRenderer,
+                  PictureMarkerSymbol,
+                  Point,
+                  Extent,
+                  Query,
+                  QueryTask,
+                  on,
+                  TooltipDialog,
+                  dijitPopup) {
           
 
+          // Base map layer
+          service.basemapLayer = new VectorTileLayer({
+            url: 'https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json'
+          });
+
+          var corBasemap = new Basemap({
+            baseLayers: [service.basemapLayer],
+            title: "Raleigh Basemap",
+            id: "corbasemap"
+          });
+
           // initialize the ESRI map
-          service.map = new Map('map-canvas', {
+          service.map = new Map({
+            basemap: corBasemap,
+            layers: []
+          });
+
+          service.mapView = new MapView({
+            container: 'map-canvas',
             center: [-78.646, 35.785],
             zoom: 13,
-            // basemap: 'streets-vector',
-            logo: false
+            constraints: {
+              // snapToZoom: true,
+              // maxZoom: 20,
+              minZoom: 9
+            },
+            map: service.map
           });
 
           // Park Markers layer
-          service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
-            mode: FeatureLayer.MODE_SNAPSHOT,
-            outFields: ['*']
+          service.parks = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0' 
           });
 
-          // Base map layer
-          service.basemapLayer = new VectorTileLayer('https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json');
+          // Change the icon for the park marker
+          var customParkRenderer = new SimpleRenderer({
+            type: 'simple',
+            symbol: new PictureMarkerSymbol({
+              type: 'picturemarkersymbol',
+              url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-marker.svg',
+              height: 40,
+              width: 40
+            })
+          });
+          service.parks.renderer = customParkRenderer;
 
-          // Aerial view
-          service.aerialLayer = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer', {
+          console.log(service.parks);
+          
+          // Park on click event
+          service.parks.on('click', function (evt) {
+            console.log('click', evt);
+            var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
+            $state.go('home.park', {name: parkName});
+          });
+
+          // Aerial views
+          service.aerialLayer = new ArcGISImageLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer',
+            visible: false
+          });
+          service.aerialLayer2013 = new ArcGISImageLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2013/ImageServer',
             visible: false
           });
 
-          service.aerialLayer2013 = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2013/ImageServer', {
-            visible: false
+          // Greenways Layers
+          var greenways = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0'
+          });
+          var greenways2 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1'
           });
 
-          service.map.addLayer(service.basemapLayer);
-          service.map.addLayer(service.aerialLayer2013);
-          service.map.addLayer(service.aerialLayer);
+          // Add layers to map. Order is important! Map will get the coordinate system (in this case Web Mercator) from the first layer that is added
+          service.map.layers.addItems([service.aerialLayer2013, service.aerialLayer]);          
+          service.map.layers.addItems([greenways, greenways2, service.parks]);
+
+          // Map events
+          var queryInstance = new Query();
+          var aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
+          
+          // Don't show park markers when zoomed in
+          service.mapView.watch('zoom', function(newZoom) {
+            // Only run this function when the map has settled in an integer zoom level
+            if (newZoom % 1 === 0) {
+              service.parks.visible = (newZoom <= 17);
+            }
+          });
+
+          // Switch between aerial views when out of bounds
+          service.mapView.watch('extent', function(newVal) {
+            if ( !service.basemapLayer.visible ) {
+              console.log(newVal);
+              queryInstance.geometry = newVal.getCenter();
+              aerialLayer2015Query.executeForCount(queryInstance, function(count) {
+                var isOutside2015LayerBoundaries = (count === 0);
+                service.aerialLayer2013.visible = isOutside2015LayerBoundaries;
+                service.aerialLayer.visible = !isOutside2015LayerBoundaries;
+              });
+              
+            }
+          });
+          // End map events
+
+          //This graphics layer will store the graphic used to display the user's location
+          // var gl = new GraphicsLayer();
+          // service.map.layers.addItems([gl]);
 
 
+          // Attach Esri returned objects to our service so we can use them from other controllers or services
           service.VectorTileLayer = VectorTileLayer;
-          service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
+          service.ArcGISImageLayer = ArcGISImageLayer;
           service.FeatureLayer = FeatureLayer;
-          service.LocateButton = LocateButton;
-          service.SimpleRenderer = e;
-          service.UniqueValueRenderer = f;
+          service.SimpleRenderer = SimpleRenderer;
+          service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
           service.Query = Query;
-          service.queryInstance = new Query();
           service.QueryTask = QueryTask;
-          service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
-          service.on = g;
-          service.TooltipDialog = h;
-          service.dijitPopup = i;
+          service.on = on;
+          service.TooltipDialog = TooltipDialog;
+          service.dijitPopup = dijitPopup;
 
+          // Finally, resolve the promise so we can tell other components that the Esri modules are ready to be used (all async modules have been returned)
           deferred.resolve(service);
         }
       );
