@@ -91,17 +91,15 @@
             symbol: new PictureMarkerSymbol({
               type: 'picturemarkersymbol',
               url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/park-marker.svg',
+              size: 36,
               height: 40,
               width: 40
             })
           });
           service.parks.renderer = customParkRenderer;
-
-          console.log(service.parks);
           
           // Park on click event
-          service.parks.on('click', function (evt) {
-            console.log('click', evt);
+          on(service.parks, 'click', function (evt) {
             var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
             $state.go('home.park', {name: parkName});
           });
