@@ -26,13 +26,6 @@ angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope
       $mdSidenav('left').toggle();
     };
 
-    $scope.scrollTo = function (target) {
-      if (target === 'panels-section' && !markers.currentPark) { return informUser('Oops! Please select a park first.'); }
-      var contentArea = angular.element(document.getElementById('main-scrollable'));
-      var ngTarget = angular.element(document.getElementById(target));
-      contentArea.scrollTo(ngTarget, 0, 600);
-    };
-
     $rootScope.$on('loading:progress', function(){
       $scope.progress = 'indeterminate';
     });

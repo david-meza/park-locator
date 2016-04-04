@@ -1134,6 +1134,7 @@ div[ui-view="classes-info"] {
 @media screen and (max-width: 599px) {
   #directions-map {
     min-height: 300px;
+    margin-top: 10px;
   }
 
   #map-canvas {
