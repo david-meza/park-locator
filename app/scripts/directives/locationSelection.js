@@ -9,11 +9,13 @@
       // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
       scope: {},
       templateUrl: 'views/directives/location-selection.html',
-      controller: ['$scope', 'Esri', function ($scope, Esri) {
+      controller: ['$scope', 'Esri', 'mapService', function ($scope, Esri, mapService) {
 
         Esri.modulesReady().then(function(modules) {
           console.log(modules);
         });
+
+        $scope.geolocate = mapService.geoLocate;
 
       }]
     };

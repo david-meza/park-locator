@@ -14,6 +14,7 @@
     angular.element(document).ready( function() {
       require([
         'esri/map', 
+        'esri/graphic',
         'esri/layers/VectorTileLayer',
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/FeatureLayer', 
@@ -31,6 +32,7 @@
         'dojo/domReady!'],
         
         function( Map,
+                  Graphic,
                   VectorTileLayer,
                   ArcGISImageServiceLayer,
                   FeatureLayer,
@@ -87,24 +89,46 @@
           service.map.addLayer(greenways);
           service.map.addLayer(greenways2);
 
+          // My Location graphic
+          service.myLocation = new Graphic({
+            geometry: {
+              x: -78.646,
+              y: 35.785,
+              spatialReference: { wkid: 4326 }
+            },
+            attributes: {
+              title: 'My Location'
+            },
+            symbol: {
+              type: 'esriPMS',
+              url: '/img/icons/user-marker.svg',
+              height: 28,
+              width: 28
+            }
+          });
+          service.map.on('load', function() {
+            service.map.graphics.add(service.myLocation);
+          });
+
           // Geolocate button
           var geoLocate = new LocateButton({
             map: service.map,
             useTracking: true,
             symbol: new PictureMarkerSymbol('/img/icons/my-location.svg', 56, 56)
           }, 'geolocate-button');
-          console.log(geoLocate);
 
           // Geolocation search field
           var search = new Search({
             map: service.map,
             allPlaceholder: 'Manually find your address',
-            enableHighlight: false,
+            // enableButtonMode: true,
+            enableHighlight: true,
             enableInfoWindow: false
           }, "search-field");
           
           geoLocate.startup();
           search.startup();
+          console.log(service.map);
 
 
           // Attach all Esri modules to the service so they can be used from outside

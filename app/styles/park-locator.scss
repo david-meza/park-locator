@@ -54,10 +54,11 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 }
 
 #search-field {
-  position: absolute;
-  z-index: 2;
-  top: 20px;
-  left: 74px;
+  // position: absolute;
+  // z-index: 2;
+  // top: 20px;
+  // left: 74px;
+  margin: 6px 3px 6px 7px;
 }
 
 #map-key {
@@ -905,22 +906,21 @@ html, body {
       }
     }
 
-
     .selection-menu {
       @include transition( all 800ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
       background-color: #fff;
       max-height: 500px;
-      // height: 100%;
-      // min-height: 100%;
-      overflow: hidden;
+      overflow: visible;
       padding: 12px;
 
       &.ng-hide {
-        // @include transform( scale(0,0) );
         max-height: 0;
-        // height: 0;
-        // min-height: 0;
       }
+      
+      &.ng-hide, &.ng-hide-animate {
+        overflow: auto;
+      }
+
     }
 
   }
