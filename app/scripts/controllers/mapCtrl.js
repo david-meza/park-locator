@@ -14,23 +14,15 @@
 
         modules.on(modules.map, 'extent-change', function(evt) {
           if ( !modules.basemapLayer.visible ) {
-            console.log(evt);
             modules.queryInstance.geometry = evt.extent.getCenter();
             modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
-              var bool = count === 0;
-              modules.aerialLayer2013.setVisibility(bool);
-              modules.aerialLayer.setVisibility(!bool);
+              var isOutside2015Bounds = count === 0;
+              modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
+              modules.aerialLayer.setVisibility(!isOutside2015Bounds);
             });
             
           }
         });
-
-        // Geolocate button
-        var geoLocate = new modules.LocateButton({
-          map: modules.map
-        }, 'geolocate-button');
-        geoLocate.startup();
-        
 
         // Amenity Markers (outdoors)
         var amenities1 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
@@ -67,13 +59,6 @@
           modules.map.addLayer(amenities2);
         });
         
-        // Greenways Layers
-        var greenways = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
-        modules.map.addLayer(greenways);
-        var greenways2 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
-        modules.map.addLayer(greenways2);
-
-
         // Change the icon for the park marker
         var parkSymbol = new modules.SimpleRenderer({
           type: 'simple',

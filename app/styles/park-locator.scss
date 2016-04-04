@@ -53,6 +53,13 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   }
 }
 
+#search-field {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 74px;
+}
+
 #map-key {
   position: absolute;
   bottom: 10px;

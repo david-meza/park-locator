@@ -18,8 +18,10 @@
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/FeatureLayer', 
         'esri/dijit/LocateButton', 
+        'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
+        'esri/symbols/PictureMarkerSymbol',
         'esri/geometry/Point',
         'esri/tasks/query',
         'esri/tasks/QueryTask',
@@ -27,7 +29,22 @@
         'dijit/TooltipDialog', 
         'dijit/popup',
         'dojo/domReady!'],
-        function(Map,VectorTileLayer,ArcGISImageServiceLayer,FeatureLayer,LocateButton,e,f,Point, Query, QueryTask, g,h,i) {
+        
+        function( Map,
+                  VectorTileLayer,
+                  ArcGISImageServiceLayer,
+                  FeatureLayer,
+                  LocateButton,
+                  Search,
+                  SimpleRenderer,
+                  UniqueValueRenderer,
+                  PictureMarkerSymbol,
+                  Point,
+                  Query,
+                  QueryTask,
+                  on,
+                  TooltipDialog,
+                  dijitPopup) {
           
 
           // initialize the ESRI map
@@ -47,7 +64,7 @@
           // Base map layer
           service.basemapLayer = new VectorTileLayer('https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json');
 
-          // Aerial view
+          // Aerial views
           service.aerialLayer = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer', {
             visible: false
           });
@@ -56,26 +73,55 @@
             visible: false
           });
 
+          // Greenway Layers
+          var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
+          var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
+
+
+          // Add all layers to the map. Basemap must go first so map gets the right extent and coordinate system from it
           service.map.addLayer(service.basemapLayer);
           service.map.addLayer(service.aerialLayer2013);
           service.map.addLayer(service.aerialLayer);
+          service.map.addLayer(greenways);
+          service.map.addLayer(greenways2);
+
+          // Geolocate button
+          var geoLocate = new LocateButton({
+            map: service.map,
+            useTracking: true,
+            symbol: new PictureMarkerSymbol('/img/icons/my-location.svg', 56, 56)
+          }, 'geolocate-button');
+          console.log(geoLocate);
+
+          // Geolocation search field
+          var search = new Search({
+            map: service.map,
+            allPlaceholder: 'Manually find your address',
+            enableHighlight: false,
+            enableInfoWindow: false
+          }, "search-field");
+          
+          geoLocate.startup();
+          search.startup();
 
 
+          // Attach all Esri modules to the service so they can be used from outside
           service.VectorTileLayer = VectorTileLayer;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.FeatureLayer = FeatureLayer;
           service.LocateButton = LocateButton;
-          service.SimpleRenderer = e;
-          service.UniqueValueRenderer = f;
+          service.SimpleRenderer = SimpleRenderer;
+          service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
           service.Query = Query;
           service.queryInstance = new Query();
           service.QueryTask = QueryTask;
           service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
-          service.on = g;
-          service.TooltipDialog = h;
-          service.dijitPopup = i;
+          service.on = on;
+          service.TooltipDialog = TooltipDialog;
+          service.dijitPopup = dijitPopup;
 
+          // Finally resolve the promise so we can signal other components that all modules are ready to be used
           deferred.resolve(service);
         }
       );
