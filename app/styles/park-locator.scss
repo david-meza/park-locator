@@ -2,6 +2,7 @@
 
 $primary: #1565C0;
 $indigo: #3F51B5;
+$light-blue: #ABC5E9;
 $light-white: rgba(255,255,255,0.87);
 $warn: #EF6C00;
 $alert: #E65100;
@@ -46,6 +47,18 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   top: 95px;
   left: 20px;
   z-index: 31;
+
+  .zoomLocateButton {
+    background-color: #555;
+  }
+}
+
+#search-field {
+  // position: absolute;
+  // z-index: 2;
+  // top: 20px;
+  // left: 74px;
+  margin: 6px 3px 6px 7px;
 }
 
 #map-key {
@@ -110,7 +123,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   position: initial !important;
   left: 0 !important;
   right: 0 !important;
-  display: block !important;
+  display: block;
   @include box-shadow( none !important );
   border-top: none !important;
 
@@ -870,10 +883,10 @@ html, body {
     .menu-item {
       color: $light-white;
       font-size: 16px;
-      border-bottom: 1px solid lighten($primary, 1%);
+      border-bottom: 1px solid $light-blue;
 
       &:first-child {
-        border-top: 1px solid lighten($primary, 1%);
+        border-top: 1px solid $light-blue;
       }
 
       &:hover, &:focus {
@@ -893,22 +906,21 @@ html, body {
       }
     }
 
-
     .selection-menu {
       @include transition( all 800ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
       background-color: #fff;
       max-height: 500px;
-      // height: 100%;
-      // min-height: 100%;
-      overflow: hidden;
+      overflow: visible;
       padding: 12px;
 
       &.ng-hide {
-        // @include transform( scale(0,0) );
         max-height: 0;
-        // height: 0;
-        // min-height: 0;
       }
+      
+      &.ng-hide, &.ng-hide-animate {
+        overflow: auto;
+      }
+
     }
 
   }
@@ -1122,6 +1134,7 @@ div[ui-view="classes-info"] {
 @media screen and (max-width: 599px) {
   #directions-map {
     min-height: 300px;
+    margin-top: 10px;
   }
 
   #map-canvas {

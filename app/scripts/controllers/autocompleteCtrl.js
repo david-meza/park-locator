@@ -2,15 +2,15 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', '$mdDialog',
-    function($scope, gMapsApi, mapService, $mdDialog){
+  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', '$mdSidenav',
+    function($scope, gMapsApi, mapService, $mdSidenav){
 
       // Search box inside set my location dialog
-      var myLocation;
+      var myLocation, input;
 
       gMapsApi.then(function(maps) {
 
-        var input = document.getElementById($scope.inputId);
+        input = document.getElementById($scope.inputId);
         var options = {
           componentRestrictions: {country: 'us'}
         };
@@ -28,10 +28,14 @@
 
       // Function used by address typeahead on a place selected
       var updateUserMarker = function() {
-        $mdDialog.hide().then(function () {
-          var loc = myLocation.getPlace().geometry.location;
-          mapService.updateUserCoords( loc.lat(), loc.lng() );
-        });
+        // Close the sidenav if not locked open
+        $mdSidenav('left').close();
+
+        // Reset the input field
+        input.value = '';
+
+        var loc = myLocation.getPlace().geometry.location;
+        mapService.updateUserCoords( loc.lat(), loc.lng() );
       };
 
   }]);

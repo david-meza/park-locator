@@ -1,55 +1,64 @@
-<md-tabs md-dynamic-height md-border-bottom fade-up-when-ready flex="100" md-stretch-tabs="always" md-center-tabs="true" md-swipe-content="true">
+<md-tabs  md-dynamic-height 
+          md-border-bottom 
+          fade-up-when-ready 
+          flex="100" 
+          md-stretch-tabs="always" 
+          md-center-tabs="true" 
+          md-swipe-content="true" >
   
-  <md-tab label="About this Park">
-    <div class="md-padding" layout="row" layout-xs="column">
+  <md-tab md-on-select="scrollTo('park-info')">
+    <md-tab-label>About This Park</md-tab-label>
+    <md-tab-body>
+      <div class="md-padding" layout="row" layout-xs="column">
 
-      <div flex layout="column" layout-align="space-between center">
-        
-        <md-button class="md-accent back-to-map button-top-left capitalize display-on-mobile" ui-sref="^" aria-label="back to main map">
-          <md-icon md-font-icon="fa-chevron-left fa-icon-baseline" class = "fa"></md-icon>
-          <span>Back To Map</span>
-        </md-button>
-  
-        <h3>{{ ::currentPark.name }}</h3>
-        
-        <div class="img-container">
-          <img  class = "img-responsive"
-                fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
-                ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+        <div flex layout="column" layout-align="space-between center">
+          
+          <md-button class="md-accent back-to-map button-top-left capitalize display-on-mobile" ui-sref="^" aria-label="back to main map">
+            <md-icon md-font-icon="fa-chevron-left fa-icon-baseline" class = "fa"></md-icon>
+            <span>Back To Map</span>
+          </md-button>
+    
+          <h3>{{ ::currentPark.name }}</h3>
+          
+          <div class="img-container">
+            <img  class = "img-responsive"
+                  fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
+                  ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+          </div>
+
+          <div layout="column" layout-align="space-between stretch">
+            <span class="park-detail"> <i class = "fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>
+
+            <span class="park-detail"> <i class = "fa fa-fw fa-mobile"></i> {{ ::currentPark.phone }}</span>
+
+            <span class="park-detail" ng-if = "routeData.duration">
+              <i class = "fa fa-fw" ng-class = "travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span>
+            </span>
+
+            <span class="park-detail" ng-if = "routeData.distance">
+              <i class = "fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
+            </span>
+
+            <md-button class = "md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank">
+              <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
+            </md-button>
+
+            <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank">
+              <i class = "fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
+            </md-button>
+          </div>
+
+
         </div>
 
-        <div layout="column" layout-align="space-between stretch">
-          <span class="park-detail"> <i class = "fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>
-
-          <span class="park-detail"> <i class = "fa fa-fw fa-mobile"></i> {{ ::currentPark.phone }}</span>
-
-          <span class="park-detail" ng-if = "routeData.duration">
-            <i class = "fa fa-fw" ng-class = "travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span>
-          </span>
-
-          <span class="park-detail" ng-if = "routeData.distance">
-            <i class = "fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
-          </span>
-
-          <md-button class = "md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank">
-            <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
-          </md-button>
-
-          <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank">
-            <i class = "fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
-          </md-button>
-        </div>
-
+        <directions-map flex layout="column"></directions-map>
 
       </div>
-
-      <directions-map flex layout="column"></directions-map>
-
-    </div>
+    </md-tab-body>
   </md-tab>
 
 
-  <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0">
+  <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0" md-on-select="scrollTo('park-info')">
     <div class="md-padding">
 
       <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">

@@ -2,9 +2,16 @@
 
   'use strict';
 
-  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout',
-    function (gMapsApi, $mdToast, $timeout) {
+  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout', 'Esri',
+    function (gMapsApi, $mdToast, $timeout, Esri) {
 
+    var esriModules;
+    
+    Esri.modulesReady().then( function (modules) {
+      esriModules = modules;
+      // Get user's coordinates
+      geoLocate();
+    });
 
     // Temporary coordinates while Geoloc gets us the user's coords
     var location = {
@@ -95,6 +102,9 @@
 
     var updateUserCoords = function (lat, lon) {
       // Update the location obj with the accurate user coords
+      esriModules.myLocation.setGeometry(new esriModules.Point([lon, lat]));
+      centerAndZoom(lat, lon);
+      
       map.location.coords.latitude = lat;
       map.location.coords.longitude = lon;
       map.myLocationMarker.coords.latitude = lat;
@@ -114,7 +124,7 @@
             updateUserCoords(position.coords.latitude, position.coords.longitude);
           },
           function (error) {
-            informUser('Sorry. Could not find you. Try manually dragging your pin.');
+            informUser('Sorry, could not find you. Please try again.');
             console.log('Error: ', error);
           }, {
             enableHighAccuracy: true,
@@ -127,10 +137,13 @@
       }
     };
 
-    // Get user's coordinates a few seconds after the app loaded
-    $timeout(function(){
-      geoLocate();
-    }, 5000);
+    function centerAndZoom(lat, lon) {
+      esriModules.map.centerAndZoom( new esriModules.Point({
+        y: lat, 
+        x: lon,
+        spatialReference: { wkid: 4326 }
+      }), 15);
+    }
 
     gMapsApi.then( function (maps) {
       map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
@@ -142,7 +155,8 @@
     return {
       map: map,
       updateUserCoords: updateUserCoords,
-      geoLocate: geoLocate
+      geoLocate: geoLocate,
+      centerAndZoom: centerAndZoom
     };
 
   }]);

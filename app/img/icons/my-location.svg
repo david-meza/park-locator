@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="my-location" viewBox="0 0 48 48" height="48" width="48">
+  <style>
+    .circle {
+      stroke-linecap: round;
+      -moz-animation:     pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      -webkit-animation:  pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      -o-animation:       pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      animation:          pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes pulsate {
+      0%   { stroke-width: 20; opacity: 1; }
+      60% { stroke-width: 43; opacity: 0; }
+      100% { stroke-width: 43; opacity: 0; }
+    }
+    @-webkit-keyframes pulsate {
+      0%   { stroke-width: 20; opacity: 1; }
+      60% { stroke-width: 43; opacity: 0; }
+      100% { stroke-width: 43; opacity: 0; }
+    }
+  </style>
+  <circle fill="#2196F3" fill-opacity="0.3" cx="24" cy="24" r="21"/>
+  <line x1="24" y1="24" x2="24" y2="24" stroke="#2196F3" class="circle" />
+  <circle fill="#FFFFFF" cx="24" cy="24" r="10"/>
+  <circle fill="#2196F3" cx="24" cy="24" r="9"/>
+</svg>

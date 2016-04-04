@@ -6,14 +6,21 @@ angular.module('appServices').factory('deviceService', ['$window',
     var _width = $window.innerWidth;
     var activeTab = { name: 'search' };
 
-    var isMobile = function () {
+    function isMobile() {
       return _width < 768;
-    };
+    }
+
+    function scrollTo(target) {
+      var contentArea = angular.element(document.getElementById('main-scrollable'));
+      var ngTarget = angular.element(document.getElementById(target));
+      contentArea.scrollToElementAnimated(ngTarget);
+    }
   
 
 	return {
     isMobile: isMobile,
-    activeTab: activeTab
+    activeTab: activeTab,
+    scrollTo: scrollTo
 	};
 
 }]);

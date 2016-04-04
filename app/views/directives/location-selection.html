@@ -1,0 +1,17 @@
+<gmaps-address id = "address-search-box" input-id = "'edit-my-location'">
+
+  <md-input-container class="md-icon-float md-block" style = "margin-top: 20px; padding-right: 10px;">
+
+    <label>Address</label>
+    <md-icon md-svg-icon = "/img/icons/person-pin.svg"></md-icon>
+    <input id="edit-my-location" type = "text" placeholder = "" class="md-primary" />
+
+  </md-input-container>
+
+</gmaps-address>
+
+
+<md-button class="md-raised md-primary" ng-click="geolocate()">
+  <md-icon md-svg-icon="img/icons/find-me.svg"></md-icon>
+  <span class="capitalize">Find Me!</span>
+</md-button>
