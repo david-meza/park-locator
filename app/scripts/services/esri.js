@@ -66,9 +66,11 @@
           });
 
           // Base map layer
-          service.basemapLayer = new VectorTileLayer('https://tiles.arcgis.com/tiles/v400IkDOw1ad7Yad/arcgis/rest/services/Vector_Tile_Basemap/VectorTileServer/resources/styles/root.json');
+          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/f6f7665880c94539842f4cc46cfe6c1d/resources/styles/root.json');
 
           // Aerial views
+          service.aerialLabels = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/fb05b96c9aaa4d90bbb9bc7702330916/resources/styles/root.json', { visible: false });
+
           service.aerialLayer = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer', {
             visible: false
           });
@@ -86,6 +88,7 @@
           service.map.addLayer(service.basemapLayer);
           service.map.addLayer(service.aerialLayer2013);
           service.map.addLayer(service.aerialLayer);
+          service.map.addLayer(service.aerialLabels);
           service.map.addLayer(greenways);
           service.map.addLayer(greenways2);
 
@@ -104,13 +107,12 @@
               url: '/img/icons/user-marker.svg',
               height: 28,
               width: 28
-            }
+            },
           });
 
           // Add my location graphic to map after it has loaded
           service.map.on('load', function() {
             service.map.graphics.add(service.myLocation);
-            console.log(service.myLocation.geometry);
           });
 
           // Geolocate button

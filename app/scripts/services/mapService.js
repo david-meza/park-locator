@@ -102,11 +102,7 @@
 
     var updateUserCoords = function (lat, lon) {
       // Update the location obj with the accurate user coords
-      console.log(esriModules.myLocation.geometry);
-      // esriModules.myLocation.geometry.setX(lon);
-      // esriModules.myLocation.geometry.setY(lat);
       esriModules.myLocation.setGeometry(new esriModules.Point([lon, lat]));
-      console.log(esriModules.myLocation.geometry);
       centerAndZoom(lat, lon);
       
       map.location.coords.latitude = lat;
@@ -128,7 +124,7 @@
             updateUserCoords(position.coords.latitude, position.coords.longitude);
           },
           function (error) {
-            informUser('Sorry. Could not find you. Try manually dragging your pin.');
+            informUser('Sorry, could not find you. Please try again.');
             console.log('Error: ', error);
           }, {
             enableHighAccuracy: true,

@@ -21,6 +21,7 @@
             modules.aerialLayer.setVisibility($scope.aerial);
             modules.aerialLayer2013.setVisibility($scope.aerial);
             modules.map.setExtent(modules.map.extent);
+            modules.aerialLabels.setVisibility($scope.aerial);
             modules.basemapLayer.setVisibility(!$scope.aerial);
           }
 
