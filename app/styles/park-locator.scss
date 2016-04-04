@@ -123,7 +123,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   position: initial !important;
   left: 0 !important;
   right: 0 !important;
-  display: block !important;
+  display: block;
   @include box-shadow( none !important );
   border-top: none !important;
 

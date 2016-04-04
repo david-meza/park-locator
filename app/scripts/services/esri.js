@@ -106,8 +106,11 @@
               width: 28
             }
           });
+
+          // Add my location graphic to map after it has loaded
           service.map.on('load', function() {
             service.map.graphics.add(service.myLocation);
+            console.log(service.myLocation.geometry);
           });
 
           // Geolocate button
@@ -128,7 +131,6 @@
           
           geoLocate.startup();
           search.startup();
-          console.log(service.map);
 
 
           // Attach all Esri modules to the service so they can be used from outside
