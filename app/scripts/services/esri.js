@@ -17,7 +17,8 @@
         'esri/graphic',
         'esri/layers/VectorTileLayer',
         'esri/layers/ArcGISImageServiceLayer', 
-        'esri/layers/FeatureLayer', 
+        'esri/layers/GraphicsLayer',
+        'esri/layers/FeatureLayer',
         'esri/dijit/LocateButton', 
         'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
@@ -35,6 +36,7 @@
                   Graphic,
                   VectorTileLayer,
                   ArcGISImageServiceLayer,
+                  GraphicsLayer,
                   FeatureLayer,
                   LocateButton,
                   Search,
@@ -64,7 +66,6 @@
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*']
           });
-
           // Change the icon for the park marker
           var parkSymbol = new SimpleRenderer({
             type: 'simple',
@@ -92,21 +93,30 @@
           });
 
           // Greenway Layers
-          var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0');
-          var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1');
+          var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0', {
+            id: 'greenways'
+          });
+          var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1', {
+            id: 'greenway-connectors'
+          });
 
           // Amenity Markers (outdoors)
           service.amenities1 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
-            id: 'amenities outdoors'
+            id: 'amenities-outdoors'
           });
 
           // Amenity Markers (indoors)
           service.amenities2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3', {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
-            id: 'amenities indoors'
+            id: 'amenities-indoors'
+          });
+
+          // Location Tracking Layer
+          service.tracker = new GraphicsLayer({
+            id: 'location-tracking'
           });
 
 
