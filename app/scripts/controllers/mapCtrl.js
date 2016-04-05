@@ -8,13 +8,15 @@
       Esri.modulesReady().then(function(modules) {
 
 
-        modules.on(modules.map, 'zoom-end', function(evt) {
-          modules.parks.setVisibility(evt.level <= 17);
-        });
+        // modules.on(modules.map, 'zoom-end', function(evt) {
+        //   modules.parks.setVisibility(evt.level <= 17);
+        // });
 
         modules.on(modules.map, 'extent-change', function(evt) {
           if ( !modules.basemapLayer.visible ) {
+            
             modules.queryInstance.geometry = evt.extent.getCenter();
+            
             modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
               var isOutside2015Bounds = count === 0;
               modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
@@ -59,8 +61,8 @@
         tooltip.startup();
 
 
-        // modules.on(modules.parks, 'mouse-over', openParkTooltip);
-        // modules.on(modules.parks, 'mouse-out', closeTooltip);
+        modules.on(modules.parks, 'mouse-over', openParkTooltip);
+        modules.on(modules.parks, 'mouse-out', closeTooltip);
         
         modules.on(modules.amenities1, 'mouse-over', openAmenitiesTooltip);
         modules.on(modules.amenities1, 'mouse-out', closeTooltip);

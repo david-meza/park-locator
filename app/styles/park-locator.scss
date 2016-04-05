@@ -907,7 +907,7 @@ html, body {
     }
 
     .selection-menu {
-      @include transition( all 800ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
+      @include transition( all 600ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
       background-color: #fff;
       max-height: 500px;
       overflow: visible;
