@@ -10,9 +10,11 @@
       replace: true,
       controller: ['$scope', 'Esri', function($scope, Esri) {
         
-        var options, watchId, mapEvent;
+        var options, watchId, mapEvent, modules;
 
-        $scope.tracking = 'inactive';
+        Esri.modulesReady().then( function(m) {
+          modules = m;
+        });
 
         options = {
           enableHighAccuracy: true,
@@ -20,49 +22,50 @@
           maximumAge: 0
         };
 
-        Esri.modulesReady().then( function(modules) {
+        function updatePosition(pos) {
+          var lat, lon;
+          
+          // Wrap the variable change on a $scope.$apply function to notify Angular because this event happens outside of the Angular framework (geolocation API)
+          $scope.$apply(function() {
+            $scope.watching = true;
+          });
 
-          $scope.trackUser = function() {
-            if (watchId) {
-              stopTracking();
-            } else {
-              watchId = navigator.geolocation.watchPosition(updatePosition, error, options);
-            }
-          };
+          lat = pos.coords.latitude;
+          lon = pos.coords.longitude;
 
+          modules.trackerGraphic.setGeometry(new modules.Point([lon, lat]));
+          modules.userMarker.hide();
+          // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
+          modules.map.centerAt([lon, lat]).then(function() {
+            mapEvent = modules.map.on('pan-start', stopTracking);
+          });
+        }
 
-          function updatePosition(pos) {
-            console.log('tracking...');
-            var lat, lon;
-            
-            $scope.tracking = 'active';
-            lat = pos.coords.latitude;
-            lon = pos.coords.longitude;
+        function stopTracking() {
+          
+          // Wrap the variable change on a $scope.$apply function to notify Angular because this event happens outside of the Angular framework (geolocation API)
+          $scope.$apply(function() {
+            $scope.watching = false;
+          });
+          
+          navigator.geolocation.clearWatch(watchId);
+          modules.userMarker.show();
+          watchId = null;
+          mapEvent.remove();
+        }
 
-            modules.trackerGraphic.setGeometry(new modules.Point([lon, lat]));
-            modules.userMarker.hide();
-            // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
-            modules.map.centerAt([lon, lat]).then(function() {
-              mapEvent = modules.map.on('pan-start', stopTracking);
-            });
+        function error(err) {
+          console.warn('ERROR(' + err.code + '): ' + err.message);
+        }
+
+        $scope.trackUser = function() {
+          if (watchId) {
+            stopTracking();
+          } else {
+            watchId = navigator.geolocation.watchPosition(updatePosition, error, options);
           }
+        };
 
-          function error(err) {
-            console.warn('ERROR(' + err.code + '): ' + err.message);
-          }
-
-          function stopTracking() {
-            console.log('stop track');
-            navigator.geolocation.clearWatch(watchId);
-            modules.userMarker.show();
-            $scope.tracking = 'inactive';
-            watchId = null;
-            mapEvent.remove();
-          }
-
-        });
-
-        
       }]
 
     };

@@ -9,7 +9,7 @@
     
     service.modulesReady = function() {
       return deferred.promise;
-    }
+    };
 
     angular.element(document).ready( function() {
       require([

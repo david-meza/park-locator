@@ -11,9 +11,6 @@
       templateUrl: 'views/directives/location-selection.html',
       controller: ['$scope', 'Esri', 'mapService', '$mdSidenav', function ($scope, Esri, mapService, $mdSidenav) {
 
-        Esri.modulesReady().then(function(modules) {
-        });
-
         $scope.geolocate = function() {
           $mdSidenav('left').close();
           mapService.geoLocate();

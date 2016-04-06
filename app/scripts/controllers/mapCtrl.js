@@ -22,7 +22,7 @@
               modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
               modules.aerialLayer.setVisibility(!isOutside2015Bounds);
             });
-            
+
           }
         });
 
@@ -60,16 +60,6 @@
         var tooltip = new modules.TooltipDialog({ id: "tooltip" });
         tooltip.startup();
 
-
-        modules.on(modules.parks, 'mouse-over', openParkTooltip);
-        modules.on(modules.parks, 'mouse-out', closeTooltip);
-        
-        modules.on(modules.amenities1, 'mouse-over', openAmenitiesTooltip);
-        modules.on(modules.amenities1, 'mouse-out', closeTooltip);
-        modules.on(modules.amenities2, 'mouse-over', openAmenitiesTooltip);
-        modules.on(modules.amenities2, 'mouse-out', closeTooltip);
-        
-        
         function openParkTooltip(evt) {
           var content = evt.graphic.attributes.NAME;
           tooltip.setContent(content);
@@ -92,10 +82,19 @@
           return false;
         }
 
-        function closeTooltip(evt) {
+        function closeTooltip() {
           modules.dijitPopup.close(tooltip);
         }
 
+        modules.on(modules.parks, 'mouse-over', openParkTooltip);
+        modules.on(modules.parks, 'mouse-out', closeTooltip);
+        
+        modules.on(modules.amenities1, 'mouse-over', openAmenitiesTooltip);
+        modules.on(modules.amenities1, 'mouse-out', closeTooltip);
+        modules.on(modules.amenities2, 'mouse-over', openAmenitiesTooltip);
+        modules.on(modules.amenities2, 'mouse-out', closeTooltip);
+        
+        
       });
 
     // Opens the dialog showing the map icons key

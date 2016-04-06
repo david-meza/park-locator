@@ -75,11 +75,11 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 #location-tracker {
   bottom: 80px;
 
-  .inactive {
+  md-icon {
     color: $gray;
   }
 
-  .active {
+  md-icon.active {
     color: $google-blu;
   }
 }

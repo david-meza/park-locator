@@ -48,7 +48,7 @@
         // Should trigger an update when the switch is turned on or off
         $scope.toggleSwitch = function() {
           $scope.updateParks( filterSelected($scope.activities.categoriesArr) );
-        }
+        };
 
         // md-autocomplete directive config
         $scope.search = {
