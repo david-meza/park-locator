@@ -8,11 +8,11 @@
       Esri.modulesReady().then(function(modules) {
 
 
-        // modules.on(modules.map, 'zoom-end', function(evt) {
+        // modules.map.on('zoom-end', function(evt) {
         //   modules.parks.setVisibility(evt.level <= 17);
         // });
 
-        modules.on(modules.map, 'extent-change', function(evt) {
+        modules.map.on('extent-change', function(evt) {
           if ( !modules.basemapLayer.visible ) {
             
             modules.queryInstance.geometry = evt.extent.getCenter();
@@ -51,7 +51,7 @@
         });
         
         // Park on click event
-        modules.on(modules.parks, 'click', function (evt) {
+        modules.parks.on('click', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
         });
@@ -86,13 +86,13 @@
           modules.dijitPopup.close(tooltip);
         }
 
-        modules.on(modules.parks, 'mouse-over', openParkTooltip);
-        modules.on(modules.parks, 'mouse-out', closeTooltip);
+        modules.parks.on('mouse-over', openParkTooltip);
+        modules.parks.on('mouse-out', closeTooltip);
         
-        modules.on(modules.amenities1, 'mouse-over', openAmenitiesTooltip);
-        modules.on(modules.amenities1, 'mouse-out', closeTooltip);
-        modules.on(modules.amenities2, 'mouse-over', openAmenitiesTooltip);
-        modules.on(modules.amenities2, 'mouse-out', closeTooltip);
+        modules.amenities1.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities1.on('mouse-out', closeTooltip);
+        modules.amenities2.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities2.on('mouse-out', closeTooltip);
         
         
       });

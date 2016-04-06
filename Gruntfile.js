@@ -24,6 +24,15 @@ module.exports = function (grunt) {
     // Project settings
     config: config,
 
+    surge: {
+      'park-locator': {
+        options: {
+          project: '<%= config.dist %>',
+          domain: 'park-locator-esri.surge.sh'
+        }
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -455,6 +464,8 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-surge');
+
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -500,7 +511,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'surge'
   ]);
 
   grunt.registerTask('default', [
