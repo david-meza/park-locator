@@ -52,7 +52,5 @@
   "dependencies": {
     "bower": "^1.7.1",
     "express": "^4.13.3",
-    "mapbox-gl": "^0.15.0",
-    "mapbox-gl-leaflet": "0.0.1"
   }
 }

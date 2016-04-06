@@ -36,9 +36,7 @@
             modules.userMarker.hide();
             // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
             modules.map.centerAt([lon, lat]).then(function() {
-              setTimeout( function() {
-                mapEvent = modules.map.on('pan-start', stopTracking);
-              }, 3000);
+              mapEvent = modules.map.on('mouse-drag-start', stopTracking);
             });
           }
 

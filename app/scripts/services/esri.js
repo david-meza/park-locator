@@ -12,6 +12,9 @@
     };
 
     angular.element(document).ready( function() {
+
+      esri.layers._GraphicsContainer.prototype._tolerance = 15;
+
       require([
         'esri/map', 
         'esri/graphic',
