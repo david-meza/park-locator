@@ -8,7 +8,7 @@
       controller: 'mapCtrl',
       restrict: 'E',
       templateUrl: 'views/directives/main-map.html',
-      replace: true,
+      replace: true
 
     };
   });

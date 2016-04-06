@@ -23,7 +23,7 @@
             modules.map.setExtent(modules.map.extent);
             modules.aerialLabels.setVisibility($scope.aerial);
             modules.basemapLayer.setVisibility(!$scope.aerial);
-          }
+          };
 
         });
 

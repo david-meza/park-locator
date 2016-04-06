@@ -1,19 +1,7 @@
 'use strict';
 
-angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', '$mdToast', 'deviceService', '$mdSidenav',
-	function ($scope, $rootScope, parkService, $mdToast, deviceService, $mdSidenav) {
-    
-    var markers = parkService.parks;
-
-    var informUser = function (message, hide) {
-      var toast = $mdToast.simple()
-        .textContent(message)
-        .action('ok')
-        .highlightAction(false)
-        .hideDelay(hide || 3000)
-        .position('bottom right');
-      $mdToast.show(toast);
-    };
+angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav',
+	function ($scope, $rootScope, deviceService, $mdSidenav) {
     
     $scope.title = "Park Locator";
     // Start the circular progress icon

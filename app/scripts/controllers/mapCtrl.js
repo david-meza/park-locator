@@ -8,34 +8,23 @@
       Esri.modulesReady().then(function(modules) {
 
 
-        modules.on(modules.map, 'zoom-end', function(evt) {
-          modules.parks.setVisibility(evt.level <= 17);
-        });
+        // modules.map.on('zoom-end', function(evt) {
+        //   modules.parks.setVisibility(evt.level <= 17);
+        // });
 
-        modules.on(modules.map, 'extent-change', function(evt) {
+        modules.map.on('extent-change', function(evt) {
           if ( !modules.basemapLayer.visible ) {
+            
             modules.queryInstance.geometry = evt.extent.getCenter();
+            
             modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
               var isOutside2015Bounds = count === 0;
               modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
               modules.aerialLayer.setVisibility(!isOutside2015Bounds);
             });
-            
+
           }
         });
-
-        // Amenity Markers (outdoors)
-        var amenities1 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
-          mode: modules.FeatureLayer.MODE_SNAPSHOT,
-          outFields: ['*']
-        });
-
-        // Amenity Markers (indoors)
-        var amenities2 = new modules.FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3', {
-          mode: modules.FeatureLayer.MODE_SNAPSHOT,
-          outFields: ['*']
-        });
-
 
         // Change all the icons for the amenities
         amenitiesService.getAmenitiesIcons().then(function(response) {
@@ -52,28 +41,17 @@
             uniqueValueInfos: uniqueValueInfos
           });
 
-          amenities1.setRenderer(amenities1Symbols);
-          amenities2.setRenderer(amenities2Symbols);
+          modules.amenities1.setRenderer(amenities1Symbols);
+          modules.amenities2.setRenderer(amenities2Symbols);
 
-          modules.map.addLayer(amenities1);
-          modules.map.addLayer(amenities2);
+          modules.amenities1.setMinScale(5000);
+          modules.amenities2.setMinScale(5000);
+
+          modules.map.addLayers([modules.amenities1, modules.amenities2]);
         });
-        
-        // Change the icon for the park marker
-        var parkSymbol = new modules.SimpleRenderer({
-          type: 'simple',
-          symbol: {
-            type: 'esriPMS',
-            url: '/img/icons/park-marker.svg',
-            height: 28,
-            width: 28
-          }
-        });
-        modules.parks.setRenderer(parkSymbol);
-        modules.map.addLayer(modules.parks);
         
         // Park on click event
-        modules.on(modules.parks, 'click', function (evt) {
+        modules.parks.on('click', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
         });
@@ -82,16 +60,6 @@
         var tooltip = new modules.TooltipDialog({ id: "tooltip" });
         tooltip.startup();
 
-
-        modules.on(modules.parks, 'mouse-over', openParkTooltip);
-        modules.on(modules.parks, 'mouse-out', closeTooltip);
-        
-        modules.on(amenities1, 'mouse-over', openAmenitiesTooltip);
-        modules.on(amenities1, 'mouse-out', closeTooltip);
-        modules.on(amenities2, 'mouse-over', openAmenitiesTooltip);
-        modules.on(amenities2, 'mouse-out', closeTooltip);
-        
-        
         function openParkTooltip(evt) {
           var content = evt.graphic.attributes.NAME;
           tooltip.setContent(content);
@@ -114,10 +82,19 @@
           return false;
         }
 
-        function closeTooltip(evt) {
+        function closeTooltip() {
           modules.dijitPopup.close(tooltip);
         }
 
+        modules.parks.on('mouse-over', openParkTooltip);
+        modules.parks.on('mouse-out', closeTooltip);
+        
+        modules.amenities1.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities1.on('mouse-out', closeTooltip);
+        modules.amenities2.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities2.on('mouse-out', closeTooltip);
+        
+        
       });
 
     // Opens the dialog showing the map icons key
