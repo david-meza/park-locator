@@ -7,7 +7,11 @@ var port = process.env.PORT || 8080;
 
 // set the home page route
 app.get('/', function(req, res) {
-  res.send('dist/index');
+  res.sendFile(__dirname + 'dist/index.html');
+});
+
+app.use(function(req, res, next) {
+  res.status(404).sendFile(__dirname + 'dist/404.html');
 });
 
 app.listen(port, function() {
