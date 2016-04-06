@@ -6,7 +6,8 @@ Park Locator is a mapping tool for Raleigh parks that allows you to find the clo
 ## Demo
 
 * V2 - Esri: [Open](https://park-locator-esri.surge.sh)
-* Backup Host: Heroku: [Open](https://park-locator.herokuapp.com)
+* Backup Host - Heroku: [Open](https://park-locator.herokuapp.com)
+* Backup Host 2 - AWS: [Open](http://goo.gl/qGCG4B)
 
 ## Other Versions / Branches
 

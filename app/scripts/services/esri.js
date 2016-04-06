@@ -31,6 +31,7 @@
         'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
+        'dojox/mobile/View',
         'dojo/domReady!'],
         
         function( Map,
