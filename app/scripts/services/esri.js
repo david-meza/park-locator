@@ -116,25 +116,25 @@
 
           // Location Tracking Layer
           service.tracker = new GraphicsLayer({
-            id: 'location-tracking'
+            id: 'location-tracking',
+            visible: true
           });
-
 
           // Add all layers to the map. Basemap must go first so map gets the right extent and coordinate system from it
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
           service.map.addLayer(service.basemapLayer);
           service.map.addLayers([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
-          service.map.addLayers([greenways, greenways2, service.parks]);
+          service.map.addLayers([greenways, greenways2, service.parks, service.tracker]);
 
           // My Location graphic
-          service.myLocation = new Graphic({
+          service.userMarker = new Graphic({
             geometry: {
               x: -78.646,
               y: 35.785,
               spatialReference: { wkid: 4326 }
             },
             attributes: {
-              title: 'My Location'
+              title: 'User Marker'
             },
             symbol: {
               type: 'esriPMS',
@@ -146,27 +146,34 @@
 
           // Add my location graphic to map after it has loaded
           service.map.on('load', function() {
-            service.map.graphics.add(service.myLocation);
+            service.map.graphics.add(service.userMarker);
           });
 
-          // Geolocate button
-          var geoLocate = new LocateButton({
-            map: service.map,
-            useTracking: true,
-            symbol: new PictureMarkerSymbol('/img/icons/my-location.svg', 56, 56)
-          }, 'geolocate-button');
+          // Tracker graphic
+          service.trackerGraphic = new Graphic({
+            attributes: {
+              title: 'My Location'
+            },
+            symbol: {
+              type: 'esriPMS',
+              url: '/img/icons/my-location.svg',
+              height: 28,
+              width: 28
+            },
+          });
+          // Add graphic to graphic layer
+          service.tracker.add(service.trackerGraphic);
 
           // Geolocation search field
-          var search = new Search({
-            map: service.map,
-            allPlaceholder: 'Manually find your address',
-            // enableButtonMode: true,
-            enableHighlight: true,
-            enableInfoWindow: false
-          }, "search-field");
+          // var addressSearch = new Search({
+          //   map: service.map,
+          //   allPlaceholder: 'Manually find your address',
+          //   // enableButtonMode: true,
+          //   enableHighlight: true,
+          //   enableInfoWindow: false
+          // }, "search-field");
           
-          geoLocate.startup();
-          search.startup();
+          // addressSearch.startup();
 
 
           // Attach all Esri modules to the service so they can be used from outside

@@ -2,7 +2,8 @@
 
 $primary: #1565C0;
 $indigo: #3F51B5;
-$light-blue: #ABC5E9;
+$light-blu: #ABC5E9;
+$google-blu: #286DEA;
 $light-white: rgba(255,255,255,0.87);
 $warn: #EF6C00;
 $alert: #E65100;
@@ -11,6 +12,7 @@ $success-light: #669834;
 $danger: #E63125;
 $heart: #B71C1C;
 $black: #000;
+$gray: rgba(0,0,0, 0.68);
 $accent: #FF4081;
 
 html {
@@ -61,10 +63,25 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   margin: 6px 3px 6px 7px;
 }
 
-#map-key {
+#map-key, #location-tracker {
   position: absolute;
-  bottom: 10px;
   right: 10px;
+}
+
+#map-key {
+  bottom: 10px;
+}
+
+#location-tracker {
+  bottom: 80px;
+
+  .inactive {
+    color: $gray;
+  }
+
+  .active {
+    color: $google-blu;
+  }
 }
 
 .dijitPopup {
@@ -883,10 +900,10 @@ html, body {
     .menu-item {
       color: $light-white;
       font-size: 16px;
-      border-bottom: 1px solid $light-blue;
+      border-bottom: 1px solid $light-blu;
 
       &:first-child {
-        border-top: 1px solid $light-blue;
+        border-top: 1px solid $light-blu;
       }
 
       &:hover, &:focus {

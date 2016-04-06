@@ -102,7 +102,7 @@
 
     var updateUserCoords = function (lat, lon) {
       // Update the location obj with the accurate user coords
-      esriModules.myLocation.setGeometry(new esriModules.Point([lon, lat]));
+      esriModules.userMarker.setGeometry(new esriModules.Point([lon, lat]));
       centerAndZoom(lat, lon);
       
       map.location.coords.latitude = lat;
