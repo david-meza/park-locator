@@ -1,0 +1,329 @@
+[{
+  "value": "3002", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/train.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1301", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/swimming.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1302", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/swimming.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1303", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/arts-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1304", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/arts-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "3003", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/carousel.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1305", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/community-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1306", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/community-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1310", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/neighborhood-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1311", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/neighborhood-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1110", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/picnic-basket.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1113", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/restroom.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1312", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/tennis-center.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1115", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/theater.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2101", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/ball-fields.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2113", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/ball-fields.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2114", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/ball-fields.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2301", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/basketball.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2302", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/basketball.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2202", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/boat-ramp.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2303", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/bocce.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2203", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/canoe.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2604", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/disc-golf.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "1307", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/environmental-education.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2204", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/fishing.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2304", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/handball.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2305", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/horseshoe.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2606", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/hockey.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2106", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/multipurpose-field.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2107", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/multipurpose-field.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2108", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/multipurpose-field.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2607", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/dog-park.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2501", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/playground.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2306", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/volleyball.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2307", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/volleyball.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2609", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/skate-park.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2111", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/ball-fields.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2112", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/ball-fields.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2308", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/tennis.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2309", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/tennis.svg",
+    "height": 28,
+    "width": 28
+  }
+}, {
+  "value": "2610", 
+  "symbol": {
+    "type": "esriPMS",
+    "url": "/img/icons/running.svg",
+    "height": 28,
+    "width": 28
+  }
+}]

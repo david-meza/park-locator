@@ -1,0 +1,339 @@
+{
+  "idReferences": {
+    "Amusement Train": [
+        3002
+    ],
+    "Swimming": [
+        1301,
+        1302
+    ],
+    "Art Center": [
+        1303,
+        1304
+    ],
+    "Carousel": [
+        3003
+    ],
+    "Community Center": [
+        1305,
+        1306
+    ],
+    "Neighborhood Center": [
+        1310,
+        1311
+    ],
+    "Picnic Shelter": [
+        1110
+    ],
+    "Restroom": [
+        1113
+    ],
+    "Tennis Center": [
+        1312
+    ],
+    "Theatre": [
+        1115
+    ],
+    "Baseball": [
+        2101,
+        2113,
+        2114
+    ],
+    "Outdoor Basketball": [
+        2301,
+        2302
+    ],
+    "Boat Ramp": [
+        2202
+    ],
+    "Bocce": [
+        2303
+    ],
+    "Canoe Launch": [
+        2203
+    ],
+    "Disc Golf": [
+        2604
+    ],
+    "Environmental Education": [
+        1307
+    ],
+    "Fishing Area": [
+        2204
+    ],
+    "Handball": [
+        2304
+    ],
+    "Horseshoe Pit": [
+        2305
+    ],
+    "In Line Hockey": [
+        2606
+    ],
+    "Multipurpose Field": [
+        2106,
+        2107,
+        2108
+    ],
+    "Dog Park": [
+        2607
+    ],
+    "Playground": [
+        2501
+    ],
+    "Sand Volleyball": [
+        2306,
+        2307
+    ],
+    "Skate Park": [
+        2609
+    ],
+    "Softball": [
+        2111,
+        2112
+    ],
+    "Tennis": [
+        2308,
+        2309
+    ],
+    "Running": [
+        2610
+    ]
+  },
+  "categories": {
+    "Amusement Train": {
+      "id": 3002,
+      "name": "Amusement Train",
+      "icon": "/img/icons/train.svg",
+      "parkAttr": "AMUSEMENTTRAIN"
+    },
+    "Swimming": {
+      "id": 1302,
+      "name": "Swimming",
+      "parkAttr": "POOL",
+      "icon": "/img/icons/swimming.svg",
+      "searchable": "swimming pool aquatic"
+    },
+    "Art Center": {
+      "id": 1304,
+      "name": "Art Center",
+      "parkAttr": "ARTSCENTER",
+      "icon": "/img/icons/arts-center.svg"
+    },
+    "Carousel": {
+      "id": 3003,
+      "name": "Carousel",
+      "icon": "/img/icons/carousel.svg",
+      "parkAttr": "CAROUSEL"
+    },
+    "Community Center": {
+      "id": 1306,
+      "name": "Community Center",
+      "icon": "/img/icons/community-center.svg",
+      "parkAttr": "COMMUNITYCENTER"
+    },
+    "Neighborhood Center": {
+      "id": 1311,
+      "name": "Neighborhood Center",
+      "icon": "/img/icons/neighborhood-center.svg",
+      "parkAttr": "NEIGHBORHOODCENTER"
+    },
+    "Picnic Shelter": {
+      "id": 1110,
+      "name": "Picnic Shelter",
+      "icon": "/img/icons/picnic-basket.svg",
+      "parkAttr": "PICNICSHELTER"
+    },
+    "Restroom": {
+      "id": 1113,
+      "name": "Restroom",
+      "icon": "/img/icons/restroom.svg",
+      "parkAttr": "RESTROOM"
+    },
+    "Tennis Center": {
+      "id": 1312,
+      "name": "Tennis Center",
+      "icon": "/img/icons/tennis-center.svg",
+      "parkAttr": "TENNISCENTER"
+    },
+    "Theatre": {
+      "id": 1115,
+      "name": "Theater",
+      "icon": "/img/icons/theater.svg",
+      "parkAttr": "THEATER"
+    },
+    "Baseball": {
+      "id": 2114,
+      "name": "Ball Fields",
+      "parkAttr": "BALLFIELDS",
+      "icon": "/img/icons/ball-fields.svg",
+      "searchable": "baseball softball kickball ball fields"
+    },
+    "Youth Baseball": {
+      "id": 2113,
+      "name": "Ball Fields",
+      "parkAttr": "BALLFIELDS",
+      "icon": "/img/icons/ball-fields.svg"
+    },
+    "Outdoor Basketball": {
+      "id": 2302,
+      "name": "Outdoor Basketball",
+      "icon": "/img/icons/basketball.svg",
+      "parkAttr": "OUTDOORBASKETBALL"
+    },
+    "Boat Ramp": {
+      "id": 2202,
+      "name": "Boat Ramp",
+      "parkAttr": "BOATRENTALS",
+      "icon": "/img/icons/boat-ramp.svg"
+    },
+    "Bocce": {
+      "id": 2303,
+      "name": "Bocce",
+      "icon": "/img/icons/bocce.svg",
+      "parkAttr": "BOCCE"
+    },
+    "Canoe Launch": {
+      "id": 2203,
+      "name": "Canoe Launch",
+      "parkAttr": "CANOE",
+      "icon": "/img/icons/canoe.svg"
+    },
+    "Disc Golf": {
+      "id": 2604,
+      "name": "Disc Golf",
+      "icon": "/img/icons/disc-golf.svg",
+      "parkAttr": "DISCGOLF"
+    },
+    "Fishing Area": {
+      "id": 2204,
+      "name": "Fishing",
+      "parkAttr": "FISHING",
+      "icon": "/img/icons/fishing.svg"
+    },
+    "Handball": {
+      "id": 2304,
+      "name": "Handball",
+      "icon": "/img/icons/handball.svg",
+      "parkAttr": "HANDBALL"
+    },
+    "Horseshoe Pit": {
+      "id": 2305,
+      "name": "Horseshoe Pit",
+      "parkAttr": "HORSESHOE",
+      "icon": "/img/icons/horseshoe.svg"
+    },
+    "In Line Hockey": {
+      "id": 2606,
+      "name": "In Line Hockey",
+      "parkAttr": "INLINESKATING",
+      "icon": "/img/icons/hockey.svg"
+    },
+    "Multipurpose Field": {
+      "id": 2108,
+      "name": "Multipurpose Field",
+      "icon": "/img/icons/multipurpose-field.svg",
+      "parkAttr": "MULTIPURPOSEFIELD",
+      "searchable": "multipurpose field soccer lacrosse kickball"
+    },
+    "Dog Park": {
+      "id": 2607,
+      "name": "Dog Park",
+      "icon": "/img/icons/dog-park.svg",
+      "parkAttr": "DOGPARK"
+    },
+    "Playground": {
+      "id": 2501,
+      "name": "Playground",
+      "icon": "/img/icons/playground.svg",
+      "parkAttr": "PLAYGROUND"
+    },
+    "Sand Volleyball": {
+      "id": 2307,
+      "name": "Sand Volleyball",
+      "icon": "/img/icons/volleyball.svg",
+      "parkAttr": "SANDVOLLEYBALL"
+    },
+    "Skate Park": {
+      "id": 2609,
+      "name": "Skate Park",
+      "icon": "/img/icons/skate-park.svg",
+      "parkAttr": "SKATEPARK"
+    },
+    "Softball": {
+      "id": 2112,
+      "name": "Ball Fields",
+      "parkAttr": "BALLFIELDS",
+      "icon": "/img/icons/ball-fields.svg"
+    },
+    "Tennis": {
+      "id": 2309,
+      "name": "Tennis",
+      "parkAttr": "TENNISCOURTS",
+      "icon": "/img/icons/tennis.svg",
+      "searchable": "tennis courts"
+    },
+    "Running": {
+      "id": 2610,
+      "name": "Running",
+      "parkAttr": "TRACK",
+      "icon": "/img/icons/running.svg"
+    },
+    "Active Adult Center": {
+      "name": "Active Adult Center",
+      "parkAttr": "ACTIVE_ADULT",
+      "icon": "/img/icons/active-adult-center.svg"
+    },
+    "BMX Track": {
+      "name": "BMX Track",
+      "icon": "/img/icons/bmx-track.svg",
+      "parkAttr": "BMXTRACK"
+    },
+    "Boat Rentals": {
+      "name": "Boat Rentals",
+      "icon": "/img/icons/boat-rental.svg",
+      "parkAttr": "BOATRENTALS"
+    },
+    "Environmental Education": {
+      "name": "Environmental Education",
+      "id": 1307,
+      "parkAttr": "ENVCTR",
+      "icon": "/img/icons/environmental-education.svg"
+    },
+    "Greenway Trail": {
+      "name": "Greenway Trail",
+      "parkAttr": "GREENWAYACCESS",
+      "icon": "/img/icons/greenway.svg"
+    },
+    "Gym": {
+      "name": "Gym",
+      "icon": "/img/icons/gym.svg",
+      "parkAttr": "GYM"
+    },
+    "Kiddie Boats": {
+      "name": "Kiddie Boats",
+      "parkAttr": "BOATRIDE",
+      "icon": "/img/icons/kiddie-boats.svg"
+    },
+    "Library": {
+      "name": "Library",
+      "icon": "/img/icons/library.svg",
+      "parkAttr": "LIBRARY"
+    },
+    "Museum": {
+      "name": "Museum",
+      "icon": "/img/icons/museum.svg",
+      "parkAttr": "MUSEUM"
+    },
+    "Teen Center": {
+      "name": "Teen Center",
+      "parkAttr": "TEEN",
+      "icon": "/img/icons/teen-center.svg"
+    },
+    "Walking": {
+      "name": "Walking",
+      "parkAttr": "WALKINGTRAILS",
+      "icon": "/img/icons/walking.svg"
+    }
+  }
+}
