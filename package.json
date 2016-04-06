@@ -42,13 +42,13 @@
     "time-grunt": "^1.0.0"
   },
   "engines": {
-    "node": "5.7.1",
-    "npm": "3.8.5"
+    "node": "^5.7.1",
+    "npm": "^3.8.5"
   },
   "scripts": {
     "test": "grunt test"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.4"
   }
 }
