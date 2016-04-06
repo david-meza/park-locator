@@ -9,10 +9,10 @@ var port = process.env.PORT || 8080;
 app.use(express.static(__dirname + '/dist'));
 
 // set the home page route
-app.get('/dist', function(req, res) {
+app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
-    res.render('index');
+    res.render('dist/index');
 });
 
 app.listen(port, function() {
