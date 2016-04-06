@@ -46,11 +46,9 @@
     "npm": "3.8.5"
   },
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "bower install"
+    "test": "grunt test"
   },
   "dependencies": {
-    "bower": "^1.7.1",
     "express": "^4.13.3"
   }
 }
