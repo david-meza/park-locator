@@ -1,6 +1,10 @@
 @import 'mixins';
 
-$primary: #1565C0;
+// PRCR Blue: rgb(4, 113, 206)
+// Old Primary: #1565C0
+// $primary: #0D44A7;
+
+$primary: #0471CE;
 $indigo: #3F51B5;
 $light-blu: #ABC5E9;
 $google-blu: #286DEA;
@@ -908,83 +912,26 @@ html, body {
   color: #2c3e50;
 }
 
-// Bootstrap Overrides
-
-.form-control:focus {
-  border-color: darken($primary, 5%);
-}
-
-.panel-primary {
-  border-color: $primary;
-  .panel-heading {
-    background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
-    background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
-    background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
-    background-color: $primary;
-    border-color: darken($primary, 5%);
-
-    &+.panel-collapse>.panel-body {
-      border-top-color: $primary;
-    }
-  }
-}
-
-.dropdown-menu>.active>a,
-.dropdown-menu>.active>a:hover, 
-.dropdown-menu>li>a:hover {
-  background-color: darken($primary, 20%);
-}
-
- 
-.dropdown-menu>.active>a:focus,
-.dropdown-menu>li>a:focus {
-  background-color: darken($primary, 25%);
-}
-
-
-.nav-pills>li.active>a, 
-.nav-pills>li.active>a:hover, 
-.nav-pills>li.active>a:focus {
-  background-color: $primary;
-}
-
-.panel-group .panel+.panel {
-  margin-top: 10px;
-}
-
-.panel-group {
-  // margin-bottom: 20px;
-  box-sizing: border-box;
-  display: -webkit-flex;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-.panel {
-  margin-bottom: 0;
-}
-
-.panel {
-  -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow:    0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  box-shadow:         0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-}
-
-// Overrides end
-
 .gradient-primary {
-  background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%);
-  background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 10%) 100%); 
-  background:          linear-gradient(to bottom, $primary 0%, darken($primary, 10%) 100%);
-  background-color: $primary;
-}
-
-.gradient-primary-light {
   background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
   background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
   background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
   background-color: $primary;
+}
+
+.custom-ink-ripple {
+
+  button.md-ink-ripple {
+    color: $google-blu;
+
+    &:hover {
+      background-color: rgba($google-blu, 0.1);
+    }
+
+    &.md-focused {
+      background-color: rgba($google-blu, 0.2);
+    }
+  }
 }
 
 #menu-sidenav {
@@ -995,58 +942,57 @@ html, body {
 
     img {
       height: auto;
-      width: 100%;
+      max-width: 100%;
     }
   }
 
-  md-content {
-    background: transparent;
-    background-color: transparent;
+  .menu-item {
+    color: $light-white;
+    font-size: 16px;
+    border-bottom: 1px solid $light-blu;
 
-    .menu-item {
-      color: $light-white;
-      font-size: 16px;
-      border-bottom: 1px solid $light-blu;
+    &:first-child {
+      border-top: 1px solid $light-blu;
+    }
 
-      &:first-child {
-        border-top: 1px solid $light-blu;
-      }
+    &:hover, &:focus {
+      background-color: lighten($primary, 3%);
+    }
 
-      &:hover, &:focus {
-        background-color: lighten($primary, 3%);
-      }
+    .md-button:hover, .md-button:focus {
+      background-color: transparent;
 
-      .md-button:hover, .md-button:focus {
-        background-color: transparent;
-      }
-
-      .list-icon {
-        @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
-
-        &.rotate {
-          @include transform( rotate(180deg) );
-        }
+      &.md-ripple-container {
+        display: none;
       }
     }
 
-    .selection-menu {
-      @include transition( all 600ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
-      background-color: #fff;
-      max-height: 500px;
-      overflow: visible;
-      padding: 12px;
+    .list-icon {
+      @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
 
-      &.ng-hide {
-        max-height: 0;
+      &.rotate {
+        @include transform( rotate(180deg) );
       }
-      
-      &.ng-hide, &.ng-hide-animate {
-        overflow: auto;
-      }
+    }
+  }
 
+  .selection-menu {
+    @include transition( all 600ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
+    background-color: #fff;
+    max-height: 500px;
+    overflow: visible;
+    padding: 12px;
+
+    &.ng-hide {
+      max-height: 0;
+    }
+    
+    &.ng-hide, &.ng-hide-animate {
+      overflow: auto;
     }
 
   }
+
 }
 
 #navbar {

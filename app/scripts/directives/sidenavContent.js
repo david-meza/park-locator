@@ -6,7 +6,6 @@
     
     return { 
       restrict: 'E',
-      replace: true,
       templateUrl: 'views/directives/sidenav-content.html',
       controller: ['$scope', function ($scope) {
 

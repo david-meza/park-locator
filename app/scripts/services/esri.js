@@ -20,7 +20,7 @@
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/GraphicsLayer',
         'esri/layers/FeatureLayer',
-        'esri/dijit/LocateButton', 
+        'esri/tasks/IdentifyParameters', 
         'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
@@ -39,7 +39,7 @@
                   ArcGISImageServiceLayer,
                   GraphicsLayer,
                   FeatureLayer,
-                  LocateButton,
+                  IdentifyParams,
                   Search,
                   SimpleRenderer,
                   UniqueValueRenderer,
@@ -60,6 +60,9 @@
             // basemap: 'streets-vector',
             logo: false
           });
+
+          var identifyParams = new IdentifyParams();
+          identifyParams.tolerance = 150;
 
           // Park Markers layer
           service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
@@ -180,7 +183,6 @@
           service.VectorTileLayer = VectorTileLayer;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.FeatureLayer = FeatureLayer;
-          service.LocateButton = LocateButton;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
