@@ -24,7 +24,7 @@
 
 <div scrolling-buttons>
   <md-list id="activities-list">
-    <md-list-item ng-click="toggleSelected(activity)" ng-repeat="activity in activities.categoriesArr">
+    <md-list-item class="custom-ripple-item" ng-click="toggleSelected(activity)" ng-repeat="activity in activities.categoriesArr">
       <md-icon md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}" class="activity-icon"></md-icon>
       <p class="limit-text capitalize limit-activity-name"> {{ ::activity.name }} </p>
       <md-switch class="md-secondary" ng-model="activity.selected" ng-change="toggleSwitch()" aria-label="Toggle activity filter"></md-switch>

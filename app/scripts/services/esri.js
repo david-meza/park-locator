@@ -51,7 +51,6 @@
                   TooltipDialog,
                   dijitPopup) {
           
-
           // initialize the ESRI map
           service.map = new Map('map-canvas', {
             center: [-78.646, 35.785],

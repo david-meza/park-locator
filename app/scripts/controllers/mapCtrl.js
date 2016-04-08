@@ -51,9 +51,12 @@
         });
         
         // Park on click event
-        modules.parks.on('click', function (evt) {
-          var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
-          $state.go('home.park', {name: parkName});
+        modules.parks.on('touchend, click', function (evt) {
+          // Add a delay to compensate for Dojo's touch event handling   
+          setTimeout(function() {  
+            var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
+            $state.go('home.park', {name: parkName});
+          }, 250); 
         });
 
         // Show park name on hover
