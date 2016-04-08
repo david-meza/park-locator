@@ -445,8 +445,12 @@ th {
     button.md-ink-ripple {
       color: $google-blu;
 
-      &:hover, &.md-focused {
+      &:hover {
         background-color: rgba($google-blu, 0.1);
+      }
+
+      &.md-focused {
+        background-color: rgba($google-blu, 0.2);
       }
 
       .md-ripple-container {
@@ -481,149 +485,228 @@ th {
 }
 
 
-ul#park-list, ul#amenities-list, ul#selected-amenities-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+// ul#park-list, ul#amenities-list, ul#selected-amenities-list {
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 0;
 
-  li {
-    position: relative;
-    min-height: 3.45em;
-    border-bottom: 1px solid #ccc;
+//   li {
+//     position: relative;
+//     min-height: 3.45em;
+//     border-bottom: 1px solid #ccc;
 
-    .activity-img {
-      height: 24px;
-      width: 24px;
-    }
+//     .activity-img {
+//       height: 24px;
+//       width: 24px;
+//     }
 
-    &:last-child {
-      border: none;
-    }
+//     &:last-child {
+//       border: none;
+//     }
 
-    & > p {
-      margin: 0;
-    }
+//     & > p {
+//       margin: 0;
+//     }
 
-    & > a, & > p {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      font-size: 16px;
-      line-height: 3em;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      color: darken($primary, 30%);
-      display: block;
-      width: 100%;
+//     & > a, & > p {
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       font-size: 16px;
+//       line-height: 3em;
+//       overflow: hidden;
+//       white-space: nowrap;
+//       text-overflow: ellipsis;
+//       color: darken($primary, 30%);
+//       display: block;
+//       width: 100%;
 
-      -webkit-transition: all 0.3s ease;
-      -moz-transition:    all 0.3s ease;
-      -o-transition:      all 0.3s ease;
-      -ms-transition:     all 0.3s ease;
-      transition:         all 0.3s ease;
+//       -webkit-transition: all 0.3s ease;
+//       -moz-transition:    all 0.3s ease;
+//       -o-transition:      all 0.3s ease;
+//       -ms-transition:     all 0.3s ease;
+//       transition:         all 0.3s ease;
 
-      &:hover {
-        color: darken($primary, 20%);
-        text-decoration: none;
-        font-size: 1.2em;
-        background-color: rgba(0,0,0,0.01);
+//       &:hover {
+//         color: darken($primary, 20%);
+//         text-decoration: none;
+//         font-size: 1.2em;
+//         background-color: rgba(0,0,0,0.01);
 
+//       }
+//     }
+//   }
+// }
+
+#class-sections, #park-amenities {
+
+  .icon-card {
+    height: auto;
+    max-width: 150px;
+    @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+    
+    md-card-content {
+      md-icon {
+        @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+
+        &.icon-contain {
+          width: auto;
+          height: auto;
+        }
       }
     }
+
+    md-card-footer {
+      background-color: $indigo;
+      @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+
+      .icon-name {
+        @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+        color: $light-white;
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+      }    
+    }
+    
+    // Hover for all cards (clickable and non-clickable)
+    &:hover {
+      md-card-footer {
+        background-color: $light-white;
+
+        .icon-name {
+          color: $indigo;
+          white-space: normal;
+          // font-size: 20px;
+        }    
+      }
+    }
+    
+    // Clickable cards
+    &[ng-click] {
+      cursor: pointer;
+      @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12) );
+
+      &:focus, &:visited, &:active {
+        outline: none;
+        border: 5px solid rgba($indigo, 0.82);
+        @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
+      }
+
+      &:hover {
+        @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
+        md-icon {
+          @include transform( scale(1.15, 1.15) );
+        }
+
+        
+      }
+    }
+
+    &:not([ng-click]) {
+      md-card-content {
+        padding: 8px;
+      }
+
+      // .icon-name {
+      //   font-size: 14px;
+      //   white-space: normal;
+      // }
+    }
+
   }
 }
 
 // List thumbnail grid style
-#park-amenities, #class-sections {
-  list-style-type: none;
-  padding-left: 0;
+// #park-amenities, #class-sections {
+//   list-style-type: none;
+//   padding-left: 0;
 
-  .view[ng-click] {
-    cursor: pointer;
-    @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12) );
+//   .view[ng-click] {
+//     cursor: pointer;
+//     @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12) );
 
-    &:focus {
-      outline: none;
-      border: 5px solid rgba($indigo, 0.82);
-      @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
-    }
-  }
+//     &:focus {
+//       outline: none;
+//       border: 5px solid rgba($indigo, 0.82);
+//       @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
+//     }
+//   }
 
-  .view {
+//   .view {
 
-    width: 110px;
-    height: 110px;
-    margin: 12px;
-    border: 5px solid #fff;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-    cursor: default;
+//     width: 110px;
+//     height: 110px;
+//     margin: 12px;
+//     border: 5px solid #fff;
+//     overflow: hidden;
+//     position: relative;
+//     text-align: center;
+//     -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
+//     -moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
+//     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
+//     cursor: default;
 
-    .mask {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      background-color: rgba($warn, 0.7);
-      -webkit-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-      -moz-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-      -o-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-      -ms-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-      transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-    }
+//     .mask {
+//       width: 100%;
+//       height: 100%;
+//       position: absolute;
+//       overflow: hidden;
+//       top: 0;
+//       left: 0;
+//       opacity: 0;
+//       background-color: rgba($warn, 0.7);
+//       -webkit-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
+//       -moz-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
+//       -o-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
+//       -ms-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
+//       transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
+//     }
 
-    md-icon {
-      position: relative;
-      @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+//     md-icon {
+//       position: relative;
+//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
 
-      &.icon-contain {
-        width: 100%;
-        height: 100%;
-      }
-    }
+//       &.icon-contain {
+//         width: 100%;
+//         height: 100%;
+//       }
+//     }
 
-    h6 {
-      color: #fff;
-      position: relative;
-      margin: 0;
-      padding: 10px 3px 10px 3px;
-      background: rgba($indigo, 0.82);
-      opacity: 0;
-      font-size: 15px;
-      // font-size: 1em;
-      // max-height: 50px;
-      // overflow: auto;
+//     h6 {
+//       color: #fff;
+//       position: relative;
+//       margin: 0;
+//       padding: 10px 3px 10px 3px;
+//       background: rgba($indigo, 0.82);
+//       opacity: 0;
+//       font-size: 15px;
+//       // font-size: 1em;
+//       // max-height: 50px;
+//       // overflow: auto;
 
-      @include transform( translateY(-70px) );
-      @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
-    }
+//       @include transform( translateY(-70px) );
+//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
+//     }
 
-    &:hover {
+//     &:hover {
 
-      md-icon {
-        @include transform( scale(1.1,1.1) );
-      }
+//       md-icon {
+//         @include transform( scale(1.1,1.1) );
+//       }
 
-      .mask {
-        opacity: 1;
-      }
+//       .mask {
+//         opacity: 1;
+//       }
 
-      h6 {
-        opacity: 1;
-        @include transform( translateY(25px) );
-      }
-    }
-  }
+//       h6 {
+//         opacity: 1;
+//         @include transform( translateY(25px) );
+//       }
+//     }
+//   }
 
-}
+// }
 
 md-input-container {
   &.classes-search-container {
