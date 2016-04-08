@@ -31,7 +31,6 @@
         'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
-        'dojox/mobile/View',
         'dojo/domReady!'],
         
         function( Map,
@@ -52,7 +51,6 @@
                   TooltipDialog,
                   dijitPopup) {
           
-
           // initialize the ESRI map
           service.map = new Map('map-canvas', {
             center: [-78.646, 35.785],

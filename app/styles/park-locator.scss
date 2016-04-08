@@ -14,6 +14,7 @@ $heart: #B71C1C;
 $black: #000;
 $gray: rgba(0,0,0, 0.68);
 $accent: #FF4081;
+$dark-text: rgba(38, 47, 98, 0.78);
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -123,6 +124,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 .text-center {
   text-align: center;
 }
+
 
 .activity-label, .park-label, .dijitPopup {
   background-color: #fff;
@@ -433,6 +435,27 @@ th {
     p {
       font-size: 13px;
       font-weight: 400;
+    }
+  }
+}
+
+#parks-list, #activities-list {
+  .custom-ripple-item {
+    
+    button.md-ink-ripple {
+      color: $google-blu;
+
+      &:hover, &.md-focused {
+        background-color: rgba($google-blu, 0.1);
+      }
+
+      .md-ripple-container {
+        // display: none;
+      }
+
+      p, h3 {
+        color: $dark-text;
+      }
     }
   }
 }
