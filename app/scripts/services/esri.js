@@ -20,7 +20,6 @@
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/GraphicsLayer',
         'esri/layers/FeatureLayer',
-        'esri/tasks/IdentifyParameters', 
         'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
@@ -28,7 +27,6 @@
         'esri/geometry/Point',
         'esri/tasks/query',
         'esri/tasks/QueryTask',
-        'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
         'dojo/domReady!'],
@@ -39,7 +37,6 @@
                   ArcGISImageServiceLayer,
                   GraphicsLayer,
                   FeatureLayer,
-                  IdentifyParams,
                   Search,
                   SimpleRenderer,
                   UniqueValueRenderer,
@@ -47,7 +44,6 @@
                   Point,
                   Query,
                   QueryTask,
-                  on,
                   TooltipDialog,
                   dijitPopup) {
           
@@ -61,13 +57,11 @@
             logo: false
           });
 
-          var identifyParams = new IdentifyParams();
-          identifyParams.tolerance = 150;
-
           // Park Markers layer
           service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
             mode: FeatureLayer.MODE_SNAPSHOT,
-            outFields: ['*']
+            outFields: ['*'],
+            id: 'parks'
           });
           // Change the icon for the park marker
           var parkSymbol = new SimpleRenderer({
@@ -76,7 +70,8 @@
               type: 'esriPMS',
               url: '/img/icons/park-marker.svg',
               height: 28,
-              width: 28
+              width: 28,
+              size: 512
             }
           });
           service.parks.setRenderer(parkSymbol);
@@ -190,7 +185,6 @@
           service.queryInstance = new Query();
           service.QueryTask = QueryTask;
           service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
-          service.on = on;
           service.TooltipDialog = TooltipDialog;
           service.dijitPopup = dijitPopup;
 
