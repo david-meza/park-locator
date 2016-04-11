@@ -20,7 +20,7 @@
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/GraphicsLayer',
         'esri/layers/FeatureLayer',
-        'esri/dijit/LocateButton', 
+        'esri/tasks/IdentifyParameters', 
         'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
@@ -39,7 +39,7 @@
                   ArcGISImageServiceLayer,
                   GraphicsLayer,
                   FeatureLayer,
-                  LocateButton,
+                  IdentifyParams,
                   Search,
                   SimpleRenderer,
                   UniqueValueRenderer,
@@ -61,6 +61,9 @@
             logo: false
           });
 
+          var identifyParams = new IdentifyParams();
+          identifyParams.tolerance = 150;
+
           // Park Markers layer
           service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
             mode: FeatureLayer.MODE_SNAPSHOT,
@@ -79,7 +82,7 @@
           service.parks.setRenderer(parkSymbol);
 
           // Base map layer
-          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/f6f7665880c94539842f4cc46cfe6c1d/resources/styles/root.json');
+          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/49d007c1e87249ef9581f5662989fb9a/resources/styles/root.json');
 
           // Aerial views
           service.aerialLabels = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/fb05b96c9aaa4d90bbb9bc7702330916/resources/styles/root.json', { visible: false });
@@ -180,7 +183,6 @@
           service.VectorTileLayer = VectorTileLayer;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.FeatureLayer = FeatureLayer;
-          service.LocateButton = LocateButton;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
