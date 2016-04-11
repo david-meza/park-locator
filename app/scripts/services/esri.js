@@ -82,7 +82,7 @@
           service.parks.setRenderer(parkSymbol);
 
           // Base map layer
-          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/f6f7665880c94539842f4cc46cfe6c1d/resources/styles/root.json');
+          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/49d007c1e87249ef9581f5662989fb9a/resources/styles/root.json');
 
           // Aerial views
           service.aerialLabels = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/fb05b96c9aaa4d90bbb9bc7702330916/resources/styles/root.json', { visible: false });
