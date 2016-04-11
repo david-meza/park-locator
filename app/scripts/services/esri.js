@@ -67,7 +67,8 @@
           // Park Markers layer
           service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
             mode: FeatureLayer.MODE_SNAPSHOT,
-            outFields: ['*']
+            outFields: ['*'],
+            id: 'Parks-layer'
           });
           // Change the icon for the park marker
           var parkSymbol = new SimpleRenderer({
@@ -76,7 +77,8 @@
               type: 'esriPMS',
               url: '/img/icons/park-marker.svg',
               height: 28,
-              width: 28
+              width: 28,
+              size: 512
             }
           });
           service.parks.setRenderer(parkSymbol);
