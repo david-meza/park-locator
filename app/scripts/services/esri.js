@@ -20,7 +20,6 @@
         'esri/layers/ArcGISImageServiceLayer', 
         'esri/layers/GraphicsLayer',
         'esri/layers/FeatureLayer',
-        'esri/tasks/IdentifyParameters', 
         'esri/dijit/Search', 
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
@@ -39,7 +38,6 @@
                   ArcGISImageServiceLayer,
                   GraphicsLayer,
                   FeatureLayer,
-                  IdentifyParams,
                   Search,
                   SimpleRenderer,
                   UniqueValueRenderer,
@@ -61,14 +59,11 @@
             logo: false
           });
 
-          var identifyParams = new IdentifyParams();
-          identifyParams.tolerance = 150;
-
           // Park Markers layer
           service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ['*'],
-            id: 'Parks-layer'
+            id: 'parks'
           });
           // Change the icon for the park marker
           var parkSymbol = new SimpleRenderer({

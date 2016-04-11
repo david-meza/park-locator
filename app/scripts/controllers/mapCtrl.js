@@ -51,7 +51,7 @@
         });
         
         // Park on click event
-        modules.parks.on('touchend, click', function (evt) {
+        modules.parks.on('touchend, click, mouse-down', function (evt) {
           console.log(evt);
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
