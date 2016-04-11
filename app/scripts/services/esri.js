@@ -27,7 +27,6 @@
         'esri/geometry/Point',
         'esri/tasks/query',
         'esri/tasks/QueryTask',
-        'dojo/on', 
         'dijit/TooltipDialog', 
         'dijit/popup',
         'dojo/domReady!'],
@@ -45,7 +44,6 @@
                   Point,
                   Query,
                   QueryTask,
-                  on,
                   TooltipDialog,
                   dijitPopup) {
           
@@ -187,7 +185,6 @@
           service.queryInstance = new Query();
           service.QueryTask = QueryTask;
           service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
-          service.on = on;
           service.TooltipDialog = TooltipDialog;
           service.dijitPopup = dijitPopup;
 
