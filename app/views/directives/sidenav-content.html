@@ -16,7 +16,7 @@
     <span flex>Choose an Activity</span>
     <md-icon md-font-icon="fa-chevron-down" class="fa light list-icon" ng-class="{ rotate: currentList === 'activities' }"></md-icon>
   </md-list-item>
-  <activities-selection ng-cloak class="layout-column flex selection-menu" ng-show="currentList === 'activities'"></activities-selection>
+  <activities-selection ng-cloak class="layout-column flex selection-menu activities-selection" ng-show="currentList === 'activities'"></activities-selection>
 
   <md-list-item ng-click="toggleList('parks')" class="md-secondary menu-item">
     <span flex>Find a Park</span>

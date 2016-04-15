@@ -420,6 +420,20 @@ th {
   margin: 5px 0;
 }
 
+.md-chips {
+  
+  .md-chip {
+    max-width: 45%;
+    
+    .md-chip-content {
+      
+      md-chip-template {
+
+      }
+    }
+  }
+}
+
 #activities-list {
   .activity-icon {
     margin: 5px 8px 5px 5px;
@@ -984,7 +998,7 @@ html, body {
       max-height: 0;
     }
     
-    &.ng-hide, &.ng-hide-animate {
+    &.ng-hide, &.ng-hide-animate, &.activities-selection {
       overflow: auto;
     }
 
