@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="greenway" width="24" height="24" viewBox="0 0 48 48" fill="rgb(52, 73, 94)">
+<svg xmlns="http://www.w3.org/2000/svg" id="greenway" width="24" height="24" viewBox="0 0 48 48" fill="rgb(52, 73, 94)">	
+	<path d="M 19 42 L 19.5 32 L 27.5 32 L 28 42 Z" fill="#c9ccc5"/>
+  <line fill="none" stroke="#795548" stroke-width="1" x1="19" y1="42" x2="19.5" y2="32" />
+	<line fill="none" stroke="#795548" stroke-width="1" x1="28" y1="42" x2="27.5" y2="32"/>
 	<line fill="none" stroke="#795548" stroke-width="4" x1="31" y1="42" x2="31" y2="34"/>
 	<line fill="none" stroke="#795548" stroke-width="4" x1="16" y1="42" x2="16" y2="31"/>
 	<circle fill="#8BC34A" cx="15.5" cy="12.5" r="4.5"/>
