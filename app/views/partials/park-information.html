@@ -61,16 +61,18 @@
   <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0" md-on-select="scrollTo('park-info')">
     <div class="md-padding">
 
-      <ul id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center center">
-        <li ng-repeat="activity in activitiesInPark">
-            <div class="view">
-              <md-icon class="icon-contain" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
-              <div class="mask">
-                <h6>{{ ::activity.name }}</h6>
-              </div>
-            </div>
-        </li>
-      </ul>
+      <div id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center stretch">
+        <md-card ng-repeat="activity in activitiesInPark" class="icon-card">
+          
+          <md-card-content>
+            <md-icon class="icon-contain" md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}"></md-icon>
+          </md-card-content>
+          
+          <md-card-footer>
+            <h3 class="limit-text capitalize icon-name flex">{{ ::activity.name }}</h3>
+          </md-card-footer>
+        </md-card>
+      </div>
 
     </div>
   </md-tab>

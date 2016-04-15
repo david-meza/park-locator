@@ -5,9 +5,17 @@
 
   <title>City of Raleigh Park Locator</title>
 
-  <meta charset="utf-8">
-  <meta name="description" content="Find the your nearest park in Raleigh">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta charset="UTF-8" />
+  <meta name="description" content="Find parks closest to you in Raleigh">
+  <meta name="keywords" content="City of Raleigh, Park Locator, City of Raleigh Park Locator, parks, raleigh, pullen, park, recreation, things to do, activities, map" />
+  <meta name="author" content="David Meza" />
+  <meta property="og:title" content="City of Raleigh Park Locator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://park-locator-esri.surge.sh" />
+  <meta property="og:description" content="Find parks closest to you in Raleigh" />
+  <meta property="fb:admins" content="jdmeza93"/>
 
   <!-- build:css({.,app}) styles/vendor.css -->
   <!-- bower:css -->
@@ -36,28 +44,19 @@
 </head>
 
 
-<body ng-app="parkLocator" ng-cloak layout = "row">
+<body ng-app="parkLocator" ng-cloak class="layout-row">
   
-  <!-- Menu button -> Left Sidenav -> Opened from navbarCtrl -->
-  <md-sidenav class="gradient-primary md-sidenav-left md-whiteframe-z2" 
-              md-component-id="left" 
-              md-is-locked-open="$mdMedia('gt-sm')"
-              id="menu-sidenav">
+  <md-sidenav class="gradient-primary md-sidenav-left md-whiteframe-z2" id="menu-sidenav"
+              md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
       
-      <header class="nav-header">
-        <a ng-href="https://parks.raleighnc.gov" target="_blank" class="parks-logo">
-          <img src="img/icons/parks-logo-white.svg" alt="Parks Logo" />
-        </a>
-      </header>
-
       <sidenav-content></sidenav-content>
     
   </md-sidenav>
   
-  <div id="main" layout="column" role="main" flex>
+  <div id="main" role="main" class="flex layout-column">
     <ng-navbar></ng-navbar>
 
-    <ui-view layout="column" flex></ui-view>
+    <ui-view class="flex layout-column"></ui-view>
 
     <ng-footer></ng-footer>
     <collapse-footer></collapse-footer>

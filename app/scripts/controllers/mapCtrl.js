@@ -7,7 +7,6 @@
 
       Esri.modulesReady().then(function(modules) {
 
-
         // modules.map.on('zoom-end', function(evt) {
         //   modules.parks.setVisibility(evt.level <= 17);
         // });
@@ -51,7 +50,7 @@
         });
         
         // Park on click event
-        modules.parks.on('click', function (evt) {
+        modules.parks.on('touchend, click, mouse-down', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
         });
@@ -62,17 +61,19 @@
 
         function openParkTooltip(evt) {
           var content = evt.graphic.attributes.NAME;
-          tooltip.setContent(content);
-          modules.dijitPopup.open({
-            popup: tooltip,
-            x: evt.pageX + 10,
-            y: evt.pageY + 10
-          });
-          return false;
+          return setTooltipContent(content, evt);
         }
 
         function openAmenitiesTooltip(evt) {
           var content = amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY].name;
+          return setTooltipContent(content, evt);
+        }
+        
+        function openGreenwaysTooltip(evt) {
+          return setTooltipContent('Greenway Trail', evt);
+        }
+
+        function setTooltipContent(content, evt) {
           tooltip.setContent(content);
           modules.dijitPopup.open({
             popup: tooltip,
@@ -93,6 +94,11 @@
         modules.amenities1.on('mouse-out', closeTooltip);
         modules.amenities2.on('mouse-over', openAmenitiesTooltip);
         modules.amenities2.on('mouse-out', closeTooltip);
+
+        modules.greenways.on('mouse-over', openGreenwaysTooltip);
+        modules.greenways.on('mouse-out', closeTooltip);
+        modules.greenways2.on('mouse-over', openGreenwaysTooltip);
+        modules.greenways2.on('mouse-out', closeTooltip);
         
         
       });

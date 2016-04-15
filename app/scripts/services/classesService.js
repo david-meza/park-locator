@@ -19,7 +19,7 @@
       'social': { name: 'Social', urlName: 'social', icon: '/img/icons/classes/social.svg'},
       'specializedrecreation': { name: 'Specialized Recreation', urlName: 'specializedrecreation', icon: '/img/icons/classes/specialized-recreation.svg'},
       'sports': { name: 'Sports', urlName: 'sports', icon: '/img/icons/classes/sports.svg'},
-      'summercampspecializedrecreation': { name: 'Summer Camp - Specialized Recreation', urlName: 'summercampspecializedrecreation', icon: '/img/icons/classes/summer-camp.svg'},
+      'summercampspecializedrecreation': { name: 'Summer Camp - Specialized Recreation', urlName: 'summercampspecializedrecreation', icon: '/img/icons/classes/summer-camp-spec.svg'},
       'summercampspecialty': { name: 'Summer Camp - Specialty', urlName: 'summercampspecialty', icon: '/img/icons/classes/summer-camp.svg'},
       'summercamptraditional': { name: 'Summer Camp - Traditional', urlName: 'summercamptraditional', icon: '/img/icons/classes/summer-camp.svg'}
     };

@@ -1,33 +1,46 @@
-<md-autocomplete  md-selected-item="search.selectedItem"
-                  md-search-text="search.searchText"
-                  md-selected-item-change="search.selectedItemChange(activity)"
-                  md-items="activity in search.querySearch(search.searchText)"
-                  md-item-text="activity.name"
-                  placeholder="Find an activity"
-                  md-menu-class="activity-custom-template"
-                  md-autoselect="true"
-                  md-select-on-match="true">
-  <md-item-template>
-    <span class="item-title" layout="row">
-      <md-icon md-svg-icon="{{ activity.icon }}"></md-icon>
-      <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ activity.name }} </span>
-      <md-icon md-svg-icon="/img/icons/ok.svg" ng-if="activity.selected"></md-icon>
-    </span>
-  </md-item-template>
-  <md-not-found>No matching activities found.</md-not-found>
-</md-autocomplete>
+<md-chips ng-model="activityChips" md-autocomplete-snap
+          md-transform-chip="search.transformChip($chip)"
+          md-require-match="true"
+          md-on-add="toggleSelected($chip, 'md-chips')"
+          md-on-remove="toggleSelected($chip, 'md-chips')">
+  
+  <md-autocomplete  md-selected-item="search.selectedItem"
+                    md-search-text="search.searchText"
+                    md-items="activity in search.querySearch(search.searchText)"
+                    md-item-text="activity.name"
+                    placeholder="Find an activity"
+                    md-menu-class="activity-custom-template"
+                    md-autoselect="true"
+                    md-select-on-match="true">
+    <md-item-template>
+      <span class="item-title" layout="row">
+        <md-icon md-svg-icon="{{ activity.icon }}"></md-icon>
+        <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ activity.name }} </span>
+        <md-icon md-svg-icon="/img/icons/ok.svg" ng-if="activity.selected"></md-icon>
+      </span>
+    </md-item-template>
+    <md-not-found>No matching activities found.</md-not-found>
+  </md-autocomplete>
+
+  <md-chip-template>
+    <md-icon md-svg-icon="{{ $chip.icon }}"></md-icon>
+    <span>{{ ::$chip.name }}</span>
+  </md-chip-template>
+</md-chips>
 
 <div layout="row" class="pull-down-sm">
   <span flex></span>
   <span class = "text-total-results text-info">Number of Parks: {{ parks.length }}</span>
 </div>
 
+<br />
+
 <div scrolling-buttons>
   <md-list id="activities-list">
-    <md-list-item ng-click="toggleSelected(activity)" ng-repeat="activity in activities.categoriesArr">
+    <md-list-item class="custom-ripple-item" ng-click="toggleSelected(activity, 'md-list-item')" ng-repeat="activity in activities.categoriesArr">
       <md-icon md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}" class="activity-icon"></md-icon>
       <p class="limit-text capitalize limit-activity-name"> {{ ::activity.name }} </p>
-      <md-switch class="md-secondary" ng-model="activity.selected" ng-change="toggleSwitch()" aria-label="Toggle activity filter"></md-switch>
+      <md-switch class="md-secondary" ng-model="activity.selected" ng-change="toggleSelected(activity, 'md-switch')" aria-label="Toggle activity filter"></md-switch>
     </md-list-item>
   </md-list>
 </div>

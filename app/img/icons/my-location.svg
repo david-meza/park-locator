@@ -2,10 +2,10 @@
   <style>
     .circle {
       stroke-linecap: round;
-      -moz-animation:     pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-      -webkit-animation:  pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-      -o-animation:       pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-      animation:          pulsate 3s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      -moz-animation:     pulsate 2.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      -webkit-animation:  pulsate 2.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      -o-animation:       pulsate 2.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+      animation:          pulsate 2.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
 
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
@@ -13,12 +13,10 @@
 
     @keyframes pulsate {
       0%   { stroke-width: 20; opacity: 1; }
-      60% { stroke-width: 43; opacity: 0; }
       100% { stroke-width: 43; opacity: 0; }
     }
     @-webkit-keyframes pulsate {
       0%   { stroke-width: 20; opacity: 1; }
-      60% { stroke-width: 43; opacity: 0; }
       100% { stroke-width: 43; opacity: 0; }
     }
   </style>
