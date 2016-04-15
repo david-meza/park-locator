@@ -96,7 +96,6 @@
     };
 
     var _isInRaleigh = function (lat, lon) {
-      console.log(lat,lon);
       // Test Raleigh address: 35.7776464, -78.63844279999999
       return lat < 36.413561 && lat > 35.437814 && lon < -77.936890 && lon > -78.984583;
     };

@@ -69,9 +69,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/park-marker.svg',
-              height: 28,
-              width: 28,
-              size: 512
+              height: 36,
+              width: 36,
             }
           });
           service.parks.setRenderer(parkSymbol);
@@ -149,8 +148,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/user-marker.svg',
-              height: 28,
-              width: 28
+              height: 36,
+              width: 36
             },
           });
 
@@ -167,8 +166,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/my-location.svg',
-              height: 28,
-              width: 28
+              height: 36,
+              width: 36
             },
           });
           // Add graphic to graphic layer
