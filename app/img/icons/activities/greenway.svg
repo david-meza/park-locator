@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="greenway" viewBox="0 0 48 48" fill="rgb(52, 73, 94)">	
+<svg xmlns="http://www.w3.org/2000/svg" id="greenway" viewBox="0 0 48 48" height="48" width="48" fill="rgb(52, 73, 94)">	
 	
 	<path d="M 19 45 Q 21 42 19 38 T 19 32 T 19 25 L 27 45 Z" fill="#c9ccc5" />
 	<path d="M 27 45 Q 29 42 27 38 T 27 32 T 27 25 L 19 45 Z" fill="#c9ccc5" />
-	<path d="M 19 45 Q 21 42 19 38 T 19 32 T 19 25 M 27 45 Q 29 42 27 38 T 27 32 T 27 25" stroke="#4E2C20" stroke-width="0.5" fill="none" />
+	<path d="M 19 45 Q 21 42 19 38 T 19 32 T 19 25 M 27 45 Q 29 42 27 38 T 27 32 T 27 25" stroke="#4E2C20" stroke-width="1" fill="none" />
 	
 	<line fill="none" stroke="#795548" stroke-width="4" x1="31" y1="42" x2="31" y2="34"/>
 	<line fill="none" stroke="#795548" stroke-width="4" x1="16" y1="42" x2="16" y2="31"/>
