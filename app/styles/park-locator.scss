@@ -25,7 +25,7 @@ html {
   font-weight: 400;
 }
 
-.nav, .pagination, image, a { 
+.nav, .pagination, #parks_layer image, a { 
   cursor: pointer; 
 }
 
@@ -418,6 +418,20 @@ th {
 
 .park-detail {
   margin: 5px 0;
+}
+
+.md-chips {
+  
+  .md-chip {
+    max-width: 45%;
+    
+    .md-chip-content {
+      
+      md-chip-template {
+
+      }
+    }
+  }
 }
 
 #activities-list {
@@ -984,7 +998,7 @@ html, body {
       max-height: 0;
     }
     
-    &.ng-hide, &.ng-hide-animate {
+    &.ng-hide, &.ng-hide-animate, &.activities-selection {
       overflow: auto;
     }
 

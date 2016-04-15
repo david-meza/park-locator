@@ -91,12 +91,24 @@
           });
 
           // Greenway Layers
-          var greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0', {
+          service.greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0', {
             id: 'greenways'
           });
-          var greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1', {
+          service.greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1', {
             id: 'greenway-connectors'
           });
+          // Change the default green line renderer
+          var greenwaysLine = new SimpleRenderer({
+            type: 'simple',
+            symbol: {
+              type: 'esriSLS',
+              color: [150, 188, 152],
+              style: 'esriSLSSolid',
+              width: 3,
+            }
+          });
+          service.greenways.setRenderer(greenwaysLine);
+          service.greenways2.setRenderer(greenwaysLine);
 
           // Amenity Markers (outdoors)
           service.amenities1 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
@@ -122,7 +134,7 @@
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
           service.map.addLayer(service.basemapLayer);
           service.map.addLayers([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
-          service.map.addLayers([greenways, greenways2, service.parks, service.tracker]);
+          service.map.addLayers([service.greenways, service.greenways2, service.parks, service.tracker]);
 
           // My Location graphic
           service.userMarker = new Graphic({
