@@ -8,10 +8,7 @@
                   md-autoselect="true"
                   md-select-on-match="true">
   <md-item-template>
-    <span class="item-title" layout="row">
-      <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>
-      <md-icon md-svg-icon="/img/icons/ok.svg" ng-if="park.selected"></md-icon>
-    </span>
+    <span class="item-title" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>
   </md-item-template>
   <md-not-found>No matching park names found.</md-not-found>
 </md-autocomplete>

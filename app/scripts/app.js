@@ -33,6 +33,10 @@ angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'a
       .warnPalette('yellow');
   }])
 
+  .config([ '$mdIconProvider', function($mdIconProvider) {
+    $mdIconProvider.defaultIconSet('img/icons/core.svg', 48);       
+  }])
+
   .config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
 
