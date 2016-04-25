@@ -44,7 +44,7 @@
 </head>
 
 
-<body ng-app="parkLocator" ng-cloak layout = "row">
+<body ng-app="parkLocator" ng-cloak class="layout-row">
   
   <md-sidenav class="gradient-primary md-sidenav-left md-whiteframe-z2" id="menu-sidenav"
               md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
@@ -53,10 +53,10 @@
     
   </md-sidenav>
   
-  <div id="main" layout="column" role="main" flex>
+  <div id="main" role="main" class="flex layout-column">
     <ng-navbar></ng-navbar>
 
-    <ui-view layout="column" flex></ui-view>
+    <ui-view class="flex layout-column"></ui-view>
 
     <ng-footer></ng-footer>
     <collapse-footer></collapse-footer>
