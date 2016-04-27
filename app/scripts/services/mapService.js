@@ -2,14 +2,14 @@
 
   'use strict';
 
-  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout', 'Esri',
-    function (gMapsApi, $mdToast, $timeout, Esri) {
+  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', 'Esri', 'deviceService',
+    function (gMapsApi, $mdToast, Esri, deviceService) {
 
     var esriModules;
     
     Esri.modulesReady().then( function (modules) {
       esriModules = modules;
-      // Get user's coordinates
+      // Get user's coordinates. Delay it a bit so it doesn't block other more important scripts.
       geoLocate();
     });
 
@@ -92,7 +92,10 @@
         .highlightAction(false)
         .hideDelay(hide || 3000)
         .position('bottom right');
-      $mdToast.show(toast);
+      
+      deviceService.toastIsClosed().then( function() {
+        $mdToast.show(toast);
+      });
     };
 
     var _isInRaleigh = function (lat, lon) {

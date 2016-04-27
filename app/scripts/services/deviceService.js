@@ -1,10 +1,18 @@
 'use strict';
 
-angular.module('appServices').factory('deviceService', ['$window', 
-  function($window){
+angular.module('appServices').factory('deviceService', ['$window', '$q', 
+  function($window, $q){
 
     var _width = $window.innerWidth;
-    var activeTab = { name: 'search' };
+    var activeToast = $q.defer();
+
+    function toastIsClosed() {
+      return activeToast.promise;
+    }
+
+    function isIE() {
+      return !!window.MSInputMethodContext && !!document.documentMode;
+    }
 
     function isMobile() {
       return _width < 768;
@@ -19,7 +27,9 @@ angular.module('appServices').factory('deviceService', ['$window',
 
 	return {
     isMobile: isMobile,
-    activeTab: activeTab,
+    isIE: isIE,
+    activeToast: activeToast,
+    toastIsClosed: toastIsClosed,
     scrollTo: scrollTo
 	};
 

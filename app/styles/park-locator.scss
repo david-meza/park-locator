@@ -91,14 +91,11 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
 .dijitPopup {
   position: absolute;
+  overflow: hidden !important;
 
-  * {
-    cursor: default;
+  .dijitBackgroundIframe {
+    display: none;
   }
-}
-
-.opaque {
-  opacity: 0;
 }
 
 .light {
@@ -1282,4 +1279,27 @@ md-tabs {
     }
   }
 
+}
+
+.browser-warning {
+  position:absolute;
+  background-color:#444;
+  color:white;
+  top:0;
+  bottom: 0;
+  left:0;
+  right:0;
+  z-index:100000;
+  padding: 40px;
+}
+
+
+.browser-warning .btn {
+  background: none;
+  color: white;
+}
+
+.lead {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
