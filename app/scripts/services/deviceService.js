@@ -6,6 +6,10 @@ angular.module('appServices').factory('deviceService', ['$window',
     var _width = $window.innerWidth;
     var activeTab = { name: 'search' };
 
+    function isIE() {
+      return !!window.MSInputMethodContext && !!document.documentMode;
+    }
+
     function isMobile() {
       return _width < 768;
     }
@@ -19,6 +23,7 @@ angular.module('appServices').factory('deviceService', ['$window',
 
 	return {
     isMobile: isMobile,
+    isIE: isIE,
     activeTab: activeTab,
     scrollTo: scrollTo
 	};
