@@ -5,15 +5,17 @@ angular.module('appControllers').controller('devicesCtrl', ['$scope', 'deviceSer
 
     $scope.isMobile = deviceService.isMobile;
 
-    $scope.activeTab = deviceService.activeTab;
-
     if (deviceService.isIE() ) {
       $mdToast.show({
-        hideDelay   : 20000,
+        hideDelay   : 0,
         position    : 'top right',
         controller  : 'ToastCtrl',
         templateUrl : 'views/partials/ie-warning-toast.html'
+      }).then( function(response) {
+        deviceService.activeToast.resolve(response);
       });
+    } else {
+      deviceService.activeToast.resolve('Good to go!');
     }
 
     $scope.showTab = function (tab) {
@@ -25,7 +27,7 @@ angular.module('appControllers').controller('devicesCtrl', ['$scope', 'deviceSer
   .controller('ToastCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
 
     $scope.closeToast = function() {
-      $mdToast.hide();
+      $mdToast.hide('Ok');
     };
     
   }]);
