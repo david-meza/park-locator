@@ -53,6 +53,7 @@
         modules.parks.on('touchend, click, mouse-down', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
+          closeTooltip();
         });
 
         // Show park name on hover
