@@ -241,9 +241,6 @@ md-icon {
 }
 
 #map-icons-dialog {
-  md-toolbar {
-    background-color: darken($primary, 10%);
-  }
 
   .map-icons-list {
     .user-icon {
@@ -626,10 +623,8 @@ md-input-container {
 
   .panel-scrollable {
     max-height: 340px;
-    overflow: auto;
-    margin-right: -15px;
-    padding-right: 15px;
-    clear: right;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -678,9 +673,13 @@ md-input-container {
 }
 
 #menu-sidenav {
+
+  sidenav-content {
+    overflow-x: hidden;
+  }
   
   .nav-header {
-    margin: 25px 8px 40px;
+    margin: 25px 14px 40px;
     box-sizing: border-box;
 
     img {
@@ -985,6 +984,12 @@ md-tabs {
   #navbar .app-title {
     font-size: 0.8em;
   }
+
+  #menu-sidenav {
+    .nav-header {
+      margin: 22px 28px;
+    }
+  }
   
   [scrolling-buttons] {
     .panel-scrollable {
@@ -993,6 +998,8 @@ md-tabs {
   }
 
 }
+
+
 
 .browser-warning {
   position:absolute;
