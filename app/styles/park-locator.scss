@@ -43,6 +43,11 @@ a, a:hover, a:active, a:focus, a:visited {
   background: rgba(37,208,117,0.3);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
 img, h1, h2, h3, h4, h5, h6, #map-canvas {
   -webkit-user-select: none;  
      -moz-user-select: none;    
@@ -240,47 +245,19 @@ md-icon {
   vertical-align: baseline;
 }
 
-#map-icons-dialog {
-
+#map-icons-dialog-content {
   .map-icons-list {
-    .user-icon {
-      height: 45px !important;
-    }
-
     .md-avatar {
       border-radius: 0;
-      height: 50px;
-      width: 50px;
-    }
-
-    h4 {
-      font-weight: 500;
-      color: rgba(0,0,0,0.75);
+      margin: 0 16px 0 0;
+      height: auto;
+      max-width: 100%;
     }
   }
 }
 
-
-h2 {
-  font: 400 40px/1.5 Roboto, Helvetica, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.small-font {
-  font-size: 0.75em;
-}
-
 p {
   word-wrap: break-word;
-}
-
-.font-p-sm {
-  font-size: 0.9em
-}
-
-th {
-  white-space: nowrap;
 }
 
 .fa-pad-right {
@@ -302,8 +279,8 @@ th {
   width: 200px;
 
   .img-responsive {
-    height: 100%;
-    width: auto;
+    height: auto;
+    max-width: 100%;
   }
   
 }
@@ -341,16 +318,21 @@ th {
 }
 
 #parks-list {
-  .md-list-item-text {
-    margin: 0;
-    p {
-      font-size: 13px;
-      font-weight: 400;
+  .md-button {
+    padding: 0;
+  }
+
+  .md-list-item-inner {
+    @include justify-content( space-between );
+
+    .list-inner-text {
+      white-space: nowrap;
     }
   }
 }
 
 #parks-list, #activities-list {
+
   .custom-ripple-item {
     
     button.md-ink-ripple {
@@ -364,11 +346,7 @@ th {
         background-color: rgba($google-blu, 0.2);
       }
 
-      .md-ripple-container {
-        // display: none;
-      }
-
-      p, h3 {
+      .list-inner-text {
         color: $dark-text;
       }
     }
@@ -378,9 +356,6 @@ th {
 .text-before-dropdown, .inline-dropdown {
   font-size: 14px;
   font-weight: 500;
-}
-
-.text-before-dropdown {
 }
 
 .inline-dropdown {
@@ -622,7 +597,7 @@ md-input-container {
   }
 
   .panel-scrollable {
-    max-height: 340px;
+    max-height: 330px;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -993,7 +968,7 @@ md-tabs {
   
   [scrolling-buttons] {
     .panel-scrollable {
-      max-height: 195px;
+      max-height: 190px;
     }
   }
 

@@ -1,4 +1,4 @@
-<md-dialog aria-label="Map Icons Key" id="map-icons-dialog">
+<md-dialog aria-label="Map Icons Key">
   <md-toolbar class="gradient-primary">
     <div class="md-toolbar-tools">
       
@@ -14,54 +14,46 @@
   </md-toolbar>
 
   
-  <md-dialog-content layout="column">
+  <md-content id="map-icons-dialog-content">
 
-    <md-subheader class="md-primary">You</md-subheader>
+    <md-subheader class="md-primary md-no-sticky">You</md-subheader>
     
     <md-list class = "map-icons-list">
       <div layout="row" layout-xs="column" layout-align = "start stretch"> 
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src = "/img/icons/my-location.svg" class="md-avatar" alt="location tracking" />
-          <div class="md-list-item-text">
-            <h4>You are here (location tracking)</h4>
-          </div>
+          <span class="list-item-text">You are here (location tracking)</span>
         </md-list-item>
 
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src = "/img/icons/user-marker.svg" class="md-avatar" alt="user marker" />
-          <div class="md-list-item-text">
-            <h4>Distance Point of Reference to Parks</h4>
-          </div>
+          <span class="list-item-text">Point of Reference (distance to parks)</span>
         </md-list-item>
       </div>
     </md-list>
 
     <md-divider></md-divider>
 
-    <md-subheader class="md-primary">Park Icons</md-subheader>
+    <md-subheader class="md-primary md-no-sticky">Park Icons</md-subheader>
     
     <md-list class = "map-icons-list">  
       <div layout="row" layout-xs="column" layout-align = "start stretch">  
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src="/img/icons/park-marker.svg" class="md-avatar" alt="Park Pin (Location)" />
-          <div class="md-list-item-text">
-            <h4>Park Marker</h4>
-          </div>
+          <span class="list-item-text">Park Marker</span>
         </md-list-item>
       </div>
     </md-list>
       
     <md-divider></md-divider>
     
-    <md-subheader class="md-primary">Activity Icons</md-subheader>
+    <md-subheader class="md-primary md-no-sticky">Activity Icons</md-subheader>
       
     <md-list class = "map-icons-list">
       <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
         <md-list-item ng-repeat="activity in activities" flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img class="md-avatar" ng-src="{{ ::activity.icon }}" alt="{{ ::activity.name }}" />
-          <div class="md-list-item-text">
-            <h4>{{ ::activity.name }}</h4>
-          </div>
+          <span class="list-item-text">{{ ::activity.name }}</span>
         </md-list-item>
       </div>
     </md-list>
@@ -69,33 +61,27 @@
 
     <md-divider></md-divider>
     
-    <md-subheader class="md-primary">Miscellaneous</md-subheader>
+    <md-subheader class="md-primary md-no-sticky">Miscellaneous</md-subheader>
       
     <md-list class = "map-icons-list">
       <div layout="row" layout-xs="column" layout-align = "start stretch" layout-wrap>  
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src="/img/icons/activities/restroom.svg" class="md-avatar" alt="Restroom" />
-          <div class="md-list-item-text">
-            <h4>Restroom</h4>
-          </div>
+          <span class="list-item-text">Restroom</span>
         </md-list-item>
         
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src = "/img/icons/activities/tennis-center.svg" class="md-avatar" alt="Tennis Center" />
-          <div class="md-list-item-text">
-            <h4>Tennis Center</h4>
-          </div>
+          <span class="list-item-text">Tennis Center</span>
         </md-list-item>
 
         <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
           <img src = "/img/icons/activities/library.svg" class="md-avatar" alt="Library" />
-          <div class="md-list-item-text">
-            <h4>Library</h4>
-          </div>
+          <span class="list-item-text">Library</span>
         </md-list-item>
       </div>
     </md-list>
-  </md-dialog-content>
+  </md-content>
   
 
   <md-dialog-actions layout="row">

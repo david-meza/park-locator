@@ -92,3 +92,9 @@
   background:         radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
   background-color: $from;
 }
+
+@mixin justify-content($value) {
+  -webkit-justify-content:  $value;
+  -ms-flex-pack:            $value;
+  justify-content:          $value;
+}

@@ -39,7 +39,7 @@
   <md-list id="activities-list">
     <md-list-item class="custom-ripple-item" ng-click="toggleSelected(activity, 'md-list-item')" ng-repeat="activity in activities.categoriesArr">
       <md-icon md-svg-icon="{{ ::activity.icon }}" alt="{{ ::activity.name }}" class="activity-icon"></md-icon>
-      <p class="limit-text capitalize limit-activity-name"> {{ ::activity.name }} </p>
+      <p class="limit-text capitalize limit-activity-name list-inner-text"> {{ ::activity.name }} </p>
       <md-switch class="md-secondary" ng-model="activity.selected" ng-change="toggleSelected(activity, 'md-switch')" aria-label="Toggle activity filter"></md-switch>
     </md-list-item>
   </md-list>
