@@ -8,19 +8,19 @@
   
   <md-list-item ng-click="toggleList('location')" class="md-secondary menu-item">
     <span flex>Set My Location</span>
-    <md-icon md-font-icon="fa-chevron-down" class="fa light list-icon" ng-class="{ rotate: currentList === 'location' }"></md-icon>
+    <md-icon md-font-icon="fa-chevron-down" class="fa text-light list-icon" ng-class="{ rotate: currentList === 'location' }"></md-icon>
   </md-list-item>
   <location-selection ng-cloak class="layout-column flex selection-menu" ng-show="currentList === 'location'"></location-selection>
 
   <md-list-item ng-click="toggleList('activities')" class="md-secondary menu-item">
     <span flex>Choose an Activity</span>
-    <md-icon md-font-icon="fa-chevron-down" class="fa light list-icon" ng-class="{ rotate: currentList === 'activities' }"></md-icon>
+    <md-icon md-font-icon="fa-chevron-down" class="fa text-light list-icon" ng-class="{ rotate: currentList === 'activities' }"></md-icon>
   </md-list-item>
   <activities-selection ng-cloak class="layout-column flex selection-menu activities-selection" ng-show="currentList === 'activities'"></activities-selection>
 
   <md-list-item ng-click="toggleList('parks')" class="md-secondary menu-item">
     <span flex>Find a Park</span>
-    <md-icon md-font-icon="fa-chevron-down" class="fa light list-icon" ng-class="{ rotate: currentList === 'parks' }"></md-icon>
+    <md-icon md-font-icon="fa-chevron-down" class="fa text-light list-icon" ng-class="{ rotate: currentList === 'parks' }"></md-icon>
   </md-list-item>
   <park-selection ng-cloak class="layout-column flex selection-menu" ng-show="currentList === 'parks'"></park-selection>
 

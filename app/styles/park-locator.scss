@@ -1,9 +1,5 @@
 @import 'mixins';
 
-// PRCR Blue: rgb(4, 113, 206)
-// Old Primary: #1565C0
-// $primary: #0D44A7;
-
 $primary: #0471CE;
 $indigo: #3F51B5;
 $light-blu: #ABC5E9;
@@ -22,7 +18,12 @@ $dark-text: rgba(38, 47, 98, 0.78);
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
-  font-weight: 400;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .nav, .pagination, #parks_layer image, a { 
@@ -47,25 +48,6 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
      -moz-user-select: none;    
       -ms-user-select: none;
           user-select: none;  
-}
-
-#geolocate-button {
-  position: absolute;
-  top: 95px;
-  left: 20px;
-  z-index: 31;
-
-  .zoomLocateButton {
-    background-color: #555;
-  }
-}
-
-#search-field {
-  // position: absolute;
-  // z-index: 2;
-  // top: 20px;
-  // left: 74px;
-  margin: 6px 3px 6px 7px;
 }
 
 #map-key, #location-tracker {
@@ -98,7 +80,7 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
   }
 }
 
-.light {
+.text-light {
   color: $light-white;
 }
 
@@ -254,77 +236,8 @@ md-icon {
   outline: none;
 }
 
-.fa-icon-baseline {
+.icon-baseline {
   vertical-align: baseline;
-}
-
-.scroll-button-top, .scroll-button-bottom {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  height: 25px;
-  width: 100%;
-  z-index: 5;
-
-  -webkit-transition:  visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transition:     visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transition:       visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transition:      visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  transition:          visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-
-  &.show-button {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .md-button-top, .md-button-bottom {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-  }
-
-  .md-button-top {
-    top: 0;
-  }
-
-  .md-button-bottom {
-    bottom: 0;
-  }
-}
-
-.scroll-button-top {
-  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); 
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-  top: 0;
-}
-
-.scroll-button-bottom {
-  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-  bottom: 0;
-}
-
-#mobile-nav {
-
-  .nav-item {
-    text-align: center;
-    a {
-      color: $light-white;
-      padding: 10px;
-      -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      -moz-transition:    all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition:         all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-      &:focus, &:hover {
-        padding: 10px 30%;
-        outline: none;
-        background-color: darken($primary, 15%);
-      }
-    }
-  }
 }
 
 #map-icons-dialog {
@@ -386,20 +299,6 @@ th {
 .text-total-results {
   font-size: 15px;  
 }
-
-// .course-details {
-//   max-height: 40em;
-//   overflow: auto;
-//   margin-right: -15px;
-//   padding-right: 15px;
-  
-//   table, .table {
-//     a.md-button{
-//       margin: 0;
-//       text-decoration: none;
-//     }
-//   }
-// }
 
 .img-container {
   height: 150px;
@@ -496,60 +395,6 @@ th {
   }
 }
 
-
-// ul#park-list, ul#amenities-list, ul#selected-amenities-list {
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-
-//   li {
-//     position: relative;
-//     min-height: 3.45em;
-//     border-bottom: 1px solid #ccc;
-
-//     .activity-img {
-//       height: 24px;
-//       width: 24px;
-//     }
-
-//     &:last-child {
-//       border: none;
-//     }
-
-//     & > p {
-//       margin: 0;
-//     }
-
-//     & > a, & > p {
-//       position: absolute;
-//       top: 0;
-//       bottom: 0;
-//       font-size: 16px;
-//       line-height: 3em;
-//       overflow: hidden;
-//       white-space: nowrap;
-//       text-overflow: ellipsis;
-//       color: darken($primary, 30%);
-//       display: block;
-//       width: 100%;
-
-//       -webkit-transition: all 0.3s ease;
-//       -moz-transition:    all 0.3s ease;
-//       -o-transition:      all 0.3s ease;
-//       -ms-transition:     all 0.3s ease;
-//       transition:         all 0.3s ease;
-
-//       &:hover {
-//         color: darken($primary, 20%);
-//         text-decoration: none;
-//         font-size: 1.2em;
-//         background-color: rgba(0,0,0,0.01);
-
-//       }
-//     }
-//   }
-// }
-
 #class-sections, #park-amenities {
 
   .icon-card {
@@ -629,97 +474,6 @@ th {
   }
 }
 
-// List thumbnail grid style
-// #park-amenities, #class-sections {
-//   list-style-type: none;
-//   padding-left: 0;
-
-//   .view[ng-click] {
-//     cursor: pointer;
-//     @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12) );
-
-//     &:focus {
-//       outline: none;
-//       border: 5px solid rgba($indigo, 0.82);
-//       @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
-//     }
-//   }
-
-//   .view {
-
-//     width: 110px;
-//     height: 110px;
-//     margin: 12px;
-//     border: 5px solid #fff;
-//     overflow: hidden;
-//     position: relative;
-//     text-align: center;
-//     -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     -moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     cursor: default;
-
-//     .mask {
-//       width: 100%;
-//       height: 100%;
-//       position: absolute;
-//       overflow: hidden;
-//       top: 0;
-//       left: 0;
-//       opacity: 0;
-//       background-color: rgba($warn, 0.7);
-//       -webkit-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -moz-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -o-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -ms-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//     }
-
-//     md-icon {
-//       position: relative;
-//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
-
-//       &.icon-contain {
-//         width: 100%;
-//         height: 100%;
-//       }
-//     }
-
-//     h6 {
-//       color: #fff;
-//       position: relative;
-//       margin: 0;
-//       padding: 10px 3px 10px 3px;
-//       background: rgba($indigo, 0.82);
-//       opacity: 0;
-//       font-size: 15px;
-//       // font-size: 1em;
-//       // max-height: 50px;
-//       // overflow: auto;
-
-//       @include transform( translateY(-70px) );
-//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
-//     }
-
-//     &:hover {
-
-//       md-icon {
-//         @include transform( scale(1.1,1.1) );
-//       }
-
-//       .mask {
-//         opacity: 1;
-//       }
-
-//       h6 {
-//         opacity: 1;
-//         @include transform( translateY(25px) );
-//       }
-//     }
-//   }
-
-// }
-
 md-input-container {
   &.classes-search-container {
     margin: 5px 0 0;
@@ -733,15 +487,6 @@ md-input-container {
 
 .back-to-sections:hover, .back-to-sections:focus {
   background-color: rgba($indigo, 0.13) !important;
-}
-
-.back-to-map {
-  font-size: 12px;
-  margin: 0;
-
-  &:hover, &:focus {
-    background-color: rgba($accent, 0.1) !important;
-  }
 }
 
 .park-center {
@@ -788,13 +533,6 @@ md-input-container {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 }
 
 #map-canvas, #directions-map {
@@ -845,12 +583,54 @@ html, body {
   margin-bottom: 0;
 }
 
-.panel-scrollable {
-  max-height: 340px;
-  overflow: auto;
-  margin-right: -15px;
-  padding-right: 15px;
-  clear: right;
+[scrolling-buttons] {
+  .scroll-button-top {
+    @include linear-gradient( rgba(255,255,255,1),rgba(255,255,255,0) );
+    top: 0;
+  }
+
+  .scroll-button-bottom {
+    @include linear-gradient( rgba(255,255,255,0),rgba(255,255,255,1) );
+    bottom: 0;
+  }
+
+  .scroll-button-top, .scroll-button-bottom {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    z-index: 5;
+    @include transition (visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
+
+    &.show-button {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .md-button-top, .md-button-bottom {
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .md-button-top {
+      top: 0;
+    }
+
+    .md-button-bottom {
+      bottom: 0;
+    }
+  }
+
+  .panel-scrollable {
+    max-height: 340px;
+    overflow: auto;
+    margin-right: -15px;
+    padding-right: 15px;
+    clear: right;
+  }
 }
 
 .pull-down-lg {
@@ -865,49 +645,7 @@ html, body {
   margin-top: 10px;
 }
 
-#park-window {
-
-  h3 {
-    margin: 0;
-    padding: 5px 0 8px;
-  }
-
-  p {
-    margin: 0;
-    padding: 4px 0;
-    color: rgba(0,0,0,0.6);
-  }
-
-  .more-info {
-    color: $indigo;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 4px 0;
-
-    &:hover {
-      text-decoration: none;
-      color: darken($indigo, 10%);
-    }
-  }
-}
-
-#activity-window, #park-window {
-  opacity: 0;
-
-  -moz-animation:     show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -webkit-animation:  show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -o-animation:       show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  animation:          show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-me {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@-webkit-keyframes show-me {
+@include keyframes(fade-in) {
   from { opacity: 0; }
   to { opacity: 1; }
 }
@@ -921,10 +659,7 @@ html, body {
 }
 
 .gradient-primary {
-  background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
-  background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
-  background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
-  background-color: $primary;
+  @include radial-gradient($primary, $indigo);
 }
 
 .custom-ink-ripple {
@@ -1035,7 +770,6 @@ html, body {
     border: 0;
     opacity: 0;
     visibility: hidden;
-    // @include transform( translateY(50px) );
   }
 
   md-content {
@@ -1057,10 +791,7 @@ html, body {
 
   .fa-heart {
     color: $heart;
-    -moz-animation:     pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    -webkit-animation:  pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    -o-animation:       pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    animation:          pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+    @include animation( pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal );
 
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
@@ -1068,14 +799,9 @@ html, body {
 
 }
 
-@keyframes pulsate {
+@include keyframes(pulsate) {
   0% { @include transform( scale(1,1) ); }
-  10% { @include transform( scale(1.2,1.2) ); }
-  20% { @include transform( scale(1,1) ); }
-}
-@-webkit-keyframes pulsate {
-  0% { @include transform( scale(1,1) ); }
-  10% { @include transform( scale(1.2,1.2) ); }
+  10% { @include transform( scale(1.25,1.25) ); }
   20% { @include transform( scale(1,1) ); }
 }
 
@@ -1084,36 +810,19 @@ html, body {
   
   .collapse-button {
     position: absolute;
-      -webkit-transform: translate(0px, -2px);
-         -moz-transform: translate(0px, -2px);
-           -o-transform: translate(0px, -2px);
-          -ms-transform: translate(0px, -2px);
-              transform: translate(0px, -2px);
     left: 0;
     top: -68px;
     z-index: 1;
-
-    -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    @include transition( all 0.6s cubic-bezier(0.345, 0, 0.25, 1) );
+    @include transform( translate(0px, -2px) );
 
     md-icon {
       color: $heart;
-      -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      @include transition( all 0.6s cubic-bezier(0.345, 0, 0.25, 1) );
     }
 
     &.rotated {
-      -webkit-transform: translateY(30px) rotate(45deg);
-         -moz-transform: translateY(30px) rotate(45deg);
-           -o-transform: translateY(30px) rotate(45deg);
-          -ms-transform: translateY(30px) rotate(45deg);
-              transform: translateY(30px) rotate(45deg);
+      @include transform( translateY(30px) rotate(45deg) );
 
       md-icon {
         color: #55B53F;
@@ -1273,9 +982,13 @@ md-tabs {
     visibility: visible;
   }
 
-  #navbar {
-    h1 {
-      font-size: 20px;
+  #navbar .app-title {
+    font-size: 0.8em;
+  }
+  
+  [scrolling-buttons] {
+    .panel-scrollable {
+      max-height: 195px;
     }
   }
 

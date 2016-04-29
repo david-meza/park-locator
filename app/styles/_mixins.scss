@@ -45,3 +45,50 @@
       -ms-flex-direction: $direction;
           flex-direction: $direction;
 }
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }  
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }  
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($animation...) {
+  -webkit-animation:  #{$animation};
+  -moz-animation:     #{$animation};
+  -ms-animation:      #{$animation};
+  -o-animation:       #{$animation};
+  animation:          #{$animation};
+}
+
+@mixin linear-gradient($top, $bottom) {
+  background: $top; /* Old browsers */
+  background: -webkit-linear-gradient(top,  $top 0%, $bottom 100%); /* Chrome10+,Safari5.1+ */
+  background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+  background:    -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+  background:      -o-linear-gradient(top,  $top 0%, $bottom 100%); /* Opera 11.10+ */
+  background:     -ms-linear-gradient(top,  $top 0%, $bottom 100%); /* IE10+ */
+  background:         linear-gradient(to bottom, $top 0%, $bottom 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$top}', endColorstr='#{$bottom}',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin radial-gradient($from, $to) {
+  background: -webkit-radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
+  background:        -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(10%, $from), color-stop(120%, $to));
+  background:    -moz-radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
+  background:      -o-radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
+  background:     -ms-radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
+  background:         radial-gradient(circle at 50% 50%, $from 10%, $to 120%);
+  background-color: $from;
+}
