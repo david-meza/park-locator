@@ -801,12 +801,22 @@ md-input-container {
   padding: 0;
 }
 
+.classes-container {
+  position: relative;
+  min-height: 600px;
+}
+
 div[ui-view="classes-info"] {
+  &.ng-enter, &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    @include transition( all 600ms $cubic-in-out );
+  }
   // Starting the entering transition...
   &.ng-enter {
-    opacity: 0.5;
+    opacity: 0;
     @include transform( translateX(500px) );
-    @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
   }
   // Finish the enter transition
   &.ng-enter-active {
@@ -815,9 +825,8 @@ div[ui-view="classes-info"] {
   }
   // Start the leave transition...
   &.ng-leave {
-    opacity: 0;
+    opacity: 1;
     @include transform( translateX(0) );
-    @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
   }
   // Finish leaving
   &.ng-leave-active {
@@ -944,7 +953,7 @@ md-tabs {
   }
 
   #navbar .app-title {
-    font-size: 0.8em;
+    font-size: 20px;
   }
 
   #menu-sidenav {
