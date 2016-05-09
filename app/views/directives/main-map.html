@@ -1,23 +1,17 @@
-<div id="map-canvas">
-  <div id="geolocate-button"></div>
+<div id="map-canvas" class="flex">
+  
   <aerial-toggle>
     <md-button ng-click="select('map')" class="md-raised" ng-class="{ 'selected': !aerial }">Map</md-button>
     <md-button ng-click="select('aerial')" class="md-raised" ng-class="{ 'selected': aerial }">Aerial</md-button>
   </aerial-toggle>
+  
   <div id="map-key">
-    <md-button  aria-label="Key" 
-                class="md-fab md-raised md-mini"
-                ng-click="openKey($event)">
-      
-      <md-tooltip md-direction="top" 
-                  md-visible="false"
-                  md-autohide="true"
-                  md-delay = "50">
-        Key
-      </md-tooltip>
-      
-      <md-icon md-svg-icon="img/icons/help.svg" aria-label="key"></md-icon>
-
+    <md-button aria-label="Key" class="md-fab md-raised" ng-click="openKey($event)">
+      <md-tooltip md-direction="left" md-autohide="true">Key</md-tooltip>
+      <md-icon md-svg-icon="help" aria-label="key"></md-icon>
     </md-button>
   </div>
+
+  <location-tracker></location-tracker>
+
 </div>

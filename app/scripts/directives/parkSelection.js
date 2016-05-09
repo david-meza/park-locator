@@ -63,11 +63,7 @@
           $mdSidenav('left').close();
           
           // Center and zoom to the park marker on the map
-          esriModules.map.centerAndZoom( new esriModules.Point({
-            'y': park.latitude, 
-            'x': park.longitude,
-            'spatialReference': {'wkid': 4326 }
-          }), 15);
+          mapService.centerAndZoom(park.latitude, park.longitude);
           
         };
 

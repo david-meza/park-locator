@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('appControllers').controller('classesCtrl', ['$scope', 'classesService', '$state',
-	function($scope, classesService, $state){
+angular.module('appControllers').controller('classesCtrl', ['$scope', 'classesService', '$state', 'deviceService',
+	function($scope, classesService, $state, deviceService){
 
     var parkIds = classesService.getParkIds($scope.currentPark.name);
 
     $scope.classes = { sections: [] };
+    $scope.scrollTo = deviceService.scrollTo;
 
     $scope.goToSection = function (section) {
       $state.go('home.park.section', { sectionName: section });

@@ -7,72 +7,74 @@
 
       Esri.modulesReady().then(function(modules) {
 
-        // // Geolocate button
-        // var geoLocate = new modules.LocateButton({
-        //   map: modules.map
-        // }, 'geolocate-button');
-        // geoLocate.startup();
-        
-
-        // Amenity Markers (outdoors)
-        // var amenities1 = new modules.FeatureLayer({
-        //   url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
+        // modules.map.on('zoom-end', function(evt) {
+        //   modules.parks.setVisibility(evt.level <= 17);
         // });
 
-        // // Amenity Markers (indoors)
-        // var amenities2 = new modules.FeatureLayer({
-        //   url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
-        // });
+        modules.map.on('extent-change', function(evt) {
+          if ( !modules.basemapLayer.visible ) {
+            
+            modules.queryInstance.geometry = evt.extent.getCenter();
+            
+            modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
+              var isOutside2015Bounds = count === 0;
+              modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
+              modules.aerialLayer.setVisibility(!isOutside2015Bounds);
+            });
 
+          }
+        });
 
-        // // Change all the icons for the amenities
-        // amenitiesService.getAmenitiesIcons().then(function(response) {
-        //   var uniqueValueInfos = response.data;
+        // Change all the icons for the amenities
+        amenitiesService.getAmenitiesIcons().then(function(response) {
+          var uniqueValueInfos = response.data;
           
-        //   var amenities1Symbols = new modules.UniqueValueRenderer({
-        //     type: 'uniqueValue',
-        //     field1: 'SUBCATEGORY',
-        //     uniqueValueInfos: uniqueValueInfos
-        //   });
-        //   var amenities2Symbols = new modules.UniqueValueRenderer({
-        //     type: 'uniqueValue',
-        //     field1: 'SUBCATEGORY',
-        //     uniqueValueInfos: uniqueValueInfos
-        //   });
+          var amenities1Symbols = new modules.UniqueValueRenderer({
+            type: 'uniqueValue',
+            field1: 'SUBCATEGORY',
+            uniqueValueInfos: uniqueValueInfos
+          });
+          var amenities2Symbols = new modules.UniqueValueRenderer({
+            type: 'uniqueValue',
+            field1: 'SUBCATEGORY',
+            uniqueValueInfos: uniqueValueInfos
+          });
 
-        //   amenities1.renderer = amenities1Symbols;
-        //   amenities2.renderer = amenities2Symbols;
+          modules.amenities1.setRenderer(amenities1Symbols);
+          modules.amenities2.setRenderer(amenities2Symbols);
 
-        //   modules.map.layers.addItems([amenities1, amenities2]);
-        // });
+          modules.amenities1.setMinScale(5000);
+          modules.amenities2.setMinScale(5000);
+
+          modules.map.addLayers([modules.amenities1, modules.amenities2]);
+        });
         
+        // Park on click event
+        modules.parks.on('touchend, click, mouse-down', function (evt) {
+          var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
+          $state.go('home.park', {name: parkName});
+          closeTooltip();
+        });
+
         // Show park name on hover
         var tooltip = new modules.TooltipDialog({ id: "tooltip" });
         tooltip.startup();
 
-
-        modules.on(modules.parks, 'mouse-over', openParkTooltip);
-        modules.on(modules.parks, 'mouse-out', closeTooltip);
-        
-        // modules.on(amenities1, 'mouse-over', openAmenitiesTooltip);
-        // modules.on(amenities1, 'mouse-out', closeTooltip);
-        // modules.on(amenities2, 'mouse-over', openAmenitiesTooltip);
-        // modules.on(amenities2, 'mouse-out', closeTooltip);
-        
-        
         function openParkTooltip(evt) {
           var content = evt.graphic.attributes.NAME;
-          tooltip.setContent(content);
-          modules.dijitPopup.open({
-            popup: tooltip,
-            x: evt.pageX + 10,
-            y: evt.pageY + 10
-          });
-          return false;
+          return setTooltipContent(content, evt);
         }
 
         function openAmenitiesTooltip(evt) {
           var content = amenitiesService.activities[evt.graphic.attributes.SUBCATEGORY].name;
+          return setTooltipContent(content, evt);
+        }
+        
+        function openGreenwaysTooltip(evt) {
+          return setTooltipContent('Greenway Trail', evt);
+        }
+
+        function setTooltipContent(content, evt) {
           tooltip.setContent(content);
           modules.dijitPopup.open({
             popup: tooltip,
@@ -82,10 +84,24 @@
           return false;
         }
 
-        function closeTooltip(evt) {
+        function closeTooltip() {
           modules.dijitPopup.close(tooltip);
         }
 
+        modules.parks.on('mouse-over', openParkTooltip);
+        modules.parks.on('mouse-out', closeTooltip);
+        
+        modules.amenities1.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities1.on('mouse-out', closeTooltip);
+        modules.amenities2.on('mouse-over', openAmenitiesTooltip);
+        modules.amenities2.on('mouse-out', closeTooltip);
+
+        modules.greenways.on('mouse-over', openGreenwaysTooltip);
+        modules.greenways.on('mouse-out', closeTooltip);
+        modules.greenways2.on('mouse-over', openGreenwaysTooltip);
+        modules.greenways2.on('mouse-out', closeTooltip);
+        
+        
       });
 
     // Opens the dialog showing the map icons key
