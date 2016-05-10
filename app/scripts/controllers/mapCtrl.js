@@ -7,43 +7,29 @@
 
       Esri.modulesReady().then(function(modules) {
 
-        modules.map.on('extent-change', function(evt) {
-          if ( !modules.basemapLayer.visible ) {
-            
-            modules.queryInstance.geometry = evt.extent.getCenter();
-            
-            modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
-              var isOutside2015Bounds = count === 0;
-              modules.aerialLayer2013.visible = isOutside2015Bounds;
-              modules.aerialLayer.visible = !isOutside2015Bounds;
-            });
-
-          }
-        });
-
         // Change all the icons for the amenities
         amenitiesService.getAmenitiesIcons().then(function(response) {
           var uniqueValueInfos = response.data;
           
           var amenities1Symbols = new modules.UniqueValueRenderer({
+            field: 'SUBCATEGORY',
             type: 'uniqueValue',
-            field1: 'SUBCATEGORY',
             uniqueValueInfos: uniqueValueInfos
           });
           var amenities2Symbols = new modules.UniqueValueRenderer({
+            field: 'SUBCATEGORY',
             type: 'uniqueValue',
-            field1: 'SUBCATEGORY',
             uniqueValueInfos: uniqueValueInfos
           });
 
           modules.amenities1.renderer = amenities1Symbols;
           modules.amenities2.renderer = amenities2Symbols;
 
-          // modules.map.addLayers([modules.amenities1, modules.amenities2]);
+          modules.map.addMany([modules.amenities1, modules.amenities2]);
         });
         
         // Park on click event
-        modules.parks.on('touchend, click, mouse-down', function (evt) {
+        modules.parksView.on('touchend, click, mouse-down', function (evt) {
           var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
           closeTooltip();

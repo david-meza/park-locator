@@ -30,8 +30,12 @@ html, body {
   overflow: hidden;
 }
 
-#parks_layer image, a { 
+.esri-display-object #parks_layer image, a { 
   cursor: pointer; 
+}
+
+.esri-ui .esri-attribution {
+  display: none;
 }
 
 a, a:hover, a:active, a:focus, a:visited {

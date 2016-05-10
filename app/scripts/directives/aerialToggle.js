@@ -22,7 +22,6 @@
             modules.aerialLayer2013.visible = $scope.aerial;
             modules.aerialLabels.visible = $scope.aerial;
             modules.basemapLayer.visible = !$scope.aerial;
-            modules.map.extent = modules.map.extent;
           };
 
         });

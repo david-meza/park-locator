@@ -142,9 +142,7 @@
     function centerAndZoom(lat, lon) {
       esriModules.mapView.goTo({
         center: [lon, lat],
-        zoom: 15
-      }, {
-        easing: 'ease-in-out'
+        scale: 6000
       });
     }
 

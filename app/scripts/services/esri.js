@@ -30,8 +30,8 @@
         'esri/symbols/PictureMarkerSymbol',
         
         'esri/geometry/Point',
-        'esri/geometry/SpatialReference',
 
+        'esri/tasks/support/Query',
         'esri/tasks/QueryTask',
         
         'dijit/TooltipDialog', 
@@ -54,8 +54,8 @@
                   PictureMarkerSymbol,
                   
                   Point,
-                  SpatialReference,
                   
+                  Query,
                   QueryTask,
                   TooltipDialog,
                   dijitPopup) {
@@ -174,11 +174,7 @@
             attributes: {
               title: 'My Location'
             },
-            geometry: new Point({
-              x: -78.646,
-              y: 35.785,
-              spatialReference: { wkid: 4326 }
-            }),
+            geometry: new Point([-78.646, 35.785]),
             symbol: {
               type: 'picture-marker-symbol',
               url: '/img/icons/my-location.svg',
@@ -189,11 +185,7 @@
           });
           // My Location graphic
           service.userMarker = new Graphic({
-            geometry: new Point({
-              x: -78.646,
-              y: 35.785,
-              spatialReference: { wkid: 4326 }
-            }),
+            geometry: new Point([-78.646, 35.785]),
             attributes: {
               title: 'User Marker'
             },
@@ -206,7 +198,47 @@
 
           // Add my location graphic to map after it has loaded
           service.mapView.then(function() {
+            console.log(service.mapView);
             service.mapView.graphics.addMany([service.userMarker, service.trackerGraphic]);
+          });
+
+
+          // Switch between aerial imagery when outside 2015 bounds
+          var queryInstance = new Query();
+          var aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
+
+          service.mapView.watch('extent', function(newExtent) {
+            if ( !service.basemapLayer.visible ) {
+
+              queryInstance.geometry = newExtent.center;
+              
+              aerialLayer2015Query.executeForCount(queryInstance).then(function(count) {
+                var isOutside2015Bounds = count === 0;
+                service.aerialLayer2013.visible = isOutside2015Bounds;
+                service.aerialLayer.visible = !isOutside2015Bounds;
+              });
+
+            }
+          });
+
+          service.mapView.whenLayerView(service.parks).then( function(lyrView) {
+            lyrView.watch('updating', function(val) {
+              if (!val) { // wait for the layer view to finish updating
+                lyrView.queryFeatures().then(function(graphics) {
+                  console.log(graphics);
+                });
+              }
+            });
+          });
+
+          // Get the screen point from the view's click event
+          service.mapView.on('click', function(evt){
+            // Search for graphics at the clicked location
+            service.mapView.hitTest(evt.screenPoint).then(function(response){
+              if(response.results[0].graphic){
+                console.log("Top graphic found! Here it is: ", response.results[0].graphic);
+              }
+            });
           });
 
 
@@ -217,9 +249,8 @@
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
-          service.SpatialReference = SpatialReference;
+          service.Query = Query;
           service.QueryTask = QueryTask;
-          service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
           service.TooltipDialog = TooltipDialog;
           service.dijitPopup = dijitPopup;
 
