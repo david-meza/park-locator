@@ -108,8 +108,8 @@
         return informUser('Oops! It seems this location is not in Raleigh.');
       }
       // Update the location obj with the accurate user coords
-      esriModules.userMarker.setGeometry(new esriModules.Point([lon, lat]));
-      centerAndZoom(lat, lon);
+      // esriModules.userMarker.geometry = new esriModules.Point([lon, lat]);
+      // centerAndZoom(lat, lon);
       
       map.location.coords.latitude = lat;
       map.location.coords.longitude = lon;
@@ -140,11 +140,16 @@
     };
 
     function centerAndZoom(lat, lon) {
-      esriModules.map.centerAndZoom( new esriModules.Point({
-        y: lat, 
-        x: lon,
-        spatialReference: { wkid: 4326 }
-      }), 15);
+      esriModules.mapView.goTo({
+        center: new esriModules.Point({
+          latitude: lat, 
+          longitude: lon,
+          spatialReference: { wkid: 4326 }
+        }),
+        zoom: 15
+      }, {
+        easing: 'ease-in-out'
+      });
     }
 
     gMapsApi.then( function (maps) {

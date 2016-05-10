@@ -31,8 +31,8 @@
 
             lat = pos.coords.latitude;
             lon = pos.coords.longitude;
-
-            modules.trackerGraphic.setGeometry(new modules.Point([lon, lat]));
+            console.log(modules.trackerGraphic);
+            modules.trackerGraphic.geometry(new modules.Point([lon, lat]));
             modules.userMarker.hide();
             // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
             modules.map.centerAt([lon, lat]).then(function() {
@@ -70,8 +70,8 @@
 
         });
 
-      }]
 
+      }]
     };
   });
 
