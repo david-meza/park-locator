@@ -22,6 +22,8 @@
 
           function updatePosition(pos) {
             var lat, lon;
+            lat = pos.coords.latitude;
+            lon = pos.coords.longitude;
             
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (geolocation API)
@@ -29,15 +31,16 @@
               $scope.watching = true;
             });
 
-            lat = pos.coords.latitude;
-            lon = pos.coords.longitude;
-            console.log(modules.trackerGraphic);
-            modules.trackerGraphic.geometry(new modules.Point([lon, lat]));
-            modules.userMarker.hide();
+            modules.trackerGraphic.geometry = new modules.Point([lon, lat]);
+            modules.userMarker.visible = false;
             // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
-            modules.map.centerAt([lon, lat]).then(function() {
-              mapEvent = modules.map.on('mouse-drag-start', stopTracking);
-            });
+            modules.mapView
+              .goTo({
+                center: [lon, lat]
+              })
+              .then(function() {
+                mapEvent = modules.mapView.watch('interacting', stopTracking);
+              });
           }
 
           function stopTracking() {
@@ -49,7 +52,7 @@
             });
             
             navigator.geolocation.clearWatch(watchId);
-            modules.userMarker.show();
+            modules.userMarker.visible = true;
             watchId = null;
             mapEvent.remove();
           }

@@ -166,7 +166,7 @@
 
           // Add all layers to the map. Basemap must go first so map gets the right extent and coordinate system from it
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
-          // service.map.addMany([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
+          service.map.addMany([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
           service.map.addMany([service.greenways,service.greenways2, service.parks]);
 
           // Tracker graphic
@@ -174,11 +174,18 @@
             attributes: {
               title: 'My Location'
             },
-            geometry: new Point([-78.646, 35.785]),
-            symbol: new PictureMarkerSymbol({
-              url: '/img/icons/my-location.svg',
-              height: 36, width: 36
+            geometry: new Point({
+              x: -78.646,
+              y: 35.785,
+              spatialReference: { wkid: 4326 }
             }),
+            symbol: {
+              type: 'picture-marker-symbol',
+              url: '/img/icons/my-location.svg',
+              height: 36, width: 36,
+              xoffset: 0, yoffset: 0, angle: 0
+            },
+            visible: true
           });
           // My Location graphic
           service.userMarker = new Graphic({
@@ -193,13 +200,14 @@
             symbol: new PictureMarkerSymbol({
               url: '/img/icons/user-marker.svg',
               height: 36, width: 36
-            })
+            }),
+            visible: true
           });
 
           // Add my location graphic to map after it has loaded
-          // service.map.on('load', function() {
-            // service.map.graphics.add(service.userMarker);
-          // });
+          service.mapView.then(function() {
+            service.mapView.graphics.addMany([service.userMarker, service.trackerGraphic]);
+          });
 
 
           // Attach all Esri modules to the service so they can be used from outside
