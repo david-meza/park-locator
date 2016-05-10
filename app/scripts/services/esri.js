@@ -22,7 +22,7 @@
         'esri/layers/GraphicsLayer',
         'esri/layers/VectorTileLayer',
         'esri/layers/FeatureLayer',
-        'esri/layers/MapImageLayer', 
+        'esri/layers/ImageryLayer', 
         
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
@@ -42,15 +42,20 @@
                   MapView,
                   Basemap,
                   Graphic,
-                  VectorTileLayer,
-                  MapImageLayer,
+                  
                   GraphicsLayer,
+                  VectorTileLayer,
                   FeatureLayer,
+                  ImageryLayer,
+                  
                   SimpleRenderer,
                   UniqueValueRenderer,
+                  
                   PictureMarkerSymbol,
+                  
                   Point,
                   SpatialReference,
+                  
                   QueryTask,
                   TooltipDialog,
                   dijitPopup) {
@@ -90,13 +95,15 @@
             visible: false 
           });
 
-          service.aerialLayer = new MapImageLayer({
+          service.aerialLayer = new ImageryLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer',
+            format: 'png',
             visible: false
           });
 
-          service.aerialLayer2013 = new MapImageLayer({
+          service.aerialLayer2013 = new ImageryLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2013/ImageServer',
+            format: 'png',
             visible: false
           });
 
@@ -138,23 +145,22 @@
           service.parks = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
             renderer: parkSymbol,
-            definitionExpression: '1=1',
             title: 'parks'
           });
 
 
-          // // Amenity Markers (outdoors)
-          // service.amenities1 = new FeatureLayer({
-          //   url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
-          //   title: 'amenities-outdoors',
-          //   minScale: 5000
-          // });
-          // // Amenity Markers (indoors)
-          // service.amenities2 = new FeatureLayer({
-          //   url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
-          //   title: 'amenities-indoors',
-          //   minScale: 5000
-          // });
+          // Amenity Markers (outdoors)
+          service.amenities1 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
+            title: 'amenities-outdoors',
+            minScale: 5000
+          });
+          // Amenity Markers (indoors)
+          service.amenities2 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
+            title: 'amenities-indoors',
+            minScale: 5000
+          });
 
 
 
@@ -163,49 +169,49 @@
           // service.map.addMany([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
           service.map.addMany([service.greenways,service.greenways2, service.parks]);
 
-          // // Tracker graphic
-          // service.trackerGraphic = new Graphic({
-          //   attributes: {
-          //     title: 'My Location'
-          //   },
-          //   geometry: new Point([-78.646, 35.785]),
-          //   symbol: new PictureMarkerSymbol({
-          //     url: '/img/icons/my-location.svg',
-          //     height: 36, width: 36
-          //   }),
-          // });
-          // // My Location graphic
-          // service.userMarker = new Graphic({
-          //   geometry: new Point({
-          //     x: -78.646,
-          //     y: 35.785,
-          //     spatialReference: { wkid: 4326 }
-          //   }),
-          //   attributes: {
-          //     title: 'User Marker'
-          //   },
-          //   symbol: new PictureMarkerSymbol({
-          //     url: '/img/icons/user-marker.svg',
-          //     height: 36, width: 36
-          //   })
-          // });
+          // Tracker graphic
+          service.trackerGraphic = new Graphic({
+            attributes: {
+              title: 'My Location'
+            },
+            geometry: new Point([-78.646, 35.785]),
+            symbol: new PictureMarkerSymbol({
+              url: '/img/icons/my-location.svg',
+              height: 36, width: 36
+            }),
+          });
+          // My Location graphic
+          service.userMarker = new Graphic({
+            geometry: new Point({
+              x: -78.646,
+              y: 35.785,
+              spatialReference: { wkid: 4326 }
+            }),
+            attributes: {
+              title: 'User Marker'
+            },
+            symbol: new PictureMarkerSymbol({
+              url: '/img/icons/user-marker.svg',
+              height: 36, width: 36
+            })
+          });
 
           // Add my location graphic to map after it has loaded
-          service.map.on('load', function() {
+          // service.map.on('load', function() {
             // service.map.graphics.add(service.userMarker);
-          });
+          // });
 
 
           // Attach all Esri modules to the service so they can be used from outside
           service.VectorTileLayer = VectorTileLayer;
-          service.MapImageLayer = MapImageLayer;
+          service.ImageryLayer = ImageryLayer;
           service.FeatureLayer = FeatureLayer;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
           service.SpatialReference = SpatialReference;
           service.QueryTask = QueryTask;
-          // service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
+          service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
           service.TooltipDialog = TooltipDialog;
           service.dijitPopup = dijitPopup;
 
@@ -217,4 +223,4 @@
 
   }]);
 
-})(window.angular);
+})(angular || window.angular);
