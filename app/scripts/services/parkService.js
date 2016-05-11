@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri',
-  	function ($http, $q, $state, $timeout, Esri) {
+  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri', '$mdToast',
+  	function ($http, $q, $state, $timeout, Esri, $mdToast) {
   	
     var esriModules;
     
@@ -179,11 +179,13 @@
 
       var queryInstance = new esriModules.Query();
       queryInstance.where = query;
+      queryInstance.outSpatialReference = esriModules.mapView.spatialReference;
 
       esriModules.parks.queryExtent(queryInstance).then( function(response) {
         if (response.count > 0) {
-          // console.log(response.extent); Extent has different spatial reference
-          // esriModules.mapView.extent = response.extent;
+          esriModules.mapView.extent = response.extent.expand(1.3);
+        } else {
+          $mdToast.showSimple('No parks with these activities');
         }
       });
       
