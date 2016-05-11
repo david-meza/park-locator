@@ -56,7 +56,7 @@
             views: {
               '': {
                 templateUrl: 'views/partials/park-information.html',
-                controller: 'parkCtrl',
+                controller: 'parkCtrl'
               },
               'classes-info@home.park': {
                 templateUrl: 'views/partials/class-section-selection.html',

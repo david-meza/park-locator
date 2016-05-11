@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, ga) {
 
 	'use strict';
 
@@ -15,6 +15,8 @@
 
 	    $scope.scrollTo = deviceService.scrollTo;
 
+	    ga('send', 'event', 'Parks', 'selected', currentPark.name, currentPark.id);
+
 	  }]);
 
-})(window.angular);
+})(angular || window.angular, ga);
