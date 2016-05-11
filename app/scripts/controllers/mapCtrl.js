@@ -29,10 +29,23 @@
         });
         
         // Park on click event
-        modules.parksView.on('touchend, click, mouse-down', function (evt) {
-          var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
+        function transitionToParkDetails(graphic) {
+          var parkName = graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
-          closeTooltip();
+        }
+
+
+        // Get the screen point from the view's click event
+        modules.mapView.on('click', function(evt){
+          // Search for graphics at the clicked location
+          modules.mapView.hitTest(evt.screenPoint).then(function(response){
+            for (var i = 0; i < response.results.length; i++) {
+              if (response.results[i].graphic.hasOwnProperty('layer')) {
+                if (response.results[i].graphic.layer.id === 'parks-layer') { transitionToParkDetails(response.results[i].graphic) }
+                return console.log('Something here:', response.results[i].graphic);
+              }
+            }
+          });
         });
 
         // Show park name on hover

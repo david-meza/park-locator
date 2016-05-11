@@ -122,11 +122,13 @@
           service.greenways = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0',
             title: 'greenways',
+            id: 'greenways-layer',
             renderer: greenwaysLine
           });
           service.greenways2 = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1',
             title: 'greenway-connectors',
+            id: 'greenway-connectors-layer',
             renderer: greenwaysLine
           });
 
@@ -154,16 +156,18 @@
           // Amenity Markers (outdoors)
           service.amenities1 = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
-            title: 'amenities-outdoors',
             outFields: ['*'],
-            minScale: 5000
+            minScale: 5000,
+            title: 'amenities-outdoors',
+            id: 'amenities-outdoors-layer'
           });
           // Amenity Markers (indoors)
           service.amenities2 = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
-            title: 'amenities-indoors',
             outFields: ['*'],
-            minScale: 5000
+            minScale: 5000,
+            title: 'amenities-indoors',
+            id: 'amenities-indoors-layer'
           });
 
 
@@ -229,19 +233,6 @@
                 lyrView.queryFeatures().then(function(graphics) {
                   // console.log(graphics);
                 });
-              }
-            });
-          });
-
-          // Get the screen point from the view's click event
-          service.mapView.on('click', function(evt){
-            // Search for graphics at the clicked location
-            service.mapView.hitTest(evt.screenPoint).then(function(response){
-              console.log(response);
-              for (var i = 0; i < response.results.length; i++) {
-                if (response.results[i].graphic.hasOwnProperty('layer')) {
-                  return console.log('Something here:', response.results[i].graphic);
-                }
               }
             });
           });
