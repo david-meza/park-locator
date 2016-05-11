@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, ga) {
 
   'use strict';
 
@@ -124,6 +124,7 @@
         navigator.geolocation.getCurrentPosition( 
           function (position) {
             updateUserCoords(position.coords.latitude, position.coords.longitude);
+            ga('send', 'event', 'Location', 'geoLocated', position.coords.latitude + ',' + position.coords.longitude);
           },
           function (error) {
             informUser('Sorry, could not find you. Please try again.');
@@ -163,4 +164,4 @@
 
   }]);
 
-})(window.angular);
+})(angular || window.angular, ga);

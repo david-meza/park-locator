@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, ga) {
 
   'use strict';
 
@@ -30,14 +30,14 @@
       var updateUserMarker = function() {
         // Close the sidenav if not locked open
         $mdSidenav('left').close();
-
         // Reset the input field
         input.value = '';
 
         var loc = myLocation.getPlace().geometry.location;
+        ga('send', 'event', 'Location', 'geocoded', loc.lat() + ',' + loc.lng() );
         mapService.updateUserCoords( loc.lat(), loc.lng() );
       };
 
   }]);
 
-})(window.angular);
+})(angular || window.angular, ga);
