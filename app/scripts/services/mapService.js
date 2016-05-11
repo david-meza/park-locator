@@ -108,7 +108,11 @@
         return informUser('Oops! It seems this location is not in Raleigh.');
       }
       // Update the location obj with the accurate user coords
-      esriModules.userMarker.geometry = new esriModules.Point([lon, lat]);
+      esriModules.userGraphics.removeAll();
+      var positionGraphic = new esriModules.Graphic(esriModules.positionGraphicTemplate);
+      positionGraphic.geometry = new esriModules.Point([lon, lat]);
+      esriModules.userGraphics.add(positionGraphic);
+
       centerAndZoom(lat, lon);
       
       map.location.coords.latitude = lat;

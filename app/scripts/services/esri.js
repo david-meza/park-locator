@@ -145,6 +145,7 @@
           service.parks = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
             renderer: parkSymbol,
+            outFields: ['*'],
             title: 'parks'
           });
 
@@ -153,13 +154,21 @@
           service.amenities1 = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
             title: 'amenities-outdoors',
+            outFields: ['*'],
             minScale: 5000
           });
           // Amenity Markers (indoors)
           service.amenities2 = new FeatureLayer({
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
             title: 'amenities-indoors',
+            outFields: ['*'],
             minScale: 5000
+          });
+
+
+          // User Graphics
+          service.userGraphics = new GraphicsLayer({
+            graphics: []
           });
 
 
@@ -167,40 +176,30 @@
           // Add all layers to the map. Basemap must go first so map gets the right extent and coordinate system from it
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
           service.map.addMany([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
-          service.map.addMany([service.greenways,service.greenways2, service.parks]);
+          service.map.addMany([service.greenways,service.greenways2, service.parks, service.userGraphics]);
 
           // Tracker graphic
-          service.trackerGraphic = new Graphic({
+          service.trackerGraphicTemplate = {
             attributes: {
               title: 'My Location'
             },
-            geometry: new Point([-78.646, 35.785]),
             symbol: {
               type: 'picture-marker-symbol',
               url: '/img/icons/my-location.svg',
               height: 36, width: 36,
               xoffset: 0, yoffset: 0, angle: 0
-            },
-            visible: true
-          });
+            }
+          };
           // My Location graphic
-          service.userMarker = new Graphic({
-            geometry: new Point([-78.646, 35.785]),
+          service.positionGraphicTemplate = {
             attributes: {
               title: 'User Marker'
             },
             symbol: new PictureMarkerSymbol({
               url: '/img/icons/user-marker.svg',
               height: 36, width: 36
-            }),
-            visible: true
-          });
-
-          // Add my location graphic to map after it has loaded
-          service.mapView.then(function() {
-            console.log(service.mapView);
-            service.mapView.graphics.addMany([service.userMarker, service.trackerGraphic]);
-          });
+            })
+          };
 
 
           // Switch between aerial imagery when outside 2015 bounds
@@ -242,10 +241,8 @@
           });
 
 
-          // Attach all Esri modules to the service so they can be used from outside
-          service.VectorTileLayer = VectorTileLayer;
-          service.ImageryLayer = ImageryLayer;
-          service.FeatureLayer = FeatureLayer;
+          // Attach all necessary Esri modules to the service so they can be used from outside
+          service.Graphic = Graphic;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
