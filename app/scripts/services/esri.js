@@ -146,7 +146,8 @@
             url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
             renderer: parkSymbol,
             outFields: ['*'],
-            title: 'parks'
+            title: 'parks',
+            id: 'parks-layer'
           });
 
 
@@ -180,6 +181,7 @@
 
           // Tracker graphic
           service.trackerGraphicTemplate = {
+            id: 'tracker-graphic',
             attributes: {
               title: 'My Location'
             },
@@ -192,6 +194,7 @@
           };
           // My Location graphic
           service.positionGraphicTemplate = {
+            id: 'position-graphic',
             attributes: {
               title: 'User Marker'
             },
@@ -224,7 +227,7 @@
             lyrView.watch('updating', function(val) {
               if (!val) { // wait for the layer view to finish updating
                 lyrView.queryFeatures().then(function(graphics) {
-                  console.log(graphics);
+                  // console.log(graphics);
                 });
               }
             });
@@ -234,8 +237,11 @@
           service.mapView.on('click', function(evt){
             // Search for graphics at the clicked location
             service.mapView.hitTest(evt.screenPoint).then(function(response){
-              if(response.results[0].graphic){
-                console.log("Top graphic found! Here it is: ", response.results[0].graphic);
+              console.log(response);
+              for (var i = 0; i < response.results.length; i++) {
+                if (response.results[i].graphic.hasOwnProperty('layer')) {
+                  return console.log('Something here:', response.results[i].graphic);
+                }
               }
             });
           });
