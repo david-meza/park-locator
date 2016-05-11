@@ -40,9 +40,11 @@
           // Search for graphics at the clicked location
           modules.mapView.hitTest(evt.screenPoint).then(function(response){
             for (var i = 0; i < response.results.length; i++) {
+              // Get the first occurrence of a graphic that has a layer attr.
               if (response.results[i].graphic.hasOwnProperty('layer')) {
+                // Also if it is a park graphic, navigate to the park details page.
                 if (response.results[i].graphic.layer.id === 'parks-layer') { transitionToParkDetails(response.results[i].graphic) }
-                return console.log('Something here:', response.results[i].graphic);
+                return; 
               }
             }
           });
