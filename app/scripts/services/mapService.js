@@ -107,14 +107,10 @@
       if (!_isInRaleigh(lat, lon)) {
         return informUser('Oops! It seems this location is not in Raleigh.');
       }
-      // Update the location obj with the accurate user coords
-      esriModules.userGraphics.removeAll();
-      var positionGraphic = new esriModules.Graphic(esriModules.positionGraphicTemplate);
-      positionGraphic.geometry = new esriModules.Point([lon, lat]);
-      esriModules.userGraphics.add(positionGraphic);
-
+      updatePositionGraphic(lat, lon);
       centerAndZoom(lat, lon);
       
+      // Update the location obj with the accurate user coords
       map.location.coords.latitude = lat;
       map.location.coords.longitude = lon;
       map.myLocationMarker.coords.latitude = lat;
@@ -142,6 +138,13 @@
         console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };
+
+    function updatePositionGraphic(lat, lon) {
+      var positionGraphic = new esriModules.Graphic(esriModules.positionGraphicTemplate);
+      positionGraphic.geometry = new esriModules.Point([lon, lat]);
+      esriModules.userGraphics.removeAll();
+      esriModules.userGraphics.add(positionGraphic);
+    }
 
     function centerAndZoom(lat, lon) {
       esriModules.mapView.goTo({

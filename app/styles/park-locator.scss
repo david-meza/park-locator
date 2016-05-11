@@ -30,7 +30,8 @@ html, body {
   overflow: hidden;
 }
 
-.esri-display-object #parks_layer image, a { 
+// Hack to target park graphic svgs
+.esri-display-object image[height="44"], a { 
   cursor: pointer; 
 }
 

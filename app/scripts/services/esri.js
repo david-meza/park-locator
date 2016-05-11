@@ -139,7 +139,7 @@
             symbol: {
               type: 'picture-marker-symbol',
               url: '/img/icons/park-marker.svg',
-              height: 36, width: 36,
+              height: 33, width: 33,
               xoffset: 0, yoffset: 0, angle: 0
             }
           });
@@ -173,6 +173,7 @@
 
           // User Graphics
           service.userGraphics = new GraphicsLayer({
+            id: 'user-graphics',
             graphics: []
           });
 
@@ -185,7 +186,6 @@
 
           // Tracker graphic
           service.trackerGraphicTemplate = {
-            id: 'tracker-graphic',
             attributes: {
               title: 'My Location'
             },
@@ -198,7 +198,6 @@
           };
           // My Location graphic
           service.positionGraphicTemplate = {
-            id: 'position-graphic',
             attributes: {
               title: 'User Marker'
             },
