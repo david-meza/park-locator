@@ -26,7 +26,7 @@
           $element.css('height', scrollableHeight() + 'px');
         }
 
-        function animateClosing() {
+        function closeList() {
           $element.css('height', 0);
         }
 
@@ -37,7 +37,7 @@
           } else if (closingList === $attrs.listName) {
             $timeout.cancel(animating);
             updateHeight();
-            $timeout(animateClosing, 0, false);
+            $timeout(closeList, 0, false);
           }
         }
 

@@ -33,7 +33,7 @@
 
   <div layout="row" class="pull-down-sm">
     <span flex></span>
-    <span class = "text-total-results text-primary">Number of Parks: {{ parks.length }}</span>
+    <span class="text-total-results" ng-class="{'text-primary': parks.length > 0, 'text-danger': parks.length === 0}">Number of Parks: {{ parks.length }}</span>
   </div>
 
   <br />
