@@ -88,6 +88,10 @@
             }
           });
 
+          document.getElementById('map-canvas').addEventListener('touchmove', function(event) {  
+            event.preventDefault(); // Prevent scrolling on this element
+          }, false);
+
 
           // Aerial views
           service.aerialLabels = new VectorTileLayer({
