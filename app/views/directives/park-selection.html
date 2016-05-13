@@ -1,41 +1,39 @@
-<md-autocomplete  md-selected-item="search.selectedItem"
-                  md-search-text="search.searchText"
-                  md-selected-item-change="search.selectedItemChange(park)"
-                  md-items="park in search.querySearch(search.searchText)"
-                  md-item-text="park.name"
-                  placeholder="Park Name"
-                  md-menu-class="park-custom-template"
-                  md-autoselect="true"
-                  md-select-on-match="true">
-  <md-item-template>
-    <span class="item-title" layout="row">
-      <span flex="grow" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>
-      <md-icon md-svg-icon="/img/icons/ok.svg" ng-if="park.selected"></md-icon>
-    </span>
-  </md-item-template>
-  <md-not-found>No matching park names found.</md-not-found>
-</md-autocomplete>
+<div class="flex layout-column sidenav-list-item-container">
 
-<div class="pull-down-sm layout-align-end-center layout-row">
-  <span class="text-primary text-before-dropdown">Sort by</span>
-  <md-select  ng-model = "selectedSort" 
-              aria-label = "Select Park Sorter" 
-              class = "inline-dropdown text-primary" 
-              md-container-class = "inline-dropdown">
-    <md-option ng-value="::option" ng-repeat="option in sortOptions">{{ ::option.view }}</md-option>
-  </md-select>
-</div>
+  <md-autocomplete  md-selected-item="search.selectedItem"
+                    md-search-text="search.searchText"
+                    md-selected-item-change="search.selectedItemChange(park)"
+                    md-items="park in search.querySearch(search.searchText)"
+                    md-item-text="park.name"
+                    placeholder="Park Name"
+                    md-menu-class="park-custom-template"
+                    md-autoselect="true"
+                    md-select-on-match="true"
+                    class="parks-autocomplete">
+    <md-item-template>
+      <span class="item-title" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>
+    </md-item-template>
+    <md-not-found>No matching park names found.</md-not-found>
+  </md-autocomplete>
 
-<div scrolling-buttons>
-  <md-list id="parks-list">
-    <md-list-item class="md-2-line custom-ripple-item" ng-click="selectPark(park)" ng-repeat="park in parks.markers | orderBy : selectedSort.model : selectedSort.reverse">
-      <div class="md-list-item-text">
-        <h3 class="limit-text capitalize"> {{ ::park.name }} </h3>
-        <p class="park-distance" ng-show="park.distance">
-          <span flex></span>
-          <i class = "fa fa-fw fa-location-arrow"></i> Apx. <b>{{ park.distance * 85 | number: 1 }} mi</b>
-        </p>
-      </div>
-    </md-list-item>
-  </md-list>
+  <div class="sort-by-text layout-align-end-center layout-row">
+    <span class="text-primary text-before-dropdown">Sort by</span>
+    <md-select  ng-model = "selectedSort" 
+                aria-label = "Select Park Sorter" 
+                class = "inline-dropdown text-primary" 
+                md-container-class = "inline-dropdown">
+      <md-option ng-value="::option" ng-repeat="option in sortOptions">{{ ::option.view }}</md-option>
+    </md-select>
+  </div>
+
+  <div scrolling-buttons>
+    <md-list id="parks-list">
+      <md-list-item class="custom-ripple-item" ng-click="selectPark(park)" ng-repeat="park in parks.markers | orderBy : selectedSort.model : selectedSort.reverse">
+        <span class="limit-text capitalize list-inner-text"> {{ ::park.name }} </span>
+        <span class="park-distance list-inner-text" ng-show="park.distance">
+          <i class = "fa fa-fw fa-location-arrow"></i>Apx. {{ park.distance * 85 | number: 1 }}mi
+        </span>
+      </md-list-item>
+    </md-list>
+  </div>
 </div>

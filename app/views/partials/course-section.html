@@ -1,14 +1,12 @@
-<div layout="row" layout-align="start center">
+<div layout="row" layout-align="space-between center">
 	<md-input-container class="md-icon-float md-block classes-search-container">
 	  <label>Search</label>
-	  <md-icon md-svg-src="img/icons/search.svg" class="search-icon"></md-icon>
+	  <md-icon md-svg-icon="search" class="search-icon"></md-icon>
 	  <input ng-model="textSearch" type="search">
-	  <div class="hint">You can search by any one term: e.g. Yoga or Pottery or 5:30PM</div>
+	  <div class="hint">This will show only cards matching the text</div>
 	</md-input-container>
 
-	<span flex></span>
-	
-	<md-button class="md-primary md-hue-1 back-to-sections" ui-sref="^">Back To Sections</md-button>
+	<md-button class="md-primary md-hue-1 back-to-sections" ui-sref="^">Back To Class Categories</md-button>
 </div>
 
 <div layout="row" layout-align="start center" style="height:40px;">
@@ -30,15 +28,15 @@
 	  
 	  <div class="md-card-content" layout="column">
 	    <span class="limit-text class-detail" flex> 
-	    	<md-icon md-svg-icon="/img/icons/classes/course.svg" class="icon-course"></md-icon> 
+	    	<md-icon md-svg-icon="course" class="icon-course"></md-icon> 
 	    	<b>Course:</b> {{ course.COURSE || 'No Course Preview' }} 
 	    </span>
 			<span class="limit-text class-detail" flex> 
-				<md-icon md-svg-icon="/img/icons/classes/activity.svg" class="icon-activity"></md-icon> 
+				<md-icon md-svg-icon="activity" class="icon-activity"></md-icon> 
 				<b>Activity:</b> {{ course.ACTIVITY || 'No Activity Preview' }} 
 			</span>
 			<span class="limit-text class-detail" flex> 
-				<md-icon md-svg-icon="/img/icons/classes/calendar.svg" class="icon-start-date"></md-icon> 
+				<md-icon md-svg-icon="calendar-date" class="icon-start-date"></md-icon> 
 				<b>Start Date:</b> {{ (course.START_DATE | date : 'MMM d, y h:mm a') || 'No Date Specified' }} 
 			</span>
 	  </div>
@@ -50,7 +48,7 @@
 					    		class="md-accent more-info"
 					    		aria-label="Learn more about this course"> 
 		    <md-tooltip md-direction = "top">Please click again if there is a cookies alert.</md-tooltip>
-	      <md-icon aria-label="External Link" md-svg-icon="/img/icons/external-link.svg"></md-icon>
+	      <md-icon aria-label="External Link" md-svg-icon="external-link"></md-icon>
 	    	More
 	    </md-button> 
 	  </div>

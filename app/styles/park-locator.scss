@@ -1,9 +1,5 @@
 @import 'mixins';
 
-// PRCR Blue: rgb(4, 113, 206)
-// Old Primary: #1565C0
-// $primary: #0D44A7;
-
 $primary: #0471CE;
 $indigo: #3F51B5;
 $light-blu: #ABC5E9;
@@ -20,17 +16,27 @@ $gray: rgba(0,0,0, 0.68);
 $accent: #FF4081;
 $dark-text: rgba(38, 47, 98, 0.78);
 
+$quadratic-in-out: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+$cubic-in-out: cubic-bezier(0.65, 0.05, 0.36, 1);
+$fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
-  font-weight: 400;
 }
 
-.nav, .pagination, #parks_layer image, a { 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#parks_layer image, a { 
   cursor: pointer; 
 }
 
 a, a:hover, a:active, a:focus, a:visited {
   text-decoration: none;
+  outline: none;
 }
 
 *::selection {
@@ -42,30 +48,16 @@ a, a:hover, a:active, a:focus, a:visited {
   background: rgba(37,208,117,0.3);
 }
 
-img, h1, h2, h3, h4, h5, h6, #map-canvas {
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+img, h1, h2 #map-canvas, .app-title {
   -webkit-user-select: none;  
      -moz-user-select: none;    
       -ms-user-select: none;
           user-select: none;  
-}
-
-#geolocate-button {
-  position: absolute;
-  top: 95px;
-  left: 20px;
-  z-index: 31;
-
-  .zoomLocateButton {
-    background-color: #555;
-  }
-}
-
-#search-field {
-  // position: absolute;
-  // z-index: 2;
-  // top: 20px;
-  // left: 74px;
-  margin: 6px 3px 6px 7px;
 }
 
 #map-key, #location-tracker {
@@ -91,17 +83,14 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
 .dijitPopup {
   position: absolute;
+  overflow: hidden !important;
 
-  * {
-    cursor: default;
+  .dijitBackgroundIframe {
+    display: none;
   }
 }
 
-.opaque {
-  opacity: 0;
-}
-
-.light {
+.text-light {
   color: $light-white;
 }
 
@@ -212,21 +201,11 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 #back-to-top {
   position: fixed;
   right: 10px;
-  bottom: 25px;
+  bottom: 30px;
   z-index: 21;
-
-  -webkit-transform: translateY(100px) scale(0,0);
-     -moz-transform: translateY(100px) scale(0,0);
-       -o-transform: translateY(100px) scale(0,0);
-      -ms-transform: translateY(100px) scale(0,0);
-          transform: translateY(100px) scale(0,0);
-
   opacity: 0;
-  -webkit-transition:  all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transition:     all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transition:       all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transition:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  @include transform( translateY(100px) scale(0,0) );
+  @include transition( all 0.4s $cubic-in-out );
 
 
   .md-button {
@@ -235,20 +214,11 @@ img, h1, h2, h3, h4, h5, h6, #map-canvas {
 
   &.bring-to-screen {
     opacity: 1;
-    -webkit-transform: translateY(0px) scale(1,1);
-       -moz-transform: translateY(0px) scale(1,1);
-         -o-transform: translateY(0px) scale(1,1);
-        -ms-transform: translateY(0px) scale(1,1);
-            transform: translateY(0px) scale(1,1);
+    @include transform( translateY(0px) scale(1,1) );
   }
 
   &.bring-to-screen.lower {
-    opacity: 1;
-    -webkit-transform: translateY(20px) scale(1,1);
-       -moz-transform: translateY(20px) scale(1,1);
-         -o-transform: translateY(20px) scale(1,1);
-        -ms-transform: translateY(20px) scale(1,1);
-            transform: translateY(20px) scale(1,1);
+    @include transform( translateY(20px) scale(1,1) );
   }
 }
 
@@ -257,123 +227,23 @@ md-icon {
   outline: none;
 }
 
-.fa-icon-baseline {
+.icon-baseline {
   vertical-align: baseline;
 }
 
-.scroll-button-top, .scroll-button-bottom {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  height: 25px;
-  width: 100%;
-  z-index: 5;
-
-  -webkit-transition:  visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transition:     visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transition:       visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transition:      visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  transition:          visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-
-  &.show-button {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .md-button-top, .md-button-bottom {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-  }
-
-  .md-button-top {
-    top: 0;
-  }
-
-  .md-button-bottom {
-    bottom: 0;
-  }
-}
-
-.scroll-button-top {
-  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); 
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-  top: 0;
-}
-
-.scroll-button-bottom {
-  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-  bottom: 0;
-}
-
-#mobile-nav {
-
-  .nav-item {
-    text-align: center;
-    a {
-      color: $light-white;
-      padding: 10px;
-      -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      -moz-transition:    all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition:         all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-      &:focus, &:hover {
-        padding: 10px 30%;
-        outline: none;
-        background-color: darken($primary, 15%);
-      }
-    }
-  }
-}
-
-#map-icons-dialog {
-  md-toolbar {
-    background-color: darken($primary, 10%);
-  }
-
+#map-icons-dialog-content {
   .map-icons-list {
-    .user-icon {
-      height: 45px !important;
-    }
-
     .md-avatar {
       border-radius: 0;
-      height: 50px;
-      width: 50px;
-    }
-
-    h4 {
-      font-weight: 500;
-      color: rgba(0,0,0,0.75);
+      margin: 0 16px 0 0;
+      height: auto;
+      max-width: 100%;
     }
   }
-}
-
-
-h2 {
-  font: 400 40px/1.5 Roboto, Helvetica, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.small-font {
-  font-size: 0.75em;
 }
 
 p {
   word-wrap: break-word;
-}
-
-.font-p-sm {
-  font-size: 0.9em
-}
-
-th {
-  white-space: nowrap;
 }
 
 .fa-pad-right {
@@ -390,27 +260,14 @@ th {
   font-size: 15px;  
 }
 
-// .course-details {
-//   max-height: 40em;
-//   overflow: auto;
-//   margin-right: -15px;
-//   padding-right: 15px;
-  
-//   table, .table {
-//     a.md-button{
-//       margin: 0;
-//       text-decoration: none;
-//     }
-//   }
-// }
-
 .img-container {
   height: 150px;
   width: 200px;
+  margin: 12px;
 
   .img-responsive {
-    height: 100%;
-    width: auto;
+    height: auto;
+    max-width: 100%;
   }
   
 }
@@ -448,16 +305,21 @@ th {
 }
 
 #parks-list {
-  .md-list-item-text {
-    margin: 0;
-    p {
-      font-size: 13px;
-      font-weight: 400;
+  .md-button {
+    padding: 0 4px;
+  }
+
+  .md-list-item-inner {
+    @include justify-content( space-between );
+
+    .list-inner-text {
+      white-space: nowrap;
     }
   }
 }
 
 #parks-list, #activities-list {
+
   .custom-ripple-item {
     
     button.md-ink-ripple {
@@ -471,11 +333,7 @@ th {
         background-color: rgba($google-blu, 0.2);
       }
 
-      .md-ripple-container {
-        // display: none;
-      }
-
-      p, h3 {
+      .list-inner-text {
         color: $dark-text;
       }
     }
@@ -487,9 +345,6 @@ th {
   font-weight: 500;
 }
 
-.text-before-dropdown {
-}
-
 .inline-dropdown {
   margin: 0 0 4px 2px;
 
@@ -499,65 +354,11 @@ th {
   }
 }
 
-
-// ul#park-list, ul#amenities-list, ul#selected-amenities-list {
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-
-//   li {
-//     position: relative;
-//     min-height: 3.45em;
-//     border-bottom: 1px solid #ccc;
-
-//     .activity-img {
-//       height: 24px;
-//       width: 24px;
-//     }
-
-//     &:last-child {
-//       border: none;
-//     }
-
-//     & > p {
-//       margin: 0;
-//     }
-
-//     & > a, & > p {
-//       position: absolute;
-//       top: 0;
-//       bottom: 0;
-//       font-size: 16px;
-//       line-height: 3em;
-//       overflow: hidden;
-//       white-space: nowrap;
-//       text-overflow: ellipsis;
-//       color: darken($primary, 30%);
-//       display: block;
-//       width: 100%;
-
-//       -webkit-transition: all 0.3s ease;
-//       -moz-transition:    all 0.3s ease;
-//       -o-transition:      all 0.3s ease;
-//       -ms-transition:     all 0.3s ease;
-//       transition:         all 0.3s ease;
-
-//       &:hover {
-//         color: darken($primary, 20%);
-//         text-decoration: none;
-//         font-size: 1.2em;
-//         background-color: rgba(0,0,0,0.01);
-
-//       }
-//     }
-//   }
-// }
-
 #class-sections, #park-amenities {
 
   .icon-card {
     height: auto;
-    max-width: 150px;
+    width: 150px;
     @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
     
     md-card-content {
@@ -565,7 +366,7 @@ th {
         @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
 
         &.icon-contain {
-          width: auto;
+          width: 100%;
           height: auto;
         }
       }
@@ -632,97 +433,6 @@ th {
   }
 }
 
-// List thumbnail grid style
-// #park-amenities, #class-sections {
-//   list-style-type: none;
-//   padding-left: 0;
-
-//   .view[ng-click] {
-//     cursor: pointer;
-//     @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12) );
-
-//     &:focus {
-//       outline: none;
-//       border: 5px solid rgba($indigo, 0.82);
-//       @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
-//     }
-//   }
-
-//   .view {
-
-//     width: 110px;
-//     height: 110px;
-//     margin: 12px;
-//     border: 5px solid #fff;
-//     overflow: hidden;
-//     position: relative;
-//     text-align: center;
-//     -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     -moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3), 0px 0px 17px rgba(0, 0, 0, 0.25);
-//     cursor: default;
-
-//     .mask {
-//       width: 100%;
-//       height: 100%;
-//       position: absolute;
-//       overflow: hidden;
-//       top: 0;
-//       left: 0;
-//       opacity: 0;
-//       background-color: rgba($warn, 0.7);
-//       -webkit-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -moz-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -o-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       -ms-transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//       transition: all 500ms cubic-bezier(0.65, 0.05, 0.36, 1);
-//     }
-
-//     md-icon {
-//       position: relative;
-//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
-
-//       &.icon-contain {
-//         width: 100%;
-//         height: 100%;
-//       }
-//     }
-
-//     h6 {
-//       color: #fff;
-//       position: relative;
-//       margin: 0;
-//       padding: 10px 3px 10px 3px;
-//       background: rgba($indigo, 0.82);
-//       opacity: 0;
-//       font-size: 15px;
-//       // font-size: 1em;
-//       // max-height: 50px;
-//       // overflow: auto;
-
-//       @include transform( translateY(-70px) );
-//       @include transition( all 300ms cubic-bezier(0.65, 0.05, 0.36, 1) );
-//     }
-
-//     &:hover {
-
-//       md-icon {
-//         @include transform( scale(1.1,1.1) );
-//       }
-
-//       .mask {
-//         opacity: 1;
-//       }
-
-//       h6 {
-//         opacity: 1;
-//         @include transform( translateY(25px) );
-//       }
-//     }
-//   }
-
-// }
-
 md-input-container {
   &.classes-search-container {
     margin: 5px 0 0;
@@ -736,15 +446,6 @@ md-input-container {
 
 .back-to-sections:hover, .back-to-sections:focus {
   background-color: rgba($indigo, 0.13) !important;
-}
-
-.back-to-map {
-  font-size: 12px;
-  margin: 0;
-
-  &:hover, &:focus {
-    background-color: rgba($accent, 0.1) !important;
-  }
 }
 
 .park-center {
@@ -793,13 +494,6 @@ md-input-container {
   text-overflow: ellipsis;
 }
 
-
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
 #map-canvas, #directions-map {
   position: relative;
   @include box-shadow( 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) );
@@ -808,7 +502,7 @@ html, body {
 #map-canvas {
   box-sizing: content-box;
   padding: 0;
-  margin: 8px;
+  margin: 4px;
   min-height: 450px;
 
   #aerial-toggle {
@@ -848,12 +542,52 @@ html, body {
   margin-bottom: 0;
 }
 
-.panel-scrollable {
-  max-height: 340px;
-  overflow: auto;
-  margin-right: -15px;
-  padding-right: 15px;
-  clear: right;
+[scrolling-buttons] {
+  .scroll-button-top {
+    @include linear-gradient( rgba(255,255,255,1),rgba(255,255,255,0) );
+    top: 0;
+  }
+
+  .scroll-button-bottom {
+    @include linear-gradient( rgba(255,255,255,0),rgba(255,255,255,1) );
+    bottom: 0;
+  }
+
+  .scroll-button-top, .scroll-button-bottom {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    z-index: 5;
+    @include transition (visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
+
+    &.show-button {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .md-button-top, .md-button-bottom {
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .md-button-top {
+      top: 0;
+    }
+
+    .md-button-bottom {
+      bottom: 0;
+    }
+  }
+
+  .panel-scrollable {
+    max-height: 280px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 .pull-down-lg {
@@ -868,66 +602,12 @@ html, body {
   margin-top: 10px;
 }
 
-#park-window {
-
-  h3 {
-    margin: 0;
-    padding: 5px 0 8px;
-  }
-
-  p {
-    margin: 0;
-    padding: 4px 0;
-    color: rgba(0,0,0,0.6);
-  }
-
-  .more-info {
-    color: $indigo;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 4px 0;
-
-    &:hover {
-      text-decoration: none;
-      color: darken($indigo, 10%);
-    }
-  }
-}
-
-#activity-window, #park-window {
-  opacity: 0;
-
-  -moz-animation:     show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -webkit-animation:  show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -o-animation:       show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  animation:          show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-me {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@-webkit-keyframes show-me {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .full-height {
   height: 100%
 }
 
-.color-default {
-  color: #2c3e50;
-}
-
 .gradient-primary {
-  background:     -moz-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%);
-  background:  -webkit-linear-gradient(top,       $primary 0%, darken($primary, 5%) 100%); 
-  background:          linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
-  background-color: $primary;
+  @include radial-gradient($primary, $indigo);
 }
 
 .custom-ink-ripple {
@@ -946,14 +626,29 @@ html, body {
 }
 
 #menu-sidenav {
+
+  sidenav-content {
+    overflow-x: hidden;
+  }
   
   .nav-header {
-    margin: 25px 8px 40px;
+    margin: 25px 14px 40px;
     box-sizing: border-box;
+    
+    .parks-logo {
 
-    img {
-      height: auto;
-      max-width: 100%;
+      img {
+        height: auto;
+        max-width: 100%;
+      }
+
+      .header-title {
+        font-size: 26px;
+        text-align: center;
+        font-weight: 400;
+        color: $light-white;
+        margin: 1rem 0 0;
+      }
     }
   }
 
@@ -967,7 +662,7 @@ html, body {
     }
 
     &:hover, &:focus {
-      background-color: lighten($primary, 3%);
+      background-color: rgba(lighten($primary, 5%), 0.67);
     }
 
     .md-button:hover, .md-button:focus {
@@ -979,7 +674,7 @@ html, body {
     }
 
     .list-icon {
-      @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
+      @include transition( all 0.7s $cubic-in-out );
 
       &.rotate {
         @include transform( rotate(180deg) );
@@ -987,34 +682,50 @@ html, body {
     }
   }
 
-  .selection-menu {
-    @include transition( all 600ms cubic-bezier(0.46, 0.03, 0.52, 0.96) );
-    background-color: #fff;
-    max-height: 500px;
-    overflow: visible;
-    padding: 12px;
 
-    &.ng-hide {
-      max-height: 0;
-    }
-    
-    &.ng-hide, &.ng-hide-animate, &.activities-selection {
-      overflow: auto;
+  .selection-menu {
+    @include transition( height 0.7s $cubic-in-out );
+    background-color: #fff;
+    // height: 0;
+    overflow: hidden;
+
+    .sidenav-list-item-container {
+      padding: 8px 4px;
+
+      .activity-chips {
+        padding: 0 4px;
+      }
+
+      .address-input-container {
+        padding-right: 10px;
+      }
+
+      .parks-autocomplete {
+        padding: 0 4px;
+      }
+
+      .sort-by-text {
+        margin: 6px 0 8px;
+        min-height: 35px;
+      }
     }
 
   }
+}
 
+.no-transition {
+  @include transition(none !important);
 }
 
 #navbar {
   
-  h1 {
+  .app-title {
     font-size: 24px;
-  }
-
-  a:hover, a:focus {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.85);
+    color: $light-white;
+    
+    &:hover, &:focus {
+      color: #fff;
+    }
   }
 
 }
@@ -1024,12 +735,11 @@ html, body {
   max-height: 45px;
   min-height: 45px;
   height: 45px;
-  border-top: 1px solid #e5e5e5;
   opacity: 1;
   visibility: visible;
   padding: 2px 8px;
-
-  @include transition( all 500ms cubic-bezier(0.345, 0, 0.25, 1) );
+  @include box-shadow( 0 0 7px 0 rgba(0, 0, 0, 0.19) );
+  @include transition( all 500ms $cubic-in-out );
 
   &.collapsed {
     min-height: 0;
@@ -1038,11 +748,6 @@ html, body {
     border: 0;
     opacity: 0;
     visibility: hidden;
-    // @include transform( translateY(50px) );
-  }
-
-  md-content {
-    @include box-shadow( 0 -3px 7px 0 rgba(0, 0, 0, 0.19) );
   }
 
   .layout-padding {
@@ -1060,10 +765,7 @@ html, body {
 
   .fa-heart {
     color: $heart;
-    -moz-animation:     pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    -webkit-animation:  pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    -o-animation:       pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
-    animation:          pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal;
+    @include animation( pulsate 1.5s cubic-bezier(0.65, 0.05, 0.36, 1) 0s infinite normal );
 
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
@@ -1071,58 +773,50 @@ html, body {
 
 }
 
-@keyframes pulsate {
-  0% { @include transform( scale(1,1) ); }
-  10% { @include transform( scale(1.2,1.2) ); }
-  20% { @include transform( scale(1,1) ); }
-}
-@-webkit-keyframes pulsate {
-  0% { @include transform( scale(1,1) ); }
-  10% { @include transform( scale(1.2,1.2) ); }
-  20% { @include transform( scale(1,1) ); }
-}
-
 #collapse-footer {
   position: relative;
   
   .collapse-button {
     position: absolute;
-      -webkit-transform: translate(0px, -2px);
-         -moz-transform: translate(0px, -2px);
-           -o-transform: translate(0px, -2px);
-          -ms-transform: translate(0px, -2px);
-              transform: translate(0px, -2px);
     left: 0;
     top: -68px;
     z-index: 1;
-
-    -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-    transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+    @include transition( all 0.6s cubic-bezier(0.345, 0, 0.25, 1) );
+    @include transform( translate(0px, -2px) );
 
     md-icon {
       color: $heart;
-      -webkit-transition:  all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -moz-transition:     all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -o-transition:       all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      -ms-transition:      all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
-      transition:         all 0.6s cubic-bezier(0.345, 0, 0.25, 1);
+      @include transition( all 0.6s cubic-bezier(0.345, 0, 0.25, 1) );
     }
 
     &.rotated {
-      -webkit-transform: translateY(30px) rotate(45deg);
-         -moz-transform: translateY(30px) rotate(45deg);
-           -o-transform: translateY(30px) rotate(45deg);
-          -ms-transform: translateY(30px) rotate(45deg);
-              transform: translateY(30px) rotate(45deg);
+      @include transform( translateY(30px) rotate(45deg) );
 
       md-icon {
         color: #55B53F;
       }
     }
   }
+}
+
+@include keyframes(fade-in) {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@include keyframes(slide-in-ltr) {
+  from { @include transform(translateX(-100px)); opacity: 0; }
+  to { @include transform(translateX(0)); opacity: 1; }
+}
+@include keyframes(slide-in-btt) {
+  from { @include transform(translateY(100px)); opacity: 0; }
+  to { @include transform(translateX(0)); opacity: 1; }
+}
+
+@include keyframes(pulsate) {
+  0% { @include transform( scale(1,1) ); }
+  10% { @include transform( scale(1.25,1.25) ); }
+  20% { @include transform( scale(1,1) ); }
 }
 
 .content-box {
@@ -1134,12 +828,22 @@ html, body {
   padding: 0;
 }
 
+.classes-container {
+  position: relative;
+  min-height: 600px;
+}
+
 div[ui-view="classes-info"] {
+  &.ng-enter, &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    @include transition( all 600ms $cubic-in-out );
+  }
   // Starting the entering transition...
   &.ng-enter {
-    opacity: 0.5;
+    opacity: 0;
     @include transform( translateX(500px) );
-    @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
   }
   // Finish the enter transition
   &.ng-enter-active {
@@ -1148,14 +852,19 @@ div[ui-view="classes-info"] {
   }
   // Start the leave transition...
   &.ng-leave {
-    opacity: 0;
+    opacity: 1;
     @include transform( translateX(0) );
-    @include transition( all 600ms cubic-bezier(0.345, 0, 0.25, 1) );
   }
   // Finish leaving
   &.ng-leave-active {
     opacity: 0;
     @include transform( translateX(-500px) );
+  }
+}
+
+md-tabs {
+  .md-tab {
+    color: rgba($indigo, 0.89);
   }
 }
 
@@ -1270,10 +979,45 @@ div[ui-view="classes-info"] {
     visibility: visible;
   }
 
-  #navbar {
-    h1 {
-      font-size: 20px;
+  #navbar .app-title {
+    font-size: 20px;
+  }
+
+  #menu-sidenav {
+    .nav-header {
+      margin: 22px 28px;
+    }
+  }
+  
+  [scrolling-buttons] {
+    .panel-scrollable {
+      max-height: 190px;
     }
   }
 
+}
+
+
+
+.browser-warning {
+  position:absolute;
+  background-color:#444;
+  color:white;
+  top:0;
+  bottom: 0;
+  left:0;
+  right:0;
+  z-index:100000;
+  padding: 40px;
+}
+
+
+.browser-warning .btn {
+  background: none;
+  color: white;
+}
+
+.lead {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

@@ -1,23 +1,23 @@
-(function(angular) {
+(function(angular, ga) {
 
   'use strict';
 
-  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', '$timeout', 'Esri',
-    function (gMapsApi, $mdToast, $timeout, Esri) {
+  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', 'Esri', 'deviceService',
+    function (gMapsApi, $mdToast, Esri, deviceService) {
 
     var esriModules;
     
     Esri.modulesReady().then( function (modules) {
       esriModules = modules;
-      // Get user's coordinates
+      // Get user's coordinates. Delay it a bit so it doesn't block other more important scripts.
       geoLocate();
     });
 
     // Temporary coordinates while Geoloc gets us the user's coords
     var location = {
       coords: {
-        latitude: 35.79741992502266, 
-        longitude: -78.64118938203126
+        latitude: 35.779590,
+        longitude: -78.638179
       }
     };
 
@@ -92,15 +92,21 @@
         .highlightAction(false)
         .hideDelay(hide || 3000)
         .position('bottom right');
-      $mdToast.show(toast);
+      
+      deviceService.toastIsClosed().then( function() {
+        $mdToast.show(toast);
+      });
     };
 
     var _isInRaleigh = function (lat, lon) {
       // Test Raleigh address: 35.7776464, -78.63844279999999
-      return lat < 36.113561 && lat > 35.437814 && lon < -78.336890 && lon > -78.984583;
+      return lat < 36.413561 && lat > 35.437814 && lon < -77.936890 && lon > -78.984583;
     };
 
     var updateUserCoords = function (lat, lon) {
+      if (!_isInRaleigh(lat, lon)) {
+        return informUser('Oops! It seems this location is not in Raleigh.');
+      }
       // Update the location obj with the accurate user coords
       esriModules.userMarker.setGeometry(new esriModules.Point([lon, lat]));
       centerAndZoom(lat, lon);
@@ -109,10 +115,6 @@
       map.location.coords.longitude = lon;
       map.myLocationMarker.coords.latitude = lat;
       map.myLocationMarker.coords.longitude = lon;
-      map.zoom = 14;
-      if (!_isInRaleigh(lat, lon)) {
-        informUser('Oops! It seems this location is not in Raleigh.');
-      }
     };
 
     var geoLocate = function () {
@@ -122,6 +124,7 @@
         navigator.geolocation.getCurrentPosition( 
           function (position) {
             updateUserCoords(position.coords.latitude, position.coords.longitude);
+            ga('send', 'event', 'Location', 'geoLocated', position.coords.latitude + ',' + position.coords.longitude);
           },
           function (error) {
             informUser('Sorry, could not find you. Please try again.');
@@ -161,4 +164,4 @@
 
   }]);
 
-})(window.angular);
+})(angular || window.angular, ga);

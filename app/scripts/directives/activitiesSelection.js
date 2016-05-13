@@ -6,7 +6,7 @@
     
     return { 
       restrict: 'E',
-      // Set an isolate scope so we don't mistakenly inherit anything from the parent's scope
+      // Set an isolate scope
       scope: {},
       templateUrl: 'views/directives/activities-selection.html',
       controller: ['$scope', 'amenitiesService', 'parkService', function ($scope, amenitiesService, parkService) {

@@ -52,7 +52,7 @@
             center: [-78.646, 35.785],
             zoom: 13,
             maxZoom: 18,
-            minZoom: 9,
+            minZoom: 10,
             // basemap: 'streets-vector',
             logo: false
           });
@@ -69,9 +69,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/park-marker.svg',
-              height: 28,
-              width: 28,
-              size: 512
+              height: 36,
+              width: 36,
             }
           });
           service.parks.setRenderer(parkSymbol);
@@ -149,8 +148,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/user-marker.svg',
-              height: 28,
-              width: 28
+              height: 36,
+              width: 36
             },
           });
 
@@ -167,8 +166,8 @@
             symbol: {
               type: 'esriPMS',
               url: '/img/icons/my-location.svg',
-              height: 28,
-              width: 28
+              height: 36,
+              width: 36
             },
           });
           // Add graphic to graphic layer

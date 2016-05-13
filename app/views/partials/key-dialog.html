@@ -1,109 +1,93 @@
-<md-dialog aria-label="Map Icons Key" id = "map-icons-dialog">
-  <form>
-
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        
-        <h2>Map Icons Key</h2>
-        
-        <span flex></span>
-        
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-font-icon="fa-times" class = "fa fa-2x" aria-label="Close dialog"></md-icon>
-        </md-button>
+<md-dialog aria-label="Map Icons Key">
+  <md-toolbar class="gradient-primary">
+    <div class="md-toolbar-tools">
       
-      </div>
-    </md-toolbar>
-
-    
-    <md-dialog-content style = "max-width:800px;max-height:810px; " md-theme="altTheme">
-      <md-list class = "map-icons-list">
-
-        
-        <md-subheader>You</md-subheader>
-        
-        <div layout="row" layout-xs="column" layout-align = "start stretch"> 
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src = "/img/icons/my-location.svg" class="md-avatar" alt="location tracking" />
-            <div class="md-list-item-text">
-              <h4>You are here (location tracking)</h4>
-            </div>
-          </md-list-item>
-
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src = "/img/icons/user-marker.svg" class="md-avatar" alt="user marker" />
-            <div class="md-list-item-text">
-              <h4>Distance Point of Reference to Parks</h4>
-            </div>
-          </md-list-item>
-
-        </div>
-
-        <md-divider ></md-divider>
-
-        <md-subheader>Park Icons</md-subheader>
-        
-        <div layout="row" layout-xs="column" layout-align = "start stretch">  
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src="/img/icons/park-marker.svg" class="md-avatar" alt="Park Pin (Location)" />
-            <div class="md-list-item-text">
-              <h4>Park Marker</h4>
-            </div>
-          </md-list-item>
-        </div>
-        
-        
-        <md-divider ></md-divider>
-        
-        <md-subheader>Activity Icons</md-subheader>
-        
-        <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
-          <md-list-item ng-repeat="activity in activities" flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img class="md-avatar" ng-src="{{ ::activity.icon }}" alt="{{ ::activity.name }}" />
-            <div class="md-list-item-text">
-              <h4>{{ ::activity.name }}</h4>
-            </div>
-          </md-list-item>
-        </div>
-
-
-        <md-divider ></md-divider>
-        
-        <md-subheader>Miscellaneous</md-subheader>
-        
-        <div layout="row" layout-xs="column" layout-align = "start stretch" layout-wrap>  
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src="/img/icons/restroom.svg" class="md-avatar" alt="Restroom" />
-            <div class="md-list-item-text">
-              <h4>Restroom</h4>
-            </div>
-          </md-list-item>
-          
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src = "/img/icons/tennis-center.svg" class="md-avatar" alt="Tennis Center" />
-            <div class="md-list-item-text">
-              <h4>Tennis Center</h4>
-            </div>
-          </md-list-item>
-
-          <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
-            <img src = "/img/icons/library.svg" class="md-avatar" alt="Library" />
-            <div class="md-list-item-text">
-              <h4>Library</h4>
-            </div>
-          </md-list-item>
-        </div>
+      <h2>Map Icons Key</h2>
       
-
-      </md-list>
-    </md-dialog-content>
-    
-
-    <md-dialog-actions layout="row">
-      <md-button ng-click="answer('ok')" style="margin-right:10px;" md-autofocus>
-        Ok!
+      <span flex></span>
+      
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-font-icon="fa-times" class = "fa fa-2x" aria-label="Close dialog"></md-icon>
       </md-button>
-    </md-dialog-actions>
+    
+    </div>
+  </md-toolbar>
 
-  </form>
+  
+  <md-content id="map-icons-dialog-content">
+
+    <md-subheader class="md-primary md-no-sticky">You</md-subheader>
+    
+    <md-list class = "map-icons-list">
+      <div layout="row" layout-xs="column" layout-align = "start stretch"> 
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src = "/img/icons/my-location.svg" class="md-avatar" alt="location tracking" />
+          <span class="list-item-text">You are here (location tracking)</span>
+        </md-list-item>
+
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src = "/img/icons/user-marker.svg" class="md-avatar" alt="user marker" />
+          <span class="list-item-text">Point of Reference (distance to parks)</span>
+        </md-list-item>
+      </div>
+    </md-list>
+
+    <md-divider></md-divider>
+
+    <md-subheader class="md-primary md-no-sticky">Park Icons</md-subheader>
+    
+    <md-list class = "map-icons-list">  
+      <div layout="row" layout-xs="column" layout-align = "start stretch">  
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src="/img/icons/park-marker.svg" class="md-avatar" alt="Park Pin (Location)" />
+          <span class="list-item-text">Park Marker</span>
+        </md-list-item>
+      </div>
+    </md-list>
+      
+    <md-divider></md-divider>
+    
+    <md-subheader class="md-primary md-no-sticky">Activity Icons</md-subheader>
+      
+    <md-list class = "map-icons-list">
+      <div layout="row" layout-xs = "column" layout-wrap layout-align = "start stretch">
+        <md-list-item ng-repeat="activity in activities" flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img class="md-avatar" ng-src="{{ ::activity.icon }}" alt="{{ ::activity.name }}" />
+          <span class="list-item-text">{{ ::activity.name }}</span>
+        </md-list-item>
+      </div>
+    </md-list>
+
+
+    <md-divider></md-divider>
+    
+    <md-subheader class="md-primary md-no-sticky">Miscellaneous</md-subheader>
+      
+    <md-list class = "map-icons-list">
+      <div layout="row" layout-xs="column" layout-align = "start stretch" layout-wrap>  
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src="/img/icons/activities/restroom.svg" class="md-avatar" alt="Restroom" />
+          <span class="list-item-text">Restroom</span>
+        </md-list-item>
+        
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src = "/img/icons/activities/tennis-center.svg" class="md-avatar" alt="Tennis Center" />
+          <span class="list-item-text">Tennis Center</span>
+        </md-list-item>
+
+        <md-list-item flex = "100" flex-gt-xs = "50" flex-gt-sm = "33">
+          <img src = "/img/icons/activities/library.svg" class="md-avatar" alt="Library" />
+          <span class="list-item-text">Library</span>
+        </md-list-item>
+      </div>
+    </md-list>
+  </md-content>
+  
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="answer('ok')" md-autofocus>
+      Ok!
+    </md-button>
+  </md-dialog-actions>
+
 </md-dialog>
