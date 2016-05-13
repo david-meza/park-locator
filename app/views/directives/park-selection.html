@@ -8,14 +8,15 @@
                     placeholder="Park Name"
                     md-menu-class="park-custom-template"
                     md-autoselect="true"
-                    md-select-on-match="true">
+                    md-select-on-match="true"
+                    class="parks-autocomplete">
     <md-item-template>
       <span class="item-title" md-highlight-text="search.searchText" md-highlight-flags="ig"> {{ park.name }} </span>
     </md-item-template>
     <md-not-found>No matching park names found.</md-not-found>
   </md-autocomplete>
 
-  <div class="pull-down-sm layout-align-end-center layout-row">
+  <div class="sort-by-text layout-align-end-center layout-row">
     <span class="text-primary text-before-dropdown">Sort by</span>
     <md-select  ng-model = "selectedSort" 
                 aria-label = "Select Park Sorter" 
