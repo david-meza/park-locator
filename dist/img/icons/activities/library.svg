@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="library" viewBox="0 0 48 48" width="24" height="24" fill="rgb(52, 73, 94)">
+	<g>
+		<rect x="1" y="38" fill="#FF9800" width="46" height="2"/>
+		<rect x="25" y="18" fill="#FF9800" width="4" height="16"/>
+		<rect x="31" y="18" fill="#FF9800" width="4" height="16"/>
+		<rect x="37" y="18" fill="#FF9800" width="4" height="16"/>
+		<rect x="19" y="18" fill="#FF9800" width="4" height="16"/>
+		<rect x="13" y="18" fill="#FF9800" width="4" height="16"/>
+		<rect x="7" y="18" fill="#FF9800" width="4" height="16"/>
+		<polygon fill="#FF9800" points="43,16 5,16 5,13 24,4 43,13  "/>
+		<rect x="5" y="34" fill="#FF9800" width="38" height="2"/>
+	</g>
+	<g>
+		<rect x="25" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="31" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="37" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="19" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="13" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="7" y="16" fill="#EF6C00" width="4" height="2"/>
+		<rect x="3" y="36" fill="#EF6C00" width="42" height="2"/>
+		<circle fill="#EF6C00" cx="24" cy="11" r="2"/>
+	</g>
+</svg>
