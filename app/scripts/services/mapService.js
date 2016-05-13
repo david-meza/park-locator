@@ -131,7 +131,7 @@
             console.log('Error: ', error);
           }, {
             enableHighAccuracy: true,
-            timeout: 10000,
+            timeout: 60000,
             maximumAge: 60000
           });
       } else {

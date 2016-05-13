@@ -14,8 +14,8 @@
 
         options = {
           enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
+          timeout: 60000,
+          maximumAge: 30000
         };
 
         Esri.modulesReady().then( function(modules) {
@@ -23,8 +23,10 @@
           function updateTrackerGraphic(lat, lon) {
             var trackerGraphic = new modules.Graphic(modules.trackerGraphicTemplate);
             trackerGraphic.geometry = new modules.Point([lon, lat]);
+            // modules.userGraphics.graphics = [trackerGraphic]; // modules.userGraphics.graphics.items[0]
             modules.userGraphics.removeAll();
             modules.userGraphics.add(trackerGraphic);
+            console.log(modules.userGraphics.graphics);
           }
 
           function centerMapView(lat, lon) {
