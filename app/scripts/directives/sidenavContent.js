@@ -7,11 +7,15 @@
     return { 
       restrict: 'E',
       templateUrl: 'views/directives/sidenav-content.html',
-      controller: ['$scope', function ($scope) {
+      controller: ['$scope', '$timeout', function ($scope, $timeout) {
 
-        $scope.currentList = 'location';
+        $scope.currentList = '';
 
-        $scope.toggleList = function (listName) {
+        $timeout(function(){
+          $scope.currentList = 'location';
+        }, 1000);
+
+        $scope.toggleList = function (listName, evt) {
           $scope.currentList = $scope.currentList === listName ? '' : listName;
         };
 

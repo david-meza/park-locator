@@ -52,7 +52,7 @@
             center: [-78.646, 35.785],
             zoom: 13,
             maxZoom: 18,
-            minZoom: 9,
+            minZoom: 10,
             // basemap: 'streets-vector',
             logo: false
           });
