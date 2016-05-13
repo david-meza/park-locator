@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-img, h1, h2, h3, h4, h5, h6, #map-canvas, .app-title {
+img, h1, h2 #map-canvas, .app-title {
   -webkit-user-select: none;  
      -moz-user-select: none;    
       -ms-user-select: none;
@@ -306,7 +306,7 @@ p {
 
 #parks-list {
   .md-button {
-    padding: 0;
+    padding: 0 4px;
   }
 
   .md-list-item-inner {
@@ -502,7 +502,7 @@ md-input-container {
 #map-canvas {
   box-sizing: content-box;
   padding: 0;
-  margin: 8px;
+  margin: 4px;
   min-height: 450px;
 
   #aerial-toggle {
@@ -634,10 +634,21 @@ md-input-container {
   .nav-header {
     margin: 25px 14px 40px;
     box-sizing: border-box;
+    
+    .parks-logo {
 
-    img {
-      height: auto;
-      max-width: 100%;
+      img {
+        height: auto;
+        max-width: 100%;
+      }
+
+      .header-title {
+        font-size: 26px;
+        text-align: center;
+        font-weight: 400;
+        color: $light-white;
+        margin: 1rem 0 0;
+      }
     }
   }
 
@@ -651,7 +662,7 @@ md-input-container {
     }
 
     &:hover, &:focus {
-      background-color: lighten($primary, 3%);
+      background-color: rgba(lighten($primary, 5%), 0.67);
     }
 
     .md-button:hover, .md-button:focus {
@@ -663,7 +674,7 @@ md-input-container {
     }
 
     .list-icon {
-      @include transition( all 500ms $quadratic-in-out );
+      @include transition( all 0.7s $cubic-in-out );
 
       &.rotate {
         @include transform( rotate(180deg) );
@@ -671,23 +682,30 @@ md-input-container {
     }
   }
 
-  .selection-menu {
-    @include transition( all 500ms $quadratic-in-out );
-    background-color: #fff;
-    max-height: 440px;
-    overflow: visible;
-    padding: 12px;
 
-    &.ng-hide {
-      max-height: 0;
-    }
-    
-    &.ng-hide, &.ng-hide-animate, &.activities-selection {
-      overflow: hidden;
+  .selection-menu {
+    @include transition( height 0.7s $cubic-in-out );
+    background-color: #fff;
+    // height: 0;
+    overflow: hidden;
+
+    .sidenav-list-item-container {
+      padding: 8px 4px;
+
+      .activity-chips {
+        padding: 0 4px;
+      }
+
+      .address-input-container {
+        padding-right: 10px;
+      }
     }
 
   }
+}
 
+.no-transition {
+  @include transition(none !important);
 }
 
 #navbar {
