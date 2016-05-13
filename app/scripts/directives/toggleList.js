@@ -14,35 +14,47 @@
           return $attrs.currentList;
         }
 
-        function scrollableHeight() {
-          return $element.prop('scrollHeight');
+        function calculateTargetHeight() {
+          var targetHeight, currentHeight;
+          currentHeight = $element.prop('clientHeight') + 'px';
+          $element.addClass('no-transition');
+          setHeight('auto');
+          targetHeight = $element.prop('clientHeight') + 'px';
+          setHeight(currentHeight);
+          $element.removeClass('no-transition');
+          return targetHeight;
+          // return $element.prop('scrollHeight') + 'px';
         }
 
-        function setHeightToAuto() {
-          $element.css('height', 'auto');
+        function setHeight(targetHeight) {
+          $element.css('height', targetHeight);
         }
 
-        function updateHeight() {
-          $element.css('height', scrollableHeight() + 'px');
-        }
-
-        function closeList() {
-          $element.css('height', 0);
+        function setHeightnoAnimate(targetHeight) {
+          $element.addClass('no-transition');
+          setHeight(targetHeight);
+          $timeout(function(){ $element.removeClass('no-transition'); }, 0, false); // Fix for Safari. It was removing the class before changing the height.
         }
 
         function updateOpen(openingList, closingList) {
           if (openingList === $attrs.listName) {
-            $timeout(updateHeight, 0, false);
-            animating = $timeout(setHeightToAuto, 700, false);
+            $timeout(setHeight, 0, false, calculateTargetHeight());
+            animating = $timeout(setHeightnoAnimate, 695, false, 'auto'); // For a smoother transition switch to auto in the last 5ms of the transition
           } else if (closingList === $attrs.listName) {
-            $timeout.cancel(animating);
-            updateHeight();
-            $timeout(closeList, 0, false);
+            if (animating) {
+              $timeout.cancel(animating);
+              animating = null;
+            } else {
+              setHeightnoAnimate(calculateTargetHeight()); // Set height back to the full container height
+            }
+            $timeout(setHeight, 0, false, 0);
           }
+          if (animating) { animating.then(function(){ animating = null; }); }
         }
 
-        $element.css('height', 0);
+        setHeight(0); // Initially all lists are closed
         $scope.$watch(activeList, updateOpen);
+        // $scope.$watch(function(){ return $element.css('height'); }, function(newVal, oldVal){ console.log('Old: ' + oldVal, 'New: ' + newVal); });
       }
     };
 
