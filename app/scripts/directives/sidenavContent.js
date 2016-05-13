@@ -15,7 +15,7 @@
           $scope.currentList = 'location';
         }, 1000);
 
-        $scope.toggleList = function (listName, evt) {
+        $scope.toggleList = function (listName) {
           $scope.currentList = $scope.currentList === listName ? '' : listName;
         };
 
