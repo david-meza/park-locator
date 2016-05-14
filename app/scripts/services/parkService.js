@@ -72,7 +72,7 @@
     };
 
     var logError = function (response) {
-      console.log('Failed to get data from parks server', response);
+      console.error('Failed to get data from parks server', response);
       return $q.reject(response);
     };
 

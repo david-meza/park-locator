@@ -12,6 +12,7 @@ $success-light: #669834;
 $danger: #E63125;
 $heart: #B71C1C;
 $black: #000;
+$map-bg: #f2e5d4;
 $gray: rgba(0,0,0, 0.68);
 $accent: #FF4081;
 $dark-text: rgba(38, 47, 98, 0.78);
@@ -509,6 +510,7 @@ md-input-container {
   padding: 0;
   margin: 4px;
   min-height: 450px;
+  background-color: $map-bg;
 
   #aerial-toggle {
     position: absolute;

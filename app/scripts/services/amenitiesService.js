@@ -25,7 +25,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
   };
 
 	var logError = function (response) {
-	  console.log('Failed to get data from activities server', response);
+	  console.error('Failed to get data from activities server', response);
 	  return $q.reject(response);
 	};
 
