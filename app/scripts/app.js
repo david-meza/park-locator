@@ -23,7 +23,8 @@
     .config([ '$httpProvider', function ($httpProvider) {
 
       $httpProvider.interceptors.push('httpInterceptor');
-      $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+      $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+      $httpProvider.defaults.cache = true;
       
     }])
 
