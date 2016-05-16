@@ -5,79 +5,27 @@
   angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri',
   	function ($http, $q, $state, $timeout, Esri) {
   	
-    var esriModules;
+    var esriModules, parks;
     
     Esri.modulesReady().then( function (modules) {
       esriModules = modules;
     });
 
-    var parks = { markers: [], currentPark: undefined, };
-
-    parks.markersConfig = {
-      rebuild: false, 
-      shallowWatch: false, 
-      fitToMap: false, 
-      control: {},
-      type: 'cluster',
-      typeOptions: {
-        title: 'Click to zoom in and find more parks!',
-        gridSize: 56,
-        minimumClusterSize: 4
-      },
-      typeEvents: {},
-      markerEvents: {
-        mouseover: function (gMarker) {
-          gMarker.labelVisible = true;
-          gMarker.label.setVisible();
-        },
-        mouseout: function (gMarker) {
-          gMarker.labelVisible = false;
-          gMarker.label.setVisible();
-        }
-      }
-    };
-
-    parks.markersConfig.typeOptions.styles = [{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 40,width: 40},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 44,width: 44},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 48,width: 48},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 52,width: 52},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: '/img/icons/park-marker-cluster.svg',height: 56,width: 56}];
-
-    var parkWindow = {
-      show: false,
-      coords: {},
-      control: {},
-      options: {
-        pixelOffset: { width: 0, height: -48 }
-      },
-      closeclick: function (windowScope) { console.log(windowScope);windowScope.show = false; },
-      templateUrl: 'views/partials/park-window.html',
-      templateParameter: {}
-    };
-
-
-    var _positionParkWindow = function(parkModel) {
-      parkWindow.coords.latitude = parkModel.latitude;
-      parkWindow.coords.longitude = parkModel.longitude;
-      parkWindow.templateParameter.name = parkModel.name;
-      parkWindow.templateParameter.address = parkModel.address;
-      parkWindow.templateParameter.phone = parkModel.phone;
-      parkWindow.show = true;
-    };
+    parks = { markers: [], currentPark: undefined, };
   	
-    var _markerClick = function (gInstance, evnt, model) {
-      parks.currentPark = model;
-      
-      // Place the info window above park marker and pass in the park info
-      _positionParkWindow(model);
-      
+    function _markerClick() {
+      parks.currentPark = this;
       // Trigger a state change and show the park details
-      $state.go('home.park', { 'name': parks.currentPark.name.replace(/\W+/g, '').toLowerCase() });
-    };
+      $state.go('home.park', { 'name': this.name.replace(/\W+/g, '').toLowerCase() });
+    }
 
-    var logError = function (response) {
+    function logError(response) {
       console.error('Failed to get data from parks server', response);
       return $q.reject(response);
-    };
+    }
 
-    var extractIndividualMarker = function (park) {
-      var p = park.attributes;
+    function extractIndividualMarker(park) {
+      var p = park.attributes; //shorthand
       var marker = {
         id: p.OBJECTID,
         name: p.NAME,
@@ -131,13 +79,7 @@
         latitude: park.geometry.y,
         longitude: park.geometry.x,
 
-        markerClick: _markerClick,
-        options: {
-          visible: true,
-          labelContent: p.NAME,
-          labelClass: 'park-label',
-          labelVisible: false
-        },
+        markerClick: _markerClick
       };
 
       // Storing parks both individually as key on markers object and as an array of parks
@@ -148,7 +90,7 @@
     };
 
 
-    var _generateMarkers = function (response) {
+    function _generateMarkers(response) {
       if (response.status === 200) {
         // Empty the existing parks array before adding the new results
         if (parks.markers.length > 0) {
@@ -165,7 +107,7 @@
   	};
 
 
-    var updateParkMarkers = function (selectedActivities) {
+    function updateParkMarkers(selectedActivities) {
       var query = '';
 
       if (selectedActivities.length === 0) { query += '1 = 1'; }
@@ -186,19 +128,19 @@
 
     };
 
-    function getCurrentPark(deferred, parkName) {
+    function resolveCurrentPark(deferred, parkName) {
       // Queue a call once every half second until it is resolved
       if (parks[parkName]) {
         parks.currentPark = parks[parkName];
         deferred.resolve(parks.currentPark);
       } else {
         $timeout(function(){
-          getCurrentPark(deferred, parkName);
+          resolveCurrentPark(deferred, parkName);
         }, 500, false);
       }
     }
 
-    var getParksInfo = function (where) {
+    function getParksInfo(where) {
       var url = 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0/query?where=' + (where ? where : '1%3D1') + '&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=8&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=OBJECTID&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=json';
     	
       // Returns a chainable promise object
@@ -215,10 +157,9 @@
   	return {
   		parks: parks,
       updateParkMarkers: updateParkMarkers,
-      parkWindow: parkWindow,
-      getCurrentPark: getCurrentPark
+      resolveCurrentPark: resolveCurrentPark
   	};
 
   }]);
 
-})(window.angular);
+})(angular || window.angular);
