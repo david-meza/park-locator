@@ -5,80 +5,72 @@
   angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', 'Esri', 'deviceService',
     function (gMapsApi, $mdToast, Esri, deviceService) {
 
-    var esriModules, location;
-    
-    Esri.modulesReady().then( function (modules) {
-      esriModules = modules;
-      geoLocate(); // Get user's coordinates.
-    });
+    var esriModules, geoLocationOptions;
 
-    // Temporary coordinates while Geoloc gets us accurate user's coords or as fallback for denied permissions
-    location = {
-      coords: {
-        latitude: 35.779590,
-        longitude: -78.638179
-      }
+    geoLocationOptions = {
+      enableHighAccuracy: true,
+      timeout: 60000,
+      maximumAge: 30000
     };
-
-
-    var informUser = function (message, hide) {
+    
+    function informUser(message, hideDelay) {
       var toast = $mdToast.simple()
         .textContent(message)
         .action('ok')
         .highlightAction(false)
-        .hideDelay(hide || 3000)
+        .hideDelay(hideDelay || 3000)
         .position('bottom right');
       
-      deviceService.toastIsClosed().then( function() {
+      deviceService.toastIsClosed().then( function() { // In IE we wait until the user acknowledges the performance issues toast
         $mdToast.show(toast);
       });
-    };
+    }
 
-    var _isInRaleigh = function (lat, lon) {
+    function _isInRaleigh(lat, lon) {
       // Test Raleigh address: 35.7776464, -78.63844279999999
       return lat < 36.413561 && lat > 35.437814 && lon < -77.936890 && lon > -78.984583;
-    };
+    }
 
-    var updateUserCoords = function (lat, lon) {
+    function _processPosition(position) {
+      updateUserCoords(position.coords.latitude, position.coords.longitude);
+      ga('send', 'event', 'Location', 'geoLocated', position.coords.latitude + ',' + position.coords.longitude);
+    }
+
+    function _logGeolocError(error) {
+      informUser('Sorry, could not find you. Please try again.');
+      console.warn('Error: ', error);
+    }
+
+    function updateUserCoords(lat, lon) {
       if (!_isInRaleigh(lat, lon)) {
         return informUser('Oops! It seems this location is not in Raleigh.');
       }
       // Update the location obj with the accurate user coords
       esriModules.userMarker.setGeometry(new esriModules.Point([lon, lat]));
       centerAndZoom(lat, lon);
-      
-    };
+    }
 
-    var geoLocate = function () {
+    function geoLocate() {
       informUser('Attempting to find you.', 1500);
-
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( 
-          function (position) {
-            updateUserCoords(position.coords.latitude, position.coords.longitude);
-            ga('send', 'event', 'Location', 'geoLocated', position.coords.latitude + ',' + position.coords.longitude);
-          },
-          function (error) {
-            informUser('Sorry, could not find you. Please try again.');
-            console.log('Error: ', error);
-          }, {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 60000
-          });
+        navigator.geolocation.getCurrentPosition( _processPosition, _logGeolocError, geoLocationOptions);
       } else {
         informUser('Oops! Your browser does not support Geolocation.');
-        console.log('Geolocation not supported. Defaulting to backup location.');
+        console.warn('Geolocation not supported. Defaulting to backup location.');
       }
-    };
+    }
 
     function centerAndZoom(lat, lon) {
       esriModules.map.centerAndZoom( new esriModules.Point({
-        y: lat, 
-        x: lon,
+        y: lat, x: lon,
         spatialReference: { wkid: 4326 }
       }), 15);
     }
+
+    Esri.modulesReady().then( function (modules) {
+      esriModules = modules;
+      geoLocate(); // Get user's coordinates.
+    });
 
 
     return {

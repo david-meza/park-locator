@@ -137,7 +137,7 @@
 
           // My Location graphic
           service.userMarker = new Graphic({
-            geometry: {
+            geometry: { // Temporary coordinates while Geoloc gets us accurate user's coords or as fallback for denied permissions
               x: -78.646,
               y: 35.785,
               spatialReference: { wkid: 4326 }
@@ -173,22 +173,9 @@
           // Add graphic to graphic layer
           service.tracker.add(service.trackerGraphic);
 
-          // Geolocation search field
-          // var addressSearch = new Search({
-          //   map: service.map,
-          //   allPlaceholder: 'Manually find your address',
-          //   // enableButtonMode: true,
-          //   enableHighlight: true,
-          //   enableInfoWindow: false
-          // }, "search-field");
-          
-          // addressSearch.startup();
-
-
-          // Attach all Esri modules to the service so they can be used from outside
+          // Attach all necessary Esri modules to the service so they can be used from outside
           service.VectorTileLayer = VectorTileLayer;
           service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
-          service.FeatureLayer = FeatureLayer;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;

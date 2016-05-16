@@ -13,10 +13,10 @@
 
     parks = { markers: [], currentPark: undefined, };
   	
-    function _markerClick() {
-      parks.currentPark = this;
+    function _markerClick(park) { // Simulate clicking a map marker
+      parks.currentPark = park;
       // Trigger a state change and show the park details
-      $state.go('home.park', { 'name': this.name.replace(/\W+/g, '').toLowerCase() });
+      $state.go('home.park', { 'name': park.name.replace(/\W+/g, '').toLowerCase() });
     }
 
     function logError(response) {
@@ -87,7 +87,7 @@
       if (!this[parkName]) { this[parkName] = marker; }
 
       this.markers.push(marker);
-    };
+    }
 
 
     function _generateMarkers(response) {
@@ -104,7 +104,7 @@
         // Log and reject the promise
         return logError();
       }
-  	};
+  	}
 
 
     function updateParkMarkers(selectedActivities) {
@@ -126,7 +126,7 @@
       });
       getParksInfo(query).then(_generateMarkers, logError);
 
-    };
+    }
 
     function resolveCurrentPark(deferred, parkName) {
       // Queue a call once every half second until it is resolved
@@ -148,7 +148,7 @@
     		method: 'GET',
     		url: url
     	});
-    };
+    }
 
     // Initialize the map by filling it with all, unfiltered parks
     getParksInfo().then(_generateMarkers, logError);

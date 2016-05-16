@@ -5,31 +5,12 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 	
 	var activities = { categories: {}, categoriesArr: [], markers: [], markersConfig: {} };
 
-	activities.markersConfig = {
-    control: {},
-    options: 'options',
-    icon: 'icon',
-    shallowWatch: false,
-    fitToMap: false,
-    rebuild: false,
-    markerEvents: {
-      mouseover: function (gMarker) {
-        gMarker.labelVisible = true;
-        gMarker.label.setVisible();
-      },
-      mouseout: function (gMarker) {
-        gMarker.labelVisible = false;
-        gMarker.label.setVisible();
-      }
-    }
-  };
-
-	var logError = function (response) {
+	function logError(response) {
 	  console.error('Failed to get data from activities server', response);
 	  return $q.reject(response);
-	};
+	}
 
-	var extractIndividualActivity = function (activity) {
+	function extractIndividualActivity(activity) {
   	var act = activity.attributes;
     var subCat = act.SUBCATEGORY;
     
@@ -52,24 +33,23 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
     };
 
     this.push(processed);
-  };
+  }
 
-	var generateActivityMarkers = function (response) {
+	function generateActivityMarkers(response) {
 	  if (response.status === 200) {
 	    angular.forEach(response.data.features, extractIndividualActivity, activities.markers);
 	    return activities.markers;
 	  } else {
 	    return logError();
 	  }
-	};
+	}
 
-	var processParkActivities = function (responses) {
+	function processParkActivities(responses) {
 		generateActivityMarkers(responses[1]);
 		generateActivityMarkers(responses[2]);
-	};
+	}
 
-	var generateCategories = function (response) {
-
+	function generateCategories(response) {
 		if (response.status === 200) {
 			// Copy all category attributes to our local object
 			angular.extend(activities.categories, response.data.categories);
@@ -92,9 +72,9 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 			// Reject the deferred and stop any further promise chaining
 			return logError();
 		}
-	};
+	}
 
-	function storeAsArray (categoriesObj) {
+	function storeAsArray(categoriesObj) {
 		angular.forEach(categoriesObj, function(categoryValue) {
       categoryValue.searchable = categoryValue.searchable || categoryValue.name.toLowerCase();
 			this.push(categoryValue);
@@ -106,37 +86,37 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
     });
 	}
 
-	var getAmenitiesData = function () {
+	function getAmenitiesData() {
     // First set of amenities (buildings)
     return $http({
       method: 'GET',
       url: '/scripts/amenitycategories.json'
     });
-  };
+  }
 
-  var getAmenitiesIcons = function () {
+  function getAmenitiesIcons() {
 		// First set of amenities (buildings)
 		return $http({
 			method: 'GET',
 			url: '/scripts/uniqueValueInfos.json'
 		});
-	};
+	}
 
-	var getJoinParkData = function () {
+	function getJoinParkData() {
 		// Building amenities join table with parks
 		return $http({
 			method: 'GET',
 			url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=8&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=json'
 		});
-	};
+	}
 
-	var getJoinParkData2 = function () {
+	function getJoinParkData2() {
 		// Outdoor amenities join table with parks
 		return $http({
 			method: 'GET',
 			url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=8&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=json'
 		});
-	};
+	}
 
 	var categoriesPromise = getAmenitiesData().then(generateCategories, logError);
 	$q.all([categoriesPromise, getJoinParkData(), getJoinParkData2()]).then(processParkActivities, logError);

@@ -14,15 +14,14 @@
 
         options = {
           enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
+          timeout: 60000,
+          maximumAge: 30000
         };
 
         Esri.modulesReady().then( function(modules) {
 
           function updatePosition(pos) {
             var lat, lon;
-            
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (geolocation API)
             $scope.$apply(function() {
@@ -41,7 +40,6 @@
           }
 
           function stopTracking() {
-            
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (Esri/window event)
             $scope.$apply(function() {

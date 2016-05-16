@@ -41,7 +41,7 @@
         // Select a park section
         $scope.selectPark = function (park) {
           // Trigger a state change
-          park.markerClick();
+          park.markerClick(park);
           // Close the sidenav if not locked open
           $mdSidenav('left').close();
           // Center and zoom to the park marker on the map
