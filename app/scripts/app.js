@@ -10,22 +10,19 @@
       return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
     })
 
-    .config(['uiGmapGoogleMapApiProvider', 
-      function(uiGmapGoogleMapApiProvider) {
-        uiGmapGoogleMapApiProvider.configure({
-          signed_in: true,
-          v: '3',
-          key: 'AIzaSyAI5FKxCC-6lSrO5f4UcUXBEogTws2UV14',
-          libraries: 'places'
-        });
+    .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
+      uiGmapGoogleMapApiProvider.configure({
+        signed_in: true,
+        v: '3',
+        key: 'AIzaSyAI5FKxCC-6lSrO5f4UcUXBEogTws2UV14',
+        libraries: 'places'
+      });
     }])
 
     .config([ '$httpProvider', function ($httpProvider) {
-
       $httpProvider.interceptors.push('httpInterceptor');
       $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
       $httpProvider.defaults.cache = true;
-      
     }])
 
     .config([ '$mdThemingProvider', function ($mdThemingProvider) {
@@ -43,7 +40,6 @@
       function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/');
-
 
         $stateProvider
           .state('home', {
@@ -71,7 +67,7 @@
               currentPark: ['parkService', '$stateParams', '$timeout', '$q', function(parkService, $stateParams, $timeout, $q) {
                 var deferred = $q.defer();
                 $timeout( function () {
-                  parkService.getCurrentPark(deferred, $stateParams.name);
+                  parkService.resolveCurrentPark(deferred, $stateParams.name);
                 }, 0, false);
                 return deferred.promise;
               }]
@@ -90,4 +86,4 @@
 
     }]);
 
-})(window.angular || angular);
+})(angular || window.angular);
