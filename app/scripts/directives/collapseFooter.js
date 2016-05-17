@@ -18,6 +18,7 @@ angular.module('appDirectives').directive('collapseFooter', ['$document', '$time
           
           footer.toggleClass('collapsed');
           element.children().toggleClass('rotated');
+          angular.element(document.getElementById('back-to-top')).toggleClass('lower');
           
           $timeout(function(){
             animationInProgress = false;

@@ -202,7 +202,7 @@ img, h1, h2 #map-canvas, .app-title {
 #back-to-top {
   position: fixed;
   right: 10px;
-  bottom: 30px;
+  bottom: 32px;
   z-index: 21;
   opacity: 0;
   @include transform( translateY(100px) scale(0,0) );
