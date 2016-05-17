@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="neighborhood-center" viewBox="0 0 48 48" width="24" height="24" fill="rgb(52, 73, 94)">
+  <rect x="5" y="12" fill="#FF9800" width="38" height="4"/>
+  <rect x="5" y="17" fill="#FF9800" width="38" height="4"/>
+  <rect x="5" y="22" fill="#FF9800" width="38" height="4"/>
+  <g>
+  	<rect x="42" y="12" fill="#78909C" width="2" height="15"/>
+  	<rect x="4" y="12" fill="#78909C" width="2" height="15"/>
+  </g>
+  <rect x="41" y="27" fill="#455A64" width="3" height="11"/>
+  <rect x="4" y="27" fill="#455A64" width="3" height="11"/>
+  <rect x="4" y="27" fill="#F57C00" width="40" height="6"/>
+</svg>
