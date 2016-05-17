@@ -7,21 +7,21 @@
 
     // urlNames don't matter as they'll be added later.
     var sectionsMap = {
-      'adventure': { name: 'Adventure', urlName: 'adventure', icon: '/img/icons/classes/adventure.svg'},
-      'aquatic': { name: 'Aquatic', urlName: 'aquatic', icon: '/img/icons/classes/aquatic.svg'},
-      'art': { name: 'Art', urlName: 'art', icon: '/img/icons/classes/art.svg'},
-      'athleticteamsleagues': { name: 'Athletic Teams and Leagues', urlName: 'athleticteamsleagues', icon: '/img/icons/classes/leagues.svg'},
-      'citywidespecialevents': { name: 'Special Events', urlName: 'citywidespecialevents', icon: '/img/icons/classes/special-events.svg'},
-      'educational': { name: 'Educational', urlName: 'educational', icon: '/img/icons/classes/educational.svg'},
-      'fitness': { name: 'Fitness', urlName: 'fitness', icon: '/img/icons/classes/fitness.svg'},
-      'nature': { name: 'Nature', urlName: 'nature', icon: '/img/icons/classes/nature.svg'},
-      'schoolprograms': { name: 'School Programs', urlName: 'schoolprograms', icon: '/img/icons/classes/school.svg'},
-      'social': { name: 'Social', urlName: 'social', icon: '/img/icons/classes/social.svg'},
-      'specializedrecreation': { name: 'Specialized Recreation', urlName: 'specializedrecreation', icon: '/img/icons/classes/specialized-recreation.svg'},
-      'sports': { name: 'Sports', urlName: 'sports', icon: '/img/icons/classes/sports.svg'},
-      'summercampspecializedrecreation': { name: 'Summer Camp - Specialized Recreation', urlName: 'summercampspecializedrecreation', icon: '/img/icons/classes/summer-camp-spec.svg'},
-      'summercampspecialty': { name: 'Summer Camp - Specialty', urlName: 'summercampspecialty', icon: '/img/icons/classes/summer-camp.svg'},
-      'summercamptraditional': { name: 'Summer Camp - Traditional', urlName: 'summercamptraditional', icon: '/img/icons/classes/summer-camp.svg'}
+      'adventure': { name: 'Adventure', urlName: 'adventure', icon: 'img/icons/classes/adventure.svg'},
+      'aquatic': { name: 'Aquatic', urlName: 'aquatic', icon: 'img/icons/classes/aquatic.svg'},
+      'art': { name: 'Art', urlName: 'art', icon: 'img/icons/classes/art.svg'},
+      'athleticteamsleagues': { name: 'Athletic Teams and Leagues', urlName: 'athleticteamsleagues', icon: 'img/icons/classes/leagues.svg'},
+      'citywidespecialevents': { name: 'Special Events', urlName: 'citywidespecialevents', icon: 'img/icons/classes/special-events.svg'},
+      'educational': { name: 'Educational', urlName: 'educational', icon: 'img/icons/classes/educational.svg'},
+      'fitness': { name: 'Fitness', urlName: 'fitness', icon: 'img/icons/classes/fitness.svg'},
+      'nature': { name: 'Nature', urlName: 'nature', icon: 'img/icons/classes/nature.svg'},
+      'schoolprograms': { name: 'School Programs', urlName: 'schoolprograms', icon: 'img/icons/classes/school.svg'},
+      'social': { name: 'Social', urlName: 'social', icon: 'img/icons/classes/social.svg'},
+      'specializedrecreation': { name: 'Specialized Recreation', urlName: 'specializedrecreation', icon: 'img/icons/classes/specialized-recreation.svg'},
+      'sports': { name: 'Sports', urlName: 'sports', icon: 'img/icons/classes/sports.svg'},
+      'summercampspecializedrecreation': { name: 'Summer Camp - Specialized Recreation', urlName: 'summercampspecializedrecreation', icon: 'img/icons/classes/summer-camp-spec.svg'},
+      'summercampspecialty': { name: 'Summer Camp - Specialty', urlName: 'summercampspecialty', icon: 'img/icons/classes/summer-camp.svg'},
+      'summercamptraditional': { name: 'Summer Camp - Traditional', urlName: 'summercamptraditional', icon: 'img/icons/classes/summer-camp.svg'}
     };
 
     function logError(response) {
