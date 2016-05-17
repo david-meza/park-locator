@@ -90,7 +90,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
     // First set of amenities (buildings)
     return $http({
       method: 'GET',
-      url: '/scripts/amenitycategories.json'
+      url: 'scripts/amenitycategories.json'
     });
   }
 
@@ -98,7 +98,7 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
 		// First set of amenities (buildings)
 		return $http({
 			method: 'GET',
-			url: '/scripts/uniqueValueInfos.json'
+			url: 'scripts/uniqueValueInfos.json'
 		});
 	}
 
