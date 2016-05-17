@@ -10,11 +10,11 @@
 
     @keyframes pulsate {
       0%   { stroke-width: 20; opacity: 1; }
-      100% { stroke-width: 43; opacity: 0; }
+      100% { stroke-width: 48; opacity: 0; }
     }
     @-webkit-keyframes pulsate {
       0%   { stroke-width: 20; opacity: 1; }
-      100% { stroke-width: 43; opacity: 0; }
+      100% { stroke-width: 48; opacity: 0; }
     }
   </style>
   <circle fill="#2196F3" fill-opacity="0.3" cx="24" cy="24" r="21"/>

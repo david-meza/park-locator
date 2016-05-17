@@ -51,8 +51,8 @@
         Esri.modulesReady().then(function(modules) {
           // We calculate the distance between two points use Pythagorean theorem. It is not extremely accurate (unless you can walk through buildings), but it gives us a decent idea about the distance between the user and the park (better than alphabetically sorting).
           function nearestPark(park) {
-            var a = Math.abs(park.latitude - modules.userMarker.geometry.y);
-            var b = Math.abs(park.longitude - modules.userMarker.geometry.x);
+            var a = Math.abs(park.latitude - modules.getCurrentPosition().y);
+            var b = Math.abs(park.longitude - modules.getCurrentPosition().x);
             park.distance = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
             return park.distance;
           }

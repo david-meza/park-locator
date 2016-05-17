@@ -7,7 +7,7 @@
 
 			Esri.modulesReady().then(function(modules) {
 				$scope.myLocation = function() {
-					return modules.userMarker.geometry;
+					return modules.getCurrentPosition();
 				}
 			});
 

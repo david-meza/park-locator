@@ -45,8 +45,7 @@
       if (!_isInRaleigh(lat, lon)) {
         return informUser('Oops! It seems this location is not in Raleigh.');
       }
-      // Update the location obj with the accurate user coords
-      esriModules.userMarker.setGeometry(new esriModules.Point([lon, lat]));
+      updatePositionGraphic(lat, lon);
       centerAndZoom(lat, lon);
     }
 
@@ -60,11 +59,18 @@
       }
     }
 
+    function updatePositionGraphic(lat, lon) {
+      esriModules.positionGraphic = new esriModules.Graphic(esriModules.positionGraphicTemplate);
+      esriModules.positionGraphic.geometry = new esriModules.Point([lon, lat]);
+      esriModules.userGraphics.removeAll();
+      esriModules.userGraphics.add(esriModules.positionGraphic);
+    }
+
     function centerAndZoom(lat, lon) {
-      esriModules.map.centerAndZoom( new esriModules.Point({
-        y: lat, x: lon,
-        spatialReference: { wkid: 4326 }
-      }), 15);
+      esriModules.mapView.goTo({
+        center: [lon, lat],
+        scale: 6000
+      });
     }
 
     Esri.modulesReady().then( function (modules) {

@@ -7,53 +7,47 @@
 
       Esri.modulesReady().then(function(modules) {
 
-        // modules.map.on('zoom-end', function(evt) {
-        //   modules.parks.setVisibility(evt.level <= 17);
-        // });
-
-        modules.map.on('extent-change', function(evt) {
-          if ( !modules.basemapLayer.visible ) {
-            
-            modules.queryInstance.geometry = evt.extent.getCenter();
-            
-            modules.aerialLayer2015Query.executeForCount(modules.queryInstance, function(count) {
-              var isOutside2015Bounds = count === 0;
-              modules.aerialLayer2013.setVisibility(isOutside2015Bounds);
-              modules.aerialLayer.setVisibility(!isOutside2015Bounds);
-            });
-
-          }
-        });
-
         // Change all the icons for the amenities
         amenitiesService.getAmenitiesIcons().then(function(response) {
           var uniqueValueInfos = response.data;
           
           var amenities1Symbols = new modules.UniqueValueRenderer({
+            field: 'SUBCATEGORY',
             type: 'uniqueValue',
-            field1: 'SUBCATEGORY',
             uniqueValueInfos: uniqueValueInfos
           });
           var amenities2Symbols = new modules.UniqueValueRenderer({
+            field: 'SUBCATEGORY',
             type: 'uniqueValue',
-            field1: 'SUBCATEGORY',
             uniqueValueInfos: uniqueValueInfos
           });
 
-          modules.amenities1.setRenderer(amenities1Symbols);
-          modules.amenities2.setRenderer(amenities2Symbols);
+          modules.amenities1.renderer = amenities1Symbols;
+          modules.amenities2.renderer = amenities2Symbols;
 
-          modules.amenities1.setMinScale(5000);
-          modules.amenities2.setMinScale(5000);
-
-          modules.map.addLayers([modules.amenities1, modules.amenities2]);
+          modules.map.addMany([modules.amenities1, modules.amenities2]);
         });
         
         // Park on click event
-        modules.parks.on('touchend, click, mouse-down', function (evt) {
-          var parkName = evt.graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
+        function transitionToParkDetails(graphic) {
+          var parkName = graphic.attributes.NAME.toLowerCase().replace(/\W+/g, '');
           $state.go('home.park', {name: parkName});
-          closeTooltip();
+        }
+
+
+        // Get the screen point from the view's click event
+        modules.mapView.on('click', function(evt){
+          // Search for graphics at the clicked location
+          modules.mapView.hitTest(evt.screenPoint).then(function(response){
+            for (var i = 0; i < response.results.length; i++) {
+              // Get the first occurrence of a graphic that has a layer attr.
+              if (response.results[i].graphic.hasOwnProperty('layer')) {
+                // Also if it is a park graphic, navigate to the park details page.
+                if (response.results[i].graphic.layer.id === 'parks-layer') { transitionToParkDetails(response.results[i].graphic) }
+                return; 
+              }
+            }
+          });
         });
 
         // Show park name on hover
