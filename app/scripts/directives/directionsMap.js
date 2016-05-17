@@ -53,11 +53,11 @@
 
         function generateMarkerIcons() {
           icons = {
-            start: new $scope.maps.MarkerImage('/img/icons/user-marker.svg',
+            start: new $scope.maps.MarkerImage('img/icons/user-marker.svg',
                                         new $scope.maps.Size( 52, 52 ), // (width,height)
                                         new $scope.maps.Point( 0, 0 ), // The origin point (x,y)
                                         new $scope.maps.Point( 24, 46 ) ), // The anchor point (x,y)
-            end: new $scope.maps.MarkerImage('/img/icons/park-marker.svg',
+            end: new $scope.maps.MarkerImage('img/icons/park-marker.svg',
                                         new $scope.maps.Size( 48, 48 ),
                                         new $scope.maps.Point( 0, 0 ),
                                         new $scope.maps.Point( 25, 46 ) )

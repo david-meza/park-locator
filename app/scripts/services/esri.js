@@ -68,7 +68,7 @@
             type: 'simple',
             symbol: {
               type: 'esriPMS',
-              url: '/img/icons/park-marker.svg',
+              url: 'img/icons/park-marker.svg',
               height: 36,
               width: 36,
             }
@@ -147,7 +147,7 @@
             },
             symbol: {
               type: 'esriPMS',
-              url: '/img/icons/user-marker.svg',
+              url: 'img/icons/user-marker.svg',
               height: 36,
               width: 36
             },
@@ -165,7 +165,7 @@
             },
             symbol: {
               type: 'esriPMS',
-              url: '/img/icons/my-location.svg',
+              url: 'img/icons/my-location.svg',
               height: 36,
               width: 36
             },

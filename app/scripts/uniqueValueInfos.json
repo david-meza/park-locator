@@ -2,7 +2,7 @@
   "value": "3002", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/train.svg",
+    "url": "img/icons/activities/train.svg",
     "height": 28,
     "width": 28
   }
@@ -10,7 +10,7 @@
   "value": "1301", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/swimming.svg",
+    "url": "img/icons/activities/swimming.svg",
     "height": 28,
     "width": 28
   }
@@ -18,7 +18,7 @@
   "value": "1302", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/swimming.svg",
+    "url": "img/icons/activities/swimming.svg",
     "height": 28,
     "width": 28
   }
@@ -26,7 +26,7 @@
   "value": "1303", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/arts-center.svg",
+    "url": "img/icons/activities/arts-center.svg",
     "height": 28,
     "width": 28
   }
@@ -34,7 +34,7 @@
   "value": "1304", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/arts-center.svg",
+    "url": "img/icons/activities/arts-center.svg",
     "height": 28,
     "width": 28
   }
@@ -42,7 +42,7 @@
   "value": "3003", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/carousel.svg",
+    "url": "img/icons/activities/carousel.svg",
     "height": 28,
     "width": 28
   }
@@ -50,7 +50,7 @@
   "value": "1305", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/community-center.svg",
+    "url": "img/icons/activities/community-center.svg",
     "height": 28,
     "width": 28
   }
@@ -58,7 +58,7 @@
   "value": "1306", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/community-center.svg",
+    "url": "img/icons/activities/community-center.svg",
     "height": 28,
     "width": 28
   }
@@ -66,7 +66,7 @@
   "value": "1310", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/neighborhood-center.svg",
+    "url": "img/icons/activities/neighborhood-center.svg",
     "height": 28,
     "width": 28
   }
@@ -74,7 +74,7 @@
   "value": "1311", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/neighborhood-center.svg",
+    "url": "img/icons/activities/neighborhood-center.svg",
     "height": 28,
     "width": 28
   }
@@ -82,7 +82,7 @@
   "value": "1110", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/picnic-basket.svg",
+    "url": "img/icons/activities/picnic-basket.svg",
     "height": 28,
     "width": 28
   }
@@ -90,7 +90,7 @@
   "value": "1113", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/restroom.svg",
+    "url": "img/icons/activities/restroom.svg",
     "height": 24,
     "width": 24
   }
@@ -98,7 +98,7 @@
   "value": "1312", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/tennis-center.svg",
+    "url": "img/icons/activities/tennis-center.svg",
     "height": 28,
     "width": 28
   }
@@ -106,7 +106,7 @@
   "value": "1115", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/theater.svg",
+    "url": "img/icons/activities/theater.svg",
     "height": 28,
     "width": 28
   }
@@ -114,7 +114,7 @@
   "value": "2101", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/ball-fields.svg",
+    "url": "img/icons/activities/ball-fields.svg",
     "height": 28,
     "width": 28
   }
@@ -122,7 +122,7 @@
   "value": "2113", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/ball-fields.svg",
+    "url": "img/icons/activities/ball-fields.svg",
     "height": 28,
     "width": 28
   }
@@ -130,7 +130,7 @@
   "value": "2114", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/ball-fields.svg",
+    "url": "img/icons/activities/ball-fields.svg",
     "height": 28,
     "width": 28
   }
@@ -138,7 +138,7 @@
   "value": "2301", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/basketball.svg",
+    "url": "img/icons/activities/basketball.svg",
     "height": 28,
     "width": 28
   }
@@ -146,7 +146,7 @@
   "value": "2302", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/basketball.svg",
+    "url": "img/icons/activities/basketball.svg",
     "height": 28,
     "width": 28
   }
@@ -154,7 +154,7 @@
   "value": "2202", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/boat-ramp.svg",
+    "url": "img/icons/activities/boat-ramp.svg",
     "height": 28,
     "width": 28
   }
@@ -162,7 +162,7 @@
   "value": "2303", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/bocce.svg",
+    "url": "img/icons/activities/bocce.svg",
     "height": 28,
     "width": 28
   }
@@ -170,7 +170,7 @@
   "value": "2203", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/canoe.svg",
+    "url": "img/icons/activities/canoe.svg",
     "height": 28,
     "width": 28
   }
@@ -178,7 +178,7 @@
   "value": "2604", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/disc-golf.svg",
+    "url": "img/icons/activities/disc-golf.svg",
     "height": 28,
     "width": 28
   }
@@ -186,7 +186,7 @@
   "value": "1307", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/environmental-education.svg",
+    "url": "img/icons/activities/environmental-education.svg",
     "height": 28,
     "width": 28
   }
@@ -194,7 +194,7 @@
   "value": "2204", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/fishing.svg",
+    "url": "img/icons/activities/fishing.svg",
     "height": 28,
     "width": 28
   }
@@ -202,7 +202,7 @@
   "value": "2304", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/handball.svg",
+    "url": "img/icons/activities/handball.svg",
     "height": 28,
     "width": 28
   }
@@ -210,7 +210,7 @@
   "value": "2305", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/horseshoe.svg",
+    "url": "img/icons/activities/horseshoe.svg",
     "height": 28,
     "width": 28
   }
@@ -218,7 +218,7 @@
   "value": "2606", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/hockey.svg",
+    "url": "img/icons/activities/hockey.svg",
     "height": 28,
     "width": 28
   }
@@ -226,7 +226,7 @@
   "value": "2106", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/multipurpose-field.svg",
+    "url": "img/icons/activities/multipurpose-field.svg",
     "height": 28,
     "width": 28
   }
@@ -234,7 +234,7 @@
   "value": "2107", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/multipurpose-field.svg",
+    "url": "img/icons/activities/multipurpose-field.svg",
     "height": 28,
     "width": 28
   }
@@ -242,7 +242,7 @@
   "value": "2108", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/multipurpose-field.svg",
+    "url": "img/icons/activities/multipurpose-field.svg",
     "height": 28,
     "width": 28
   }
@@ -250,7 +250,7 @@
   "value": "2607", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/dog-park.svg",
+    "url": "img/icons/activities/dog-park.svg",
     "height": 28,
     "width": 28
   }
@@ -258,7 +258,7 @@
   "value": "2501", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/playground.svg",
+    "url": "img/icons/activities/playground.svg",
     "height": 28,
     "width": 28
   }
@@ -266,7 +266,7 @@
   "value": "2306", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/volleyball.svg",
+    "url": "img/icons/activities/volleyball.svg",
     "height": 28,
     "width": 28
   }
@@ -274,7 +274,7 @@
   "value": "2307", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/volleyball.svg",
+    "url": "img/icons/activities/volleyball.svg",
     "height": 28,
     "width": 28
   }
@@ -282,7 +282,7 @@
   "value": "2609", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/skate-park.svg",
+    "url": "img/icons/activities/skate-park.svg",
     "height": 28,
     "width": 28
   }
@@ -290,7 +290,7 @@
   "value": "2111", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/ball-fields.svg",
+    "url": "img/icons/activities/ball-fields.svg",
     "height": 28,
     "width": 28
   }
@@ -298,7 +298,7 @@
   "value": "2112", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/ball-fields.svg",
+    "url": "img/icons/activities/ball-fields.svg",
     "height": 28,
     "width": 28
   }
@@ -306,7 +306,7 @@
   "value": "2308", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/tennis.svg",
+    "url": "img/icons/activities/tennis.svg",
     "height": 28,
     "width": 28
   }
@@ -314,7 +314,7 @@
   "value": "2309", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/tennis.svg",
+    "url": "img/icons/activities/tennis.svg",
     "height": 28,
     "width": 28
   }
@@ -322,7 +322,7 @@
   "value": "2610", 
   "symbol": {
     "type": "esriPMS",
-    "url": "/img/icons/activities/running.svg",
+    "url": "img/icons/activities/running.svg",
     "height": 28,
     "width": 28
   }
