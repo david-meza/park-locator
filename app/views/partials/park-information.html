@@ -25,7 +25,7 @@
           <div class="img-container">
             <img  class = "img-responsive"
                   fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
-                  ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+                  ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ ::currentPark.urlFormat }}.jpg">
           </div>
 
           <div layout="column" layout-align="space-between stretch">

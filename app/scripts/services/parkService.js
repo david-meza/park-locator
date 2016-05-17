@@ -16,7 +16,7 @@
     function _markerClick(park) { // Simulate clicking a map marker
       parks.currentPark = park;
       // Trigger a state change and show the park details
-      $state.go('home.park', { 'name': park.name.replace(/\W+/g, '').toLowerCase() });
+      $state.go('home.park', { 'name': park.urlFormat });
     }
 
     function logError(response) {
@@ -30,6 +30,7 @@
         id: p.OBJECTID,
         name: p.NAME,
         searchable: p.NAME.toLowerCase(),
+        urlFormat: p.NAME.replace(/\W+/g, '').toLowerCase(),
         address: p.ADDRESS,
         url: p.URL,
         phone: p.PHONE,
@@ -83,8 +84,7 @@
       };
 
       // Storing parks both individually as key on markers object and as an array of parks
-      var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
-      if (!this[parkName]) { this[parkName] = marker; }
+      if (!this[marker.urlFormat]) { this[marker.urlFormat] = marker; }
 
       this.markers.push(marker);
     }
