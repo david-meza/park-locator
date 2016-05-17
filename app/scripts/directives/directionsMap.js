@@ -6,7 +6,7 @@
 
     return {
       restrict: 'E',
-      scope: true,
+      scope: false, // Inherit parkCtrl scope
       template: '<div id="directions-map" class="flex-100"></div>',
       
       controller: ['$scope', 'Esri', function($scope, Esri) {
@@ -14,15 +14,13 @@
       }],
 
       link: function postLink($scope, $element) {
-        var maps = $scope.$parent.maps; 
-        var destination = $scope.$parent.currentPark;
 
         var mapOptions = {
           zoom: 16,
           scrollwheel: false,
           center: undefined,
           mapTypeControlOptions: {
-            mapTypeIds: [maps.MapTypeId.ROADMAP, 'light_dream']
+            mapTypeIds: [$scope.maps.MapTypeId.ROADMAP, 'light_dream']
           }
         };
 
@@ -36,8 +34,8 @@
           var travelMode = getBestTravelMode(origin, destination);
 
           var request = {
-              origin: new maps.LatLng(origin.y, origin.x),
-              destination: new maps.LatLng(destination.latitude, destination.longitude),
+              origin: new $scope.maps.LatLng(origin.y, origin.x),
+              destination: new $scope.maps.LatLng(destination.latitude, destination.longitude),
               travelMode: travelMode,
           };
           directionsService.route(request, displayDirections);
@@ -50,25 +48,25 @@
           // var dist = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
           // Walk directions if our destination is about 0.8 miles away (aprox a 15 min walk)
           $scope.$parent.travelMode = destination.distance > 0.011 ? 'fa-car' : 'fa-male';
-          return (destination.distance <= 0.011) ? maps.TravelMode.WALKING : maps.TravelMode.DRIVING;
+          return (destination.distance <= 0.011) ? $scope.maps.TravelMode.WALKING : $scope.maps.TravelMode.DRIVING;
         }
 
         function generateMarkerIcons() {
           icons = {
-            start: new maps.MarkerImage('/img/icons/user-marker.svg',
-                                        new maps.Size( 52, 52 ), // (width,height)
-                                        new maps.Point( 0, 0 ), // The origin point (x,y)
-                                        new maps.Point( 24, 46 ) ), // The anchor point (x,y)
-            end: new maps.MarkerImage('/img/icons/park-marker.svg',
-                                        new maps.Size( 48, 48 ),
-                                        new maps.Point( 0, 0 ),
-                                        new maps.Point( 25, 46 ) )
+            start: new $scope.maps.MarkerImage('/img/icons/user-marker.svg',
+                                        new $scope.maps.Size( 52, 52 ), // (width,height)
+                                        new $scope.maps.Point( 0, 0 ), // The origin point (x,y)
+                                        new $scope.maps.Point( 24, 46 ) ), // The anchor point (x,y)
+            end: new $scope.maps.MarkerImage('/img/icons/park-marker.svg',
+                                        new $scope.maps.Size( 48, 48 ),
+                                        new $scope.maps.Point( 0, 0 ),
+                                        new $scope.maps.Point( 25, 46 ) )
           };
           return icons;
         }
 
         function displayDirections(response, status) {
-          if (status === maps.DirectionsStatus.OK) {
+          if (status === $scope.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             placeCustomMarkers(response);
             extractDirectionsInfo(response);
@@ -85,12 +83,12 @@
 
         function makeMarker( position, icon, title ) {
           if (startEndMarkers[startEndMarkers.length - 2]) { startEndMarkers[startEndMarkers.length - 2].setMap(null); }
-          var marker = new maps.Marker({
+          var marker = new $scope.maps.Marker({
             position: position,
             map: map,
             icon: icon,
             title: title,
-            animation: maps.Animation.DROP
+            animation: $scope.maps.Animation.DROP
           });
           startEndMarkers.push(marker);
         }
@@ -115,7 +113,7 @@
 
         function refreshMapTiles(){
           var center = map.getCenter();
-          maps.event.trigger(map, 'resize');
+          $scope.maps.event.trigger(map, 'resize');
           map.setCenter(center);
         }
 
@@ -126,22 +124,22 @@
           }
 
           function userMarkerChanged(newOrigin) {
-            calcRoute(newOrigin, destination);
+            calcRoute(newOrigin, $scope.currentPark);
           }
 
           (function initializeDirectionsMap() { // Run once when directive is instantiated
-            directionsService = new maps.DirectionsService();
-            directionsDisplay = new maps.DirectionsRenderer({ suppressMarkers: true });
+            directionsService = new $scope.maps.DirectionsService();
+            directionsDisplay = new $scope.maps.DirectionsRenderer({ suppressMarkers: true });
             generateMarkerIcons();
-            mapOptions.center = new maps.LatLng(modules.userMarker.geometry.y, modules.userMarker.geometry.x);
+            mapOptions.center = new $scope.maps.LatLng(modules.userMarker.geometry.y, modules.userMarker.geometry.x);
             
-            map = new maps.Map($element.children()[0], mapOptions);
+            map = new $scope.maps.Map($element.children()[0], mapOptions);
             // Watch for changes on the element's size
-            maps.event.addListenerOnce(map, 'idle', refreshMapTiles);
+            $scope.maps.event.addListenerOnce(map, 'idle', refreshMapTiles);
             
             // Show the directions on this map
             directionsDisplay.setMap( map );
-            map.mapTypes.set('light_dream', new maps.StyledMapType(mapStyle, {name: 'Light'}) );
+            map.mapTypes.set('light_dream', new $scope.maps.StyledMapType(mapStyle, {name: 'Light'}) );
             map.setMapTypeId('light_dream');
           })();
 

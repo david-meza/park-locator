@@ -2,13 +2,13 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', '$mdSidenav',
-    function($scope, gMapsApi, mapService, $mdSidenav){
+  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'googleMaps', 'mapService', '$mdSidenav',
+    function($scope, googleMaps, mapService, $mdSidenav){
 
       // Search box inside set my location dialog
       var myLocation, input;
 
-      gMapsApi.then(function(maps) {
+      googleMaps.isReady().then(function(maps) {
 
         input = document.getElementById($scope.inputId);
         var options = {

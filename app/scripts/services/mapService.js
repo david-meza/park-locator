@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast', 'Esri', 'deviceService',
-    function (gMapsApi, $mdToast, Esri, deviceService) {
+  angular.module('appServices').factory('mapService', ['$mdToast', 'Esri', 'deviceService',
+    function ($mdToast, Esri, deviceService) {
 
     var esriModules, geoLocationOptions;
 

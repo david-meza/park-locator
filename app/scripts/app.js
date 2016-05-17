@@ -2,22 +2,13 @@
 
   'use strict';
 
-  angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'duScroll', 'dcbImgFallback', 'ngAnimate'])
+  angular.module('parkLocator', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'duScroll', 'dcbImgFallback', 'ngAnimate'])
 
     .value('duScrollDuration', 600)
     .value('duScrollOffset', 0)
     .value('duScrollEasing', function (t) { 
       return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
     })
-
-    .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
-      uiGmapGoogleMapApiProvider.configure({
-        signed_in: true,
-        v: '3',
-        key: 'AIzaSyAI5FKxCC-6lSrO5f4UcUXBEogTws2UV14',
-        libraries: 'places'
-      });
-    }])
 
     .config([ '$httpProvider', function ($httpProvider) {
       $httpProvider.interceptors.push('httpInterceptor');
@@ -61,8 +52,8 @@
               }
             },
             resolve: {
-              maps: ['uiGmapGoogleMapApi', function(uiGmapGoogleMapApi) {
-                return uiGmapGoogleMapApi;
+              maps: ['googleMaps', function(googleMaps) {
+                return googleMaps.isReady();
               }],
               currentPark: ['parkService', '$stateParams', '$timeout', '$q', function(parkService, $stateParams, $timeout, $q) {
                 var deferred = $q.defer();
