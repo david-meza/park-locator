@@ -57,9 +57,7 @@
               }],
               currentPark: ['parkService', '$stateParams', '$timeout', '$q', function(parkService, $stateParams, $timeout, $q) {
                 var deferred = $q.defer();
-                $timeout( function () {
-                  parkService.resolveCurrentPark(deferred, $stateParams.name);
-                }, 0, false);
+                $timeout( parkService.resolveCurrentPark, 0, false, deferred, $stateParams.name);
                 return deferred.promise;
               }]
             }

@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri',
-  	function ($http, $q, $state, $timeout, Esri) {
+  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri', '$mdToast', '$window',
+  	function ($http, $q, $state, $timeout, Esri, $mdToast, $window) {
   	
     var esriModules, parks;
     
@@ -128,15 +128,23 @@
 
     }
 
-    function resolveCurrentPark(deferred, parkName) {
+    function resolveCurrentPark(deferred, urlFormat, retriesLeft) {
+      var retries = retriesLeft || 10; // Times out after 5 seconds of waiting
       // Queue a call once every half second until it is resolved
-      if (parks[parkName]) {
-        parks.currentPark = parks[parkName];
+      if (parks[urlFormat]) {
+        parks.currentPark = parks[urlFormat];
         deferred.resolve(parks.currentPark);
       } else {
-        $timeout(function(){
-          resolveCurrentPark(deferred, parkName);
-        }, 500, false);
+        if (retries > 1) { // Err... 0 is false in JS so it goes back to 20 :)
+          $timeout(resolveCurrentPark, 500, false, deferred, urlFormat, --retries);
+        } else {
+          console.error('Timeout error: No Park with such name: ', urlFormat);
+          deferred.reject(urlFormat);
+          $mdToast.showSimple('I searched everywhere but didn\'t find a park with that name!');
+          $state.go('home').then(function() {
+            $window.location.reload(); // We refresh the page because esri doesn't look for the map-canvas again
+          });
+        }
       }
     }
 
