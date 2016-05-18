@@ -23,42 +23,41 @@
           function updateTrackerGraphic(lat, lon) {
             var trackerGraphic = new modules.Graphic(modules.trackerGraphicTemplate);
             trackerGraphic.geometry = new modules.Point([lon, lat]);
-            // modules.userGraphics.graphics = [trackerGraphic]; // modules.userGraphics.graphics.items[0]
-            modules.userGraphics.removeAll();
-            modules.userGraphics.add(trackerGraphic);
-            console.log(modules.userGraphics.graphics);
+            $scope.$apply(function() { // Update the graphic faster
+              modules.userGraphics.removeAll();
+              modules.userGraphics.add(trackerGraphic);
+            });
+          }
+
+          function cancelTrackingIfInteracted() {
+            if (!mapEvent) { // Do not create more than one event at a time
+              // Set a map event to cancel the watch if we start panning on the map (should not cancel when zooming)
+              mapEvent = modules.mapView.watch('interacting', stopTracking);
+            }
           }
 
           function centerMapView(lat, lon) {
             modules.mapView
-              .goTo({ center: [lon, lat] })
-              .then(function() {
-                if (!mapEvent) { // Do not create more than one event at a time
-                  // Set a map event to cancel the watch if we start panning on the map (should not cancel when zooming)
-                  mapEvent = modules.mapView.watch('interacting', stopTracking);
-                }
-              });
+              .goTo({ center: [lon, lat], zoom: modules.mapView.zoom < 15 ? 17 : modules.mapView.zoom })
+              .then(cancelTrackingIfInteracted);
           }
 
           function updatePosition(pos) {
-            var lat = pos.coords.latitude, 
-                lon = pos.coords.longitude;
-            
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (geolocation API)
             $scope.$apply(function() {
-              $scope.watching = true;
+              $scope.tracking = true;
             });
 
-            updateTrackerGraphic(lat, lon);
-            centerMapView(lat, lon);
+            updateTrackerGraphic(pos.coords.latitude, pos.coords.longitude);
+            centerMapView(pos.coords.latitude, pos.coords.longitude);
           }
 
           function stopTracking() {
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (Esri/window event)
             $scope.$apply(function() {
-              $scope.watching = false;
+              $scope.tracking = false;
             });
             
             navigator.geolocation.clearWatch(watchId);

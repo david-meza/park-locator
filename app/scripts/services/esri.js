@@ -34,8 +34,6 @@
         'esri/tasks/support/Query',
         'esri/tasks/QueryTask',
         
-        'dijit/TooltipDialog', 
-        'dijit/popup',
         'dojo/domReady!'],
         
         function( Map,
@@ -56,9 +54,7 @@
                   Point,
                   
                   Query,
-                  QueryTask,
-                  TooltipDialog,
-                  dijitPopup) {
+                  QueryTask) {
           
           // Base map layer
           service.basemapLayer = new VectorTileLayer({
@@ -193,6 +189,11 @@
             attributes: {
               title: 'My Location'
             },
+            geometry: {
+              x: -78.646,
+              y: 35.785,
+              spatialReference: { wkid: 4326 }
+            },
             symbol: {
               type: 'picture-marker-symbol',
               url: '/img/icons/my-location.svg',
@@ -251,13 +252,10 @@
 
           // Attach all necessary Esri modules to the service so they can be used from outside
           service.Graphic = Graphic;
-          service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
           service.Query = Query;
           service.QueryTask = QueryTask;
-          service.TooltipDialog = TooltipDialog;
-          service.dijitPopup = dijitPopup;
 
           // Finally resolve the promise so we can signal other components that all modules are ready to be used
           deferred.resolve(service);
