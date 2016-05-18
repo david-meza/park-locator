@@ -30,7 +30,7 @@
             g.geometry = new modules.Point([lon, lat]);
             modules.userGraphics.add(g);
             if ( deviceService.isMobile() ) {
-              $timeout(removeOldGraphic, 250, g);
+              $timeout(removeOldGraphic, 250, true, g);
             } else {
               removeOldGraphic(g);
             }
