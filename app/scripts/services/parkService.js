@@ -129,7 +129,7 @@
     }
 
     function resolveCurrentPark(deferred, urlFormat, retriesLeft) {
-      var retries = retriesLeft || 10; // Times out after 5 seconds of waiting
+      var retries = retriesLeft || 20; // Times out after 10 seconds of waiting
       // Queue a call once every half second until it is resolved
       if (parks[urlFormat]) {
         parks.currentPark = parks[urlFormat];
