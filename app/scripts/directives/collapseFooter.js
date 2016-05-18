@@ -20,7 +20,7 @@
             angular.element(document.getElementById('back-to-top')).toggleClass('lower');
           }
 
-          if ( deviceService.isMobile() ) { hideFooter(); }
+          if ( deviceService.isMobile() ) { hideFooter(); } // Initially hide the footer on mobile devices
 
           element.on('click', function() {
             if (animationInProgress) { return; }
@@ -38,4 +38,4 @@
 
   }]);
 
-})(angular || window.angular)
+})(angular || window.angular);

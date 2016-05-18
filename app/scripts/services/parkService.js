@@ -84,9 +84,9 @@
       };
 
       // Storing parks both individually as key on markers object and as an array of parks
-      if (!this[marker.urlFormat]) { this[marker.urlFormat] = marker; }
+      if (!parks[marker.urlFormat]) { parks[marker.urlFormat] = marker; }
 
-      this.markers.push(marker);
+      parks.markers.push(marker);
     }
 
 
@@ -97,7 +97,7 @@
           parks.markers.splice(0, parks.markers.length);
         }
         // Make markers from the response data
-        angular.forEach(response.data.features, extractIndividualMarker, parks);
+        angular.forEach(response.data.features, extractIndividualMarker);
         // Return an array of markers in case we chain the promise
         return parks.markers;
       } else {

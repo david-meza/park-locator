@@ -8,7 +8,7 @@
 			Esri.modulesReady().then(function(modules) {
 				$scope.myLocation = function() {
 					return modules.userMarker.geometry;
-				}
+				};
 			});
 
 			// Assign to scope so we can inherit from child directions map scope.

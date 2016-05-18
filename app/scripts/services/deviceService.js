@@ -3,7 +3,6 @@
 angular.module('appServices').factory('deviceService', ['$window', '$q', 
   function($window, $q){
 
-    var _width = $window.innerWidth;
     var activeToast = $q.defer();
 
     function toastIsClosed() {
@@ -15,7 +14,7 @@ angular.module('appServices').factory('deviceService', ['$window', '$q',
     }
 
     function isMobile() {
-      return _width < 768;
+      return $window.innerWidth < 768;
     }
 
     function scrollTo(target) {
