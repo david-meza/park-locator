@@ -2,8 +2,8 @@
   
   'use strict';
 
-  angular.module('appControllers').controller('mapCtrl', ['$scope', '$state', 'amenitiesService', 'Esri', '$mdDialog',
-    function($scope, $state, amenitiesService, Esri, $mdDialog){
+  angular.module('appControllers').controller('mapCtrl', ['$scope', '$state', 'amenitiesService', 'Esri', '$mdDialog', 'deviceService',
+    function($scope, $state, amenitiesService, Esri, $mdDialog, deviceService){
 
       // Opens the dialog showing the map icons key
       $scope.openKey = function (ev) {
@@ -63,6 +63,10 @@
             }
           });
         });
+
+        if (deviceService.isMobile()) {
+          modules.mapView.ui.destroy();
+        }
 
       });
 
