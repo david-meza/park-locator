@@ -14,39 +14,39 @@
         <div flex layout="column" layout-align="space-between center">
           
           <md-button class="md-icon-button md-accent button-top-left" ui-sref="^" aria-label="back to main map">
-            <md-tooltip md-direction = "bottom">
+            <md-tooltip md-direction="bottom">
               Back to Main Map
             </md-tooltip>
-            <md-icon md-font-icon="fa-chevron-left" class = "fa fa-lg"></md-icon>
+            <md-icon md-font-icon="fa-chevron-left" class="fa fa-lg"></md-icon>
           </md-button>
     
           <h3 class="current-park-name">{{ ::currentPark.name }}</h3>
           
           <div class="img-container">
-            <img  class = "img-responsive"
-                  fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
-                  ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ currentPark.name }}.jpg">
+            <img  class="img-responsive"
+                  fallback-src="https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
+                  ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ ::currentPark.urlFormat }}.jpg">
           </div>
 
           <div layout="column" layout-align="space-between stretch">
-            <span class="park-detail"> <i class = "fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>
+            <span class="park-detail" ng-show="currentPark.address"><i class="fa fa-fw fa-map-marker"></i> {{ ::currentPark.address }}</span>
 
-            <span class="park-detail"> <i class = "fa fa-fw fa-mobile"></i> {{ ::currentPark.phone }}</span>
+            <span class="park-detail" ng-show="currentPark.phone"><i class="fa fa-fw fa-mobile"></i> {{ ::currentPark.phone }}</span>
 
             <span class="park-detail" ng-if="routeData.duration">
-              <i class = "fa fa-fw" ng-class="travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span>
+              <i class="fa fa-fw" ng-class="travelMode"></i> You could be here in <span ng-class="durationColoring"> {{ routeData.duration }}</span>
             </span>
 
-            <span class="park-detail" ng-if = "routeData.distance">
-              <i class = "fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
+            <span class="park-detail" ng-if="routeData.distance">
+              <i class="fa fa-fw fa-location-arrow"></i> Best route is <span ng-class="distanceColoring"> {{ routeData.distance }}</span>
             </span>
 
-            <md-button class = "md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank">
-              <i class = "fa fa-fw fa-info-circle color-default"></i> Park Website
+            <md-button class="md-primary capitalize list-button" ng-href="{{ ::currentPark.url }}" target="_blank">
+              <i class="fa fa-fw fa-info-circle color-default"></i> Park Website
             </md-button>
 
-            <md-button class = "md-primary capitalize list-button" ng-href = "https://www.google.com/maps/dir/{{map.myLocationMarker.coords.latitude}},{{map.myLocationMarker.coords.longitude}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank">
-              <i class = "fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
+            <md-button class="md-primary capitalize list-button" ng-href="https://www.google.com/maps/dir/{{myLocation().y}},{{myLocation().x}}/{{::currentPark.latitude}},{{::currentPark.longitude}}" target="_blank">
+              <i class="fa fa-fw fa-compass color-default"></i> Open Directions in Google Maps
             </md-button>
           </div>
 
@@ -63,7 +63,7 @@
   <md-tab label="Things to Do" ng-if="activitiesInPark.length > 0" md-on-select="scrollTo('park-info')">
     <div class="md-padding">
 
-      <div id = "park-amenities" flex layout = "row" layout-wrap layout-align = "center stretch">
+      <div id="park-amenities" flex layout="row" layout-wrap layout-align="center stretch">
         <md-card ng-repeat="activity in activitiesInPark" class="icon-card">
           
           <md-card-content>
@@ -80,7 +80,7 @@
   </md-tab>
 
 
-  <classes-info current-park = "currentPark"></classes-info>
+  <classes-info current-park="currentPark"></classes-info>
 
 
 </md-tabs>

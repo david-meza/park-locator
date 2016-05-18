@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri',
-  	function ($http, $q, $state, $timeout, Esri) {
+  angular.module('appServices').factory('parkService', ['$http', '$q', '$state', '$timeout', 'Esri', '$mdToast', '$window',
+  	function ($http, $q, $state, $timeout, Esri, $mdToast, $window) {
   	
     var esriModules, parks;
     
@@ -16,7 +16,7 @@
     function _markerClick(park) { // Simulate clicking a map marker
       parks.currentPark = park;
       // Trigger a state change and show the park details
-      $state.go('home.park', { 'name': park.name.replace(/\W+/g, '').toLowerCase() });
+      $state.go('home.park', { 'name': park.urlFormat });
     }
 
     function logError(response) {
@@ -30,6 +30,7 @@
         id: p.OBJECTID,
         name: p.NAME,
         searchable: p.NAME.toLowerCase(),
+        urlFormat: p.NAME.replace(/\W+/g, '').toLowerCase(),
         address: p.ADDRESS,
         url: p.URL,
         phone: p.PHONE,
@@ -83,10 +84,9 @@
       };
 
       // Storing parks both individually as key on markers object and as an array of parks
-      var parkName = p.NAME.replace(/\W+/g, '').toLowerCase();
-      if (!this[parkName]) { this[parkName] = marker; }
+      if (!parks[marker.urlFormat]) { parks[marker.urlFormat] = marker; }
 
-      this.markers.push(marker);
+      parks.markers.push(marker);
     }
 
 
@@ -97,7 +97,7 @@
           parks.markers.splice(0, parks.markers.length);
         }
         // Make markers from the response data
-        angular.forEach(response.data.features, extractIndividualMarker, parks);
+        angular.forEach(response.data.features, extractIndividualMarker);
         // Return an array of markers in case we chain the promise
         return parks.markers;
       } else {
@@ -128,15 +128,23 @@
 
     }
 
-    function resolveCurrentPark(deferred, parkName) {
+    function resolveCurrentPark(deferred, urlFormat, retriesLeft) {
+      var retries = retriesLeft || 20; // Times out after 10 seconds of waiting
       // Queue a call once every half second until it is resolved
-      if (parks[parkName]) {
-        parks.currentPark = parks[parkName];
+      if (parks[urlFormat]) {
+        parks.currentPark = parks[urlFormat];
         deferred.resolve(parks.currentPark);
       } else {
-        $timeout(function(){
-          resolveCurrentPark(deferred, parkName);
-        }, 500, false);
+        if (retries > 1) { // Err... 0 is false in JS so it goes back to 20 :)
+          $timeout(resolveCurrentPark, 500, false, deferred, urlFormat, --retries);
+        } else {
+          console.error('Timeout error: No Park with such name: ', urlFormat);
+          deferred.reject(urlFormat);
+          $mdToast.showSimple('I searched everywhere but didn\'t find a park with that name!');
+          $state.go('home').then(function() {
+            $window.location.reload(); // We refresh the page because esri doesn't look for the map-canvas again
+          });
+        }
       }
     }
 

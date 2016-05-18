@@ -175,7 +175,6 @@
 
           // Attach all necessary Esri modules to the service so they can be used from outside
           service.VectorTileLayer = VectorTileLayer;
-          service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
           service.SimpleRenderer = SimpleRenderer;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;

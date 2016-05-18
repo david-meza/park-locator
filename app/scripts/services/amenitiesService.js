@@ -32,12 +32,12 @@ angular.module('appServices').factory('amenitiesService', ['$http', '$q',
       }
     };
 
-    this.push(processed);
+    activities.markers.push(processed);
   }
 
 	function generateActivityMarkers(response) {
 	  if (response.status === 200) {
-	    angular.forEach(response.data.features, extractIndividualActivity, activities.markers);
+	    angular.forEach(response.data.features, extractIndividualActivity);
 	    return activities.markers;
 	  } else {
 	    return logError();

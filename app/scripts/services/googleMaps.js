@@ -35,7 +35,7 @@
       if (_isGooglePresent()) {
         deferred.resolve(google.maps || window.google.maps);
       }
-    }
+    };
 
   }]);
 
