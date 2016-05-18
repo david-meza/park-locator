@@ -8,7 +8,7 @@
       restrict: 'E',
       templateUrl: 'views/directives/location-tracker.html',
       replace: true,
-      controller: ['$scope', 'Esri', function($scope, Esri) {
+      controller: ['$scope', 'Esri', '$timeout', 'deviceService', function($scope, Esri, $timeout, deviceService) {
         
         var options, watchId, mapEvent;
 
@@ -20,13 +20,20 @@
 
         Esri.modulesReady().then( function(modules) {
 
+          function removeOldGraphic(newGraphic) {
+            modules.userGraphics.remove(modules.trackerGraphic);
+            modules.trackerGraphic = newGraphic;
+          }
+
           function updateTrackerGraphic(lat, lon) {
-            var trackerGraphic = new modules.Graphic(modules.trackerGraphicTemplate);
-            trackerGraphic.geometry = new modules.Point([lon, lat]);
-            $scope.$apply(function() { // Update the graphic faster
-              modules.userGraphics.removeAll();
-              modules.userGraphics.add(trackerGraphic);
-            });
+            var g = modules.trackerGraphic.clone();
+            g.geometry = new modules.Point([lon, lat]);
+            modules.userGraphics.add(g);
+            if ( deviceService.isMobile() ) {
+              $timeout(removeOldGraphic, 250, g);
+            } else {
+              removeOldGraphic(g);
+            }
           }
 
           function cancelTrackingIfInteracted() {

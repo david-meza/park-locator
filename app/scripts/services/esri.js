@@ -189,18 +189,14 @@
             attributes: {
               title: 'My Location'
             },
-            geometry: {
-              x: -78.646,
-              y: 35.785,
-              spatialReference: { wkid: 4326 }
-            },
-            symbol: {
-              type: 'picture-marker-symbol',
+            geometry: new Point([35.785, -78.646]),
+            symbol: new PictureMarkerSymbol({
               url: '/img/icons/my-location.svg',
-              height: 36, width: 36,
-              xoffset: 0, yoffset: 0, angle: 0
-            }
+              height: 36, width: 36
+            })
           };
+          service.trackerGraphic = new Graphic(service.trackerGraphicTemplate);
+          
           // My Location graphic
           service.positionGraphicTemplate = {
             attributes: {
