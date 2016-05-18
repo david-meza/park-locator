@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appDirectives').directive('collapseFooter', ['$document', '$timeout', function ($document, $timeout) {
+angular.module('appDirectives').directive('collapseFooter', ['$document', '$timeout', 'deviceService', function ($document, $timeout, deviceService) {
   
   return { 
     restrict: 'E',
@@ -12,13 +12,19 @@ angular.module('appDirectives').directive('collapseFooter', ['$document', '$time
         var footer = angular.element(document.getElementById('footer'));
         var animationInProgress = false;
 
+        function hideFooter() {
+          footer.toggleClass('collapsed');
+          element.children().toggleClass('rotated');
+          angular.element(document.getElementById('back-to-top')).toggleClass('lower');
+        }
+
+        if ( deviceService.isMobile() ) { hideFooter(); }
+
         element.on('click', function() {
           if (animationInProgress) { return; }
           animationInProgress = true;
           
-          footer.toggleClass('collapsed');
-          element.children().toggleClass('rotated');
-          angular.element(document.getElementById('back-to-top')).toggleClass('lower');
+          hideFooter();
           
           $timeout(function(){
             animationInProgress = false;
