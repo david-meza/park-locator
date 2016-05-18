@@ -117,13 +117,20 @@
         if (idx <= selectedActivities.length - 2) { query += ' AND '; }
       });
 
-      esriModules.parks.setDefinitionExpression(query);
+      esriModules.parks.definitionExpression = query;
 
-      esriModules.parks.queryExtent(query, function(response) {
-        if (!isNaN(response.extent.xmin)) {
-          esriModules.map.setExtent(response.extent.expand(1.3), true);
+      var queryInstance = new esriModules.Query();
+      queryInstance.where = query;
+      queryInstance.outSpatialReference = esriModules.mapView.spatialReference;
+
+      esriModules.parks.queryExtent(queryInstance).then( function(response) {
+        if (response.count > 0) {
+          esriModules.mapView.extent = response.extent.expand(1.3);
+        } else {
+          $mdToast.showSimple('No parks with these activities');
         }
       });
+      
       getParksInfo(query).then(_generateMarkers, logError);
 
     }

@@ -14,177 +14,244 @@
     angular.element(document).ready( function() {
 
       require([
-        'esri/map', 
-        'esri/graphic',
-        'esri/layers/VectorTileLayer',
-        'esri/layers/ArcGISImageServiceLayer', 
+        'esri/Map',
+        'esri/views/MapView',
+        'esri/Basemap', 
+        'esri/Graphic',
+        
         'esri/layers/GraphicsLayer',
+        'esri/layers/VectorTileLayer',
         'esri/layers/FeatureLayer',
-        'esri/dijit/Search', 
+        'esri/layers/ImageryLayer', 
+        
         'esri/renderers/SimpleRenderer', 
         'esri/renderers/UniqueValueRenderer',
+        
         'esri/symbols/PictureMarkerSymbol',
+        
         'esri/geometry/Point',
-        'esri/tasks/query',
+
+        'esri/tasks/support/Query',
         'esri/tasks/QueryTask',
-        'dijit/TooltipDialog', 
-        'dijit/popup',
+        
         'dojo/domReady!'],
         
         function( Map,
+                  MapView,
+                  Basemap,
                   Graphic,
-                  VectorTileLayer,
-                  ArcGISImageServiceLayer,
+                  
                   GraphicsLayer,
+                  VectorTileLayer,
                   FeatureLayer,
-                  Search,
+                  ImageryLayer,
+                  
                   SimpleRenderer,
                   UniqueValueRenderer,
+                  
                   PictureMarkerSymbol,
+                  
                   Point,
+                  
                   Query,
-                  QueryTask,
-                  TooltipDialog,
-                  dijitPopup) {
+                  QueryTask) {
           
+          // Base map layer
+          service.basemapLayer = new VectorTileLayer({
+            url: 'https://ral.maps.arcgis.com/sharing/rest/content/items/49d007c1e87249ef9581f5662989fb9a/resources/styles/root.json',
+            visible: true
+          });
+          // Define the basemap
+          var corBasemap = new Basemap({
+            baseLayers: [service.basemapLayer],
+            title: 'Raleigh Nature Styled Basemap',
+            id: 'cor-basemap'
+          });
           // initialize the ESRI map
-          service.map = new Map('map-canvas', {
+          service.map = new Map({
+            basemap: corBasemap
+          });
+          // Initialize the Map view
+          service.mapView = new MapView({
+            container: 'map-canvas',
+            map: service.map,
             center: [-78.646, 35.785],
             zoom: 13,
-            maxZoom: 18,
-            minZoom: 10,
-            // basemap: 'streets-vector',
-            logo: false
-          });
-
-          // Park Markers layer
-          service.parks = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0', { 
-            mode: FeatureLayer.MODE_SNAPSHOT,
-            outFields: ['*'],
-            id: 'parks'
-          });
-          // Change the icon for the park marker
-          var parkSymbol = new SimpleRenderer({
-            type: 'simple',
-            symbol: {
-              type: 'esriPMS',
-              url: 'img/icons/park-marker.svg',
-              height: 36,
-              width: 36,
+            constraints: {
+              snapToZoom: false,
+              maxZoom: 18,
+              minZoom: 10
             }
           });
-          service.parks.setRenderer(parkSymbol);
 
-          // Base map layer
-          service.basemapLayer = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/49d007c1e87249ef9581f5662989fb9a/resources/styles/root.json');
+          document.getElementById('map-canvas').addEventListener('touchmove', function(event) {  
+            event.preventDefault(); // Prevent scrolling on this element
+          }, false);
+
 
           // Aerial views
-          service.aerialLabels = new VectorTileLayer('https://ral.maps.arcgis.com/sharing/rest/content/items/fb05b96c9aaa4d90bbb9bc7702330916/resources/styles/root.json', { visible: false });
+          service.aerialLabels = new VectorTileLayer({
+            url: 'https://ral.maps.arcgis.com/sharing/rest/content/items/fb05b96c9aaa4d90bbb9bc7702330916/resources/styles/root.json',
+            visible: false 
+          });
 
-          service.aerialLayer = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer', {
+          service.aerialLayer = new ImageryLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer',
+            format: 'png',
             visible: false
           });
 
-          service.aerialLayer2013 = new ArcGISImageServiceLayer('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2013/ImageServer', {
+          service.aerialLayer2013 = new ImageryLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2013/ImageServer',
+            format: 'png',
             visible: false
           });
 
-          // Greenway Layers
-          service.greenways = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0', {
-            id: 'greenways'
-          });
-          service.greenways2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1', {
-            id: 'greenway-connectors'
-          });
+
           // Change the default green line renderer
           var greenwaysLine = new SimpleRenderer({
             type: 'simple',
             symbol: {
-              type: 'esriSLS',
+              type: 'simple-line-symbol',
               color: [150, 188, 152],
-              style: 'esriSLSSolid',
-              width: 3,
+              style: 'solid',
+              width: 3
             }
           });
-          service.greenways.setRenderer(greenwaysLine);
-          service.greenways2.setRenderer(greenwaysLine);
+          // Greenway Layers
+          service.greenways = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/0',
+            title: 'greenways',
+            id: 'greenways-layer',
+            renderer: greenwaysLine
+          });
+          service.greenways2 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/Greenway/MapServer/1',
+            title: 'greenway-connectors',
+            id: 'greenway-connectors-layer',
+            renderer: greenwaysLine
+          });
+
+
+          // Change the icon for the park marker
+          var parkSymbol = new SimpleRenderer({
+            type: 'simple',
+            symbol: {
+              type: 'picture-marker-symbol',
+              url: '/img/icons/park-marker.svg',
+              height: 33, width: 33,
+              xoffset: 0, yoffset: 0, angle: 0
+            }
+          });
+          // Park Markers layer
+          service.parks = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/0',
+            renderer: parkSymbol,
+            outFields: ['*'],
+            title: 'parks',
+            id: 'parks-layer'
+          });
+
 
           // Amenity Markers (outdoors)
-          service.amenities1 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2', {
-            mode: FeatureLayer.MODE_SNAPSHOT,
+          service.amenities1 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/2',
             outFields: ['*'],
-            id: 'amenities-outdoors'
+            minScale: 5000,
+            title: 'amenities-outdoors',
+            id: 'amenities-outdoors-layer'
           });
-
           // Amenity Markers (indoors)
-          service.amenities2 = new FeatureLayer('https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3', {
-            mode: FeatureLayer.MODE_SNAPSHOT,
+          service.amenities2 = new FeatureLayer({
+            url: 'https://maps.raleighnc.gov/arcgis/rest/services/Parks/ParkLocator/MapServer/3',
             outFields: ['*'],
-            id: 'amenities-indoors'
+            minScale: 5000,
+            title: 'amenities-indoors',
+            id: 'amenities-indoors-layer'
           });
 
-          // Location Tracking Layer
-          service.tracker = new GraphicsLayer({
-            id: 'location-tracking',
-            visible: true
+
+          // User Graphics
+          service.userGraphics = new GraphicsLayer({
+            id: 'user-graphics',
+            graphics: []
           });
+
+
 
           // Add all layers to the map. Basemap must go first so map gets the right extent and coordinate system from it
           // Layers are put on top of each other so later layers will show if overlapping with a previous layer
-          service.map.addLayer(service.basemapLayer);
-          service.map.addLayers([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
-          service.map.addLayers([service.greenways, service.greenways2, service.parks, service.tracker]);
+          service.map.addMany([service.aerialLayer2013, service.aerialLayer, service.aerialLabels]);
+          service.map.addMany([service.greenways,service.greenways2, service.parks, service.userGraphics]);
 
+          // Tracker graphic
+          service.trackerGraphicTemplate = {
+            attributes: {
+              title: 'My Location'
+            },
+            geometry: new Point([35.785, -78.646]),
+            symbol: new PictureMarkerSymbol({
+              url: '/img/icons/my-location.svg',
+              height: 36, width: 36
+            })
+          };
+          service.trackerGraphic = new Graphic(service.trackerGraphicTemplate);
+          
           // My Location graphic
-          service.userMarker = new Graphic({
+          service.positionGraphicTemplate = {
+            attributes: {
+              title: 'User Marker'
+            },
             geometry: { // Temporary coordinates while Geoloc gets us accurate user's coords or as fallback for denied permissions
               x: -78.646,
               y: 35.785,
               spatialReference: { wkid: 4326 }
             },
-            attributes: {
-              title: 'User Marker'
-            },
-            symbol: {
-              type: 'esriPMS',
-              url: 'img/icons/user-marker.svg',
-              height: 36,
-              width: 36
-            },
+            symbol: new PictureMarkerSymbol({
+              url: '/img/icons/user-marker.svg',
+              height: 36, width: 36
+            })
+          };
+
+          service.getCurrentPosition = function() {
+            return service.positionGraphic ? service.positionGraphic.geometry : service.positionGraphicTemplate.geometry;
+          }
+
+
+          // Switch between aerial imagery when outside 2015 bounds
+          var queryInstance = new Query();
+          var aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
+
+          service.mapView.watch('extent', function(newExtent) {
+            if ( !service.basemapLayer.visible ) {
+
+              queryInstance.geometry = newExtent.center;
+              
+              aerialLayer2015Query.executeForCount(queryInstance).then(function(count) {
+                var isOutside2015Bounds = count === 0;
+                service.aerialLayer2013.visible = isOutside2015Bounds;
+                service.aerialLayer.visible = !isOutside2015Bounds;
+              });
+            }
           });
 
-          // Add my location graphic to map after it has loaded
-          service.map.on('load', function() {
-            service.map.graphics.add(service.userMarker);
+          service.mapView.whenLayerView(service.parks).then( function(lyrView) {
+            lyrView.watch('updating', function(val) {
+              if (!val) { // wait for the layer view to finish updating
+                lyrView.queryFeatures().then(function(graphics) {
+                  // console.log(graphics);
+                });
+              }
+            });
           });
 
-          // Tracker graphic
-          service.trackerGraphic = new Graphic({
-            attributes: {
-              title: 'My Location'
-            },
-            symbol: {
-              type: 'esriPMS',
-              url: 'img/icons/my-location.svg',
-              height: 36,
-              width: 36
-            },
-          });
-          // Add graphic to graphic layer
-          service.tracker.add(service.trackerGraphic);
 
           // Attach all necessary Esri modules to the service so they can be used from outside
-          service.VectorTileLayer = VectorTileLayer;
-          service.ArcGISImageServiceLayer = ArcGISImageServiceLayer;
-          service.SimpleRenderer = SimpleRenderer;
+          service.Graphic = Graphic;
           service.UniqueValueRenderer = UniqueValueRenderer;
           service.Point = Point;
           service.Query = Query;
-          service.queryInstance = new Query();
           service.QueryTask = QueryTask;
-          service.aerialLayer2015Query = new QueryTask('https://maps.raleighnc.gov/arcgis/rest/services/Orthos10/Orthos2015/ImageServer');
-          service.TooltipDialog = TooltipDialog;
-          service.dijitPopup = dijitPopup;
 
           // Finally resolve the promise so we can signal other components that all modules are ready to be used
           deferred.resolve(service);
@@ -194,4 +261,4 @@
 
   }]);
 
-})(window.angular);
+})(angular || window.angular);

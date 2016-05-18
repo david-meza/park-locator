@@ -8,7 +8,7 @@
       restrict: 'E',
       templateUrl: 'views/directives/location-tracker.html',
       replace: true,
-      controller: ['$scope', 'Esri', function($scope, Esri) {
+      controller: ['$scope', 'Esri', '$timeout', 'deviceService', function($scope, Esri, $timeout, deviceService) {
         
         var options, watchId, mapEvent;
 
@@ -20,39 +20,60 @@
 
         Esri.modulesReady().then( function(modules) {
 
+          function removeOldGraphic(newGraphic) {
+            modules.userGraphics.remove(modules.trackerGraphic);
+            modules.trackerGraphic = newGraphic;
+          }
+
+          function updateTrackerGraphic(lat, lon) {
+            var g = modules.trackerGraphic.clone();
+            g.geometry = new modules.Point([lon, lat]);
+            modules.userGraphics.add(g);
+            if ( deviceService.isMobile() ) {
+              $timeout(removeOldGraphic, 250, true, g);
+            } else {
+              removeOldGraphic(g);
+            }
+          }
+
+          function cancelTrackingIfInteracted() {
+            if (!mapEvent) { // Do not create more than one event at a time
+              // Set a map event to cancel the watch if we start panning on the map (should not cancel when zooming)
+              mapEvent = modules.mapView.watch('interacting', stopTracking);
+            }
+          }
+
+          function centerMapView(lat, lon) {
+            modules.mapView
+              .goTo({ center: [lon, lat], zoom: modules.mapView.zoom < 15 ? 17 : modules.mapView.zoom })
+              .then(cancelTrackingIfInteracted);
+          }
+
           function updatePosition(pos) {
-            var lat, lon;
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (geolocation API)
             $scope.$apply(function() {
-              $scope.watching = true;
+              $scope.tracking = true;
             });
 
-            lat = pos.coords.latitude;
-            lon = pos.coords.longitude;
-
-            modules.trackerGraphic.setGeometry(new modules.Point([lon, lat]));
-            modules.userMarker.hide();
-            // Set a map event to cancel the watch if we start panning on the map (does not cancel when zooming)
-            modules.map.centerAt([lon, lat]).then(function() {
-              mapEvent = modules.map.on('mouse-drag-start', stopTracking);
-            });
+            updateTrackerGraphic(pos.coords.latitude, pos.coords.longitude);
+            centerMapView(pos.coords.latitude, pos.coords.longitude);
           }
 
           function stopTracking() {
             // Wrap the variable change on a $scope.$apply function to notify Angular of the variable change 
             // because this event happens outside of the Angular framework (Esri/window event)
             $scope.$apply(function() {
-              $scope.watching = false;
+              $scope.tracking = false;
             });
             
             navigator.geolocation.clearWatch(watchId);
-            modules.userMarker.show();
             watchId = null;
             mapEvent.remove();
+            mapEvent = null;
           }
 
-          function error(err) {
+          function logError(err) {
             console.warn('ERROR(' + err.code + '): ' + err.message);
           }
 
@@ -61,16 +82,16 @@
               if (watchId) {
                 stopTracking();
               } else {
-                watchId = navigator.geolocation.watchPosition(updatePosition, error, options);
+                watchId = navigator.geolocation.watchPosition(updatePosition, logError, options);
               }
             }, 0);
           };
 
         });
 
-      }]
 
+      }]
     };
   });
 
-})(window.angular);
+})(angular || window.angular);

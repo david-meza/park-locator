@@ -120,7 +120,7 @@
         $scope.Esri.modulesReady().then(function(modules) {
 
           function getUserMarker() {
-            return modules.userMarker.geometry;
+            return modules.getCurrentPosition();
           }
 
           function userMarkerChanged(newOrigin) {
@@ -131,7 +131,7 @@
             directionsService = new $scope.maps.DirectionsService();
             directionsDisplay = new $scope.maps.DirectionsRenderer({ suppressMarkers: true });
             generateMarkerIcons();
-            mapOptions.center = new $scope.maps.LatLng(modules.userMarker.geometry.y, modules.userMarker.geometry.x);
+            mapOptions.center = new $scope.maps.LatLng(modules.getCurrentPosition().y, modules.getCurrentPosition().x);
             
             map = new $scope.maps.Map($element.children()[0], mapOptions);
             // Watch for changes on the element's size

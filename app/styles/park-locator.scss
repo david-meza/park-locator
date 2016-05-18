@@ -31,11 +31,16 @@ html, body {
   overflow: hidden;
 }
 
-#parks_layer image, a { 
+// Hack to target park graphic svgs
+.esri-display-object image[height="44"], a { 
   cursor: pointer; 
 }
 
-a, a:hover, a:active, a:focus, a:visited {
+.esri-ui .esri-attribution {
+  display: none;
+}
+
+a, a:hover, a:active, a:focus, a:visited, .esri-button {
   text-decoration: none;
   outline: none;
 }

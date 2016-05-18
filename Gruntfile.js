@@ -28,7 +28,7 @@ module.exports = function (grunt) {
       'park-locator': {
         options: {
           project: '<%= config.dist %>',
-          domain: 'park-locator-esri.surge.sh'
+          domain: 'park-locator-esri-test.surge.sh'
         }
       }
     },
