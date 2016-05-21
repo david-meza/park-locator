@@ -20,7 +20,9 @@
             angular.element(document.getElementById('back-to-top')).toggleClass('lower');
           }
 
-          if ( deviceService.isMobile() ) { hideFooter(); } // Initially hide the footer on mobile devices
+          if ( deviceService.isMobile() ) { // Initially hide the footer on mobile devices
+            $timeout(hideFooter, 2000); 
+          }
 
           element.on('click', function() {
             if (animationInProgress) { return; }

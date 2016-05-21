@@ -14,7 +14,7 @@ angular.module('appServices').factory('deviceService', ['$window', '$q',
     }
 
     function isMobile() {
-      return $window.innerWidth < 768;
+      return $window.innerWidth <= 959;
     }
 
     function scrollTo(target) {

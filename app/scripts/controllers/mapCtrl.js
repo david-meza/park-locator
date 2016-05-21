@@ -7,10 +7,6 @@
 
       Esri.modulesReady().then(function(modules) {
 
-        // modules.map.on('zoom-end', function(evt) {
-        //   modules.parks.setVisibility(evt.level <= 17);
-        // });
-
         modules.map.on('extent-change', function(evt) {
           if ( !modules.basemapLayer.visible ) {
             
