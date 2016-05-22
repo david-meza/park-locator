@@ -66,7 +66,15 @@
   <div id="main" role="main" class="flex layout-column">
     <ng-navbar></ng-navbar>
 
-    <ui-view class="flex layout-column"></ui-view>
+    <ui-view class="flex layout-column">
+      <div id="loading-container" class="flex layout-row layout-align-center-center">
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+      </div>
+    </ui-view>
 
     <ng-footer></ng-footer>
     <collapse-footer></collapse-footer>

@@ -131,8 +131,8 @@
     function informUser(message, hideDelay) {
       var toast = $mdToast.simple()
         .textContent(message)
-        .action('ok')
-        .highlightAction(true)
+        .action('Ok')
+        .highlightAction(false)
         .hideDelay(hideDelay || 3000)
         .position('bottom right');
       
@@ -153,7 +153,7 @@
         } else {
           console.error('Timeout error: No Park with such name: ', urlFormat);
           deferred.reject(urlFormat);
-          informUser('Oops! I searched everywhere but didn\'t find a park with that name. Please refresh the page.', 10000);
+          informUser('Oops! I didn\'t find a park with that name. Press Ok to refresh.', 10000);
         }
       }
     }
