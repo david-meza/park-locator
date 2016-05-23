@@ -128,22 +128,32 @@
 
     }
 
+    function informUser(message, hideDelay) {
+      var toast = $mdToast.simple()
+        .textContent(message)
+        .action('ok')
+        .highlightAction(true)
+        .hideDelay(hideDelay || 3000)
+        .position('bottom right');
+      
+      $mdToast.show(toast).then(function(){
+        $window.location.reload(); // We refresh the page because esri doesn't look for the map-canvas again
+      });
+    }
+
     function resolveCurrentPark(deferred, urlFormat, retriesLeft) {
-      var retries = retriesLeft || 20; // Times out after 10 seconds of waiting
+      var retries = retriesLeft || 40; // Times out after 20 seconds of waiting
       // Queue a call once every half second until it is resolved
       if (parks[urlFormat]) {
         parks.currentPark = parks[urlFormat];
         deferred.resolve(parks.currentPark);
       } else {
-        if (retries > 1) { // Err... 0 is false in JS so it goes back to 20 :)
+        if (retries > 1) { // Err... 0 is falsey in JS so it goes back to 20 :)
           $timeout(resolveCurrentPark, 500, false, deferred, urlFormat, --retries);
         } else {
           console.error('Timeout error: No Park with such name: ', urlFormat);
           deferred.reject(urlFormat);
-          $mdToast.showSimple('I searched everywhere but didn\'t find a park with that name!');
-          $state.go('home').then(function() {
-            $window.location.reload(); // We refresh the page because esri doesn't look for the map-canvas again
-          });
+          informUser('Oops! I searched everywhere but didn\'t find a park with that name. Please refresh the page.', 10000);
         }
       }
     }

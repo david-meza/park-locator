@@ -7,7 +7,7 @@ git status
 grunt build
 git checkout gh-pages
 git pull origin master
-cp -R /dist ./
+cp -r dist/ ./
 git status
 git add -A
 git commit -m 'Update dist'

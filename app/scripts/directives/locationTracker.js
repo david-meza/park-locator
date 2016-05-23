@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('appDirectives').directive('locationTracker', function(){
+  angular.module('appDirectives').directive('locationTracker', ['$mdToast', function($mdToast){
     return {
       
       restrict: 'E',
@@ -54,6 +54,7 @@
 
           function error(err) {
             console.warn('ERROR(' + err.code + '): ' + err.message);
+            $mdToast.showSimple('Please enable Geolocation.')
           }
 
           $scope.trackUser = function() {
@@ -71,6 +72,6 @@
       }]
 
     };
-  });
+  }]);
 
 })(window.angular);

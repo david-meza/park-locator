@@ -73,6 +73,18 @@
             }
           });
 
-    }]);
+    }])
 
+    .run(['$rootScope', '$state', function($rootScope, $state) {
+      
+      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+        event.preventDefault();
+        if (toState.name === 'home.park') {
+          $state.go('home');
+        }
+        console.log(event, toState, toParams, fromState, fromParams, error);
+      });
+
+    }]);
+  // End angular.module
 })(angular || window.angular);

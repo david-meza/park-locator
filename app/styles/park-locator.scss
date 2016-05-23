@@ -31,6 +31,10 @@ html, body {
   overflow: hidden;
 }
 
+html, body, md-content, div[ui-view], ui-view, md-tabs {
+  background-color: #fff !important;
+}
+
 #parks_layer image, a { 
   cursor: pointer; 
 }
@@ -511,7 +515,7 @@ md-input-container {
   box-sizing: content-box;
   padding: 0;
   margin: 4px;
-  min-height: 450px;
+  min-height: 400px;
   background-color: $map-bg;
 
   #aerial-toggle {
